@@ -1,0 +1,4 @@
+.bg-image{
+    background-image: url('../images/header.jpg');
+    border-bottom: 1rem solid goldenrod;
+}
