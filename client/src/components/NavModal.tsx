@@ -1,4 +1,3 @@
-
 import { useRouter } from "next/navigation";
 import React from "react";
 
@@ -7,7 +6,7 @@ interface ModalProps {
 }
 
 const NavModal: React.FC<ModalProps> = ({ onClose }) => {
-  const router = useRouter()
+  const router = useRouter();
 
   const handleRoute = (path: string) => {
     router.push(path);
@@ -28,31 +27,37 @@ const NavModal: React.FC<ModalProps> = ({ onClose }) => {
       <ul className="text-white text-xl space-y-4 text-center">
         <li>
           <button
-           onClick={() => handleRoute('/login')}
-           
-            className="hover:underline"
+            onClick={() => handleRoute('/login')}
+            className="bg-goldenrod text-black w-48 py-3 rounded focus:outline-none hover:underline"
           >
             Login As Receiver
           </button>
         </li>
         <li>
           <button
-            onClick={() => handleAlert("Service not currently available, to check your shipment log in as a receiver.")}
-            className="hover:underline"
+            onClick={() =>
+              handleAlert(
+                "Service not currently available, to check your shipment log in as a receiver."
+              )
+            }
+            className="bg-goldenrod text-black w-48 py-3 rounded focus:outline-none hover:underline"
           >
             Login As Sender
           </button>
         </li>
         <li>
           <button
-            onClick={() => handleAlert("Service not currently available, to check your shipment log in as a receiver.")}
-            className="hover:underline"
+            onClick={() =>
+              handleAlert(
+                "Service not currently available, to check your shipment log in as a receiver."
+              )
+            }
+            className="bg-goldenrod text-black w-48 py-3 rounded focus:outline-none hover:underline"
           >
             Sign Up
           </button>
         </li>
       </ul>
-    
     </div>
   );
 };

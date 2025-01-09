@@ -1,6 +1,8 @@
 "use client"
 import Header from "@/components/Header";
 import Information from "@/components/Information";
+import Schedule from "@/components/Schedule";
+import ScheduleCard from "@/components/ScheduleCard";
 
 
 export default function H() {
@@ -20,6 +22,13 @@ export default function H() {
         text="Discover the best shipping solutions tailored for your needs."
         images={images}
       />
+      <Schedule/>
+      <Information
+        title="Meeting Your Shiping needs"
+        text="Discover the best shipping solutions tailored for your needs."
+        images={images}
+      />
+      <ScheduleCard/>
     </>
   );
 }
