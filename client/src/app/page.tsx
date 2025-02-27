@@ -1,34 +1,38 @@
 "use client"
+import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Information from "@/components/Information";
 import Schedule from "@/components/Schedule";
 import ScheduleCard from "@/components/ScheduleCard";
+import image1 from '@/assets/images/auto.png'
+import image2 from '@/assets/images/ship.png'
+import image3 from '@/assets/images/ireefers.jpg'
+import image4 from '@/assets/images/restoftheworld.jpg'
+import image5 from '@/assets/images/transporttradefair.jpg'
 
 
 export default function H() {
   const images = [
-    { src: "/image1.jpg", alt: "Service 1" },
-    { src: "/image2.jpg", alt: "Service 2" },
-    { src: "/image3.jpg", alt: "Service 3" },
-    { src: "/image4.jpg", alt: "Service 4" },
-    { src: "/image5.jpg", alt: "Service 5" },
-    { src: "/image6.jpg", alt: "Service 6" },
+    { src: image1, text: "Automobile Shipping Services" },
+    { src: image2, text: "Goods and valuables logistics" },
+    { src: image3, text: "Container shipping and logistics" },
+    { src: image4, text: 'International all over the world' },
+    { src: image5, text: "Trade facilitation" },
+
   ];
   return (
-    <>
+    <div className="bg-white">
     <Header/>
+    
     <Information
-        title="Our Services"
-        text="Discover the best shipping solutions tailored for your needs."
-        images={images}
-      />
-      <Schedule/>
-      <Information
         title="Meeting Your Shiping needs"
         text="Discover the best shipping solutions tailored for your needs."
         images={images}
       />
+      <Schedule/>
+     
       <ScheduleCard/>
-    </>
+      <Footer/>
+    </div>
   );
 }

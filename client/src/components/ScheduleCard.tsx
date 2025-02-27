@@ -1,3 +1,4 @@
+import { formatDate } from "@/utils/utils";
 import React from "react";
 
 const ScheduleCard = () => {
@@ -5,7 +6,7 @@ const ScheduleCard = () => {
     { title: "Port of Load (POL)", body: "BREMERHAVEN (DEBRV)" },
     { title: "Port of Discharge (POD)", body: "MUNDRA (INMUN)" },
     { title: "Fastest Transit Time", body: "36 DAYS" },
-    { title: "Next Departure", body: "SAT 4TH JAN 2025" },
+    { title: "Next Departure", body: formatDate(3) },
     { title: "Service", body: "SWAN-SENTOSA" },
     { title: "Routing Type", body: "DIRECT" },
   ];

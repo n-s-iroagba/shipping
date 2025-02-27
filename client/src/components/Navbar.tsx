@@ -1,16 +1,12 @@
 import { useState, useEffect } from "react";
-import NavModal from "./NavModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserAlt } from "@fortawesome/free-solid-svg-icons";
 import "../assets/styles/Navbar.css";
 
 const Navbar: React.FC = () => {
-  const [isModalOpen, setModalOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  const toggleModal = () => {
-    setModalOpen(!isModalOpen);
-  };
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,7 +31,7 @@ const Navbar: React.FC = () => {
       } transition-all duration-300`}
     >
       <div className="bg-gold">
-        <button onClick={toggleModal} className="focus:outline-none">
+        <button  className="focus:outline-none">
           <span className="block w-8 h-1 bg-black mb-1 mt-2"></span>
           <span className="block w-8 h-1 bg-black mb-1"></span>
           <span className="block w-8 h-1 bg-black mb-0"></span>
@@ -46,11 +42,10 @@ const Navbar: React.FC = () => {
         <FontAwesomeIcon
           className="text-black"
           size="2x"
-          onClick={toggleModal}
+          
           icon={faUserAlt}
         />
       </div>
-      {isModalOpen && <NavModal onClose={toggleModal} />}
     </nav>
   );
 };
