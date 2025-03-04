@@ -1,6 +1,8 @@
 'use client'
 
 import { registerUserUrl } from "@/data/urls";
+import { useRouter } from "next/navigation";
+
 import { useState } from "react";
 
 const SignupForm = () => {
@@ -12,9 +14,9 @@ const SignupForm = () => {
     });
 
     const [loading, setLoading] = useState(false);
-    const [success, setSuccess] = useState(false);
-    const [error, setError] = useState("");
 
+    const [error, setError] = useState("");
+    const router = useRouter()
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.id]: e.target.value });
     };
@@ -46,8 +48,8 @@ const SignupForm = () => {
             if (!response.ok) {
                 throw new Error("Signup failed. Please try again.");
             }
+            router.push(`/verify-email/${response.body}`)
 
-            setSuccess(true);
         } catch (err) {
             console.error(err)
             setError('an error occurred');
@@ -66,11 +68,6 @@ const SignupForm = () => {
                     <h2 className="text-black text-xl font-bold">SIGN UP</h2>
                 </div>
 
-                {success ? (
-                    <p className="text-green-600 text-center">
-                        Signup successful! Please check your email to verify your account.
-                    </p>
-                ) : (
                     <>
                         <div className="mb-4">
                             <label htmlFor="name" className="block text-sm font-medium text-gray-700">
@@ -142,7 +139,7 @@ const SignupForm = () => {
                             {loading ? "Signing Up..." : "Sign Up"}
                         </button>
                     </>
-                )}
+                
             </form>
         </div>
     );

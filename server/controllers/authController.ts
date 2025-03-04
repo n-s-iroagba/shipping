@@ -32,7 +32,7 @@ export const signUp = async (req: Request, res: Response): Promise<any> => {
       }
     );
 
-    const verificationCode = Math.random();
+    const verificationCode = Math.random()*1000000;
 
     newUser.verificationCode = String(verificationCode);
     newUser.verificationToken = verificationToken;

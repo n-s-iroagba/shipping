@@ -1,3 +1,4 @@
+import { stepUrl } from "@/data/urls";
 import React, { useState } from "react";
 
 interface Step {
@@ -7,11 +8,12 @@ interface Step {
 }
 
 interface ModalProps {
-  step: Step;
+
   onClose: () => void;
+  shipmentId:number
 }
 
-export const  AddStepModal:React.FC<{onClose:()=>void}> =({onClose})=> {
+export const  AddStepModal:React.FC<ModalProps> =({onClose,shipmentId})=> {
   const [formData, setFormData] = useState({
     orderStage: '',
     processedStatus:''
@@ -22,13 +24,14 @@ export const  AddStepModal:React.FC<{onClose:()=>void}> =({onClose})=> {
   };
 
   const handleSubmit = async()=>{
+
     try {
-      const response = await fetch(`/api/shipments/`, {
+      const response = await fetch(`${stepUrl}/${shipmentId}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-
+      
       if (!response.ok) throw new Error("Failed to update shipment");
       window.location.reload()
       onClose(); // Close modal after success
@@ -40,10 +43,10 @@ export const  AddStepModal:React.FC<{onClose:()=>void}> =({onClose})=> {
 
   return (
     <>
-      {/* Edit Modal */}
+
       <div className="fixed inset-0 flex items-center justify-center p-4 bg-black bg-opacity-50">
         <div className="bg-white p-6 rounded-lg w-96 shadow-lg modal">
-          <h2 className="text-lg font-semibold mb-4">Edit Order</h2>
+          <h2 className="text-lg font-semibold mb-4">Add Step</h2>
           <label className="block mb-2">
             Order Stage:
             <select
@@ -74,14 +77,14 @@ export const  AddStepModal:React.FC<{onClose:()=>void}> =({onClose})=> {
             <button onClick={() => onClose()} className="bg-red-500 text-white px-4 py-2 rounded">
               Cancel
             </button>
-            <button onClick={onClose} className="bg-gray-300 px-4 py-2 rounded">Cancel</button>
+      
           </div>
         </div>
       </div>
   
     </>
 )}
-export default function EditStepModal({ step, onClose }: ModalProps) {
+export default function EditStepModal({ step, onClose }: {step:Step, onClose:()=>void}) {
   const [formData, setFormData] = useState(step);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -90,7 +93,7 @@ export default function EditStepModal({ step, onClose }: ModalProps) {
 
   const handleSubmit = async()=>{
     try {
-      const response = await fetch(`/api/shipments/${step.id}`, {
+      const response = await fetch(`${stepUrl}/${step.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -157,7 +160,7 @@ export const DeleteStepModal: React.FC<{
 }> = ({ step, onClose, }) => {
   const handleSubmit = async () => {
     try {
-      const response = await fetch(`/api/shipments/${step.id}`, {
+      const response = await fetch(`${stepUrl}/${step.id}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
     

@@ -1,11 +1,12 @@
 "use client";
 
+import { useParams } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
+
 
 const VerifyEmail = () => {  
-  const searchParams = useSearchParams();
-  const token = searchParams.get("token"); // Extract token from URL
+    const params = useParams();
+    const token = params.token;;
   const [code, setCode] = useState(["", "", "", "", "", ""]);
   const inputRefs = useRef<HTMLInputElement[]>([]);
   const [message, setMessage] = useState("");

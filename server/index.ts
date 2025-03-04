@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import { connectDB, sequelize } from "./config/database";
 import router from "./router";
 import cors from 'cors'
+import { seedDatabase } from "./seed";
 
 dotenv.config();
 
@@ -16,8 +17,11 @@ app.use(cors({
 connectDB();
 
 
-sequelize.sync({force:true}).then(() => {
+sequelize.sync(
+  {force:true}
+).then(() => {
   console.log("📦 MySQL Database synchronized!");
+  seedDatabase()
 });
 
 
@@ -26,3 +30,4 @@ app.use("/api", router);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+

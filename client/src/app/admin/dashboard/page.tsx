@@ -3,17 +3,19 @@
 import { Shipment } from "@/app/types/Shipment";
 import { CreateShipmentModal } from "@/components/ShipmentModals";
 import { adminShipmentUrl } from "@/data/urls";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 
 
-const adminId = "123"; // Replace with actual adminId from context or state
+const adminId = "1"; // Replace with actual adminId from context or state
 
 const ShipmentDashboard: React.FC = () => {
   const [shipments, setShipments] = useState<Shipment[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const router = useRouter()
 
   useEffect(() => {
     const fetchShipments = async () => {
@@ -42,7 +44,7 @@ const ShipmentDashboard: React.FC = () => {
   if (error) return <p className="text-center text-red-500 text-lg">{error}</p>;
 
   return (
-    <div className="container mx-auto p-6 max-w-full overflow-x-auto">
+    <div className="container mx-auto p-6 max-w-full overflow-x-auto bg-white text-black min-h-screen">
       <h1 className="text-2xl font-bold mb-4 text-center">Shipment Dashboard</h1>
       <button
         className="bg-green-500 text-white px-4 py-2 mb-4 w-full md:w-auto"
@@ -70,7 +72,9 @@ const ShipmentDashboard: React.FC = () => {
                 <td className="border p-2">{shipment.recipientName}</td>
                 <td className="border p-2">{shipment.receivingAddress}</td>
                 <td className="border p-2">
-                  <button className="bg-blue-500 text-white px-2 py-1 mr-2 w-full md:w-auto">
+                  <button className="bg-blue-500 text-white px-2 py-1 mr-2 w-full md:w-auto"
+                  onClick={()=>router.push(`/admin/shipment-details/${shipment.id}`)}
+                  >
                     View More
                   </button>
                 </td>

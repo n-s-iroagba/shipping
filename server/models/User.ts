@@ -1,6 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../config/database";
-
+import { ShipmentDetails } from "./ShipmentDetails";
 
 export class User extends Model {
   public id!: number;
@@ -8,8 +8,9 @@ export class User extends Model {
   public email!: string;
   public password!: string;
   public isVerified!: boolean;
-  public verificationCode!:string |null
-  public verificationToken!:string | null
+  public verificationCode!: string | null;
+  public verificationToken!: string | null;
+
 }
 
 User.init(
@@ -19,8 +20,11 @@ User.init(
     email: { type: DataTypes.STRING, allowNull: false, unique: true },
     password: { type: DataTypes.STRING, allowNull: false },
     isVerified: { type: DataTypes.BOOLEAN, defaultValue: false },
-    verificationCode: { type: DataTypes.STRING },
-    verificationToken: { type: DataTypes.STRING },
+    verificationCode: { type: DataTypes.STRING, allowNull: true },
+    verificationToken: { type: DataTypes.STRING, allowNull: true },
   },
   { sequelize, modelName: "User" }
 );
+
+// Define relationships
+User.hasMany(ShipmentDetails, { foreignKey: "adminId", as: "shipments" });

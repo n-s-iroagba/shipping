@@ -4,9 +4,11 @@ import { useEffect, useState } from "react";
 
 import { DeleteShipmentModal, EditShipmentModal } from "@/components/ShipmentModals";
 import EditStepModal, { AddStepModal, DeleteStepModal } from "@/components/StepModal";
-import { useSearchParams } from "next/navigation";
+import { useParams } from "next/navigation";
 import { Step } from "@/app/types/Steps";
 import { Shipment } from "@/app/types/Shipment";
+import { shipmentUrl } from "@/data/urls";
+
 
 
 
@@ -19,24 +21,31 @@ const AdminShipmentDetails = ()=>{
     const [showEditStepModal, setShowEditStepModal] = useState(false)
     const [showDeleteStepModal, setShowDeleteStepModal] = useState(false)
     const [showAddStepModal, setShowAddStepModal] = useState(false)
-    const searchParams = useSearchParams(); // ✅ Correct way to get query params
-    const shipmentId = searchParams.get("id");
+    const params = useParams();
+    const shipmentId = params.id;;
+
 
     useEffect(() => {
-      if (!shipmentId) return;
+      if (!shipmentId) {
+        return;
+}
       
-      const fetchShipmentDetails = async () => {
-        try {
-          const response = await fetch(`/api/shipments/${shipmentId}`);
-          if (!response.ok) throw new Error("Failed to fetch shipment details");
-  
-          const data = await response.json();
-          setShipmentDetails(data);
-        } catch (error) {
-          alert('an error occcured try again later')
-          console.error(error);
-        }
-      };
+const fetchShipmentDetails = async () => {
+  try {
+    const response = await fetch(`${shipmentUrl}/${shipmentId}`);
+
+    if (!response.ok) throw new Error("Failed to fetch shipment details");
+
+    const data = await response.json(); // ✅ Parse JSON response
+    console.log("Fetched Shipment Details:", data); // ✅ Debugging
+
+    setShipmentDetails(data); // ✅ Store data properly
+  } catch (error) {
+    alert("An error occurred, try again later");
+    console.error("Fetch Error:", error);
+  }
+};
+
   
       fetchShipmentDetails();
     }, [shipmentId]);
@@ -67,8 +76,10 @@ const AdminShipmentDetails = ()=>{
           <strong>Recipient:</strong> {shipmentDetails.recipientName}
         </p>
         <p className="rounded border-b-4 border-goldenrod p-2">
-          <strong>Current Location:</strong> {shipmentDetails.currentLocation}
+          <strong>Description:</strong> {shipmentDetails.shipmentDescription}
         </p>
+     
+
         <div className="my-2">
         <button onClick={() => {
           setShowEditModal(true);
@@ -85,7 +96,7 @@ const AdminShipmentDetails = ()=>{
         setShowAddStepModal(true)
       }} className="bg-red-500 text-white p-1 rounded">Add Step</button>
       <ul>
-        {shipmentDetails.steps.map((step) => (
+        {shipmentDetails?.steps?.map((step:Step) => (
           <>
           <li key={step.id} className="flex justify-evenly items-center border-b p-1">
             <span className="w-[40%] min-h-[40px] break-words whitespace-normal">Stage: {step.orderStage}</span>
@@ -111,7 +122,7 @@ const AdminShipmentDetails = ()=>{
     </div>
     {showEditModal &&  <EditShipmentModal shipment={shipmentDetails} onClose={() => setShowEditModal(false)}  />}
       {showDeleteModal && <DeleteShipmentModal shipment={shipmentDetails}  onClose={() => setShowDeleteModal(false)}  />}
-        {showAddStepModal && <AddStepModal onClose={()=>setShowAddStepModal(false)} />}
+        {showAddStepModal && <AddStepModal onClose={() => setShowAddStepModal(false)} shipmentId={Number(shipmentDetails.id)} />}
         {showEditStepModal && selectedStep && <EditStepModal step={selectedStep} onClose={()=>setShowEditStepModal(false)} />}
         {showDeleteStepModal && selectedStep && <DeleteStepModal step={selectedStep}  onClose={()=>setShowDeleteStepModal(false)} />}
      

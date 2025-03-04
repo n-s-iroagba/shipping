@@ -7,7 +7,7 @@ export interface Shipment {
   sendingAddress: string;
   receivingAddress: string;
   recipientName: string;
-  currentLocation: string;
   shipmentDescription: string;
+  adminId:string;
   steps: Step[]
 }

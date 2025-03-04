@@ -1,5 +1,6 @@
 "use client";;
 import { Shipment } from "@/app/types/Shipment";
+import { adminShipmentUrl, shipmentUrl } from "@/data/urls";
 import React, { useState } from "react";
 
 
@@ -20,11 +21,11 @@ export const CreateShipmentModal: React.FC<{
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-
+  const adminId = '1'
   // Handle form submission
   const handleSubmit = async () => {
     try {
-      const response = await fetch("/api/shipments", {
+      const response =  await fetch(`${adminShipmentUrl}/${adminId}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
@@ -74,7 +75,7 @@ export const EditShipmentModal: React.FC<{
   // Handle form submission
   const handleSubmit = async () => {
     try {
-      const response = await fetch(`/api/shipments/${form.shipmentID}`, {
+      const response = await fetch(`${shipmentUrl}/${form.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
@@ -97,7 +98,6 @@ export const EditShipmentModal: React.FC<{
         <input className="border p-2 w-full mb-2" name="sendingAddress" value={form.sendingAddress} onChange={handleChange} />
         <input className="border p-2 w-full mb-2" name="receivingAddress" value={form.receivingAddress} onChange={handleChange} />
         <input className="border p-2 w-full mb-2" name="recipientName" value={form.recipientName} onChange={handleChange} />
-        <input className="border p-2 w-full mb-2" name="currentLocation" value={form.currentLocation} onChange={handleChange} />
         <textarea className="border p-2 w-full mb-2" name="shipmentDescription" value={form.shipmentDescription} onChange={handleChange} />
 
         <div className="flex justify-end space-x-2">
@@ -116,7 +116,7 @@ export const DeleteShipmentModal: React.FC<{
 }> = ({ shipment, onClose, }) => {
   const handleSubmit = async () => {
     try {
-      const response = await fetch(`/api/shipments/${shipment}`, {
+      const response = await fetch(`${shipmentUrl}/${shipment.id}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
     

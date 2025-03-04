@@ -1,22 +1,74 @@
-import { DataTypes, ForeignKey, Model } from "sequelize";
+import { Model, DataTypes, ForeignKey, InferAttributes, InferCreationAttributes } from "sequelize";
+import { User } from "./User"; // Ensure correct import
+import { Step } from "./Step"; // Import related Step model
 import { sequelize } from "../config/database";
-import { User } from "./User";
 
-export class ShipmentDetails extends Model {
-  public id!: number;
-  public sender!: string;
-  public receiver!: string;
-  public address!: string;
-  public userd1!: ForeignKey<User['id']>;
+export class ShipmentDetails extends Model<
+  InferAttributes<ShipmentDetails>,
+  InferCreationAttributes<ShipmentDetails>
+> {
+  declare id?: string;
+  declare shipmentID: string;
+  declare senderName: string;
+  declare sendingAddress: string;
+  declare receivingAddress: string;
+  declare recipientName: string;
+  declare shipmentDescription: string;
+  declare adminId: ForeignKey<User["id"]>;
+
+  // One ShipmentDetails has many Steps
+  declare steps?: Step[];
 }
 
 ShipmentDetails.init(
   {
-    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    sender: { type: DataTypes.STRING, allowNull: false },
-    receiver: { type: DataTypes.STRING, allowNull: false },
-    address: { type: DataTypes.STRING, allowNull: false },
-    userd1: { type: DataTypes.INTEGER, allowNull: false },
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    shipmentID: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    senderName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    sendingAddress: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    receivingAddress: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    recipientName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    shipmentDescription: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    adminId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: User,
+        key: "id",
+      },
+    },
   },
-  { sequelize, modelName: "ShipmentDetails" }
+  {
+    sequelize,
+    modelName: "ShipmentDetails",
+    timestamps: true,
+  }
 );
+ShipmentDetails.hasMany(Step, { foreignKey: "shipmentDetailsId", as: "steps" });
+Step.belongsTo(ShipmentDetails, { foreignKey: "shipmentDetailsId", as: "shipment" });
+
+
+
