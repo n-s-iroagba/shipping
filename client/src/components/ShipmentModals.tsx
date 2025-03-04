@@ -1,6 +1,5 @@
-"use client";
-
-import { Shipment } from "@/app/admin/dashboard/page";
+"use client";;
+import { Shipment } from "@/app/types/Shipment";
 import React, { useState } from "react";
 
 
@@ -9,14 +8,12 @@ export const CreateShipmentModal: React.FC<{
   onCreate: (shipment: Shipment) => void;
 }> = ({ onClose, onCreate }) => {
   const [form, setForm] = useState({
-    shipmentID: "",
-    date: "",
-    senderName: "",
-    sendingAddress: "",
-    destination: "",
-    recipientName: "",
-    currentLocation: "",
-    shipmentDescription: "",
+    senderName: '',
+    sendingAddress: '',
+    receivingAddress: '',
+    recipientName: '',
+    currentLocation: '',
+    shipmentDescription: '',
   });
 
   // Handle input changes
@@ -47,11 +44,9 @@ export const CreateShipmentModal: React.FC<{
     <div id="default-modal" className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
       <div className="bg-white p-6 rounded shadow-lg w-96">
         <h2 className="text-xl mb-4">Create Shipment</h2>
-        <input className="border p-2 w-full mb-2" name="shipmentID" placeholder="Shipment ID" onChange={handleChange} />
-        <input className="border p-2 w-full mb-2" name="date" type="date" onChange={handleChange} />
         <input className="border p-2 w-full mb-2" name="senderName" placeholder="Sender Name" onChange={handleChange} />
         <input className="border p-2 w-full mb-2" name="sendingAddress" placeholder="Sending Address" onChange={handleChange} />
-        <input className="border p-2 w-full mb-2" name="destination" placeholder="Destination" onChange={handleChange} />
+        <input className="border p-2 w-full mb-2" name="receivingAddress" placeholder="Destination" onChange={handleChange} />
         <input className="border p-2 w-full mb-2" name="recipientName" placeholder="Recipient Name" onChange={handleChange} />
         <input className="border p-2 w-full mb-2" name="currentLocation" placeholder="Current Location" onChange={handleChange} />
         <textarea className="border p-2 w-full mb-2" name="shipmentDescription" placeholder="Shipment Description" onChange={handleChange} />
@@ -98,10 +93,9 @@ export const EditShipmentModal: React.FC<{
       <div className="bg-white p-6 rounded shadow-lg w-96">
         <h2 className="text-xl mb-4">Edit Shipment</h2>
         <input className="border p-2 w-full mb-2" name="shipmentID" value={form.shipmentID} readOnly />
-        <input className="border p-2 w-full mb-2" name="date" type="date" value={form.date} onChange={handleChange} />
         <input className="border p-2 w-full mb-2" name="senderName" value={form.senderName} onChange={handleChange} />
         <input className="border p-2 w-full mb-2" name="sendingAddress" value={form.sendingAddress} onChange={handleChange} />
-        <input className="border p-2 w-full mb-2" name="destination" value={form.destination} onChange={handleChange} />
+        <input className="border p-2 w-full mb-2" name="receivingAddress" value={form.receivingAddress} onChange={handleChange} />
         <input className="border p-2 w-full mb-2" name="recipientName" value={form.recipientName} onChange={handleChange} />
         <input className="border p-2 w-full mb-2" name="currentLocation" value={form.currentLocation} onChange={handleChange} />
         <textarea className="border p-2 w-full mb-2" name="shipmentDescription" value={form.shipmentDescription} onChange={handleChange} />
