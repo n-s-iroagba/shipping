@@ -1,66 +1,30 @@
 'use client'
 
 import { useState } from "react";
-import { Shipment } from "../../dashboard/page";
+
 import { DeleteShipmentModal, EditShipmentModal } from "@/components/ShipmentModals";
+import EditStepModal, { AddStepModal, DeleteStepModal } from "@/components/StepModal";
 
 
+type Step ={
+  id: string,
+  orderStage: string,
+  processedStatus: string
+}
 const AdminShipmentDetails = ()=>{
     const [showEditModal, setShowEditModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
-    const [selectedShipment, setSelectedShipment] = useState<Shipment | null>(null);
-      const [shipments, setShipments] = useState<Shipment[]>([]);
+    // const [shipmentDetails, setShipmentDetails] = useState<Shipment | null>(null);
+    const [selectedStep, setSelectedStep] = useState <Step|null>(null)
+    const [showEditStepModal, setShowEditStepModal] = useState(false)
+    const [showDeleteStepModal, setShowDeleteStepModal] = useState(false)
+    const [showAddStepModal, setShowAddStepModal] = useState(false)
 
-    const onEdit =(id:string)=>{
 
-      console.log(id)
-      setSelectedShipment(null)
-    }
-    const onDelete =(id:string)=>{
 
-      console.log(id)
-    }
-    const updateStep =(id:string)=>{
-      console.log(id)
-
-    }
-    const deleteStep =(id:string)=>{
-      console.log(id)
-    }
-    const handleEdit = async (updatedShipment: Shipment) => {
-      try {
-        const response = await fetch(`/api/shipments/${updatedShipment.shipmentID}`, {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(updatedShipment),
-        });
   
-        if (!response.ok) throw new Error("Failed to update shipment");
   
-        setShipments(shipments.map(s => (s.shipmentID === updatedShipment.shipmentID ? updatedShipment : s))); // Update UI
-        setShowEditModal(false);
-      } catch (error) {
-        console.error("Error updating shipment:", error);
-      }
-    };
-  
-    // Delete Shipment
-    const handleDelete = async () => {
-      if (!selectedShipment) return;
-  
-      try {
-        const response = await fetch(`/api/shipments/${selectedShipment.shipmentID}`, {
-          method: "DELETE",
-        });
-  
-        if (!response.ok) throw new Error("Failed to delete shipment");
-  
-        setShipments(shipments.filter(s => s.shipmentID !== selectedShipment.shipmentID)); // Remove from UI
-        setShowDeleteModal(false);
-      } catch (error) {
-        console.error("Error deleting shipment:", error);
-      }
-    };
+    
     const shipmentDetails = {
         id:'1',
         shipmentID: "SHIP123456",
@@ -106,31 +70,51 @@ const AdminShipmentDetails = ()=>{
           <strong>Current Location:</strong> {shipmentDetails.currentLocation}
         </p>
         <div className="my-2">
-        <button onClick={() => onEdit(shipmentDetails.id)} className="bg-red-500 text-white p-1 rounded">Edit Shipment</button>
+        <button onClick={() => {
+          setShowEditModal(true);
+
+        }} className="bg-red-500 text-white p-1 rounded">Edit Shipment</button>
       </div>
       <div className="my-2">
-        <button onClick={() => onDelete(shipmentDetails.id)} className="bg-red-500 text-white p-1 rounded">Delete Shipment</button>
+        <button onClick={() =>{
+          setShowDeleteModal(true);
+        }} className="bg-red-500 text-white p-1 rounded">Delete Shipment</button>
       </div>
       <h3 className="text-md font-semibold">Shipment Steps</h3>
-      <button onClick={() => onEdit(shipmentDetails.id)} className="bg-red-500 text-white p-1 rounded">Add Step</button>
+      <button onClick={() => {
+        setShowAddStepModal(true)
+      }} className="bg-red-500 text-white p-1 rounded">Add Step</button>
       <ul>
         {shipmentDetails.steps.map((step) => (
+          <>
           <li key={step.id} className="flex justify-evenly items-center border-b p-1">
             <span className="w-[40%] min-h-[40px] break-words whitespace-normal">Stage: {step.orderStage}</span>
             <div className="flex flex-col">
             <span>Processed Status: {step.processedStatus}</span>
             <div>
            
-              <button onClick={() => updateStep(step.id)} className="bg-yellow-500 text-white p-1 mx-2">Edit</button>
-              <button onClick={() => deleteStep(step.id)} className="bg-red-500 text-white p-1">Delete</button>
+              <button onClick={() => {
+                setShowEditStepModal(true);
+                setSelectedStep(step);
+              }} className="bg-yellow-500 text-white p-1 mx-2">Edit</button>
+              <button onClick={() => {
+                setShowDeleteStepModal(true);
+                setSelectedStep(step);
+              }} className="bg-red-500 text-white p-1">Delete</button>
             </div>
             </div>
           </li>
+     
+        </>
         ))}
       </ul>
     </div>
-    {showEditModal && selectedShipment && <EditShipmentModal shipment={selectedShipment} onClose={() => setShowEditModal(false)} onEdit={handleEdit} />}
-      {showDeleteModal && selectedShipment && <DeleteShipmentModal onClose={() => setShowDeleteModal(false)} onDelete={handleDelete} />}
+    {showEditModal &&  <EditShipmentModal shipment={shipmentDetails} onClose={() => setShowEditModal(false)}  />}
+      {showDeleteModal && <DeleteShipmentModal shipment={shipmentDetails}  onClose={() => setShowDeleteModal(false)}  />}
+        {showAddStepModal && <AddStepModal onClose={()=>setShowAddStepModal(false)} />}
+        {showEditStepModal && selectedStep && <EditStepModal step={selectedStep} onClose={()=>setShowEditStepModal(false)} />}
+        {showDeleteStepModal && selectedStep && <DeleteStepModal step={selectedStep}  onClose={()=>setShowDeleteStepModal(false)} />}
+     
     </div>
     )
 }

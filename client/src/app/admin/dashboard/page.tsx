@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 
 
 export interface Shipment {
+  id:string,
   shipmentID: string;
   date: string;
   senderName: string;
@@ -45,26 +46,15 @@ export const ShipmentDashboard: React.FC = () => {
     fetchShipments();
   }, []);
 
-  // Create Shipment
-  const handleCreate = async (newShipment: Shipment) => {
-    try {
-      const response = await fetch("/api/shipments", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newShipment),
-      });
 
-      if (!response.ok) throw new Error("Failed to create shipment");
-
-      const createdShipment = await response.json();
-      setShipments([...shipments, createdShipment]); // Update UI
+  const updateUI = async (newShipment: Shipment) => {
+   
+      setShipments([...shipments, newShipment]); 
       setShowCreateModal(false);
-    } catch (error) {
-      console.error("Error creating shipment:", error);
-    }
+   
   };
 
-  // Edit Shipment
+
 
 
   if (loading) return <p>Loading shipments...</p>;
@@ -104,7 +94,7 @@ export const ShipmentDashboard: React.FC = () => {
       </table>
 
       {/* Modals */}
-      {showCreateModal && <CreateShipmentModal onClose={() => setShowCreateModal(false)} onCreate={handleCreate} />}
+      {showCreateModal && <CreateShipmentModal onClose={() => setShowCreateModal(false)} onCreate={updateUI} />}
       
     </div>
   );

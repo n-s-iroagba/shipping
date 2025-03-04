@@ -1,23 +1,14 @@
 "use client";
 
+import { Shipment } from "@/app/admin/dashboard/page";
 import React, { useState } from "react";
 
-interface Shipment {
-  shipmentID: string;
-  date: string;
-  senderName: string;
-  sendingAddress: string;
-  destination: string;
-  recipientName: string;
-  currentLocation: string;
-  shipmentDescription: string;
-}
 
 export const CreateShipmentModal: React.FC<{
   onClose: () => void;
   onCreate: (shipment: Shipment) => void;
 }> = ({ onClose, onCreate }) => {
-  const [form, setForm] = useState<Shipment>({
+  const [form, setForm] = useState({
     shipmentID: "",
     date: "",
     senderName: "",
@@ -77,8 +68,7 @@ export const CreateShipmentModal: React.FC<{
 export const EditShipmentModal: React.FC<{
   shipment: Shipment;
   onClose: () => void;
-  onEdit: (shipment: Shipment) => void;
-}> = ({ shipment, onClose, onEdit }) => {
+}> = ({ shipment, onClose, }) => {
   const [form, setForm] = useState<Shipment>(shipment);
 
   // Handle input changes
@@ -96,9 +86,7 @@ export const EditShipmentModal: React.FC<{
       });
 
       if (!response.ok) throw new Error("Failed to update shipment");
-
-      const result = await response.json();
-      onEdit(result); // Pass updated data back to parent
+      window.location.reload()
       onClose(); // Close modal after success
     } catch (error) {
       console.error("Error updating shipment:", error);
@@ -128,13 +116,31 @@ export const EditShipmentModal: React.FC<{
 };
 
   
-export const DeleteShipmentModal: React.FC<{ onClose: () => void; onDelete: () => void; }> = ({ onDelete }) => {
+export const DeleteShipmentModal: React.FC<{
+  shipment: Shipment;
+  onClose: () => void;
+}> = ({ shipment, onClose, }) => {
+  const handleSubmit = async () => {
+    try {
+      const response = await fetch(`/api/shipments/${shipment}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+    
+      });
+
+      if (!response.ok) throw new Error("Failed to update shipment");
+      window.location.reload()
+      onClose(); // Close modal after success
+    } catch (error) {
+      console.error("Error updating shipment:", error);
+    }
+  }
     return (
       <div className="fixed inset-0 flex items-center justify-center">
         <div className="bg-white p-6 rounded shadow-lg">
           <h2 className="text-xl mb-4">Delete Shipment</h2>
           <p>Are you sure you want to delete this shipment?</p>
-          <button className="bg-red-500 text-white px-4 py-2 mt-2" onClick={onDelete}>Delete</button>
+          <button className="bg-red-500 text-white px-4 py-2 mt-2" onClick={handleSubmit}>Delete</button>
         </div>
       </div>
     );
