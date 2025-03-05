@@ -9,6 +9,7 @@ import image2 from '@/assets/images/ship.png'
 import image3 from '@/assets/images/ireefers.jpg'
 import image4 from '@/assets/images/restoftheworld.jpg'
 import image5 from '@/assets/images/transporttradefair.jpg'
+import TestimonialCarousel from "@/components/TestimonialCarousel";
 
 
 export default function H() {
@@ -30,6 +31,7 @@ export default function H() {
         images={images}
       />
       <Schedule/>
+      <TestimonialCarousel/>
      
       <ScheduleCard/>
       <Footer/>

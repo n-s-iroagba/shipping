@@ -7,15 +7,15 @@ export const createStep = async (req: Request, res: Response):Promise<any> => {
   console.log('aaaaaaa')
   try {
     const { orderStage, processedStatus } = req.body;
-    const { shipmentDetailsId } = req.params; // Get from URL params
+    const { shipmentDetailsId } = req.params; 
 
-    // Check if shipmentDetails exists
     const shipment = await ShipmentDetails.findByPk(shipmentDetailsId);
     if (!shipment) {
       return res.status(404).json({ message: "Shipment details not found" });
     }
 
-    // Create the Step
+  
+    
     const step = await Step.create({ orderStage, processedStatus, shipmentDetailsId });
     
     return res.status(201).json(step);
@@ -29,7 +29,7 @@ export const createStep = async (req: Request, res: Response):Promise<any> => {
 export const updateStep = async (req: Request, res: Response):Promise<any> => {
  
   try {
-    const { id } = req.params; // Step ID
+    const { id } = req.params; 
     const { orderStage, processedStatus } = req.body;
 
     const step = await Step.findByPk(id);
@@ -37,7 +37,7 @@ export const updateStep = async (req: Request, res: Response):Promise<any> => {
       return res.status(404).json({ message: "Step not found" });
     }
 
-    // Update fields
+
     step.orderStage = orderStage || step.orderStage;
     step.processedStatus = processedStatus || step.processedStatus;
     await step.save();
@@ -49,7 +49,7 @@ export const updateStep = async (req: Request, res: Response):Promise<any> => {
   }
 };
 
-// ✅ Delete a step
+
 export const deleteStep = async (req: Request, res: Response):Promise<any> => {
   try {
     const { id } = req.params;

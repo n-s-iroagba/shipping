@@ -35,7 +35,7 @@ const SignupForm = () => {
         }
 
         try {
-            const response = await fetch(registerUserUrl, {
+             await fetch(registerUserUrl, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -43,13 +43,13 @@ const SignupForm = () => {
                     email: formData.email,
                     password: formData.password,
                 }),
-            });
+            }) .then((response) => response.json()) // Convert response to JSON
+            .then((data) => router.push(`/admin/verify-email/${data}`)
+        ) // Log the data
+            .catch((error) => console.error("Error:", error)); ;
 
-            if (!response.ok) {
-                throw new Error("Signup failed. Please try again.");
-            }
-            router.push(`/verify-email/${response.body}`)
-
+         
+            
         } catch (err) {
             console.error(err)
             setError('an error occurred');

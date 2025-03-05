@@ -32,8 +32,7 @@ export const signUp = async (req: Request, res: Response): Promise<any> => {
       }
     );
 
-    const verificationCode = Math.random()*1000000;
-
+    const verificationCode = Math.floor(100000 + Math.random() * 900000);
     newUser.verificationCode = String(verificationCode);
     newUser.verificationToken = verificationToken;
     await newUser.save();
@@ -52,6 +51,7 @@ export const verifyEmail = async (
 ): Promise<any> => {
   try {
     const { token,code } = req.body;
+    console.log('verifying email')
 
     const decoded: any = jwt.verify(token, process.env.JWT_SECRET as string);
     const user = await User.findByPk(decoded.userId);

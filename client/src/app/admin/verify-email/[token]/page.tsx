@@ -1,6 +1,7 @@
 "use client";
 
-import { useParams } from "next/navigation";
+import { verifyEmailUrl } from "@/data/urls";
+import { useParams, useRouter } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
 
 
@@ -12,6 +13,7 @@ const VerifyEmail = () => {
   const [message, setMessage] = useState("");
   const [timeLeft, setTimeLeft] = useState(300); // 5-minute countdown
   const [canResend, setCanResend] = useState(false);
+  const router = useRouter()
 
   useEffect(() => {
     // if (!token) setMessage("Invalid or missing verification token.");
@@ -52,15 +54,18 @@ const VerifyEmail = () => {
   const handleVerify = async (e: React.FormEvent) => {
     e.preventDefault();
     const verificationCode = code.join("");
-
-    const res = await fetch("/api/verify", {
+   try{
+    const res = await fetch( verifyEmailUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token, code: verificationCode }),
     });
+   localStorage.setItem('netlyLoginToken',await res.json())
+   router.push(`/admin/dashboard`)
 
-    const data = await res.json();
-    setMessage(data.message);
+  }catch(err){
+    console.error(err)
+  }
   };
 
   const handleResendCode = async () => {
