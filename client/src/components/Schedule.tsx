@@ -1,10 +1,11 @@
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
-import Select from "react-select";
+import React, { useEffect, useState } from "react";
+
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+
 
 
 const portOptions = [
@@ -15,11 +16,14 @@ const portOptions = [
 ];
 
 const Schedule: React.FC = () => {
-  const [fromPort, setFromPort] = useState<{ value: string; label: string } | null>(null);
-  const [toPort, setToPort] = useState<{ value: string; label: string } | null>(null);
-  const selectedDate= new Date();
+  const [fromPort, setFromPort] = useState<string>('');
+  const [toPort, setToPort] = useState<string>('');
+  const [selectedDate, setSelectedDate] = useState(new Date())
 
-
+  useEffect(() => {
+   
+    setSelectedDate(new Date())
+  }, []);
   const handleSearch = () => {
     alert('No shipping from this port on this date')
   };
@@ -37,13 +41,19 @@ const Schedule: React.FC = () => {
   
         <div className="flex flex-col w-1/3">
           <label className="text-sm font-medium mb-1">From Port</label>
-          <Select
-            options={portOptions}
+          <select
+            
             value={fromPort}
-            onChange={(selectedOption) => setFromPort(selectedOption)}
-            placeholder="Select a port"
-            className="text-sm"
-          />
+            onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => setFromPort(e.target.value)}
+       
+            className="text-sm text-black bg-white"
+          >.
+          {portOptions.map((option, idx)=>{
+            return <option key={idx} value={option.value}>{option.label}</option>
+          }
+          
+          )}
+          </select>
           <div className="mt-2">
             <DatePicker
               selected={selectedDate}
@@ -68,13 +78,19 @@ const Schedule: React.FC = () => {
     
         <div className="flex flex-col w-1/3">
           <label className="text-sm font-medium mb-1">To Port</label>
-          <Select
-            options={portOptions}
+          <select
+            
             value={toPort}
-            onChange={(selectedOption) => setToPort(selectedOption)}
-            placeholder="Select a port"
-            className="text-sm text-black"
-          />
+            onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => setToPort(e.target.value)}
+       
+            className="text-sm text-black bg-white"
+          >.
+          {portOptions.map((option, idx)=>{
+            return <option key={idx} value={option.value}>{option.label}</option>
+          }
+          
+          )}
+          </select>
           <button
             onClick={handleSearch}
             className="mt-4 bg-goldenrod text-white py-2 px-4 rounded-md hover:bg-goldenrod-dark focus:outline-none"

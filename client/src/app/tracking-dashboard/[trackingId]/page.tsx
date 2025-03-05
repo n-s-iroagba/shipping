@@ -1,38 +1,56 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
+import { useParams } from "next/navigation";
+import { trackShipmentUrl } from "@/data/urls";
+import { Shipment } from "@/app/types/Shipment";
 
 const ShipmentTrackingDashboard: React.FC = () => {
+   const [shipmentDetails, setShipmentDetails] = useState<Shipment | null>(null);
+
+ const params = useParams();
+    const trackingId = params.trackingId;
 
 
-  const shipmentDetails = {
-    shipmentID: "SHIP123456",
-    date: "2024-12-29",
-    senderName: "John Doe",
-    sendingAddress: "Port of Los Angeles",
-    destination: "Shanghai Port",
-    recipientName: "Jane Smith",
-    currentLocation: "Pacific Ocean",
-    shipmentDescription: "A white Hyundai Sonata car",
-    steps:[
-      { orderStage: "Shippedddddddddddddddddddddddddddddddddddddddddddddddddddd", processedStatus:'blocked' },
-      { orderStage: "Processed", processedStatus:'blocked' },
-      { orderStage: "Processed", processedStatus:'blocked' },
-      { orderStage: "Processed", processedStatus:'blocked' },
-      { orderStage: "Processed", processedStatus:'blocked' },
-      { orderStage: "Current Location", processedStatus:'blocked' },
-    ]
-  };
+    useEffect(() => {
+      if (!trackingId) {
+        return;
+}
+      
+const fetchShipmentDetails = async () => {
+  try {
+    const response = await fetch(`${trackShipmentUrl}/${trackingId}`);
 
-  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
+    if (!response.ok) throw new Error("Failed to fetch shipment details");
+
+    const data = await response.json(); 
+    console.log("Fetched Shipment Details:", data); 
+
+    setShipmentDetails(data);
+  } catch (error) {
+    alert("An error occurred, try again later");
+    console.error("Fetch Error:", error);
+  }
+};
+
+  
+      fetchShipmentDetails();
+    }, [trackingId]);
+    const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollLeft = scrollContainerRef.current.scrollWidth;
     }
   }, []);
+
+
+  if (!shipmentDetails) return <p>Loading shipment details...</p>;
+
+
+
 
   return (
     <div className="bg-white py-5">
@@ -84,9 +102,7 @@ const ShipmentTrackingDashboard: React.FC = () => {
         <p className="rounded border-b-4 p-2 ">
           <strong>Shipment ID:</strong> {shipmentDetails.shipmentID}
         </p>
-        <p className="rounded border-b-4 border-goldenrod p-2">
-          <strong>Date:</strong> {shipmentDetails.date}
-        </p>
+        
         <p className="rounded border-b-4 border-goldenrod p-2">
           <strong>Sender:</strong> {shipmentDetails.senderName}
         </p>
@@ -94,14 +110,12 @@ const ShipmentTrackingDashboard: React.FC = () => {
           <strong>Sending Port:</strong> {shipmentDetails.sendingAddress}
         </p>
         <p className="rounded border-b-4 border-goldenrod p-2">
-          <strong>Delivery Address:</strong> {shipmentDetails.destination}
+          <strong>Delivery Address:</strong> {shipmentDetails.receivingAddress}
         </p>
         <p className="rounded border-b-4 border-goldenrod p-2">
           <strong>Recipient:</strong> {shipmentDetails.recipientName}
         </p>
-        <p className="rounded border-b-4 border-goldenrod p-2">
-          <strong>Current Location:</strong> {shipmentDetails.currentLocation}
-        </p>
+        
       </div>
     </div>
   );

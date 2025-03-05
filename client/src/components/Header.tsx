@@ -78,7 +78,7 @@ const Header: React.FC = () => {
               <input
                 type="text"
                 id="booking-id"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-yellow-500 focus:border-yellow-500"
+                className="mt-1 block w-full text-black rounded-md border-gray-300 shadow-sm focus:ring-yellow-500 focus:border-yellow-500"
                 placeholder="Your Tracking Id"
                 value={trackingId}
                 onChange={(e) => setTrackingId(e.target.value)}

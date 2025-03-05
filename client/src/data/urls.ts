@@ -6,6 +6,7 @@ export const logoutUserUrl = `${SERVER_URL}/api/logout`
 export const verifyEmailUrl = `${SERVER_URL}/api/verify-email`
 
 export const shipmentUrl = `${SERVER_URL}/api/shipments`
+export const trackShipmentUrl = `${SERVER_URL}/api/shipments/tracking`
 export const adminShipmentUrl = `${SERVER_URL}/api/shipments/admin`
 
 

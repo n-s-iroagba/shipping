@@ -1,6 +1,7 @@
 {
   "name": "client",
   "version": "0.1.0",
+  "homepage": "https://netlylogistics.com",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",

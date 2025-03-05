@@ -124,7 +124,7 @@ export const DeleteShipmentModal: React.FC<{
 
       if (!response.ok) throw new Error("Failed to update shipment");
       window.location.reload()
-      onClose(); // Close modal after success
+      onClose(); // Close modasl after success
     } catch (error) {
       console.error("Error updating shipment:", error);
     }

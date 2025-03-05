@@ -100,6 +100,33 @@ export const fetchShipmentDetails = async (req: Request, res: Response):Promise<
   }
 };
 
+export const fetchShipmentTrackingDetails = async (req: Request, res: Response): Promise<void> => {
+  console.log("Fetching shipment details...");
+
+  try {
+    const { trackingID } = req.params;
+
+    const shipment = await ShipmentDetails.findOne({
+      where: { shipmentID: trackingID },
+      include: [
+        {
+          model: Step,
+          as: "steps", // Ensure this alias matches your Sequelize association
+        },
+      ],
+    });
+
+    if (!shipment) {
+      throw  Error('shipment not found')
+    }
+
+    res.status(200).json(shipment);
+  } catch (error) {
+    console.error("Error fetching shipment:", error);
+    res.status(500).json({ message: "Error fetching shipment", error });
+  }
+};
+
 export const fetchAllAdminShipmentDetails = async (req: Request, res: Response):Promise<any> => {
   try {
     const { adminId } = req.params;

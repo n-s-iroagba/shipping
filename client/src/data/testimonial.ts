@@ -1,43 +1,43 @@
 export const testimonials = [
     {
       name: "Alice Johnson",
-      testimonial: "I never thought achieving financial freedom could be this easy! Thanks to Netly Logistics, my shipments always arrive on time, and my business has grown tremendously."
-    },
-    {
-      name: "Michael Smith",
-      testimonial: "Netly Logistics has completely transformed how we handle logistics. Their efficiency and reliability are unmatched!"
+      testimonial: "Netly Logistics has made shipping so much easier for my business. Their reliability and speed are unmatched!"
     },
     {
       name: "Sarah Williams",
-      testimonial: "Thanks to Netly Logistics, our supply chain has never been smoother. Their tracking system keeps us updated every step of the way!"
-    },
-    {
-      name: "David Brown",
-      testimonial: "Shipping delays used to be a nightmare for us, but since switching to Netly Logistics, everything runs seamlessly."
+      testimonial: "I love how Netly Logistics keeps me updated every step of the way. My deliveries always arrive on time!"
     },
     {
       name: "Jessica Martinez",
-      testimonial: "The professionalism and dedication of Netly Logistics have exceeded our expectations. Highly recommended for any business needing reliable shipping!"
-    },
-    {
-      name: "James Anderson",
-      testimonial: "Netly Logistics provides top-notch service with competitive pricing. We trust them with all our shipments!"
+      testimonial: "Netly Logistics' customer service is outstanding! They helped me streamline my supply chain effortlessly."
     },
     {
       name: "Emily Davis",
-      testimonial: "From small parcels to large cargo, Netly Logistics delivers with care and precision. They are our go-to logistics partner!"
-    },
-    {
-      name: "Daniel Wilson",
-      testimonial: "I appreciate the transparency and efficiency of Netly Logistics. Their customer service is always ready to help!"
+      testimonial: "Fast, secure, and affordable—Netly Logistics is the best shipping partner we've ever had."
     },
     {
       name: "Olivia Thomas",
-      testimonial: "Our business has expanded internationally thanks to the seamless shipping solutions provided by Netly Logistics."
+      testimonial: "Expanding internationally was a breeze with Netly Logistics. Their logistics solutions are top-notch!"
+    },
+    {
+      name: "Michael Smith",
+      testimonial: "Netly Logistics has eliminated all my shipping headaches. Their tracking system is fantastic!"
+    },
+    {
+      name: "David Brown",
+      testimonial: "I trust Netly Logistics with all my shipments. Their efficiency and reliability give me peace of mind."
+    },
+    {
+      name: "James Anderson",
+      testimonial: "With Netly Logistics, I never worry about delays. They always deliver on time, no matter the distance."
+    },
+    {
+      name: "Daniel Wilson",
+      testimonial: "The professionalism and attention to detail at Netly Logistics are second to none. Highly recommended!"
     },
     {
       name: "Matthew White",
-      testimonial: "Reliable, fast, and professional—Netly Logistics takes the stress out of shipping. We couldn't be happier!"
+      testimonial: "Netly Logistics takes care of all our logistics needs, so we can focus on growing our business."
     }
   ];
   
