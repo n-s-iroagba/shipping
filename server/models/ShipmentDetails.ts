@@ -1,6 +1,6 @@
 import { Model, DataTypes, ForeignKey, InferAttributes, InferCreationAttributes } from "sequelize";
 import { User } from "./User"; // Ensure correct import
-import { Step } from "./Step"; // Import related Step model
+import { ShipmentStatus } from "./ShipmentStatus"; // Import related ShipmentStatus model
 import { sequelize } from "../config/database";
 
 export class ShipmentDetails extends Model<
@@ -16,8 +16,8 @@ export class ShipmentDetails extends Model<
   declare shipmentDescription: string;
   declare adminId: ForeignKey<User["id"]>;
 
-  // One ShipmentDetails has many Steps
-  declare steps?: Step[];
+  // One ShipmentDetails has many ShipmentStatus
+  declare shipmentStatus?: ShipmentStatus[];
 }
 
 ShipmentDetails.init(
@@ -67,8 +67,8 @@ ShipmentDetails.init(
     timestamps: true,
   }
 );
-ShipmentDetails.hasMany(Step, { foreignKey: "shipmentDetailsId", as: "steps" });
-Step.belongsTo(ShipmentDetails, { foreignKey: "shipmentDetailsId", as: "shipment" });
+ShipmentDetails.hasMany(ShipmentStatus, { foreignKey: "shipmentDetailsId", as: "shipmentStatus" });
+ShipmentStatus.belongsTo(ShipmentDetails, { foreignKey: "shipmentDetailsId", as: "shipment" });
 
 
 

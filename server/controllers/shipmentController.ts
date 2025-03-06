@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { ShipmentDetails } from "../models/ShipmentDetails";
-import { Step } from "../models/Step";
+import { ShipmentStatus } from "../models/ShipmentStatus";
 
 export const createShipmentDetails = async (req: Request, res: Response):Promise<any> => {
   const { adminId } = req.params;
@@ -26,14 +26,20 @@ export const createShipmentDetails = async (req: Request, res: Response):Promise
         adminId: Number(adminId),
       },
     );
-    await Step.create({
+    await ShipmentStatus.create({
       status:'Request to ship',
-      processedStatus:'Processed',
+      shipmentStatus:'Processed',
       shipmentDetailsId:shipment.id
     })
-    await Step.create({
+    await ShipmentStatus.create({
+      status:'Onboarding',
+      shipmentStatus:'Processed',
+      shipmentDetailsId:shipment.id
+
+    })
+    await ShipmentStatus.create({
       status:'Onboarded',
-      processedStatus:'Processed',
+      shipmentStatus:'In transit',
       shipmentDetailsId:shipment.id
 
     })
@@ -85,8 +91,8 @@ export const fetchShipmentDetails = async (req: Request, res: Response):Promise<
     const shipment = await ShipmentDetails.findByPk(id, {
       include: [
         {
-          model: Step, // Include related steps
-          as: "steps", // Ensure this matches your association alias
+          model: ShipmentStatus, // Include related shipmentStatus
+          as: "shipmentStatus", // Ensure this matches your association alias
         },
       ],
     })
@@ -110,8 +116,8 @@ export const fetchShipmentTrackingDetails = async (req: Request, res: Response):
       where: { shipmentID: trackingID },
       include: [
         {
-          model: Step,
-          as: "steps", // Ensure this alias matches your Sequelize association
+          model: ShipmentStatus,
+          as: "shipmentStatus", // Ensure this alias matches your Sequelize association
         },
       ],
     });

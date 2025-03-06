@@ -1,7 +1,7 @@
 import express from "express";
 import { signUp, verifyEmail, login } from "./controllers/authController";
 import { createShipmentDetails, editShipmentDetails, deleteShipmentDetails, fetchShipmentDetails, fetchAllAdminShipmentDetails, fetchShipmentTrackingDetails } from "./controllers/shipmentController";
-import { createStep, deleteStep, updateStep } from "./controllers/StepsController";
+import { createShipmentStatus, deleteShipmentStatus, updateShipmentStatus } from "./controllers/ShipmentStatusController";
 
 const router = express.Router();
 
@@ -17,8 +17,8 @@ router.get("/shipments/:id", fetchShipmentDetails);
 router.get("/shipments/admin/:adminId", fetchAllAdminShipmentDetails);
 
 
-router.post("/steps/:shipmentDetailsId", createStep);
-router.put("/steps/:id", updateStep)
-router.delete("/steps/:id", deleteStep);
+router.post("/shipmentStatus/:shipmentDetailsId", createShipmentStatus);
+router.put("/shipmentStatus/:id", updateShipmentStatus)
+router.delete("/shipmentStatus/:id", deleteShipmentStatus);
 
 export default router;

@@ -1,21 +1,22 @@
 'use client'
 import { useEffect, useState } from "react";
 import { DeleteShipmentModal, EditShipmentModal } from "@/components/ShipmentModals";
-import EditStepModal, { AddStepModal, DeleteStepModal } from "@/components/StepModal";
+import EditShipmentStatusModal, { AddShipmentStatusModal, DeleteShipmentStatusModal } from "@/components/ShipmentStatusModal";
 import { useParams } from "next/navigation";
-import { Step } from "@/app/types/Steps";
+import { ShipmentStatus } from "@/app/types/ShipmentStatus";
 import { Shipment } from "@/app/types/Shipment";
 import { shipmentUrl } from "@/data/urls";
+import Loading from "@/components/Loading";
 
 
 const AdminShipmentDetails = ()=>{
     const [showEditModal, setShowEditModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [shipmentDetails, setShipmentDetails] = useState<Shipment | null>(null);
-    const [selectedStep, setSelectedStep] = useState <Step|null>(null)
-    const [showEditStepModal, setShowEditStepModal] = useState(false)
-    const [showDeleteStepModal, setShowDeleteStepModal] = useState(false)
-    const [showAddStepModal, setShowAddStepModal] = useState(false)
+    const [selectedShipmentStatus, setSelectedShipmentStatus] = useState <ShipmentStatus|null>(null)
+    const [showEditShipmentStatusModal, setShowEditShipmentStatusModal] = useState(false)
+    const [showDeleteShipmentStatusModal, setShowDeleteShipmentStatusModal] = useState(false)
+    const [showAddShipmentStatusModal, setShowAddShipmentStatusModal] = useState(false)
     const params = useParams();
     const shipmentId = params.id;;
 
@@ -43,7 +44,7 @@ const fetchShipmentDetails = async () => {
     }, [shipmentId]);
   
   // get the shipmentDetails.id from the url and write a useEffect hook to query the server and fetch the user details based off the
-  if (!shipmentDetails) return <p>Loading shipment details...</p>;
+  if (!shipmentDetails) return <Loading/>
     
 
     return(
@@ -83,26 +84,26 @@ const fetchShipmentDetails = async () => {
       </div>
       </div>
       <p className="rounded border-b-4 border-goldenrod p-2"></p>
-      <h2 className="text-md font-semibold text-center">Shipment Steps</h2>
+      <h2 className="text-md font-semibold text-center">Shipment ShipmentStatus</h2>
      
       <div className="flex justify-center">
       <button onClick={() => {
-        setShowAddStepModal(true)
-      }} className="text-white p-1 rounded bg-goldenrod">Add Step</button>
+        setShowAddShipmentStatusModal(true)
+      }} className="text-white p-1 rounded bg-goldenrod">Add ShipmentStatus</button>
         </div>
       <ul>
     
-        {shipmentDetails?.steps?.map((step:Step) => (
+        {shipmentDetails?.shipmentStatus?.map((step:ShipmentStatus) => (
           <>
           <li key={step.id} className="flex justify-evenly border-b p-1">
 
           <div className="flex flex-col w-[60%] justify-between ">
             <h4 className="text-center font-bold">Status: </h4>
-            <span className="min-h-[40px] break-words whitespace-normal text-black">{step.status}</span>
+            <span className="min-h-[40px] break-words whitespace-normal text-black text-center">{step.status}</span>
             <div className="flex justify-center">
             <button onClick={() => {
-                setShowEditStepModal(true);
-                setSelectedStep(step);
+                setShowEditShipmentStatusModal(true);
+                setSelectedShipmentStatus(step);
               }} className="bg-yellow-500 w-[10rem] text-white p-1 mx-2">Edit</button>
             </div>
             </div>
@@ -110,11 +111,11 @@ const fetchShipmentDetails = async () => {
 
           <div className="flex flex-col justify-start">
             <h4 className="text-center font-bold">Processed Status: </h4>
-            <span className="min-h-[40px] break-words whitespace-normal">{step.processedStatus}</span>
+            <span className="min-h-[40px] break-words whitespace-normal text-black text-center" >{step.shipmentStatus}</span>
             <div className="flex justify-center">
             <button onClick={() => {
-                setShowDeleteStepModal(true);
-                setSelectedStep(step);
+                setShowDeleteShipmentStatusModal(true);
+                setSelectedShipmentStatus(step);
               }} className="bg-red-500 text-white p-1">Delete</button>
             </div>
             </div>
@@ -133,9 +134,9 @@ const fetchShipmentDetails = async () => {
     </div>
     {showEditModal &&  <EditShipmentModal shipment={shipmentDetails} onClose={() => setShowEditModal(false)}  />}
     {showDeleteModal && <DeleteShipmentModal shipment={shipmentDetails}  onClose={() => setShowDeleteModal(false)}  />}
-    {showAddStepModal && <AddStepModal onClose={() => setShowAddStepModal(false)} shipmentId={Number(shipmentDetails.id)} />}
-    {showEditStepModal && selectedStep && <EditStepModal step={selectedStep} onClose={()=>setShowEditStepModal(false)} />}
-    {showDeleteStepModal && selectedStep && <DeleteStepModal step={selectedStep}  onClose={()=>setShowDeleteStepModal(false)} />}
+    {showAddShipmentStatusModal && <AddShipmentStatusModal onClose={() => setShowAddShipmentStatusModal(false)} shipmentId={Number(shipmentDetails.id)} />}
+    {showEditShipmentStatusModal && selectedShipmentStatus && <EditShipmentStatusModal step={selectedShipmentStatus} onClose={()=>setShowEditShipmentStatusModal(false)} />}
+    {showDeleteShipmentStatusModal && selectedShipmentStatus && <DeleteShipmentStatusModal step={selectedShipmentStatus}  onClose={()=>setShowDeleteShipmentStatusModal(false)} />}
      
     </div>
     )

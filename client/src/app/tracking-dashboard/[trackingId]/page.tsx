@@ -6,12 +6,28 @@ import { faCheckCircle, faTimesCircle } from "@fortawesome/free-solid-svg-icons"
 import { useParams } from "next/navigation";
 import { Shipment } from "@/app/types/Shipment";
 import { trackShipmentUrl } from "@/data/urls";
+import Loading from "@/components/Loading";
+
 
 const ShipmentTrackingDashboard: React.FC = () => {
 const [shipmentDetails, setShipmentDetails] = useState<Shipment | null>(null);
 const params = useParams();
 const trackingId =  params.trackingId;
 
+const scrollContainerRef = useRef<HTMLDivElement | null>(null);
+
+useEffect(() => {
+  const scrollToEnd = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollLeft = scrollContainerRef.current.scrollWidth;
+    }
+  };
+
+  // Ensure it only scrolls on small screens (e.g., width < 768px)
+  if (window.innerWidth < 768) {
+    setTimeout(scrollToEnd, 100);
+  }
+}, []);
 useEffect(() => {
        if (!trackingId) {
          return;
@@ -36,15 +52,8 @@ fetchShipmentDetails();
 
 
 
-  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollLeft = scrollContainerRef.current.scrollWidth;
-    }
-  }, []);
-
-  if (!shipmentDetails) return <p>Loading shipment details...</p>;
+  if (!shipmentDetails) return <Loading/>
 
   return (
     <div className="bg-white py-5">
@@ -65,25 +74,30 @@ fetchShipmentDetails();
     style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
   >
     <div className="flex flex-row min-w-screen justify-center w-full px-20 items-stretch">
-      {shipmentDetails.steps.map((step, index) => (
+      {shipmentDetails.shipmentStatus.map((step, index) => (
         <div key={index} className="flex flex-col justify-start items-center">
+               <p className="text-black">Status:</p>
+          <div className="text-black text-xs mt-2 text-center w-[80px] h-[6rem] break-words whitespace-normal">
+            {step.status}
+          </div>
           <div className="flex items-center">
             {/* Line Connecting to Previous Tick */}
             {index !== 0 && <div className="w-[68px] h-1 bg-goldenrod -ml-px flex-shrink-0"></div>}
             
             <FontAwesomeIcon
-              icon={step.processedStatus==='blocked' ? faTimesCircle : faCheckCircle}
+              icon={step.shipmentStatus==='Fee Unpaid'|| step.shipmentStatus ==='Fee Partially Paid' ? faTimesCircle : faCheckCircle}
               size="lg"
-              className={`text-2xl ${step.processedStatus==='blocked' ? "text-red-500" : "text-goldenrod"} ${index === 0 ? "pl-20" : index === shipmentDetails.steps.length - 1 ? "pr-20" : ""}`}
+              className={`text-2xl ${step.shipmentStatus==='Fee Unpaid'|| step.shipmentStatus ==='Fee Partially Paid' ? "text-red-500" : "text-goldenrod"} ${index === 0 ? "pl-20" : index === shipmentDetails.shipmentStatus.length - 1 ? "pr-20" : ""}`}
             />
             
             {/* Line Connecting to Next Tick */}
-            {index !== shipmentDetails.steps.length - 1 && <div className="w-[68px] h-1 bg-goldenrod -ml-px flex-shrink-0"></div>}
+            {index !== shipmentDetails.shipmentStatus.length - 1 && <div className="w-[68px] h-1 bg-goldenrod -ml-px flex-shrink-0"></div>}
           </div>
-          <p className="text-black">Status:</p>
+      
           <div className="text-black text-xs mt-2 text-center w-[80px] min-h-[40px] break-words whitespace-normal">
-            {step.status}
+            {step.shipmentStatus}
           </div>
+          <small className="text-black">{new Date(step.date).toDateString()}</small>
         </div>
       ))}
     </div>

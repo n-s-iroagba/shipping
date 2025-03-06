@@ -2,18 +2,20 @@ import { DataTypes, ForeignKey, Model } from "sequelize";
 import { sequelize } from "../config/database";
 import { ShipmentDetails } from "./ShipmentDetails";
 
-export class Step extends Model {
+export class ShipmentStatus extends Model {
   public id!: number;
   public status!: string;
-  public processedStatus!: string;
+  public shipmentStatus!: string;
+  public date!:string;
   public shipmentDetailsId!: ForeignKey<ShipmentDetails["id"]>;
 }
 
-Step.init(
+ShipmentStatus.init(
   {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     status: { type: DataTypes.STRING, allowNull: false },
-    processedStatus: { type: DataTypes.STRING, allowNull: false },
+    shipmentStatus: { type: DataTypes.STRING, allowNull: false },
+    date: { type: DataTypes.DATE, allowNull: false },
     shipmentDetailsId: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -24,7 +26,7 @@ Step.init(
       onDelete: "CASCADE",
     },
   },
-  { sequelize, modelName: "Step" }
+  { sequelize, modelName: "ShipmentStatus" }
 );
 
 

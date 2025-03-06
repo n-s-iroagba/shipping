@@ -1,4 +1,4 @@
-import { Step } from "./Steps";
+import { ShipmentStatus } from "./ShipmentStatus";
 
 export interface Shipment {
   id: string;
@@ -9,5 +9,5 @@ export interface Shipment {
   recipientName: string;
   shipmentDescription: string;
   adminId:string;
-  steps: Step[]
+  shipmentStatus: ShipmentStatus[]
 }

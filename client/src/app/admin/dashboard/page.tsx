@@ -1,6 +1,7 @@
 "use client";
 
 import { Shipment } from "@/app/types/Shipment";
+import Loading from "@/components/Loading";
 import { CreateShipmentModal } from "@/components/ShipmentModals";
 import { adminShipmentUrl } from "@/data/urls";
 import { useRouter } from "next/navigation";
@@ -40,7 +41,7 @@ const ShipmentDashboard: React.FC = () => {
     setShowCreateModal(false);
   };
 
-  if (loading) return <p className="text-center text-lg">Loading shipments...</p>;
+  if (loading) return <Loading/>;
   if (error) return <p className="text-center text-red-500 text-lg">{error}</p>;
 
   return (

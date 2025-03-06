@@ -1,6 +1,6 @@
 
 import { ShipmentDetails } from "./models/ShipmentDetails";
-import { Step } from "./models/Step";
+import { ShipmentStatus } from "./models/ShipmentStatus";
 import { User } from "./models/User";
 
 
@@ -30,14 +30,27 @@ export async function seedDatabase() {
 
     console.log("✅ Shipment Created:", shipment.toJSON());
 
-    // Create Steps for the Shipment
-    const steps = await Step.bulkCreate([
-      { status: "Processing", processedStatus: "Pending", shipmentDetailsId: shipment.id },
-      { status: "In Transit", processedStatus: "Ongoing", shipmentDetailsId: shipment.id },
-      { status: "Delivered", processedStatus: "Completed", shipmentDetailsId: shipment.id },
-    ]);
+   await ShipmentStatus.create({
+       status:'Request to ship',
+       shipmentStatus:'Processed',
+       date: new Date(),
+       shipmentDetailsId:shipment.id
+     })
+     await ShipmentStatus.create({
+       status:'Onboarding',
+       shipmentStatus:'Processed',
+       date:new Date (),
+       shipmentDetailsId:shipment.id
+ 
+     })
+     await ShipmentStatus.create({
+       status:'Onboarded',
+       date:new Date (),
+       shipmentStatus:'In transit',
+       shipmentDetailsId:shipment.id
+ 
+     })
 
-    console.log("✅ Steps Created:", steps.map((s) => s.toJSON()));
 
     console.log("✅ Seeding Completed!");
   } catch (error) {
