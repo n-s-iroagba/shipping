@@ -27,6 +27,8 @@ const TestimonialCarousel = () => {
 
   return (
     <Carousel
+    autoPlay
+    infiniteLoop
       showThumbs={false}
       showStatus={false}
       showIndicators={false}

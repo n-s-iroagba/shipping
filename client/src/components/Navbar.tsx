@@ -26,7 +26,7 @@ const Navbar: React.FC = () => {
 
   return (
     <nav
-      className={`sticky top-0 z-20 flex justify-between items-center px-4 py-2 ${
+      className={`sticky top-0 z-20 flex justify-between items-center px-4 py-2 w-full ${
         scrolled ? "bg-white text-black shadow-lg" : "bg-transparent"
       } transition-all duration-300`}
     >

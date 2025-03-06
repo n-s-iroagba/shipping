@@ -32,9 +32,9 @@ export async function seedDatabase() {
 
     // Create Steps for the Shipment
     const steps = await Step.bulkCreate([
-      { orderStage: "Processing", processedStatus: "Pending", shipmentDetailsId: shipment.id },
-      { orderStage: "In Transit", processedStatus: "Ongoing", shipmentDetailsId: shipment.id },
-      { orderStage: "Delivered", processedStatus: "Completed", shipmentDetailsId: shipment.id },
+      { status: "Processing", processedStatus: "Pending", shipmentDetailsId: shipment.id },
+      { status: "In Transit", processedStatus: "Ongoing", shipmentDetailsId: shipment.id },
+      { status: "Delivered", processedStatus: "Completed", shipmentDetailsId: shipment.id },
     ]);
 
     console.log("✅ Steps Created:", steps.map((s) => s.toJSON()));

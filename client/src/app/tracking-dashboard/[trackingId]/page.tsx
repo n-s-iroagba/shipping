@@ -4,41 +4,39 @@ import React, { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "next/navigation";
-import { trackShipmentUrl } from "@/data/urls";
 import { Shipment } from "@/app/types/Shipment";
+import { trackShipmentUrl } from "@/data/urls";
 
 const ShipmentTrackingDashboard: React.FC = () => {
-   const [shipmentDetails, setShipmentDetails] = useState<Shipment | null>(null);
+const [shipmentDetails, setShipmentDetails] = useState<Shipment | null>(null);
+const params = useParams();
+const trackingId =  params.trackingId;
 
- const params = useParams();
-    const trackingId = params.trackingId;
+useEffect(() => {
+       if (!trackingId) {
+         return;
+ }  
+ const fetchShipmentDetails = async () => {
+   try {
+     const response = await fetch(`${trackShipmentUrl}/${trackingId}`);
+ 
+     if (!response.ok) throw new Error("Failed to fetch shipment details");
+ 
+     const data = await response.json();
+     console.log("Fetched Shipment Details:", data); 
+ 
+     setShipmentDetails(data);
+   } catch (error) {
+     alert("An error occurred, try again later");
+     console.error("Fetch Error:", error);
+   }
+ };  
+fetchShipmentDetails();
+},[trackingId]);
 
 
-    useEffect(() => {
-      if (!trackingId) {
-        return;
-}
-      
-const fetchShipmentDetails = async () => {
-  try {
-    const response = await fetch(`${trackShipmentUrl}/${trackingId}`);
 
-    if (!response.ok) throw new Error("Failed to fetch shipment details");
-
-    const data = await response.json(); 
-    console.log("Fetched Shipment Details:", data); 
-
-    setShipmentDetails(data);
-  } catch (error) {
-    alert("An error occurred, try again later");
-    console.error("Fetch Error:", error);
-  }
-};
-
-  
-      fetchShipmentDetails();
-    }, [trackingId]);
-    const scrollContainerRef = useRef<HTMLDivElement | null>(null);
+  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (scrollContainerRef.current) {
@@ -46,11 +44,7 @@ const fetchShipmentDetails = async () => {
     }
   }, []);
 
-
   if (!shipmentDetails) return <p>Loading shipment details...</p>;
-
-
-
 
   return (
     <div className="bg-white py-5">
@@ -88,7 +82,7 @@ const fetchShipmentDetails = async () => {
           </div>
           <p className="text-black">Status:</p>
           <div className="text-black text-xs mt-2 text-center w-[80px] min-h-[40px] break-words whitespace-normal">
-            {step.orderStage}
+            {step.status}
           </div>
         </div>
       ))}
@@ -96,13 +90,12 @@ const fetchShipmentDetails = async () => {
   </div>
 </div>
 
-      {/* Shipment Details */}
       <h3 className="font-bold mb-2 mt-3 text-center text-black">Shipment Details</h3>
       <div className="space-y-2 text-black">
         <p className="rounded border-b-4 p-2 ">
           <strong>Shipment ID:</strong> {shipmentDetails.shipmentID}
         </p>
-        
+       
         <p className="rounded border-b-4 border-goldenrod p-2">
           <strong>Sender:</strong> {shipmentDetails.senderName}
         </p>
@@ -114,8 +107,7 @@ const fetchShipmentDetails = async () => {
         </p>
         <p className="rounded border-b-4 border-goldenrod p-2">
           <strong>Recipient:</strong> {shipmentDetails.recipientName}
-        </p>
-        
+        </p>   
       </div>
     </div>
   );

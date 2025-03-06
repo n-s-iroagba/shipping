@@ -6,7 +6,7 @@ import { ShipmentDetails } from "../models/ShipmentDetails";
 export const createStep = async (req: Request, res: Response):Promise<any> => {
   console.log('aaaaaaa')
   try {
-    const { orderStage, processedStatus } = req.body;
+    const { status, processedStatus } = req.body;
     const { shipmentDetailsId } = req.params; 
 
     const shipment = await ShipmentDetails.findByPk(shipmentDetailsId);
@@ -16,7 +16,7 @@ export const createStep = async (req: Request, res: Response):Promise<any> => {
 
   
     
-    const step = await Step.create({ orderStage, processedStatus, shipmentDetailsId });
+    const step = await Step.create({ status, processedStatus, shipmentDetailsId });
     
     return res.status(201).json(step);
   } catch (error) {
@@ -30,7 +30,7 @@ export const updateStep = async (req: Request, res: Response):Promise<any> => {
  
   try {
     const { id } = req.params; 
-    const { orderStage, processedStatus } = req.body;
+    const { status, processedStatus } = req.body;
 
     const step = await Step.findByPk(id);
     if (!step) {
@@ -38,7 +38,7 @@ export const updateStep = async (req: Request, res: Response):Promise<any> => {
     }
 
 
-    step.orderStage = orderStage || step.orderStage;
+    step.status = status || step.status;
     step.processedStatus = processedStatus || step.processedStatus;
     await step.save();
 

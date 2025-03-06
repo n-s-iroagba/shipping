@@ -21,7 +21,7 @@ const Header: React.FC = () => {
   const images:StaticImageData[] = [image1, image2, image3]
 
   return (
-    <header className="relative bg-cover bg-center h-screen lg:h-[80vh] bg-image flex flex-col p-4">
+    <header className="relative bg-cover bg-center h-screen lg:h-[80vh] bg-image flex flex-col py-4">
   
       <Navbar />
       {/* Background Carousel */}

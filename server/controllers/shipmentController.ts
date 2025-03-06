@@ -27,12 +27,12 @@ export const createShipmentDetails = async (req: Request, res: Response):Promise
       },
     );
     await Step.create({
-      orderStage:'Request to ship',
+      status:'Request to ship',
       processedStatus:'Processed',
       shipmentDetailsId:shipment.id
     })
     await Step.create({
-      orderStage:'Onboarded',
+      status:'Onboarded',
       processedStatus:'Processed',
       shipmentDetailsId:shipment.id
 

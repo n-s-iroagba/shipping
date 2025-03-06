@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 interface Step {
   id: string;
-  orderStage: string;
+  status: string;
   processedStatus: string;
 }
 
@@ -15,7 +15,7 @@ interface ModalProps {
 
 export const  AddStepModal:React.FC<ModalProps> =({onClose,shipmentId})=> {
   const [formData, setFormData] = useState({
-    orderStage: '',
+    status: '',
     processedStatus:''
   });
 
@@ -50,8 +50,8 @@ export const  AddStepModal:React.FC<ModalProps> =({onClose,shipmentId})=> {
           <label className="block mb-2">
             Order Stage:
             <select
-              name="orderStage"
-              value={formData.orderStage}
+              name="status"
+              value={formData.status}
               onChange={handleChange}
               className="w-full p-2 border rounded"
             >
@@ -117,8 +117,8 @@ export default function EditStepModal({ step, onClose }: {step:Step, onClose:()=
           <label className="block mb-2">
             Order Stage:
             <select
-              name="orderStage"
-              value={formData.orderStage}
+              name="status"
+              value={formData.status}
               onChange={handleChange}
               className="w-full p-2 border rounded"
             >

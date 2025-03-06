@@ -4,7 +4,7 @@ import { ShipmentDetails } from "./ShipmentDetails";
 
 export class Step extends Model {
   public id!: number;
-  public orderStage!: string;
+  public status!: string;
   public processedStatus!: string;
   public shipmentDetailsId!: ForeignKey<ShipmentDetails["id"]>;
 }
@@ -12,7 +12,7 @@ export class Step extends Model {
 Step.init(
   {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    orderStage: { type: DataTypes.STRING, allowNull: false },
+    status: { type: DataTypes.STRING, allowNull: false },
     processedStatus: { type: DataTypes.STRING, allowNull: false },
     shipmentDetailsId: {
       type: DataTypes.INTEGER,

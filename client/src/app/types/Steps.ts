@@ -1,5 +1,5 @@
 export type Step ={
   id: string,
-  orderStage: string,
+  status: string,
   processedStatus: string
 }

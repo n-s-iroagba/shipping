@@ -78,7 +78,7 @@ const SignupForm = () => {
                                 id="name"
                                 value={formData.name}
                                 onChange={handleChange}
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                                className="mt-1 block w-full text-black rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                                 placeholder="Enter your name"
                                 required
                             />
@@ -93,7 +93,7 @@ const SignupForm = () => {
                                 id="email"
                                 value={formData.email}
                                 onChange={handleChange}
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                                className="mt-1 block w-full text-black rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                                 placeholder="Enter your email"
                                 required
                             />
@@ -108,7 +108,7 @@ const SignupForm = () => {
                                 id="password"
                                 value={formData.password}
                                 onChange={handleChange}
-                                className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                                className="text-black mt-1 block w-full  text-black rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                                 placeholder="Enter your password"
                                 required
                             />
@@ -123,7 +123,7 @@ const SignupForm = () => {
                                 id="confirmPassword"
                                 value={formData.confirmPassword}
                                 onChange={handleChange}
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-black"
+                                className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-black"
                                 placeholder="Confirm your password"
                                 required
                             />
