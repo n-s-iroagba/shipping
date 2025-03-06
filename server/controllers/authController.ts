@@ -62,7 +62,7 @@ export const verifyEmail = async (
     await user.save();
 
     const loginToken = jwt.sign(
-      { userId: user.id },
+      { adminId: user.id },
       process.env.JWT_SECRET as string,
       {
         expiresIn: "1d",
@@ -93,7 +93,7 @@ export const login = async (req: Request, res: Response): Promise<any> => {
       return res.status(400).json({ message: "Invalid credentials" });
 
     const token = jwt.sign(
-      { userId: user.id },
+      { adminId: user.id },
       process.env.JWT_SECRET as string,
       {
         expiresIn: "1d",
