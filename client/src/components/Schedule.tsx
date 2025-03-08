@@ -2,12 +2,6 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 
-
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-
-
-
 const portOptions = [
   { value: "Aarhus, Denmark (DKAAR)", label: "Aarhus, Denmark (DKAAR)" },
   { value: "Adelaide, Australia (AUADL)", label: "Adelaide, Australia (AUADL)" },
@@ -55,10 +49,10 @@ const Schedule: React.FC = () => {
           )}
           </select>
           <div className="mt-2">
-            <DatePicker
-              selected={selectedDate}
+            <input
+              value={selectedDate.toDateString()}
               className="w-full border border-gray-300 rounded-md p-2 text-sm focus:outline-none focus:ring-2 focus:ring-goldenrod text-black"
-              dateFormat="dd/MM/yyyy"
+           
             />
           </div>
         </div>

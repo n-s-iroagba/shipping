@@ -7,7 +7,7 @@ import { useState, useRef, useEffect } from "react";
 
 const VerifyEmail = () => {  
     const params = useParams();
-    const token = params.token;;
+    const token = params.token;
   const [code, setCode] = useState(["", "", "", "", "", ""]);
   const inputRefs = useRef<HTMLInputElement[]>([]);
   const [message, setMessage] = useState("");

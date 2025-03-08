@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserAlt } from "@fortawesome/free-solid-svg-icons";
 import "../assets/styles/Navbar.css";
-import Image from "next/image";
-import image from '../assets/images/logo.png'
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -28,7 +26,7 @@ const Navbar: React.FC = () => {
 
   return (
     <nav
-      className={`sticky top-0 z-20 flex justify-between items-center px-4 py-2 w-full ${
+      className={`sticky top-0 z-20 flex justify-between items-center px-4 py-2 w- ${
         scrolled ? "bg-white text-black shadow-lg" : "bg-transparent"
       } transition-all duration-300`}
     >
@@ -39,14 +37,10 @@ const Navbar: React.FC = () => {
           <span className="block w-8 h-1 bg-black mb-0"></span>
         </button>
       </div>
-   <Image
-                 src={image}
-                 alt={`logo`}
-                 className="  w-[6rem] h-[6rem] object-cover"
-               />
+      <h2 className="text-2xl font-bold">Logo</h2>
       <div className="bg-gold">
         <FontAwesomeIcon
-          className="text-black "
+          className="text-black"
           size="2x"
           
           icon={faUserAlt}
