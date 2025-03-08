@@ -44,7 +44,7 @@ const SignupForm = () => {
                     password: formData.password,
                 }),
             }) .then((response) => response.json()) // Convert response to JSON
-            .then((data) => router.push(`/admin/verify-email/${data}`)
+            .then(() => router.push(`/admin/dashboard`)
         ) // Log the data
             .catch((error) => console.error("Error:", error)); ;
 

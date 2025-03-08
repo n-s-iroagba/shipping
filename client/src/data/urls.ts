@@ -1,5 +1,5 @@
-// const SERVER_URL = 'http://localhost:5000'
-const SERVER_URL = 'https://fly.dev.shippingx1'
+const SERVER_URL = 'http://localhost:9000'
+// const SERVER_URL = 'https://shippingx1.fly.dev'
 
 export const registerUserUrl = `${SERVER_URL}/api/signup`
 export const loginUserUrl = `${SERVER_URL}/api/login`
