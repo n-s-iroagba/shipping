@@ -21,7 +21,7 @@ const LoginForm = () =>{
             <input
               type="text"
               id="booking-id"
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text- text-black"
               placeholder="Enter your email"
               required
             />
@@ -36,7 +36,7 @@ const LoginForm = () =>{
             <input
               type="text"
               id="booking-id"
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text- text-black"
               placeholder="Enter your password"
               required
             />
