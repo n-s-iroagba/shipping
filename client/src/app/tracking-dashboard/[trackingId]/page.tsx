@@ -84,10 +84,10 @@ fetchShipmentDetails();
             {/* Line Connecting to Previous Tick */}
             {index !== 0 && <div className="w-[68px] h-1 bg-goldenrod -ml-px flex-shrink-0"></div>}
             
-            <FontAwesomeIcon
+             <FontAwesomeIcon
               icon={step.shipmentStatus==='Fee Unpaid'|| step.shipmentStatus ==='Fee Partially Paid' ? faTimesCircle : faCheckCircle}
               size="lg"
-              className={`text-2xl ${step.shipmentStatus==='Fee Unpaid'|| step.shipmentStatus ==='Fee Partially Paid' ? "text-red-500" : "text-goldenrod"} ${index === 0 ? "pl-20" : index === shipmentDetails.shipmentStatus.length - 1 ? "pr-20" : ""}`}
+              className={`text-2xl ${step.shipmentStatus==='Fee Unpaid'|| step.shipmentStatus ==='Fee Partially Paid' ? "text-red-500" : "text-goldenrod"} ${index === 0 ? "" : index === shipmentDetails.shipmentStatus.length - 1 ? "pr-20" : ""}`}
             />
             
             {/* Line Connecting to Next Tick */}
@@ -108,6 +108,9 @@ fetchShipmentDetails();
       <div className="space-y-2 text-black">
         <p className="rounded border-b-4 p-2 ">
           <strong>Shipment ID:</strong> {shipmentDetails.shipmentID}
+        </p>
+          <p className="rounded border-b-4 p-2 ">
+          <strong>Content:</strong> {shipmentDetails.shipmentDescription}
         </p>
        
         <p className="rounded border-b-4 border-goldenrod p-2">
