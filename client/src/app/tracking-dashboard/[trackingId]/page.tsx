@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheckCircle, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
+import { faCheckCircle, faTimesCircle, faBox, faMapMarkerAlt, faInfoCircle, faDollarSign } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "next/navigation";
 import { Shipment } from "@/app/types/Shipment";
 import { trackShipmentUrl } from "@/data/urls";
@@ -55,79 +55,116 @@ fetchShipmentDetails();
 
   if (!shipmentDetails) return <Loading/>
 
-  return (
-    <div className="bg-white py-5">
-      <h2 className="text-xl font-semibold mb-4 text-center text-black">Shipment Tracking</h2>
-      
-      {/* Google Maps Embed */}
-      <div className="d-flex justify-content-center px-4 my-5">
-        <iframe
-          title="Google Map"
-          style={{ width: "100%", height: "6cm" }}
-          src="https://www.google.com/maps/embed/v1/search?q=+1015+15th+St+NW+6th+Floor,+Washington,+DC,+20005,+USA+·+1050+Connecticut+Avenue+Northwest.&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"
-        />
-      </div>
-      <div className="flex flex-col items-center justify-center mt-10 w-full">
-  <div
-    ref={scrollContainerRef}
-    className="flex overflow-x-auto whitespace-nowrap w-full scroll-smooth"
-    style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-  >
-    <div className="flex flex-row min-w-screen justify-center w-full px-20 items-stretch">
-      {shipmentDetails.shipmentStatus.map((step, index) => (
-        <div key={index} className="flex flex-col justify-start items-center">
-               <p className="text-black">Status:</p>
-          <div className="text-black text-xs mt-2 text-center w-[80px] h-[6rem] break-words whitespace-normal">
-            {step.status}
-          </div>
-          <div className="flex items-center">
-            {/* Line Connecting to Previous Tick */}
-            {index !== 0 && <div className="w-[68px] h-1 bg-goldenrod -ml-px flex-shrink-0"></div>}
-            
-             <FontAwesomeIcon
-              icon={step.shipmentStatus==='Fee Unpaid'|| step.shipmentStatus ==='Fee Partially Paid' ? faTimesCircle : faCheckCircle}
-              size="lg"
-              className={`text-2xl ${step.shipmentStatus==='Fee Unpaid'|| step.shipmentStatus ==='Fee Partially Paid' ? "text-red-500" : "text-goldenrod"} ${index === 0 ? "" : index === shipmentDetails.shipmentStatus.length - 1 ? "pr-20" : ""}`}
-            />
-            
-            {/* Line Connecting to Next Tick */}
-            {index !== shipmentDetails.shipmentStatus.length - 1 && <div className="w-[68px] h-1 bg-goldenrod -ml-px flex-shrink-0"></div>}
-          </div>
-      
-          <div className="text-black text-xs mt-2 text-center w-[80px] min-h-[40px] break-words whitespace-normal">
-            {step.shipmentStatus}
-          </div>
-          <small className="text-black">{new Date(step.date).toDateString()}</small>
-        </div>
-      ))}
-    </div>
-  </div>
-</div>
 
-      <h3 className="font-bold mb-2 mt-3 text-center text-black">Shipment Details</h3>
-      <div className="space-y-2 text-black">
-        <p className="rounded border-b-4 p-2 ">
-          <strong>Shipment ID:</strong> {shipmentDetails.shipmentID}
-        </p>
-          <p className="rounded border-b-4 p-2 ">
-          <strong>Content:</strong> {shipmentDetails.shipmentDescription}
-        </p>
-       
-        <p className="rounded border-b-4 border-goldenrod p-2">
-          <strong>Sender:</strong> {shipmentDetails.senderName}
-        </p>
-        <p className="rounded border-b-4 border-goldenrod p-2">
-          <strong>Sending Port:</strong> {shipmentDetails.sendingAddress}
-        </p>
-        <p className="rounded border-b-4 border-goldenrod p-2">
-          <strong>Delivery Address:</strong> {shipmentDetails.receivingAddress}
-        </p>
-        <p className="rounded border-b-4 border-goldenrod p-2">
-          <strong>Recipient:</strong> {shipmentDetails.recipientName}
-        </p>   
+
+
+  if (!shipmentDetails) return <Loading />;
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-8 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto">
+        {/* Header Section */}
+        <div className="text-center mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 flex items-center justify-center gap-2">
+            <FontAwesomeIcon icon={faBox} className="text-indigo-600 h-6 w-6" />
+            Shipment Tracking
+          </h1>
+          <p className="text-sm sm:text-base text-gray-600">Tracking ID: {trackingId}</p>
+        </div>
+
+        {/* Payment Alert */}
+        {shipmentDetails.shipmentStatus.some(s => s.shipmentStatus.includes('Fee')) && (
+          <div className="bg-gradient-to-r from-orange-50 to-amber-50 border-l-4 border-orange-400 text-orange-800 p-4 mb-8 rounded-lg flex items-start gap-3">
+            <FontAwesomeIcon icon={faDollarSign} className="text-lg mt-1 flex-shrink-0" />
+            <div>
+              <p className="font-semibold text-sm sm:text-base">Payment Required</p>
+              <p className="text-xs sm:text-sm mt-1">Complete payment to continue shipment processing</p>
+            </div>
+          </div>
+        )}
+
+        {/* Map Section */}
+        <div className="bg-white rounded-2xl shadow-lg p-4 mb-8">
+          <div className="flex items-center gap-2 mb-4">
+            <FontAwesomeIcon icon={faMapMarkerAlt} className="text-indigo-600 h-5 w-5" />
+            <h3 className="text-lg font-semibold text-gray-900">Live Location</h3>
+          </div>
+          <div className="relative h-48 sm:h-64 rounded-xl overflow-hidden border-2 border-gray-100">
+            <iframe
+              title="Google Map"
+              className="w-full h-full"
+              src="https://www.google.com/maps/embed/v1/search?q=+1015+15th+St+NW+6th+Floor,+Washington,+DC,+20005,+USA+·+1050+Connecticut+Avenue+Northwest.&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 border-[3px] border-white/20 rounded-xl pointer-events-none" />
+          </div>
+        </div>
+
+    
+      {/* Progress Timeline */}
+      <div className="bg-white rounded-2xl shadow-lg p-6 mb-8">
+          <h3 className="text-lg font-semibold text-gray-900 mb-6 flex items-center gap-2">
+            <FontAwesomeIcon icon={faInfoCircle} className="text-indigo-600" />
+            Shipment Progress
+          </h3>
+          <div className="relative overflow-hidden">
+            <div ref={scrollContainerRef} className="flex overflow-x-auto pb-4 scroll-smooth">
+              <div className="flex min-w-max w-full justify-between">
+                {shipmentDetails.shipmentStatus.map((step, index) => {
+                  const isComplete = !['Fee Unpaid', 'Fee Partially Paid'].includes(step.shipmentStatus);
+                  const isCurrent = index === shipmentDetails.shipmentStatus.length - 1;
+                  
+                  return (
+                    <div key={index} className="flex flex-col items-center relative px-4">
+                      <div className={`h-1 w-full absolute top-5 left-1/2 -translate-y-1/2 ${isComplete ? 'bg-indigo-600' : 'bg-gray-300'}`} />
+                      <div className={`relative z-10 w-10 h-10 rounded-full flex items-center justify-center mb-4 
+                        ${isComplete ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-400'}
+                        ${isCurrent ? 'ring-4 ring-indigo-200' : ''}`}>
+                        <FontAwesomeIcon 
+                          icon={isComplete ? faCheckCircle : faTimesCircle} 
+                          className={isComplete ? 'text-white' : 'text-gray-400'}
+                        />
+                      </div>
+                      <div className="text-center">
+                        <p className={`text-sm font-medium ${isCurrent ? 'text-indigo-600' : 'text-gray-900'}`}>
+                          {step.shipmentStatus}
+                        </p>
+                        <p className="text-xs text-gray-500 mt-1">
+                          {new Date(step.date).toLocaleDateString()}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Shipment Details Grid */}
+        <div className="bg-white rounded-2xl shadow-lg p-6">
+          <h3 className="text-lg font-semibold text-gray-900 mb-6 flex items-center gap-2">
+            <FontAwesomeIcon icon={faInfoCircle} className="text-indigo-600 h-5 w-5" />
+            Shipment Details
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <DetailItem label="Shipment ID" value={shipmentDetails.shipmentID} />
+            <DetailItem label="Content" value={shipmentDetails.shipmentDescription} />
+            <DetailItem label="Sender" value={shipmentDetails.senderName} />
+            <DetailItem label="Sending Port" value={shipmentDetails.sendingAddress} />
+            <DetailItem label="Delivery Address" value={shipmentDetails.receivingAddress} />
+            <DetailItem label="Recipient" value={shipmentDetails.recipientName} />
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
-export default ShipmentTrackingDashboard;
+const DetailItem: React.FC<{ label: string; value: string }> = ({ label, value }) => (
+  <div className="p-3 bg-gray-50 rounded-lg border border-gray-100 transition-colors hover:border-indigo-100">
+    <dt className="text-xs font-medium text-gray-500 uppercase tracking-wide">{label}</dt>
+    <dd className="mt-1 text-sm font-medium text-gray-900 truncate">{value}</dd>
+  </div>
+);
+export default ShipmentTrackingDashboard
