@@ -102,44 +102,50 @@ fetchShipmentDetails();
 
     
       {/* Progress Timeline */}
-      <div className="bg-white rounded-2xl shadow-lg p-6 mb-8">
-          <h3 className="text-lg font-semibold text-gray-900 mb-6 flex items-center gap-2">
-            <FontAwesomeIcon icon={faInfoCircle} className="text-indigo-600" />
-            Shipment Progress
-          </h3>
-          <div className="relative overflow-hidden">
-            <div ref={scrollContainerRef} className="flex overflow-x-auto pb-4 scroll-smooth">
-              <div className="flex min-w-max w-full">
-                {shipmentDetails.shipmentStatus.map((step, index) => {
-                  const isComplete = !['Fee Unpaid', 'Fee Partially Paid'].includes(step.shipmentStatus);
-                  const isCurrent = index === shipmentDetails.shipmentStatus.length - 1;
-                  
-                  return (
-                    <div key={index} className="flex flex-col items-center relative ">
-                      <div className={`h-1 w-full absolute top-5 left-1/2  -translate-y-1/2 ${isComplete ? 'bg-indigo-600' : 'bg-gray-300'}`} />
-                      <div className={`relative z-10 w-10 h-10 rounded-full flex items-center justify-center mb-4 
-                        ${isComplete ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-400'}
-                        ${isCurrent ? 'ring-4 ring-indigo-200' : ''}`}>
-                        <FontAwesomeIcon 
-                          icon={isComplete ? faCheckCircle : faTimesCircle} 
-                          className={isComplete ? 'text-white' : 'text-gray-400'}
-                        />
-                      </div>
-                      <div className="text-center">
-                        <p className={`text-sm font-medium ${isCurrent ? 'text-indigo-600' : 'text-gray-900'}`}>
-                          {step.shipmentStatus}  <br/>
-                        </p>
-                        <p className="text-xs text-gray-500 mt-1">
-                          {new Date(step.date).toLocaleDateString()}
-                        </p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
+      <div className="flex items-center">
+  {shipmentDetails.shipmentStatus.map((step, index) => {
+    const isComplete = !['Fee Unpaid', 'Fee Partially Paid'].includes(step.shipmentStatus);
+    const isCurrent = index === shipmentDetails.shipmentStatus.length - 1;
+
+    return (
+      <div key={index} className="flex flex-col items-center relative min-w-[100px]">
+        {/* Top Section: Icon and Connecting Line */}
+        <div className="flex items-center w-full">
+          {/* Line to the left (except for first item) */}
+          {index !== 0 && (
+            <div className={`h-1 flex-1 ${isComplete ? 'bg-indigo-600' : 'bg-gray-300'}`} />
+          )}
+
+          {/* Icon */}
+          <div className={`w-10 h-10 rounded-full flex items-center justify-center 
+            ${isComplete ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-400'}
+            ${isCurrent ? 'ring-4 ring-indigo-200' : ''}`}>
+            <FontAwesomeIcon
+              icon={isComplete ? faCheckCircle : faTimesCircle}
+              className={isComplete ? 'text-white' : 'text-gray-400'}
+            />
           </div>
+
+          {/* Line to the right (except for last item) */}
+          {index !== shipmentDetails.shipmentStatus.length - 1 && (
+            <div className={`h-1 flex-1 ${isComplete ? 'bg-indigo-600' : 'bg-gray-300'}`} />
+          )}
         </div>
+
+        {/* Bottom Section: Text */}
+        <div className="mt-2 text-center px-2">
+          <p className={`text-sm font-medium ${isCurrent ? 'text-indigo-600' : 'text-gray-900'}`}>
+            {step.shipmentStatus}
+          </p>
+          <p className="text-xs text-gray-500 mt-1">
+            {new Date(step.date).toLocaleDateString()}
+          </p>
+        </div>
+      </div>
+    );
+  })}
+</div>
+
 
         {/* Shipment Details Grid */}
         <div className="bg-white rounded-2xl shadow-lg p-6">
