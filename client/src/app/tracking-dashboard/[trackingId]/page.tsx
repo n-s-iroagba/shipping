@@ -127,7 +127,7 @@ fetchShipmentDetails();
                       </div>
                       <div className="text-center">
                         <p className={`text-sm font-medium ${isCurrent ? 'text-indigo-600' : 'text-gray-900'}`}>
-                          {step.shipmentStatus}{'  '}
+                          {step.shipmentStatus}  <br/>
                         </p>
                         <p className="text-xs text-gray-500 mt-1">
                           {new Date(step.date).toLocaleDateString()}
