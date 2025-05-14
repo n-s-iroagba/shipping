@@ -109,7 +109,7 @@ fetchShipmentDetails();
           </h3>
           <div className="relative overflow-hidden">
             <div ref={scrollContainerRef} className="flex overflow-x-auto pb-4 scroll-smooth">
-              <div className="flex min-w-max w-full justify-between">
+              <div className="flex min-w-max w-full">
                 {shipmentDetails.shipmentStatus.map((step, index) => {
                   const isComplete = !['Fee Unpaid', 'Fee Partially Paid'].includes(step.shipmentStatus);
                   const isCurrent = index === shipmentDetails.shipmentStatus.length - 1;
