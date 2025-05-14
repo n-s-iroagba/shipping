@@ -116,7 +116,7 @@ fetchShipmentDetails();
                   
                   return (
                     <div key={index} className="flex flex-col items-center relative ">
-                      <div className={`h-1 w-full absolute top-5  -translate-y-1/2 ${isComplete ? 'bg-indigo-600' : 'bg-gray-300'}`} />
+                      <div className={`h-1 w-full absolute top-5 left-1/2  -translate-y-1/2 ${isComplete ? 'bg-indigo-600' : 'bg-gray-300'}`} />
                       <div className={`relative z-10 w-10 h-10 rounded-full flex items-center justify-center mb-4 
                         ${isComplete ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-400'}
                         ${isCurrent ? 'ring-4 ring-indigo-200' : ''}`}>
@@ -127,7 +127,7 @@ fetchShipmentDetails();
                       </div>
                       <div className="text-center">
                         <p className={`text-sm font-medium ${isCurrent ? 'text-indigo-600' : 'text-gray-900'}`}>
-                          {step.shipmentStatus}
+                          {step.shipmentStatus}{'  '}
                         </p>
                         <p className="text-xs text-gray-500 mt-1">
                           {new Date(step.date).toLocaleDateString()}
