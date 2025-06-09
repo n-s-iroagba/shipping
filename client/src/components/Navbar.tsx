@@ -43,8 +43,8 @@ const Navbar: React.FC = () => {
   <Image
                  src={logo}
                  alt={`logo`}
-                 width={150}
-                 height={150}
+                 width={75}
+                 height={75}
               
                />
       <div className="bg-gold">
