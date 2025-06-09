@@ -1,13 +1,15 @@
 import { Model, DataTypes, ForeignKey, InferAttributes, InferCreationAttributes } from "sequelize";
 import { User } from "./User"; // Ensure correct import
-import { ShipmentStatus } from "./ShipmentStatus"; // Import related ShipmentStatus model
+
 import { sequelize } from "../config/database";
+import { ShipmentStatus } from "./ShipmentStatus";
+
 
 export class ShipmentDetails extends Model<
   InferAttributes<ShipmentDetails>,
   InferCreationAttributes<ShipmentDetails>
 > {
-  declare id?: string;
+  declare id?: number;
   declare shipmentID: string;
   declare senderName: string;
   declare sendingAddress: string;
@@ -67,8 +69,6 @@ ShipmentDetails.init(
     timestamps: true,
   }
 );
-ShipmentDetails.hasMany(ShipmentStatus, { foreignKey: "shipmentDetailsId", as: "shipmentStatus" });
-ShipmentStatus.belongsTo(ShipmentDetails, { foreignKey: "shipmentDetailsId", as: "shipment" });
 
 
 

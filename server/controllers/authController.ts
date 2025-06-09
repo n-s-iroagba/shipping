@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import { sendVerificationEmail } from "../mailService";
 
 dotenv.config();
+const  JWT_SECRET = 'udorakpuenyi'
 
 export const signUp = async (req: Request, res: Response): Promise<any> => {
   try {
@@ -26,7 +27,7 @@ export const signUp = async (req: Request, res: Response): Promise<any> => {
 
     const verificationToken = jwt.sign(
       { userId: newUser.id },
-      process.env.JWT_SECRET as string,
+      JWT_SECRET as string,
       {
         expiresIn: "1h",
       }
@@ -53,7 +54,7 @@ export const verifyEmail = async (
     const { token,code } = req.body;
     console.log('verifying email')
 
-    const decoded: any = jwt.verify(token, process.env.JWT_SECRET as string);
+    const decoded: any = jwt.verify(token, JWT_SECRET as string);
     const user = await User.findByPk(decoded.userId);
     if (!user)
       return res.status(400).json({ message: "Invalid or expired token" });
@@ -63,7 +64,7 @@ export const verifyEmail = async (
 
     const loginToken = jwt.sign(
       { adminId: user.id },
-      process.env.JWT_SECRET as string,
+      JWT_SECRET as string,
       {
         expiresIn: "1d",
       }
@@ -94,7 +95,7 @@ export const login = async (req: Request, res: Response): Promise<any> => {
 
     const token = jwt.sign(
       { adminId: user.id },
-      process.env.JWT_SECRET as string,
+      JWT_SECRET as string,
       {
         expiresIn: "1d",
       }

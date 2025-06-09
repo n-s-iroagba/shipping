@@ -17,7 +17,7 @@ router.get("/shipments/:id", fetchShipmentDetails);
 router.get("/shipments/admin/:adminId", fetchAllAdminShipmentDetails);
 
 
-router.post("/shipmentStatus/:shipmentDetailsId", createShipmentStatus);
+router.post("/shipmentStatus/:shipmentId", createShipmentStatus);
 router.put("/shipmentStatus/:id", updateShipmentStatus)
 router.delete("/shipmentStatus/:id", deleteShipmentStatus);
 

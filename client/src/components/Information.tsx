@@ -1,15 +1,12 @@
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import React from "react";
 import '../assets/styles/Information.css'
-interface ImageData {
-  src: StaticImageData;
-  text: string;
-}
+
 
 interface InformationProps {
   title: string;
   text: string;
-  images: ImageData[];
+  images: {src:string,text:string}[];
 }
 
 const Information: React.FC<InformationProps> = ({ title, text, images }) => {

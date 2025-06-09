@@ -4,11 +4,11 @@ import Header from "@/components/Header";
 import Information from "@/components/Information";
 import Schedule from "@/components/Schedule";
 import ScheduleCard from "@/components/ScheduleCard";
-import image1 from '@/assets/images/auto.png'
-import image2 from '@/assets/images/ship.png'
-import image3 from '@/assets/images/ireefers.jpg'
-import image4 from '@/assets/images/restoftheworld.jpg'
-import image5 from '@/assets/images/transporttradefair.jpg'
+const image1 = '/images/auto.png'
+const image2 = '/images/ship.png'
+const image3 = '/images/ireefers.jpg'
+const image4 = '/images/restoftheworld.jpg'
+const image5 = '/images/transporttradefair.jpg'
 import TestimonialCarousel from "@/components/TestimonialCarousel";
 import ContactInfo from "@/components/Contact";
 

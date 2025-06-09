@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import { connectDB, sequelize } from "./config/database";
 import router from "./router";
 import cors from 'cors'
+import { ShipmentStatus } from "./models/ShipmentStatus";
 
 dotenv.config();
 
@@ -15,7 +16,9 @@ app.use(cors({
 
 connectDB();
 
-
+ ShipmentStatus.sync({
+  force: true
+})
 sequelize.sync(
   // {force:true}
 ).then(() => {

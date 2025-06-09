@@ -14,7 +14,7 @@ export const createShipmentDetails = async (req: Request, res: Response):Promise
   } = req.body;
 
   try {
-    const  id = String( Math.random()*1000000000) + 'WPCFJJ'
+    const  id = "SHP" + Date.now().toString() + Math.random().toString(36).substr(2, 4).toUpperCase()
    const shipment = await ShipmentDetails.create(
       {
         shipmentID: id,
@@ -26,23 +26,7 @@ export const createShipmentDetails = async (req: Request, res: Response):Promise
         adminId: Number(adminId),
       },
     );
-    await ShipmentStatus.create({
-      status:'Request to ship',
-      shipmentStatus:'Processed',
-      shipmentDetailsId:shipment.id
-    })
-    await ShipmentStatus.create({
-      status:'Onboarding',
-      shipmentStatus:'Processed',
-      shipmentDetailsId:shipment.id
 
-    })
-    await ShipmentStatus.create({
-      status:'Onboarded',
-      shipmentStatus:'In transit',
-      shipmentDetailsId:shipment.id
-
-    })
 
     res.status(201).json({ message: "Shipment details created", shipment });
   } catch (error) {

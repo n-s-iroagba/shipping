@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheckCircle, faTimesCircle, faBox, faMapMarkerAlt, faInfoCircle, faDollarSign } from "@fortawesome/free-solid-svg-icons";
+import { faBox, faMapMarkerAlt, faInfoCircle, faDollarSign } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "next/navigation";
 import { Shipment } from "@/app/types/Shipment";
 import { trackShipmentUrl } from "@/data/urls";
@@ -10,53 +10,60 @@ import Loading from "@/components/Loading";
 
 
 const ShipmentTrackingDashboard: React.FC = () => {
-const [shipmentDetails, setShipmentDetails] = useState<Shipment | null>(null);
-const params = useParams();
-const trackingId =  params.trackingId;
+  const [shipmentDetails, setShipmentDetails] = useState<Shipment | null>(null);
+  const [viewShipmentDetails, setViewShipmentDetails] = useState(false)
+  const params = useParams();
+  const trackingId = params.trackingId;
 
-const scrollContainerRef = useRef<HTMLDivElement | null>(null);
+  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
+  const mostRecentStage = shipmentDetails?.shipmentStatus?.[0];
+  const long = mostRecentStage?.longitude || -119.417931;
+  const lat = mostRecentStage?.latitude || 10.606619;
 
-useEffect(() => {
-  const scrollToEnd = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollLeft = scrollContainerRef.current.scrollWidth;
+  useEffect(() => {
+    const scrollToEnd = () => {
+      if (scrollContainerRef.current) {
+        scrollContainerRef.current.scrollLeft = scrollContainerRef.current.scrollWidth;
+      }
+    };
+
+    // Ensure it only scrolls on small screens (e.g., width < 768px)
+    if (window.innerWidth < 768) {
+      setTimeout(scrollToEnd, 100);
     }
+  }, []);
+
+  useEffect(() => {
+    if (!trackingId) {
+      return;
+    }
+    
+    const fetchShipmentDetails = async () => {
+      try {
+        const response = await fetch(`${trackShipmentUrl}/${trackingId}`);
+
+        if (!response.ok) throw new Error("Failed to fetch shipment details");
+
+        const data = await response.json();
+        console.log("Fetched Shipment Details:", data);
+
+        setShipmentDetails(data);
+      } catch (error) {
+        alert("An error occurred, try again later");
+        console.error("Fetch Error:", error);
+      }
+    };
+    
+    fetchShipmentDetails();
+  }, [trackingId]);
+
+  // Handle payment button click
+  const handlePaymentSupport = () => {
+    // Add your payment support logic here
+    console.log("Payment support requested");
+    // Example: redirect to support page or open email client
+    window.location.href = "mailto:support@example.com?subject=Payment Support Request";
   };
-
-  // Ensure it only scrolls on small screens (e.g., width < 768px)
-  if (window.innerWidth < 768) {
-    setTimeout(scrollToEnd, 100);
-  }
-}, []);
-useEffect(() => {
-       if (!trackingId) {
-         return;
- }  
- const fetchShipmentDetails = async () => {
-   try {
-     const response = await fetch(`${trackShipmentUrl}/${trackingId}`);
- 
-     if (!response.ok) throw new Error("Failed to fetch shipment details");
- 
-     const data = await response.json();
-     console.log("Fetched Shipment Details:", data); 
- 
-     setShipmentDetails(data);
-   } catch (error) {
-     alert("An error occurred, try again later");
-     console.error("Fetch Error:", error);
-   }
- };  
-fetchShipmentDetails();
-},[trackingId]);
-
-
-
-
-  if (!shipmentDetails) return <Loading/>
-
-
-
 
   if (!shipmentDetails) return <Loading />;
 
@@ -73,7 +80,7 @@ fetchShipmentDetails();
         </div>
 
         {/* Payment Alert */}
-        {shipmentDetails.shipmentStatus.some(s => s.shipmentStatus.includes('Fee')) && (
+        {shipmentDetails.shipmentStatus.some(s => s.paymentStatus.includes('UNPAID')) && (
           <div className="bg-gradient-to-r from-orange-50 to-amber-50 border-l-4 border-orange-400 text-orange-800 p-4 mb-8 rounded-lg flex items-start gap-3">
             <FontAwesomeIcon icon={faDollarSign} className="text-lg mt-1 flex-shrink-0" />
             <div>
@@ -93,61 +100,23 @@ fetchShipmentDetails();
             <iframe
               title="Google Map"
               className="w-full h-full"
-              src="https://www.google.com/maps/embed/v1/search?q=+1015+15th+St+NW+6th+Floor,+Washington,+DC,+20005,+USA+·+1050+Connecticut+Avenue+Northwest.&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"
+              src={`https://www.google.com/maps/embed/v1/view?center=${lat},${long}&zoom=12&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8`}
               loading="lazy"
             />
             <div className="absolute inset-0 border-[3px] border-white/20 rounded-xl pointer-events-none" />
           </div>
         </div>
-
-    
-      {/* Progress Timeline */}
-      <div className="flex items-center">
-  {shipmentDetails.shipmentStatus.map((step, index) => {
-    const isComplete = !['Fee Unpaid', 'Fee Partially Paid'].includes(step.shipmentStatus);
-    const isCurrent = index === shipmentDetails.shipmentStatus.length - 1;
-
-    return (
-      <div key={index} className="flex flex-col items-center relative min-w-[100px]">
-        {/* Top Section: Icon and Connecting Line */}
-        <div className="flex items-center w-full">
-          {/* Line to the left (except for first item) */}
-          {index !== 0 && (
-            <div className={`h-1 flex-1 ${isComplete ? 'bg-indigo-600' : 'bg-gray-300'}`} />
-          )}
-
-          {/* Icon */}
-          <div className={`w-10 h-10 rounded-full flex items-center justify-center 
-            ${isComplete ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-400'}
-            ${isCurrent ? 'ring-4 ring-indigo-200' : ''}`}>
-            <FontAwesomeIcon
-              icon={isComplete ? faCheckCircle : faTimesCircle}
-              className={isComplete ? 'text-white' : 'text-gray-400'}
-            />
-          </div>
-
-          {/* Line to the right (except for last item) */}
-          {index !== shipmentDetails.shipmentStatus.length - 1 && (
-            <div className={`h-1 flex-1 ${isComplete ? 'bg-indigo-600' : 'bg-gray-300'}`} />
-          )}
+             <div>
+          <button
+            className="inline-block bg-indigo-600 text-white px-6 py-2.5 rounded-lg hover:bg-indigo-700 transition-colors font-medium"
+            onClick={() => setViewShipmentDetails(!viewShipmentDetails)}
+          >
+            {viewShipmentDetails ? "Collapse Shipment Details" : "View Shipment Details"}
+          </button>
         </div>
 
-        {/* Bottom Section: Text */}
-        <div className="mt-2 text-center px-2">
-          <p className={`text-sm font-medium ${isCurrent ? 'text-indigo-600' : 'text-gray-900'}`}>
-            {step.shipmentStatus}
-          </p>
-          <p className="text-xs text-gray-500 mt-1">
-            {new Date(step.date).toLocaleDateString()}
-          </p>
-        </div>
-      </div>
-    );
-  })}
-</div>
-
-
-        {/* Shipment Details Grid */}
+      {viewShipmentDetails && (
+      
         <div className="bg-white rounded-2xl shadow-lg p-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-6 flex items-center gap-2">
             <FontAwesomeIcon icon={faInfoCircle} className="text-indigo-600 h-5 w-5" />
@@ -162,6 +131,157 @@ fetchShipmentDetails();
             <DetailItem label="Recipient" value={shipmentDetails.recipientName} />
           </div>
         </div>
+        )}
+
+        {/* Current Status Section */}
+        {mostRecentStage && (
+          <div className="bg-white rounded-2xl shadow-lg p-6 mb-8">
+            <div className="flex gap-6">
+              <div className="flex-none">
+                <div className="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center">
+                  <FontAwesomeIcon icon={faBox} className="text-indigo-600 h-5 w-5" />
+                </div>
+              </div>
+              <div className="flex-1">
+                <div className="mb-2">
+                  <span className="inline-block bg-indigo-100 text-indigo-800 text-xs font-semibold px-2.5 py-0.5 rounded-full uppercase tracking-wide">
+                    Current Status
+                  </span>
+                </div>
+                <h4 className="text-lg font-semibold text-gray-900">{mostRecentStage.title}</h4>
+                <p className="text-gray-600 mb-1">Location: {mostRecentStage.location}</p>
+                <p className="text-gray-600 mb-2">Carrier note: {mostRecentStage.carrierNote}</p>
+                <small className="text-sm text-gray-500">{new Date(mostRecentStage.dateAndTime).toLocaleString()}</small>
+
+                {mostRecentStage.feeInDollars && mostRecentStage.feeInDollars > 0 && (
+                  <div className="mt-4 space-y-2">
+                    <div className="text-gray-600">
+                      Fee Required: <span className="text-lg font-medium text-amber-600">${mostRecentStage.feeInDollars}</span>
+                    </div>
+                    {mostRecentStage.paymentStatus !== 'NO_PAYMENT_REQUIRED' &&<div className="text-gray-600">
+                      Payment Status:{" "}
+                      <span
+                        className={`font-medium ${
+                          mostRecentStage.paymentStatus === "PAID"
+                            ? "text-green-600"
+                            : mostRecentStage.paymentStatus === "PENDING"
+                              ? "text-yellow-600"
+                              : "text-red-600"
+                        }`}
+                      >
+                        {mostRecentStage.paymentStatus}
+                      </span>
+                    </div>
+}
+                    {mostRecentStage.percentageNote && (
+                      <small className="text-sm text-gray-600">{mostRecentStage.percentageNote}% of shipment value</small>
+                    )}
+
+                    {mostRecentStage.amountPaid && (
+                      <>
+                        <div className="text-gray-600 mb-2">
+                          Amount Paid: <span className="text-lg font-medium text-green-600">${mostRecentStage.amountPaid}</span>
+                        </div>
+                        <small className="text-sm text-gray-600">
+                          Payment Date: {mostRecentStage.paymentDate && new Date(mostRecentStage.paymentDate).toLocaleDateString()}
+                        </small>
+                      </>
+                    )}
+                    
+                    <div className="flex flex-col lg:flex-row gap-4">
+                      {mostRecentStage.paymentStatus === "UNPAID" && (
+                     <button
+                            onClick={handlePaymentSupport}
+                            className="inline-block bg-indigo-600 text-white px-6 py-2.5 rounded-lg hover:bg-indigo-700 transition-colors font-medium"
+                          >
+                            Mail Support to Make Payment
+                          </button>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {shipmentDetails.shipmentStatus.length>1 &&
+        <div className="bg-white rounded-2xl shadow-lg p-6 mb-8">
+          <h3 className="text-lg font-semibold text-gray-900 mb-6">Shipment Progress Time line</h3>
+          <div className="space-y-6">
+           {shipmentDetails.shipmentStatus.slice(1).map((stat, index) => (
+              <div key={stat.id} className="flex gap-6 relative">
+                <div className="flex-none">
+                  <div className="flex flex-col items-center h-full">
+                    <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center">
+                      <FontAwesomeIcon icon={faBox} className="text-gray-500 h-5 w-5" />
+                    </div>
+                    {index < shipmentDetails.shipmentStatus.length - 1 && (
+                      <div className="w-0.5 bg-blue-600 flex-1 mt-1 min-h-[2rem]"></div>
+                    )}
+                  </div>
+                </div>
+
+                <div className="flex-1 pb-6">
+                  <h4 className="text-lg font-semibold text-gray-900">{stat.title}</h4>
+                  <p className="text-gray-600 mb-1">Location: {stat.location}</p>
+                  <p className="text-gray-600 mb-2">Carrier note: {stat.carrierNote}</p>
+                  <small className="text-sm text-gray-500">{new Date(stat.dateAndTime).toLocaleString()}</small>
+
+                  {stat.feeInDollars && stat.feeInDollars > 0 && (
+                    <div className="mt-4 space-y-2">
+                      <div className="text-gray-600">
+                        Fee Required: <span className="text-lg font-medium text-amber-600">${stat.feeInDollars}</span>
+                      </div>
+                               {stat.paymentStatus !== 'NO_PAYMENT_REQUIRED' &&<div className="text-gray-600">
+                      Payment Status:{" "}
+                      <span
+                        className={`font-medium ${
+                          stat.paymentStatus === "PAID"
+                            ? "text-green-600"
+                            : stat.paymentStatus === "PENDING"
+                              ? "text-yellow-600"
+                              : "text-red-600"
+                        }`}
+                      >
+                        {stat.paymentStatus}
+                      </span>
+                    </div>
+}
+                      {stat.percentageNote && (
+                        <small className="text-sm text-gray-600">{stat.percentageNote}% of shipment value</small>
+                      )}
+
+                      {stat.amountPaid && (
+                        <>
+                          <div className="text-gray-600 mb-2">
+                            Amount Paid: <span className="text-lg font-medium text-green-600">${stat.amountPaid}</span>
+                          </div>
+                          <small className="text-sm text-gray-600">
+                            Payment Date: {stat.paymentDate && new Date(stat.paymentDate).toLocaleDateString()}
+                          </small>
+                        </>
+                      )}
+                      
+                      <div className="flex flex-col lg:flex-row gap-4">
+                        {stat.paymentStatus === "UNPAID" && (
+                          <button
+                            onClick={handlePaymentSupport}
+                            className="inline-block bg-indigo-600 text-white px-6 py-2.5 rounded-lg hover:bg-indigo-700 transition-colors font-medium"
+                          >
+                            Mail Support to Make Payment
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+}
+
       </div>
     </div>
   );
@@ -173,4 +293,5 @@ const DetailItem: React.FC<{ label: string; value: string }> = ({ label, value }
     <dd className="mt-1 text-sm font-medium text-gray-900 truncate">{value}</dd>
   </div>
 );
-export default ShipmentTrackingDashboard
+
+export default ShipmentTrackingDashboard;

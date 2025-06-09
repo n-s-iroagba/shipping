@@ -1,4 +1,5 @@
-import { ShipmentStatus } from "./ShipmentStatus";
+import { ShippingStatus } from "./ShipmentStatus";
+
 
 export interface Shipment {
   id: string;
@@ -9,5 +10,5 @@ export interface Shipment {
   recipientName: string;
   shipmentDescription: string;
   adminId:string;
-  shipmentStatus: ShipmentStatus[]
+  shipmentStatus: ShippingStatus[]
 }

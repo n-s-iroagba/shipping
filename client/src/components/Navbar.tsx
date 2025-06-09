@@ -3,7 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserAlt } from "@fortawesome/free-solid-svg-icons";
 import "../assets/styles/Navbar.css";
 import Image from "next/image";
-import image from '../assets/images/logo.png'
+const logo = '/images/logo.png';
+
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -40,9 +41,11 @@ const Navbar: React.FC = () => {
         </button>
       </div>
   <Image
-                 src={image}
+                 src={logo}
                  alt={`logo`}
-                 className="w-[4.5rem] h-[4.5rem]"
+                 width={200}
+                 height={200}
+              
                />
       <div className="bg-gold">
         <FontAwesomeIcon
