@@ -257,7 +257,7 @@ export  function EditShipmentStatusModal({ step, onClose }: { step: ShippingStat
               <input
                 type="date"
                 name="paymentDate"
-           value={formData.paymentDate ? new Date(formData.paymentDate).toISOString().split("T")[0] : ''}
+           value={formData.paymentDate ? formData.paymentDate.toISOString().split("T")[0] : ''}
 
                 onChange={handleChange}
                 className="w-full border rounded px-3 py-2"
