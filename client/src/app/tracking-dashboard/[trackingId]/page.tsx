@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBox, faMapMarkerAlt, faInfoCircle, faDollarSign } from "@fortawesome/free-solid-svg-icons";
+import { faBox, faMapMarkerAlt,  faDollarSign } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "next/navigation";
 import { Shipment } from "@/app/types/Shipment";
 import { trackShipmentUrl } from "@/data/urls";
@@ -11,7 +11,7 @@ import Loading from "@/components/Loading";
 
 const ShipmentTrackingDashboard: React.FC = () => {
   const [shipmentDetails, setShipmentDetails] = useState<Shipment | null>(null);
-  const [viewShipmentDetails, setViewShipmentDetails] = useState(false)
+
   const params = useParams();
   const trackingId = params.trackingId;
 
@@ -106,32 +106,7 @@ const ShipmentTrackingDashboard: React.FC = () => {
             <div className="absolute inset-0 border-[3px] border-white/20 rounded-xl pointer-events-none" />
           </div>
         </div>
-             <div>
-          <button
-            className="inline-block bg-indigo-600 text-white px-6 py-2.5 rounded-lg hover:bg-indigo-700 transition-colors font-medium"
-            onClick={() => setViewShipmentDetails(!viewShipmentDetails)}
-          >
-            {viewShipmentDetails ? "Collapse Shipment Details" : "View Shipment Details"}
-          </button>
-        </div>
-
-      {viewShipmentDetails && (
-      
-        <div className="bg-white rounded-2xl shadow-lg p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-6 flex items-center gap-2">
-            <FontAwesomeIcon icon={faInfoCircle} className="text-indigo-600 h-5 w-5" />
-            Shipment Details
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            <DetailItem label="Shipment ID" value={shipmentDetails.shipmentID} />
-            <DetailItem label="Content" value={shipmentDetails.shipmentDescription} />
-            <DetailItem label="Sender" value={shipmentDetails.senderName} />
-            <DetailItem label="Sending Port" value={shipmentDetails.sendingAddress} />
-            <DetailItem label="Delivery Address" value={shipmentDetails.receivingAddress} />
-            <DetailItem label="Recipient" value={shipmentDetails.recipientName} />
-          </div>
-        </div>
-        )}
+     
 
         {/* Current Status Section */}
         {mostRecentStage && (
@@ -287,11 +262,6 @@ const ShipmentTrackingDashboard: React.FC = () => {
   );
 };
 
-const DetailItem: React.FC<{ label: string; value: string }> = ({ label, value }) => (
-  <div className="p-3 bg-gray-50 rounded-lg border border-gray-100 transition-colors hover:border-indigo-100">
-    <dt className="text-xs font-medium text-gray-500 uppercase tracking-wide">{label}</dt>
-    <dd className="mt-1 text-sm font-medium text-gray-900 truncate">{value}</dd>
-  </div>
-);
+
 
 export default ShipmentTrackingDashboard;
