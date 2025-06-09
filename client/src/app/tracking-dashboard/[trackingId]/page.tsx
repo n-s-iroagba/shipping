@@ -62,7 +62,7 @@ const ShipmentTrackingDashboard: React.FC = () => {
     // Add your payment support logic here
     console.log("Payment support requested");
     // Example: redirect to support page or open email client
-    window.location.href = "mailto:support@example.com?subject=Payment Support Request";
+    window.location.href = "mailto:netlylogisticshelpservice247@outlook.com?subject=Payment Support Request";
   };
 
   if (!shipmentDetails) return <Loading />;

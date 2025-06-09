@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { 
-    // faPhone,
+    faPhone,
      faEnvelope, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 
 const ContactInfo = () => {
@@ -15,15 +15,15 @@ const ContactInfo = () => {
           Switzerland</span>
         </div>
 
-        {/* <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3">
           <FontAwesomeIcon icon={faPhone} className="text-green-600 w-5 h-5" />
-          <span>+1 (555) 123-4567</span>
-        </div> */}
+          <span>+1 (337) 287-0951</span>
+        </div> 
 
         <div className="flex items-center gap-3">
           <FontAwesomeIcon icon={faEnvelope} className="text-black w-5 h-5" />
           <a href="mailto:info@netlylogistics.com" className="text-black hover:underline">
-  info@netlylogistics.com
+netlylogisticshelpservice247@outlook.com
 </a>
 
         </div>
