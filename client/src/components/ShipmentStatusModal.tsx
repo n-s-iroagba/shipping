@@ -189,7 +189,7 @@ export  function EditShipmentStatusModal({ step, onClose }: { step: ShippingStat
             <input
               type="datetime-local"
               name="dateAndTime"
-              value={formData.dateAndTime.toISOString()}
+              value={formData.dateAndTime.toISOString().split("T")[0]}
               onChange={handleChange}
               className="w-full border rounded px-3 py-2"
             />
