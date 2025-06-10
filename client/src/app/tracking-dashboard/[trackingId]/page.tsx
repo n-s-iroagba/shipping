@@ -131,7 +131,7 @@ const ShipmentTrackingDashboard: React.FC = () => {
                 {mostRecentStage.feeInDollars && mostRecentStage.feeInDollars > 0 && (
                   <div className="mt-4 space-y-2">
                     <div className="text-gray-600">
-                      Fee Required: <span className="text-lg font-medium text-amber-600">${mostRecentStage.feeInDollars}</span>
+                      Fee is required
                     </div>
                     {mostRecentStage.paymentStatus !== 'NO_PAYMENT_REQUIRED' &&<div className="text-gray-600">
                       Payment Status:{" "}
