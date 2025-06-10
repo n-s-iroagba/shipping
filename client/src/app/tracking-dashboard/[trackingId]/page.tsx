@@ -49,7 +49,7 @@ const ShipmentTrackingDashboard: React.FC = () => {
 
         setShipmentDetails(data);
       } catch (error) {
-        alert("An error occurred, try again later");
+        alert("Wrong shipment tracking code.");
         console.error("Fetch Error:", error);
       }
     };

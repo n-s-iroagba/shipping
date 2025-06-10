@@ -71,7 +71,7 @@ export const AddShipmentStatusModal: React.FC<ModalProps> = ({ onClose, shipment
           <input
             type="date"
             name="dateAndTime"
-             value={formData.dateAndTime.toISOString().split("T")[0]}
+             value={new Date (formData.dateAndTime).toISOString().split("T")[0]}
             onChange={handleChange}
             className="w-full p-2 border rounded"
           />
