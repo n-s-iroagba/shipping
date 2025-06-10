@@ -204,7 +204,7 @@ const ShipmentTrackingDashboard: React.FC = () => {
                   {stat.feeInDollars && stat.feeInDollars > 0 && (
                     <div className="mt-4 space-y-2">
                       <div className="text-gray-600">
-                        Fee Required: <span className="text-lg font-medium text-amber-600">${stat.feeInDollars}</span>
+                        Fee is required.
                       </div>
                                {stat.paymentStatus !== 'NO_PAYMENT_REQUIRED' &&<div className="text-gray-600">
                       Payment Status:{" "}
