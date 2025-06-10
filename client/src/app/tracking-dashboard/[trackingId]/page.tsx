@@ -154,9 +154,7 @@ const ShipmentTrackingDashboard: React.FC = () => {
 
                     {mostRecentStage.amountPaid && (
                       <>
-                        <div className="text-gray-600 mb-2">
-                          Amount Paid: <span className="text-lg font-medium text-green-600">${mostRecentStage.amountPaid}</span>
-                        </div>
+                    
                         <small className="text-sm text-gray-600">
                           Payment Date: {mostRecentStage.paymentDate && new Date(mostRecentStage.paymentDate).toLocaleDateString()}
                         </small>
@@ -223,15 +221,11 @@ const ShipmentTrackingDashboard: React.FC = () => {
                       </span>
                     </div>
 }
-                      {stat.percentageNote && (
-                        <small className="text-sm text-gray-600">{stat.percentageNote}% of shipment value</small>
-                      )}
+                
 
                       {stat.amountPaid && (
                         <>
-                          <div className="text-gray-600 mb-2">
-                            Amount Paid: <span className="text-lg font-medium text-green-600">${stat.amountPaid}</span>
-                          </div>
+                     
                           <small className="text-sm text-gray-600">
                             Payment Date: {stat.paymentDate && new Date(stat.paymentDate).toLocaleDateString()}
                           </small>
