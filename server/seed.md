@@ -1,12 +1,10 @@
-
-import { ShipmentDetails } from "./models/ShipmentDetails";
+import { Shipment } from "./models/Shipment";
 import { ShipmentStatus } from "./models/ShipmentStatus";
 import { User } from "./models/User";
 
-
 export async function seedDatabase() {
-  try {
-   
+try {
+
     // Create an Admin User
     const admin = await User.create({
       name: "John Doe",
@@ -18,7 +16,7 @@ export async function seedDatabase() {
     console.log("✅ Admin User Created:", admin.toJSON());
 
     // Create a Shipment under the Admin
-    const shipment = await ShipmentDetails.create({
+    const shipment = await Shipment.create({
       shipmentID: "SHIP-001",
       senderName: "Alice",
       sendingAddress: "123 Sender St, City A",
@@ -30,31 +28,31 @@ export async function seedDatabase() {
 
     console.log("✅ Shipment Created:", shipment.toJSON());
 
-   await ShipmentStatus.create({
-       status:'Request to ship',
-       shipmentStatus:'Processed',
-       date: new Date(),
-       shipmentDetailsId:shipment.id
-     })
-     await ShipmentStatus.create({
-       status:'Onboarding',
-       shipmentStatus:'Processed',
-       date:new Date (),
-       shipmentDetailsId:shipment.id
- 
+await ShipmentStatus.create({
+status:'Request to ship',
+shipmentStatus:'Processed',
+date: new Date(),
+shipmentId:shipment.id
+})
+await ShipmentStatus.create({
+status:'Onboarding',
+shipmentStatus:'Processed',
+date:new Date (),
+shipmentId:shipment.id
+
      })
      await ShipmentStatus.create({
        status:'Onboarded',
        date:new Date (),
        shipmentStatus:'In transit',
-       shipmentDetailsId:shipment.id
- 
+       shipmentId:shipment.id
+
      })
 
 
     console.log("✅ Seeding Completed!");
-  } catch (error) {
-    console.error("❌ Seeding Error:", error);
-  }
-}
 
+} catch (error) {
+console.error("❌ Seeding Error:", error);
+}
+}

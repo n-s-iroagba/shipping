@@ -3,13 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserAlt } from "@fortawesome/free-solid-svg-icons";
 import "../assets/styles/Navbar.css";
 import Image from "next/image";
-const logo = '/images/logo.png';
-
+import image from "../assets/images/logo.png";
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
-
-
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,26 +31,15 @@ const Navbar: React.FC = () => {
       } transition-all duration-300`}
     >
       <div className="bg-gold">
-        <button  className="focus:outline-none">
+        <button className="focus:outline-none">
           <span className="block w-8 h-1 bg-black mb-1 mt-2"></span>
           <span className="block w-8 h-1 bg-black mb-1"></span>
           <span className="block w-8 h-1 bg-black mb-0"></span>
         </button>
       </div>
-  <Image
-                 src={logo}
-                 alt={`logo`}
-                 width={75}
-                 height={75}
-              
-               />
+      <Image src={image} alt={`logo`} className="w-[4.5rem] h-[4.5rem]" />
       <div className="bg-gold">
-        <FontAwesomeIcon
-          className="text-black"
-          size="2x"
-          
-          icon={faUserAlt}
-        />
+        <FontAwesomeIcon className="text-black" size="2x" icon={faUserAlt} />
       </div>
     </nav>
   );

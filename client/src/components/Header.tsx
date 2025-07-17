@@ -1,30 +1,27 @@
 import React, { useState } from "react";
 import Navbar from "./Navbar";
+import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
-
-// Move images to public folder and reference them with absolute paths
-const image1 = '/images/header.jpg'
-// const image2 = '/images/transporttradefair.jpg'
-// const image3 = '/images/ship.png'
+import Image, { StaticImageData } from "next/image";
+import image1 from "../assets/images/header.jpg";
+import image2 from "../assets/images/transporttradefair.jpg";
+import image3 from "../assets/images/ship.png";
 
 const Header: React.FC = () => {
-  const [trackingId, setTrackingId] = useState('')
-  const router = useRouter()
+  const [trackingId, setTrackingId] = useState("");
+  const router = useRouter();
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    router.push(`/tracking-dashboard/${trackingId}`)
+    router.push(`/tracking-dashboard/${trackingId}`);
   };
-
-  // const images = [image1, image2, image3]
+  const images: StaticImageData[] = [image1, image2, image3];
 
   return (
     <header className="relative bg-cover bg-center h-screen lg:h-[80vh] bg-image flex flex-col py-4">
       <Navbar />
-      
-      {/* Background Carousel
+      {/* Background Carousel */}
       <div className="absolute inset-0 z-0">
         <Carousel
           autoPlay
@@ -37,21 +34,18 @@ const Header: React.FC = () => {
         >
           {images.map((image, index) => (
             <div key={index} className="w-full h-full">
-              
+              <Image
+                src={image}
+                alt={`Slide ${index + 1}`}
+                className="w-full h-screen lg:h-[80vh] object-cover"
+              />
             </div>
           ))}
         </Carousel>
-      </div> */}
-<Image
-                src={image1}
-                alt={`Slide ${ + 1}`}
-                className="w-full h-screen lg:h-[80vh] object-cover"
-                fill
-               
-             
-              />
+      </div>
+
       {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black bg-opacity-50 z-[1]"></div>
+      <div className="absolute inset-0 bg-black bg-opacity-50"></div>
 
       {/* Content */}
       <div className="relative z-10 flex flex-col justify-between flex-grow text-center text-white">

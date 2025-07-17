@@ -11,12 +11,10 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        goldenrod: '#DAA520', 
+        goldenrod: "#DAA520",
         "goldenrod-dark": "#B8860B",
       },
     },
   },
   plugins: [],
 } satisfies Config;
-
-

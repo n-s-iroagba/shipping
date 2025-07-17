@@ -1,98 +1,212 @@
 "use client";
+import { routes } from "@/data/routes";
+import { useAuthContext } from "@/hooks/useAuthContext";
+import { useGetList } from "@/hooks/useGet";
 
-import { Shipment } from "@/app/types/Shipment";
-import Loading from "@/components/Loading";
-import { CreateShipmentModal } from "@/components/ShipmentModals";
-import { adminShipmentUrl } from "@/data/urls";
-import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+// import { Stage } from "@/types/stage.types";
+// import TodoAlert from "@/components/TodoAlert";
+import { ReactNode } from "react";
+import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
+import { Spinner } from "@/components/Spinner";
+import { motion } from "framer-motion";
+import { FiTruck, FiUser, FiMapPin, FiPackage } from "react-icons/fi";
+import { Shipment } from "@/types/shipment.types";
 
+// import { CryptoWallet } from "@/types/crypto-wallet.types";
+// import ErrorAlert from "@/components/ErrorAlert";
 
+const Todo = () => {
+  const { loading: authLoading, displayName, adminId } = useAuthContext();
+  const route = adminId ? routes.shipment.list(adminId) : "";
+  const {
+    // error,
+    loading,
+    data: shipments,
+  } = useGetList<Shipment>(route);
 
-const adminId = "1"; // Replace with actual adminId from context or state
+  // const {
+  //   data: wallets,
+  //   error: walletError,
+  //   loading: walletLoading,
+  // } = useGetList<CryptoWallet>(routes.cryptoWallet.list(adminId));
 
-const ShipmentDashboard: React.FC = () => {
-  const [shipments, setShipments] = useState<Shipment[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-  const [showCreateModal, setShowCreateModal] = useState(false);
-  const router = useRouter()
+  // const {
+  //   data: payments,
+  //   error: paymentError,
+  //   loading: paymentLoading,
+  // } = useGetList<Stage>(routes.payment.unapproved(adminId));
 
-  useEffect(() => {
-    const fetchShipments = async () => {
-      try {
-        const response = await fetch(`${adminShipmentUrl}/${adminId}`);
-        if (!response.ok) throw new Error("Failed to fetch shipments");
-        const data = await response.json();
-        setShipments(data);
-      } catch (err) {
-        console.error(err);
-        setError("Error fetching shipments");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchShipments();
-  }, []);
-
-  const updateUI = async (newShipment: Shipment) => {
-    setShipments([...shipments, newShipment]);
-    setShowCreateModal(false);
+  const todos: ReactNode[] = [];
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
   };
 
-  if (loading) return <Loading/>;
-  if (error) return <p className="text-center text-red-500 text-lg">{error}</p>;
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+      },
+    },
+  };
+  // if (!wallets.length) {
+  //   todos.push(
+  //     <TodoAlert
+  //       key="wallet-alert"
+  //       message="You do not have any wallets, add wallets to start managing transactions"
+  //       link="/admin/crypto-wallets"
+  //     />,
+  //   );
+  // }
+
+  // if (payments.length) {
+  //   todos.push(
+  //     <TodoAlert
+  //       key="Pending-payment"
+  //       message="You have pending payments"
+  //       link="/admin/pending-payments"
+  //     />,
+  //   );
+  // }
+
+  if (
+    authLoading ||
+    //  || walletLoading || paymentLoading
+    loading
+  ) {
+    return (
+      <div className="flex justify-center items-center h-screen px-4">
+        <Spinner className="w-8 h-8 text-blue-600" />
+      </div>
+    );
+  }
+
+  // if )
+  //   //  || walletError || paymentError||
+
+  // ){
+  //   return (
+  //   <ErrorAlert message={paymentError || walletError || "Not Authorised"} />
+  // );
+  // }
 
   return (
-    <div className="container mx-auto p-6 max-w-full overflow-x-auto bg-white text-black min-h-screen">
-      <h1 className="text-2xl font-bold mb-4 text-center">Shipment Dashboard</h1>
-      <button
-        className="bg-green-500 text-white px-4 py-2 mb-4 w-full md:w-auto"
-        onClick={() => setShowCreateModal(true)}
-      >
-        Create Shipment
-      </button>
+    <>
+      {/* Mobile-optimized content container */}
+      <div className="w-full">
+        {/* Header - Responsive text sizing */}
+        <div className="mb-4 sm:mb-6">
+          <h2 className="text-xl sm:text-2xl font-bold text-blue-900 mb-2 flex items-center gap-2 flex-wrap">
+            <ExclamationTriangleIcon className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 flex-shrink-0" />
+            <span className="break-words">Welcome back, {displayName}!</span>
+          </h2>
+          <h3 className="text-base sm:text-lg font-semibold text-blue-700">
+            Admin Tasks
+          </h3>
+        </div>
+        <div className="space-y-3 sm:space-y-4">
+          {todos.length > 0 ? (
+            <div className="grid gap-3 sm:gap-4">
+              {todos.map((todo, index) => (
+                <div key={index} className="w-full">
+                  {todo}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="p-4 sm:p-6 bg-blue-50 rounded-lg sm:rounded-xl border border-blue-200 text-center">
+              <p className="text-blue-700 font-medium text-sm sm:text-base">
+                🎉 All caught up! No pending tasks
+              </p>
+            </div>
+          )}
+        </div>
+        {/* Stats Cards */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10"
+        >
+          <motion.div
+            variants={itemVariants}
+            className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 border-l-4 border-indigo-500"
+          >
+            <div className="flex items-center gap-4">
+              <div className="p-3 rounded-full bg-indigo-100 text-indigo-600">
+                <FiTruck className="text-2xl" />
+              </div>
+              <div>
+                <p className="text-gray-500">Total Shipments</p>
+                <h3 className="text-2xl font-bold text-gray-800">
+                  {shipments.length}
+                </h3>
+              </div>
+            </div>
+          </motion.div>
 
-      <div className="overflow-x-auto">
-        <table className="min-w-full border-collapse border border-gray-300">
-          <thead>
-            <tr className="bg-gray-200 text-center">
-              <th className="border p-2">Shipment ID</th>
-              <th className="border p-2">Sender</th>
-              <th className="border p-2">Recipient</th>
-              <th className="border p-2">Destination</th>
-              <th className="border p-2">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {shipments.map((shipment) => (
-              <tr key={shipment.shipmentID} className="border text-center">
-                <td className="border p-2">{shipment.shipmentID}</td>
-                <td className="border p-2">{shipment.senderName}</td>
-                <td className="border p-2">{shipment.recipientName}</td>
-                <td className="border p-2">{shipment.receivingAddress}</td>
-                <td className="border p-2">
-                  <button className="bg-blue-500 text-white px-2 py-1 mr-2 w-full md:w-auto"
-                  onClick={()=>router.push(`/admin/shipment-details/${shipment.id}`)}
-                  >
-                    View More
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+          <motion.div
+            variants={itemVariants}
+            className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 border-l-4 border-blue-500"
+          >
+            <div className="flex items-center gap-4">
+              <div className="p-3 rounded-full bg-blue-100 text-blue-600">
+                <FiUser className="text-2xl" />
+              </div>
+              <div>
+                <p className="text-gray-500">Active Senders</p>
+                <h3 className="text-2xl font-bold text-gray-800">
+                  {new Set(shipments.map((s) => s.senderName)).size}
+                </h3>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            variants={itemVariants}
+            className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 border-l-4 border-green-500"
+          >
+            <div className="flex items-center gap-4">
+              <div className="p-3 rounded-full bg-green-100 text-green-600">
+                <FiMapPin className="text-2xl" />
+              </div>
+              <div>
+                <p className="text-gray-500">Unique Destinations</p>
+                <h3 className="text-2xl font-bold text-gray-800">
+                  {new Set(shipments.map((s) => s.destination)).size}
+                </h3>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            variants={itemVariants}
+            className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 border-l-4 border-purple-500"
+          >
+            <div className="flex items-center gap-4">
+              <div className="p-3 rounded-full bg-purple-100 text-purple-600">
+                <FiPackage className="text-2xl" />
+              </div>
+              <div>
+                <p className="text-gray-500">Recent Activity</p>
+                <h3 className="text-2xl font-bold text-gray-800">
+                  {shipments.length > 0 ? "Active" : "None"}
+                </h3>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
       </div>
-
-      {showCreateModal && (
-        <CreateShipmentModal
-          onClose={() => setShowCreateModal(false)}
-          onCreate={updateUI}
-        />
-      )}
-    </div>
+    </>
   );
 };
 
-export default ShipmentDashboard;
+export default Todo;

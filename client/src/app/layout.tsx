@@ -14,7 +14,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Netly Logistics",
-  description: "Shipping Efficiency redefined, your one-stop logistics partner, the best in logistics and shipping",
+  description:
+    "Shipping Efficiency redefined, your one-stop logistics partner, the best in logistics and shipping",
 };
 
 export default function RootLayout({
