@@ -22,7 +22,7 @@ app.use(cookieParser());
 const corsOptions = {
   origin:
     process.env.NODE_ENV === 'production'
-      ? process.env.CLIENT_URL || 'https://your-production-domain.com'
+      ? process.env.CLIENT_URL || 'https://www.netlylogistics.com'
       : 'http://localhost:3000',
   credentials: true, // Allow cookies to be sent
   optionsSuccessStatus: 200,
@@ -34,11 +34,11 @@ app.use((req, res, next) => {
   next();
 });
 
-connectDB();
+connectDB(true);
 
 app.use('/api/auth', authRoutes);
 app.use('/api/stage', shippingStageRoutes);
 app.use('/api/shipment', shipmentRoutes);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.NODE_ENV==='production'?3000: 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));

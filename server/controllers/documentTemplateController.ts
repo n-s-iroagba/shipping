@@ -1,167 +1,166 @@
 // controllers/DocumentTemplateController.ts
 import { Request, Response } from 'express';
 import { BadRequestError, NotFoundError } from '../errors/errors';
-import { uploadTemplateMiddleware } from '../middleware/upload';
 import { DocumentTemplateService } from '../services/documentTemplateService';
 
 const templateService = new DocumentTemplateService();
 
 export class DocumentTemplateController {
-  async createTemplate(req: Request, res: Response) {
-    try {
-      if (!req.file) {
-        throw new BadRequestError('No file uploaded');
-      }
+  // async createTemplate(req: Request, res: Response) {
+  //   try {
+  //     if (!req.file) {
+  //       throw new BadRequestError('No file uploaded');
+  //     }
 
-      const { name, description } = req.body;
-      const template = await templateService.createTemplate(
-        name,
-        req.file,
-        description
-      );
+  //     const { name, description } = req.body;
+  //     const template = await templateService.createTemplate(
+  //       name,
+  //       req.file,
+  //       description
+  //     );
 
-      res.status(201).json({
-        success: true,
-        data: template,
-      });
-    } catch (error) {
-      if (error instanceof BadRequestError) {
-        res.status(400).json({
-          success: false,
-          error: error.message,
-        });
-      } else {
-        res.status(500).json({
-          success: false,
-          error: 'Failed to create template',
-        });
-      }
-    }
-  }
+  //     res.status(201).json({
+  //       success: true,
+  //       data: template,
+  //     });
+  //   } catch (error) {
+  //     if (error instanceof BadRequestError) {
+  //       res.status(400).json({
+  //         success: false,
+  //         error: error.message,
+  //       });
+  //     } else {
+  //       res.status(500).json({
+  //         success: false,
+  //         error: 'Failed to create template',
+  //       });
+  //     }
+  //   }
+  // }
 
-  async getAllTemplates(req: Request, res: Response) {
-    try {
-      const templates = await templateService.getAllTemplates();
-      res.json({
-        success: true,
-        data: templates,
-      });
-    } catch (error) {
-      res.status(500).json({
-        success: false,
-        error: 'Failed to fetch templates',
-      });
-    }
-  }
+  // async getAllTemplates(req: Request, res: Response) {
+  //   try {
+  //     const templates = await templateService.getAllTemplates();
+  //     res.json({
+  //       success: true,
+  //       data: templates,
+  //     });
+  //   } catch (error) {
+  //     res.status(500).json({
+  //       success: false,
+  //       error: 'Failed to fetch templates',
+  //     });
+  //   }
+  // }
 
-  async getTemplateById(req: Request, res: Response) {
-    try {
-      const template = await templateService.getTemplateById(
-        Number(req.params.id)
-      );
-      res.json({
-        success: true,
-        data: template,
-      });
-    } catch (error) {
-      if (error instanceof NotFoundError) {
-        res.status(404).json({
-          success: false,
-          error: error.message,
-        });
-      } else {
-        res.status(500).json({
-          success: false,
-          error: 'Failed to fetch template',
-        });
-      }
-    }
-  }
+  // async getTemplateById(req: Request, res: Response) {
+  //   try {
+  //     const template = await templateService.getTemplateById(
+  //       Number(req.params.id)
+  //     );
+  //     res.json({
+  //       success: true,
+  //       data: template,
+  //     });
+  //   } catch (error) {
+  //     if (error instanceof NotFoundError) {
+  //       res.status(404).json({
+  //         success: false,
+  //         error: error.message,
+  //       });
+  //     } else {
+  //       res.status(500).json({
+  //         success: false,
+  //         error: 'Failed to fetch template',
+  //       });
+  //     }
+  //   }
+  // }
 
-  async updateTemplate(req: Request, res: Response) {
-    try {
-      const { name, description } = req.body;
-      const template = await templateService.updateTemplate(
-        Number(req.params.id),
-        {
-          name,
-          description,
-        }
-      );
+  // async updateTemplate(req: Request, res: Response) {
+  //   try {
+  //     const { name, description } = req.body;
+  //     const template = await templateService.updateTemplate(
+  //       Number(req.params.id),
+  //       {
+  //         name,
+  //         description,
+  //       }
+  //     );
 
-      res.json({
-        success: true,
-        data: template,
-      });
-    } catch (error) {
-      if (error instanceof NotFoundError) {
-        res.status(404).json({
-          success: false,
-          error: error.message,
-        });
-      } else {
-        res.status(500).json({
-          success: false,
-          error: 'Failed to update template',
-        });
-      }
-    }
-  }
+  //     res.json({
+  //       success: true,
+  //       data: template,
+  //     });
+  //   } catch (error) {
+  //     if (error instanceof NotFoundError) {
+  //       res.status(404).json({
+  //         success: false,
+  //         error: error.message,
+  //       });
+  //     } else {
+  //       res.status(500).json({
+  //         success: false,
+  //         error: 'Failed to update template',
+  //       });
+  //     }
+  //   }
+  // }
 
-  async updateTemplateFile(req: Request, res: Response) {
-    try {
-      if (!req.file) {
-        throw new BadRequestError('No file uploaded');
-      }
+  // async updateTemplateFile(req: Request, res: Response) {
+  //   try {
+  //     if (!req.file) {
+  //       throw new BadRequestError('No file uploaded');
+  //     }
 
-      const template = await templateService.updateTemplateFile(
-        Number(req.params.id),
-        req.file
-      );
+  //     const template = await templateService.updateTemplateFile(
+  //       Number(req.params.id),
+  //       req.file
+  //     );
 
-      res.json({
-        success: true,
-        data: template,
-      });
-    } catch (error) {
-      if (error instanceof NotFoundError) {
-        res.status(404).json({
-          success: false,
-          error: error.message,
-        });
-      } else if (error instanceof BadRequestError) {
-        res.status(400).json({
-          success: false,
-          error: error.message,
-        });
-      } else {
-        res.status(500).json({
-          success: false,
-          error: 'Failed to update template file',
-        });
-      }
-    }
-  }
+  //     res.json({
+  //       success: true,
+  //       data: template,
+  //     });
+  //   } catch (error) {
+  //     if (error instanceof NotFoundError) {
+  //       res.status(404).json({
+  //         success: false,
+  //         error: error.message,
+  //       });
+  //     } else if (error instanceof BadRequestError) {
+  //       res.status(400).json({
+  //         success: false,
+  //         error: error.message,
+  //       });
+  //     } else {
+  //       res.status(500).json({
+  //         success: false,
+  //         error: 'Failed to update template file',
+  //       });
+  //     }
+  //   }
+  // }
 
-  async deleteTemplate(req: Request, res: Response) {
-    try {
-      await templateService.deleteTemplate(Number(req.params.id));
-      res.json({
-        success: true,
-        message: 'Template deleted successfully',
-      });
-    } catch (error) {
-      if (error instanceof NotFoundError) {
-        res.status(404).json({
-          success: false,
-          error: error.message,
-        });
-      } else {
-        res.status(500).json({
-          success: false,
-          error: 'Failed to delete template',
-        });
-      }
-    }
-  }
+  // async deleteTemplate(req: Request, res: Response) {
+  //   try {
+  //     await templateService.deleteTemplate(Number(req.params.id));
+  //     res.json({
+  //       success: true,
+  //       message: 'Template deleted successfully',
+  //     });
+  //   } catch (error) {
+  //     if (error instanceof NotFoundError) {
+  //       res.status(404).json({
+  //         success: false,
+  //         error: error.message,
+  //       });
+  //     } else {
+  //       res.status(500).json({
+  //         success: false,
+  //         error: 'Failed to delete template',
+  //       });
+  //     }
+  //   }
+  // }
 }
