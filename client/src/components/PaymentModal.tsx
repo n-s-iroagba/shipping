@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { routes } from "@/data/routes";
 import type { CryptoWallet } from "@/types/crypto-wallet.types";
 
 interface PaymentModalProps {
@@ -18,7 +17,6 @@ interface PaymentModalProps {
 }
 
 export default function PaymentModal({
-  statusId,
   onClose,
   feeInDollars,
   cryptoWallets,
