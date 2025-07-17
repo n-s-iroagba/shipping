@@ -66,17 +66,17 @@ export default function PaymentModal({
         const formData = new FormData();
         formData.append("paymentReceipt", file);
 
-        const response = await fetch(
-          routes.stage.uploadReceipt(Number(statusId)),
-          {
-            method: "POST",
-            body: formData,
-          },
-        );
+        // const response = await fetch(
+        //   routes.stage.uploadReceipt(Number(statusId)),
+        //   {
+        //     method: "POST",
+        //     body: formData,
+        //   },
+        // );
 
-        if (!response.ok) {
-          throw new Error(`Failed to upload ${file.name}`);
-        }
+        // if (!response.ok) {
+        //   throw new Error(`Failed to upload ${file.name}`);
+        // }
       }
 
       onClose();
