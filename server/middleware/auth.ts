@@ -1,12 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
+import { Admin } from '../models/Admin';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'udorakpuenyi';
 
 export interface AuthRequest extends Request {
-  user?: {
-    adminId: number;
-  };
+  user?: {id:number|string}
 }
 
 export const authenticate = async (
@@ -24,10 +23,10 @@ export const authenticate = async (
     console.log('toke', token);
 
     // Verify token
-    const decoded = jwt.verify(token, JWT_SECRET) as { adminId: number };
+    const decoded = jwt.verify(token, JWT_SECRET) as { id: number };
 
     // Add user to request
-    req.user = { adminId: decoded.adminId };
+    req.user = { id: decoded.id };
 
     next();
   } catch (error) {

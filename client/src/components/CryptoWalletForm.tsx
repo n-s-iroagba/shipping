@@ -10,12 +10,14 @@ interface CryptoWalletFormProps {
   existingWallet?: CryptoWallet;
   patch?: boolean;
   onClose: () => void;
+  adminId:number|string
 }
 
 const CryptoWalletForm: React.FC<CryptoWalletFormProps> = ({
   existingWallet,
   patch = false,
   onClose,
+  adminId
 }) => {
   const [formData, setFormData] = useState({
     currency: "",
@@ -50,10 +52,7 @@ const CryptoWalletForm: React.FC<CryptoWalletFormProps> = ({
     setError("");
 
     try {
-      const adminId = localStorage.getItem("admin_id");
-      if (!adminId) {
-        throw new Error("Admin ID not found");
-      }
+   
 
       const walletData = {
         ...formData,
@@ -61,11 +60,11 @@ const CryptoWalletForm: React.FC<CryptoWalletFormProps> = ({
 
       if (patch && existingWallet) {
         await putRequest(
-          `/admin/crypto-wallets/${existingWallet.id}`,
+          `/crypto-wallet/${existingWallet.id}`,
           walletData,
         );
       } else {
-        await postRequest(`/admin/crypto-wallets/${adminId}`, walletData);
+        await postRequest(`/crypto-wallet/${adminId}`, walletData);
       }
 
       onClose();

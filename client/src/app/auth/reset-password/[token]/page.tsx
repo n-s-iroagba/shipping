@@ -1,163 +1,134 @@
-"use client";
+'use client';
+import { useState, useEffect } from 'react';
+import { useParams, useRouter } from 'next/navigation';
 
-export default function ResetPassword() {
-  // { params }: { params: Promise<{ token: string }> }
-  // const [formData, setFormData] = useState({
-  //   password: '',
-  //   confirmPassword: ''
-  // });
-  // const [error, setError] = useState('');
-  // const [loading, setLoading] = useState(false);
-  // const [validatingToken, setValidatingToken] = useState(true);
-  // const [token, setToken] = useState<string>('');
 
-  // useEffect(() => {
-  //   // Extract token from params promise
-  //   const getToken = async () => {
-  //     const resolvedParams = await params;
-  //     setToken(resolvedParams.token);
-  //   };
-  //   getToken();
-  // }, [params]);
+import { UserCircleIcon,  LockClosedIcon, ArrowPathIcon } from '@heroicons/react/24/outline';
+import { routes } from '@/data/routes';
+import api, { setAccessToken } from '@/utils/apiUtils';
 
-  // useEffect(() => {
-  //   // Validate token once we have it
-  //   if (!token) return;
 
-  //   const validateToken = async () => {
-  //     try {
-  //       const { error: validationError } = await authApi.validateResetToken(token);
-  //       if (validationError) {
-  //         setError('This reset link is invalid or has expired. Please request a new one.');
-  //         setTimeout(() => router.push('/admin/forgot-password'), 3000);
-  //       }
-  //     } catch (err) {
-  //       console.error(err)
-  //       setError('Unable to validate reset token. Please try again later.');
-  //     } finally {
-  //       setValidatingToken(false);
-  //     }
-  //   };
-  //   validateToken();
-  // }, [token, router]);
+interface FormState {
+  password: string;
+  confirmPassword: string;
+}
 
-  // const validatePassword = (password: string) => {
-  //   if (password.length < 8) {
-  //     return 'Password must be at least 8 characters long';
-  //   }
-  //   if (!/[A-Z]/.test(password)) {
-  //     return 'Password must contain at least one uppercase letter';
-  //   }
-  //   if (!/[a-z]/.test(password)) {
-  //     return 'Password must contain at least one lowercase letter';
-  //   }
-  //   if (!/[0-9]/.test(password)) {
-  //     return 'Password must contain at least one number';
-  //   }
-  //   return '';
-  // };
+export default function ResetPasswordPage() {
+  const router = useRouter();
+  const params = useParams();
+  const urlToken = params.token;
+  const [isMounted, setIsMounted] = useState(false);
+  const [form, setForm] = useState<FormState>({
+    password: '',
+    confirmPassword: '',
+  });
+  const [error, setError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
 
-  // const handleSubmit = async (e: React.FormEvent) => {
-  //   e.preventDefault();
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
-  // // Validate passwords
-  // const passwordError = validatePassword(formData.password);
-  // if (passwordError) {
-  //   setError(passwordError);
-  //   return;
-  // }
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
 
-  // if (formData.password !== formData.confirmPassword) {
-  //   setError('Passwords do not match');
-  //   return;
-  // }
+type VerificationResponse = {
+  verificationToken: string;
+};
 
-  // setLoading(true);
 
-  // try {
-  //   const { data, error: apiError } = await authApi.resetPassword({
-  //     password: formData.password,
-  //     resetToken: token
-  //   });
 
-  //   if (data) {
-  //     alert('Password reset successful! Please log in with your new password.');
-  //     router.push('/admin/login');
-  //   } else if (apiError) {
-  //     if (apiError.includes('Invalid or expired token')) {
-  //       setError('This reset link is invalid or has expired. Please request a new one.');
-  //       setTimeout(() => router.push('/admin/forgot-password'), 3000);
-  //     } else if (apiError.includes('Admin not found')) {
-  //       setError('No admin account associated with this link.');
-  //     } else {
-  //       setError('An error occurred. Please try again later.');
-  //     }
-  //   }
-  // } catch (err) {
-  //   console.error('Reset password error:', err);
-  //   setError('An error occurred. Please try again later.');
-  // } finally {
-  //   setLoading(false);
-  // }
-  // };
+
+const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+
+    if (form.password !== form.confirmPassword) {
+      return setError("Passwords don't match");
+    }
+
+    setSubmitting(true);
+    
+      const payload = {
+        resetPasswordToken: urlToken,
+        password: form.password,
+      };
+    
+try {
+  const response = await api.post(routes.auth.resetPassword, payload);
+
+const token = response.data.accessToken;
+setAccessToken(token);
+router.push(`/admin/dashboard`);
+} catch (err: unknown) {
+  let msg = 'Unexpected error';
+  if (err instanceof Error) msg = err.message;
+  console.error('Error in login handleSubmit function', err);
+  setError(msg);
+} finally {
+  setSubmitting(false);
+}
+    }
+
+  if (!isMounted) return null;
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      {/* <div className="w-full max-w-md bg-white p-8 rounded-lg shadow">
-        <h2 className="text-2xl font-bold mb-6 text-center">Reset Password</h2>
+    <div className="min-h-screen flex items-center justify-center bg-sky-50 p-4">
+      <div className="bg-white rounded-2xl shadow-sm border-2 border-sky-50 relative max-w-md w-full p-8">
+        {/* Decorative Corner Borders */}
+        <div className="absolute top-2 right-2 w-8 h-8 border-t-2 border-r-2 border-sky-800 opacity-20" />
+        <div className="absolute bottom-2 left-2 w-8 h-8 border-b-2 border-l-2 border-sky-800 opacity-20" />
+
+        <h1 className="text-2xl font-bold text-sky-900 mb-8 text-center flex items-center justify-center gap-2">
+          <UserCircleIcon className="w-8 h-8 text-sky-700" />
+          New Password
+        </h1>
 
         {error && (
-          <div className="mb-4 p-3 bg-red-100 text-red-700 rounded">
+          <div className="mb-6 p-3 bg-red-50 text-red-700 rounded-xl border-2 border-red-100">
             {error}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              New Password
-            </label>
-            <input
-              type="password"
-              value={formData.password}
-              onChange={(e) => setFormData({...formData, password: e.target.value})}
-              className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
-              required
-              disabled={loading}
-              minLength={8}
-            />
-            <p className="text-xs text-gray-500 mt-1">
-              Password must be at least 8 characters long and contain uppercase, lowercase, and numbers
-            </p>
-          </div>
-
-          <div>
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Confirm New Password
-            </label>
-            <input
-              type="password"
-              value={formData.confirmPassword}
-              onChange={(e) => setFormData({...formData, confirmPassword: e.target.value})}
-              className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
-              required
-              disabled={loading}
-            />
-          </div>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          {[
+            { label: 'Password', name: 'password', type: 'password', Icon: LockClosedIcon },
+            { label: 'Confirm Password', name: 'confirmPassword', type: 'password', Icon: LockClosedIcon },
+          ].map(({ label, name, type, Icon }) => (
+            <div key={name}>
+              <label className="block text-sm font-medium text-sky-700 mb-2 flex items-center gap-1">
+                <Icon className="w-4 h-4" />
+                {label}
+              </label>
+              <input
+                type={type}
+                name={name}
+                value={form[name as keyof FormState]}
+                onChange={handleChange}
+                required
+                className={`w-full p-3 rounded-xl border-2 ${
+                  error?.toLowerCase().includes(name) ? 'border-red-300' : 'border-sky-100'
+                } focus:border-sky-500 focus:ring-2 focus:ring-sky-200 transition-all`}
+              />
+            </div>
+          ))}
 
           <button
             type="submit"
-            disabled={loading}
-            className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 disabled:bg-blue-300 disabled:cursor-not-allowed"
+            disabled={submitting}
+            className="w-full py-3 bg-sky-700 text-white rounded-xl hover:bg-sky-800 disabled:bg-sky-400 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
           >
-         
+            {submitting ? (
+              <>
+                <ArrowPathIcon className="w-5 h-5 animate-spin" />
+                Resetting Password...
+              </>
+            ) : (
+              'Reset Password'
+            )}
           </button>
-        </form> */}
-
-      <div className="mt-4 text-center">
-        <a href="/admin/login" className="text-blue-500 hover:text-blue-600">
-          Back to Login
-        </a>
+        </form>
       </div>
     </div>
   );

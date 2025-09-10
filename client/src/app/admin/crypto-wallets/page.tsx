@@ -34,6 +34,7 @@ export default function CryptoWalletCrudPage() {
     return <ErrorAlert message={error || "Failed to load crypto wallets"} />;
   }
 
+
   return (
     <>
       <div className="container mx-auto p-4 bg-blue-50 min-h-screen">
@@ -52,11 +53,12 @@ export default function CryptoWalletCrudPage() {
           </div>
 
           {createWallet && (
-            <CryptoWalletForm onClose={() => setCreateWallet(false)} />
+            <CryptoWalletForm   adminId={adminId} onClose={() => setCreateWallet(false)} />
           )}
 
           {walletToUpdate && (
             <CryptoWalletForm
+            adminId={adminId}
               existingWallet={walletToUpdate}
               patch
               onClose={() => setWalletToUpdate(null)}

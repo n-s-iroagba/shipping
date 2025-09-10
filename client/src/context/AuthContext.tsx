@@ -4,9 +4,12 @@ import { useGetSingle } from "@/hooks/useGet";
 import { createContext, ReactNode } from "react";
 
 interface LoggedInUser {
-  name: string;
-  id: number;
+  id: number
+  username: string
+  email: string
 }
+
+
 export interface AuthContextValue {
   loading: boolean;
   displayName: string;
@@ -27,7 +30,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     error,
     loading,
   } = useGetSingle<LoggedInUser>(routes.auth.me);
-  const displayName = user?.name || "User";
+  const displayName = user?.username || "User";
   const adminId = user?.id || 0;
 
   return (

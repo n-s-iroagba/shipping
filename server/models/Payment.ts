@@ -2,6 +2,8 @@ import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../config/database';
 import fs from 'fs';
 import path from 'path';
+import { ShippingStage } from '.';
+
 
 export enum PaymentStatus {
   PENDING = 'PENDING',
@@ -18,10 +20,7 @@ export interface PaymentAttributes {
   amount: number;
   dateAndTime: Date;
   status: PaymentStatus;
-  receiptPath: string;
-  receiptType: string;
-  receiptSize: number;
-  referenceNumber?: string;
+  receipt: Buffer;
   notes?: string;
   createdAt: Date;
   updatedAt: Date;
@@ -39,9 +38,7 @@ export class Payment
   public amount!: number;
   public dateAndTime!: Date;
   public status!: PaymentStatus;
-  public receiptPath!: string;
-  public receiptType!: string;
-  public receiptSize!: number;
+  public receipt!: Buffer;
   public referenceNumber?: string;
   public notes?: string;
   public createdAt!: Date;
@@ -49,9 +46,7 @@ export class Payment
 
   public readonly receiptUrl!: string;
 
-  getReceiptUrl(): string {
-    return `/uploads/payments/${path.basename(this.receiptPath)}`;
-  }
+
 }
 
 Payment.init(
@@ -83,22 +78,11 @@ Payment.init(
       allowNull: false,
       defaultValue: PaymentStatus.PENDING,
     },
-    receiptPath: {
-      type: DataTypes.STRING,
+    receipt: {
+      type: DataTypes.BLOB,
       allowNull: false,
     },
-    receiptType: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    receiptSize: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    referenceNumber: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
+   
     notes: {
       type: DataTypes.TEXT,
       allowNull: true,
@@ -115,13 +99,14 @@ Payment.init(
   {
     sequelize,
     tableName: 'payments',
-    hooks: {
-      beforeDestroy: async (payment: Payment) => {
-        // Delete receipt file when payment is deleted
-        if (fs.existsSync(payment.receiptPath)) {
-          fs.unlinkSync(payment.receiptPath);
-        }
-      },
-    },
+  
   }
 );
+Payment.belongsTo(ShippingStage, {
+  foreignKey: 'shippingStageId',
+  as: 'paymentStage'
+});
+ShippingStage.hasMany(Payment, {
+  foreignKey: 'shippingStageId',
+  as: 'payments',
+});

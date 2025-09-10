@@ -4,8 +4,9 @@ import {
   InferAttributes,
   InferCreationAttributes,
 } from 'sequelize';
-import { User } from './User'; // Ensure correct import
+
 import { sequelize } from '../config/database';
+import { ShippingStage } from './ShippingStage';
 
 type FreightType = 'LAND' | 'AIR' | 'SEA';
 export type ShipmentStatus = 'RECEIVED (WAREHOUSE)' | 'ONBOARD' | 'IN TRANSIT';
@@ -23,12 +24,13 @@ export class Shipment extends Model<
   declare recipientName: string;
   declare pickupPoint: string;
   declare shipmentDescription: string;
-  declare adminId: number;
   declare status: ShipmentStatus;
   declare dimensionInInches: string;
   declare expectedTimeOfArrival: Date;
   declare receipientEmail: string;
   declare weight: number;
+  declare viewCode:string
+   declare viewToken:string
   declare freightType: FreightType;
 }
 
@@ -57,14 +59,7 @@ Shipment.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    adminId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: User,
-        key: 'id',
-      },
-    },
+ 
     origin: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -97,6 +92,12 @@ Shipment.init(
       type: DataTypes.ENUM('LAND', 'SEA', 'AIR'),
       allowNull: false,
     },
+    viewCode:{
+      type:DataTypes.STRING
+    },
+    viewToken:{
+      type:DataTypes.STRING
+    },
     status: {
       type: DataTypes.ENUM('RECEIVED (WAREHOUSE)', 'ONBOARD', 'IN TRANSIT'),
       allowNull: false,
@@ -109,3 +110,15 @@ Shipment.init(
     timestamps: true,
   }
 );
+Shipment.hasMany(ShippingStage, {
+  foreignKey: 'shipmentId',
+  as: 'shippingStages',
+  onDelete: 'CASCADE',
+  onUpdate: 'CASCADE',
+});
+
+// ShippingStage associations
+ShippingStage.belongsTo(Shipment, {
+  foreignKey: 'shipmentId',
+  as: 'shipment',
+});

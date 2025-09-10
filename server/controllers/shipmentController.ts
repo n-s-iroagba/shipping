@@ -53,6 +53,7 @@ export class ShipmentController {
       res.json(shipments);
       return;
     } catch (error) {
+      console.error(error)
       res.status(500).json({ error: 'Failed to fetch shipments' });
     }
   }
@@ -101,22 +102,22 @@ export class ShipmentController {
     }
   }
 
-  async trackPublic(req: Request, res: Response): Promise<void> {
-    try {
-      const trackingInfo = await service.getPublicTrackingInfo(
-        req.params.trackingId
-      );
-      res.json(trackingInfo);
-    } catch (error) {
-      if (error instanceof NotFoundError) {
-        res.status(404).json(error);
-      } else {
-        res.status(500).json({ error: 'Failed to track shipment' });
-      }
-    }
-  }
+  // async trackPublic(req: Request, res: Response): Promise<void> {
+  //   try {
+  //     const trackingInfo = await service.getPublicTrackingInfo(
+  //       req.params.trackingId
+  //     );
+  //     res.json(trackingInfo);
+  //   } catch (error) {
+  //     if (error instanceof NotFoundError) {
+  //       res.status(404).json(error);
+  //     } else {
+  //       res.status(500).json({ error: 'Failed to track shipment' });
+  //     }
+  //   }
+  // }
 
-  async trackSensitive(req: Request, res: Response): Promise<void> {
+  async trackPublic(req: Request, res: Response): Promise<void> {
     try {
       const trackingInfo = await service.getSensitiveTrackingInfo(
         req.params.trackingId
@@ -126,8 +127,30 @@ export class ShipmentController {
       if (error instanceof NotFoundError) {
         res.status(404).json(error);
       } else {
+        console.error(error)
         res.status(500).json({ error: 'Failed to track shipment' });
       }
     }
   }
+
+    async initiateSensitiveTracking(req:Request, res:Response){
+    const shipmentId = req.params.shipmentId
+    try {
+
+       const token =await service.initiateSensitiveTracking(shipmentId)
+   res.json(token)
+    }catch(error){
+ res.status(500).json({ error: 'Failed initiate shipment tracking' });
+    }
+}
+
+async grantsSensitiveView (req:Request,res:Response){
+   try {
+
+      const token= await service.issueSenstiveViewToken(req.body)
+ res.json(token)
+    }catch(error){
+ res.status(500).json({ error: 'Failed initiate shipment tracking' });
+    }
+}
 }

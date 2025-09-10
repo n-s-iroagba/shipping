@@ -9,9 +9,8 @@ export interface DocumentTemplateAttributes {
   adminId: number;
   name: string;
   description?: string;
-  filePath: string;
-  fileType: string;
-  fileSize: number;
+  file: Buffer;
+ 
   createdAt: Date;
   updatedAt: Date;
 }
@@ -27,18 +26,12 @@ export class DocumentTemplate
   public adminId!: number;
   public name!: string;
   public description?: string;
-  public filePath!: string;
-  public fileType!: string;
-  public fileSize!: number;
-  public createdAt!: Date;
-  public updatedAt!: Date;
+  public file!: Buffer;
+  createdAt!: Date;
+  updatedAt!: Date
 
   public readonly url!: string;
 
-  // Virtual getter for file URL
-  public getUrl(): string {
-    return `/uploads/templates/${path.basename(this.filePath)}`;
-  }
 }
 
 DocumentTemplate.init(
@@ -64,18 +57,11 @@ DocumentTemplate.init(
       type: DataTypes.TEXT,
       allowNull: true,
     },
-    filePath: {
-      type: DataTypes.STRING,
+    file: {
+      type: DataTypes.BLOB,
       allowNull: false,
     },
-    fileType: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    fileSize: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
+    
     createdAt: {
       type: DataTypes.DATE,
       allowNull: false,
@@ -88,13 +74,7 @@ DocumentTemplate.init(
   {
     sequelize,
     tableName: 'document_templates',
-    hooks: {
-      beforeDestroy: async (template: DocumentTemplate) => {
-        // Delete the file when template is deleted
-        if (fs.existsSync(template.filePath)) {
-          fs.unlinkSync(template.filePath);
-        }
-      },
+ 
     },
-  }
+
 );

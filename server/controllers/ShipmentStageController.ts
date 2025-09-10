@@ -93,7 +93,7 @@ export class ShippingStageController {
       const updatedStage = await this.service.update(stageId, stageData);
       console.log(updatedStage);
       res.json(updatedStage);
-      return;
+      
     } catch (error) {
       console.error(error);
       res.status(500).json(error);

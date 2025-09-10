@@ -7,7 +7,7 @@ import { sequelize } from '../config/database';
 
 // Import all models through the index file
 import {
-  User,
+  Admin,
   Shipment,
   ShippingStage,
   Payment,
@@ -18,7 +18,7 @@ import {
 // Export models for use in other parts of the application
 export {
   sequelize,
-  User,
+  Admin,
   Shipment,
   ShippingStage,
   Payment,
@@ -45,7 +45,7 @@ export const testAssociations = () => {
   console.log('🔍 Testing model associations...');
 
   // Test User associations
-  console.log('User associations:', Object.keys(User.associations));
+  console.log('User associations:', Object.keys(Admin.associations));
 
   // Test Shipment associations
   console.log('Shipment associations:', Object.keys(Shipment.associations));

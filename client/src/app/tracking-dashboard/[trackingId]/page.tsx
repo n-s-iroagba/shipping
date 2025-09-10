@@ -1,14 +1,21 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBox, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "next/navigation";
-import { useGetSingle } from "@/hooks/useGet";
+import { useGetList, useGetSingle } from "@/hooks/useGet";
 import { Shipment } from "@/types/shipment.types";
 import { routes } from "@/data/routes";
 import { Spinner } from "@/components/Spinner";
 import ErrorAlert from "@/components/ErrorAlert";
+import VerificationModal from "@/components/VerificationModal";
+import { handleError } from "@/utils/utils";
+import { getRequest } from "@/utils/apiUtils";
+import PaymentModal from "@/components/PaymentModal";
+import { Stage } from "@/types/stage.types";
+import { CryptoWallet } from "@/types/crypto-wallet.types";
+import { Bank } from "@/types/bank.types";
 
 const ShipmentTrackingDashboard: React.FC = () => {
   const params = useParams();
@@ -17,10 +24,26 @@ const ShipmentTrackingDashboard: React.FC = () => {
   const {
     data: shipment,
     loading,
-    error,
+    error:loadingError,
   } = useGetSingle<Shipment>(routes.shipment.trackPublic(trackingId));
 
+  const [showVerifyModal, setShowVerifyModal] = useState(false);
+  const  [showPaymentStage, setPaymentStage] = useState<Stage|null>(null);
+  const [error, setError] = useState('')
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
+  const [token, setToken] = useState('')
+  const [viewToken, setViewToken]= useState('')
+    const {
+      data: wallets,
+      // loading:walletLoading,
+      // error,
+    } = useGetList<CryptoWallet>(routes.cryptoWallet.list(shipment?.adminId||0))
+        const {
+      data: bank,
+      // loading:walletLoading,
+      // error,
+    } = useGetSingle<Bank>(`/bank/${shipment?.adminId||0}`)
+  console.log(shipment)
   const mostRecentStage = shipment?.shippingStages?.[0];
   const long = mostRecentStage?.longitude || -119.417931;
   const lat = mostRecentStage?.latitude || 10.606619;
@@ -35,15 +58,28 @@ const ShipmentTrackingDashboard: React.FC = () => {
     if (window.innerWidth < 768) {
       setTimeout(scrollToEnd, 100);
     }
+   setViewToken( sessionStorage.getItem("temp-shipping-view")||'')
   }, []);
+  const initateTracking=async()=>{
+    try{
+const data =await getRequest(`/shipment/initiate/${shipment?.id}`)
+setToken(data)
 
-  // const handlePaymentSupport = () => {
-  //   window.location.href =
-  //     "mailto:netlylogisticshelpservice247@outlook.com?subject=Payment Support Request";
-  // };
 
+  setShowVerifyModal(true)
+
+    }catch(error){
+      console.error(error)
+      handleError(error,setError)
+      
+    }
+  }
+
+  const startPayment=async (stage:Stage)=>{
+    setPaymentStage(stage)
+  }
   if (loading) return <Spinner />;
-  if (error)
+  if (loadingError)
     return (
       <ErrorAlert message="Failed to retrieve tracking details, please try again later." />
     );
@@ -51,10 +87,17 @@ const ShipmentTrackingDashboard: React.FC = () => {
     return (
       <ErrorAlert message="Tracking details not found, please try again later." />
     );
-
+  
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
+        {/* Request Full Details Button */}
+      
+
+        {showVerifyModal && (
+          <VerificationModal token={token} onClose={() => setShowVerifyModal(false)} />
+        )}
+
         {/* Header Section */}
         <div className="text-center mb-8">
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 flex items-center justify-center gap-2">
@@ -64,20 +107,15 @@ const ShipmentTrackingDashboard: React.FC = () => {
           <p className="text-sm sm:text-base text-gray-600">
             Tracking ID: {trackingId}
           </p>
+            <div className="text-center mt-6">
+          <button
+            onClick={() => initateTracking()}
+            className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700"
+          >
+            Request Full Shipment Details
+          </button>
         </div>
-
-        {/* Payment Alert (optional) */}
-        {/* {shipment.shippingStages.some(s => s.paymentStatus === 'UNPAID') && (
-          <div className="bg-gradient-to-r from-orange-50 to-amber-50 border-l-4 border-orange-400 text-orange-800 p-4 mb-8 rounded-lg flex items-start gap-3">
-            <FontAwesomeIcon icon={faDollarSign} className="text-lg mt-1 flex-shrink-0" />
-            <div>
-              <p className="font-semibold text-sm sm:text-base">Payment Required</p>
-              <p className="text-xs sm:text-sm mt-1">
-                Complete payment to continue shipment processing
-              </p>
-            </div>
-          </div>
-        )} */}
+        </div>
 
         {/* Map Section */}
         <div className="bg-white rounded-2xl shadow-lg p-4 mb-8">
@@ -128,6 +166,20 @@ const ShipmentTrackingDashboard: React.FC = () => {
                 <p className="text-gray-600 mb-2">
                   Carrier note: {mostRecentStage.carrierNote}
                 </p>
+                      {viewToken&&(<> { mostRecentStage.feeInDollars&& <p className="text-gray-600 mb-1">
+                      Fee: {mostRecentStage.feeInDollars}
+                    </p>
+}  <p className="text-gray-600 mb-2">
+                      Amount Paid: ${mostRecentStage.amountPaid||0}
+                    </p>
+                    <p className="text-gray-600 mb-2">
+                      Payment Status: {mostRecentStage.paymentStatus}
+                    </p>
+                    {mostRecentStage.paymentStatus!=='PAID'&&<button
+                    onClick={()=>startPayment(mostRecentStage)}
+                    >Make Payment</button>}
+                    </>
+                  )}
                 <small className="text-sm text-gray-500">
                   {new Date(mostRecentStage.dateAndTime).toLocaleString()}
                 </small>
@@ -158,6 +210,7 @@ const ShipmentTrackingDashboard: React.FC = () => {
                       )}
                     </div>
                   </div>
+
                   <div className="flex-1 pb-6">
                     <h4 className="text-lg font-semibold text-gray-900">
                       {stat.title}
@@ -168,9 +221,59 @@ const ShipmentTrackingDashboard: React.FC = () => {
                     <p className="text-gray-600 mb-2">
                       Carrier note: {stat.carrierNote}
                     </p>
+                    {viewToken&&(<> { stat.feeInDollars&& <p className="text-gray-600 mb-1">
+                      Fee: {stat.feeInDollars}
+                    </p>
+}  <p className="text-gray-600 mb-2">
+                      Amount Paid: {stat.amountPaid}
+                    </p>
+                    <p className="text-gray-600 mb-2">
+                      Payment Status: {stat.paymentStatus}
+                    </p></>)}
                     <small className="text-sm text-gray-500">
                       {new Date(stat.dateAndTime).toLocaleString()}
                     </small>
+
+                    {/* Payments Section */}
+                   {viewToken&&stat.payments.length !==0 && <div className="mt-3">
+                      <h5 className="font-semibold text-sm text-gray-800 mb-2">
+                        Payments for this stage
+                      </h5>
+                      {stat.payments && stat.payments.length > 0 ? (
+                        <ul className="space-y-2">
+                          {stat.payments.map((payment) => (
+                            <li
+                              key={payment.id}
+                              className="flex justify-between items-center border rounded px-3 py-2 bg-gray-50"
+                            >
+                              <span className="text-sm text-gray-700">
+                                {new Date(
+                                  payment.dateAndTime
+                                ).toLocaleString()}
+                              </span>
+                              <span className="text-sm text-gray-900 font-medium">
+                                ${payment.amount.toFixed(2)}
+                              </span>
+                              <span
+                                className={`text-xs px-2 py-1 rounded ${
+                                  payment.status === "PENDING"
+                                    ? "bg-yellow-100 text-yellow-700"
+                                    : payment.status === "PAID"
+                                    ? "bg-green-100 text-green-700"
+                                    : "bg-gray-100 text-gray-700"
+                                }`}
+                              >
+                                {payment.status}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      ) : (
+                        <p className="text-sm text-gray-500 italic">
+                          Payments not available (verify access to see)
+                        </p>
+                      )}
+                    </div>}
                   </div>
                 </div>
               ))}
@@ -178,8 +281,11 @@ const ShipmentTrackingDashboard: React.FC = () => {
           </div>
         )}
       </div>
+      {showPaymentStage&&<PaymentModal bank={bank} statusId={String(showPaymentStage.id)} onClose={()=>setPaymentStage(null)} feeInDollars={((showPaymentStage.feeInDollars)||0)-(showPaymentStage.amountPaid||0)} cryptoWallets={wallets}/>}
     </div>
   );
 };
 
 export default ShipmentTrackingDashboard;
+
+

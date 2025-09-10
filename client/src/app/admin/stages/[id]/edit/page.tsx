@@ -21,7 +21,7 @@ export default function EditStageForm() {
   const router = useRouter();
   const params = useParams();
   const stageId = params.id as string;
-  const [formData, setFormData] = useState<Stage>({
+  const [formData, setFormData] = useState<Omit<Stage,'payments'>>({
     shipmentId: 0,
     id: 0,
     createdAt: new Date(),
@@ -112,8 +112,11 @@ export default function EditStageForm() {
       });
 
       await putRequest(routes.stage.update(stage.id), formDataToSend, true);
+      router.push('/admin/shipment')
     } catch (error) {
       console.error(error);
+    }finally{
+      setIsSubmitting(false)
     }
   };
 

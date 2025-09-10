@@ -5,6 +5,7 @@ import type React from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
 import { routes } from "@/data/routes";
+import { handleError } from "@/utils/utils";
 
 const VerifyEmail = () => {
   const params = useParams();
@@ -12,7 +13,7 @@ const VerifyEmail = () => {
   const [code, setCode] = useState(["", "", "", "", "", ""]);
   const inputRefs = useRef<HTMLInputElement[]>([]);
   const [message, setMessage] = useState("");
-  const [timeLeft, setTimeLeft] = useState(300); // 5-minute countdown
+  const [timeLeft, setTimeLeft] = useState(0); // 5-minute countdown
   const [canResend, setCanResend] = useState(false);
   const [token, setToken] = useState<string>("");
   const router = useRouter();
@@ -50,7 +51,7 @@ const VerifyEmail = () => {
       inputRefs.current[index + 1]?.focus();
     }
   };
-
+ 
   const handleKeyDown = (index: number, e: React.KeyboardEvent) => {
     if (e.key === "Backspace" && !code[index] && index > 0) {
       inputRefs.current[index - 1]?.focus();
@@ -62,15 +63,13 @@ const VerifyEmail = () => {
     const verificationCode = code.join("");
     try {
       const loginToken = await postRequest(routes.auth.verifyEmail, {
-        code: verificationCode,
+        verificationCode: verificationCode,
         verificationToken: token,
       });
       setAccessToken(loginToken);
       router.push(`/admin/dashboard`);
     } catch (err) {
-      setMessage(
-        "An Error occured please try again later, or contact developer",
-      );
+     handleError(err,setMessage)
       console.error(err);
     }
   };
@@ -79,15 +78,13 @@ const VerifyEmail = () => {
     setCanResend(false);
     setTimeLeft(300);
     try {
-      const newToken = postRequest(routes.auth.resendVerificationCode, {
-        token,
+      const newToken = await postRequest(routes.auth.resendVerificationCode, {
+       verificationToken: token,
       });
 
       router.push(`/auth/verify-email/${newToken}`);
     } catch (error) {
-      setMessage(
-        "An Error occured please try again later, or contact developer",
-      );
+      handleError(error,setMessage)
       console.error(error);
     }
   };

@@ -6,6 +6,7 @@ import {
   type NonAttribute,
 } from 'sequelize';
 import { sequelize } from '../config/database';
+import { Shipment } from './associations';
 
 // Main Attributes
 export enum ShippingStagePaymentStatus {
@@ -109,3 +110,5 @@ ShippingStage.init(
     tableName: 'ShippingStages',
   }
 );
+
+

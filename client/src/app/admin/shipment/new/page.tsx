@@ -1,11 +1,13 @@
 "use client";
 import { routes } from "@/data/routes";
+import { useAuthContext } from "@/hooks/useAuthContext";
 import { CreateShipmentDto } from "@/types/shipment.types";
 import {
   ShippingStagePaymentStatus,
   StageCreationDto,
 } from "@/types/stage.types";
 import { postRequest } from "@/utils/apiUtils";
+import { handleError } from "@/utils/utils";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -86,12 +88,13 @@ export default function CreateShipmentPage() {
   });
 
   const [submitting, setSubmitting] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string >('');
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [validationErrors, setValidationErrors] = useState<ValidationErrors>(
     {},
   );
   const router = useRouter();
+  const {adminId} = useAuthContext()
 
   // Initialize with one stage by default
   const initializeDefaultStage = (): StageCreationDto => ({
@@ -243,7 +246,7 @@ export default function CreateShipmentPage() {
   const removeStage = (index: number): void => {
     if (form.shippingStages.length <= 1) {
       setError("At least one stage is required");
-      setTimeout(() => setError(null), 3000);
+      setTimeout(() => setError(''), 3000);
       return;
     }
     setForm((prev) => {
@@ -263,7 +266,7 @@ export default function CreateShipmentPage() {
 
   const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
-    setError(null);
+    setError('');
     setSuccessMessage("");
 
     if (!validateForm()) {
@@ -345,7 +348,7 @@ export default function CreateShipmentPage() {
 
       // Simulate API call
       const response = await postRequest(
-        routes.shipment.create(1),
+        routes.shipment.create(adminId),
         formData,
         true,
       );
@@ -368,11 +371,9 @@ export default function CreateShipmentPage() {
         dimensionInInches: "",
         shippingStages: [initializeDefaultStage()],
       });
-      router.push(`/admin/shipment/${response.data.id}`);
+      router.push(`/admin/shipment/${response.id}`);
     } catch (err) {
-      setError(
-        err instanceof Error ? err.message : "Failed to create shipment",
-      );
+     handleError(err,setError)
     } finally {
       setSubmitting(false);
     }
@@ -385,21 +386,7 @@ export default function CreateShipmentPage() {
           Create New Shipment
         </h1>
 
-        {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 flex items-center">
-            <svg
-              className="w-5 h-5 mr-2"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path
-                fillRule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-              />
-            </svg>
-            {error}
-          </div>
-        )}
+      
 
         {successMessage && (
           <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4 flex items-center">
@@ -563,26 +550,7 @@ export default function CreateShipmentPage() {
               <h2 className="text-xl font-semibold text-gray-800">
                 Shipping Stages
               </h2>
-              <button
-                type="button"
-                onClick={addStage}
-                className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors flex items-center"
-              >
-                <svg
-                  className="w-4 h-4 mr-2"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                  />
-                </svg>
-                Add Stage
-              </button>
+          
             </div>
 
             {form.shippingStages.map((stage, index) => (
@@ -806,7 +774,41 @@ export default function CreateShipmentPage() {
               </div>
             ))}
           </div>
-
+    <button
+                type="button"
+                onClick={addStage}
+                className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors flex items-center"
+              >
+                <svg
+                  className="w-4 h-4 mr-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                  />
+                </svg>
+                Add Stage
+              </button>
+                {error && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 flex items-center">
+            <svg
+              className="w-5 h-5 mr-2"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fillRule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+              />
+            </svg>
+            {error}
+          </div>
+        )}
           <div className="flex justify-end space-x-4 pt-6">
             <button
               type="button"

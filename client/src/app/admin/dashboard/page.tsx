@@ -11,30 +11,32 @@ import { Spinner } from "@/components/Spinner";
 import { motion } from "framer-motion";
 import { FiTruck, FiUser, FiMapPin, FiPackage } from "react-icons/fi";
 import { Shipment } from "@/types/shipment.types";
+import { CryptoWallet } from "@/types/crypto-wallet.types";
+import { Stage } from "@/types/stage.types";
+import ErrorAlert from "@/components/ErrorAlert";
+import TodoAlert from "@/components/TodoAlert";
 
-// import { CryptoWallet } from "@/types/crypto-wallet.types";
-// import ErrorAlert from "@/components/ErrorAlert";
 
 const Todo = () => {
   const { loading: authLoading, displayName, adminId } = useAuthContext();
-  const route = adminId ? routes.shipment.list(adminId) : "";
+
   const {
-    // error,
+    error,
     loading,
     data: shipments,
-  } = useGetList<Shipment>(route);
+  } = useGetList<Shipment>(routes.shipment.list(adminId));
 
-  // const {
-  //   data: wallets,
-  //   error: walletError,
-  //   loading: walletLoading,
-  // } = useGetList<CryptoWallet>(routes.cryptoWallet.list(adminId));
+  const {
+    data: wallets,
+    error: walletError,
+    loading: walletLoading,
+  } = useGetList<CryptoWallet>(routes.cryptoWallet.list(adminId));
 
-  // const {
-  //   data: payments,
-  //   error: paymentError,
-  //   loading: paymentLoading,
-  // } = useGetList<Stage>(routes.payment.unapproved(adminId));
+  const {
+    data: payments,
+    error: paymentError,
+    loading: paymentLoading,
+  } = useGetList<Stage>(routes.payment.unapproved(adminId));
 
   const todos: ReactNode[] = [];
   const containerVariants = {
@@ -57,30 +59,30 @@ const Todo = () => {
       },
     },
   };
-  // if (!wallets.length) {
-  //   todos.push(
-  //     <TodoAlert
-  //       key="wallet-alert"
-  //       message="You do not have any wallets, add wallets to start managing transactions"
-  //       link="/admin/crypto-wallets"
-  //     />,
-  //   );
-  // }
+  if (!wallets.length) {
+    todos.push(
+      <TodoAlert
+        key="wallet-alert"
+        message="You do not have any wallets, add wallets to start managing transactions"
+        link="/admin/crypto-wallets"
+      />,
+    );
+  }
 
-  // if (payments.length) {
-  //   todos.push(
-  //     <TodoAlert
-  //       key="Pending-payment"
-  //       message="You have pending payments"
-  //       link="/admin/pending-payments"
-  //     />,
-  //   );
-  // }
+  if (payments.length) {
+    todos.push(
+      <TodoAlert
+        key="Pending-payment"
+        message="You have pending payments"
+        link="/admin/pending-payments"
+      />,
+    );
+  }
 
   if (
     authLoading ||
-    //  || walletLoading || paymentLoading
-    loading
+     walletLoading || paymentLoading
+    ||loading
   ) {
     return (
       <div className="flex justify-center items-center h-screen px-4">
@@ -89,14 +91,12 @@ const Todo = () => {
     );
   }
 
-  // if )
-  //   //  || walletError || paymentError||
-
-  // ){
-  //   return (
-  //   <ErrorAlert message={paymentError || walletError || "Not Authorised"} />
-  // );
-  // }
+  if( walletError || paymentError||error
+  ){
+    return (
+    <ErrorAlert message={paymentError || walletError || "Not Authorised"} />
+  );
+  }
 
   return (
     <>

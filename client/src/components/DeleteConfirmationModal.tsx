@@ -11,7 +11,7 @@ import { useState } from "react";
 interface DeleteModalProps {
   id: number | string;
   onClose: () => void;
-  type: "shipment" | "wallet" | "stage" | "document-template";
+  type: "shipment" | "wallet" | "stage" | "document-template" |'bank';
   message: string;
 }
 
@@ -19,6 +19,7 @@ const API_ROUTES_MAP = {
   shipment: routes.shipment.delete,
   wallet: routes.cryptoWallet.delete,
   stage: routes.stage.delete,
+  bank :(id:number|string)=>`/bank/${id}`,
 
   "document-template": routes.templates.delete,
 };

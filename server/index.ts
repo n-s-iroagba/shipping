@@ -1,13 +1,17 @@
 import express, { urlencoded } from 'express';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
-import { connectDB } from './config/database';
-
 import cors from 'cors';
 import shipmentRoutes from './routes/shipmentRoutes';
 import authRoutes from './routes/authRoutes';
 import shippingStageRoutes from './routes/shippingStageRoutes';
-import { upload } from './middleware/upload';
+import cryptoWalletRoutes from './routes/cryptoWalletRoutes';
+import { connectDB, sequelize } from './config/database';
+import paymentRoutes from './routes/paymentRoutes';
+import documentTemplateRoutes from './routes/documentTemplateRoutes';
+import { errorHandler } from './middleware/errorHandler';
+import bankRoutes from './routes/bankRoutes';
+
 
 dotenv.config();
 
@@ -33,12 +37,16 @@ app.use((req, res, next) => {
   console.log('📦 Body:', req.body);
   next();
 });
-
-connectDB(true);
-
+// connectDB(true);
+// sequelize.sync({ alter: true });
+app.use('/api/payment',paymentRoutes)
+app.use ('/api/crypto-wallet',cryptoWalletRoutes)
 app.use('/api/auth', authRoutes);
 app.use('/api/stage', shippingStageRoutes);
 app.use('/api/shipment', shipmentRoutes);
+app.use('/api/templates',documentTemplateRoutes)
+app.use('/bank',bankRoutes)
+app.use(errorHandler)
 
 const PORT = process.env.NODE_ENV==='production'?3000: 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));

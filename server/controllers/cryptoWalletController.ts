@@ -1,153 +1,147 @@
 import { Response, Request } from 'express';
 import { CryptoWallet } from '../models/CryptoWallet';
 import { AuthRequest } from '../middleware/auth';
+import logger from '../utils/logger';
 
+// Unified error handler using plain Error
+function handleError(error: unknown, context: string, res: Response) {
+  let message = 'Internal server error';
+
+  if (error instanceof Error) {
+    message = error.message;
+  }
+
+  logger.error(`Failed to ${context}: ${message}`);
+  res.status(400).json({
+    success: false,
+    message,
+  });
+}
 
 export const cryptoWalletController = {
-  // async list(req: AuthRequest, res: Response): Promise<void> {
-  //   try {
-  //     const adminId = req.i;
-  //     const { page = 1, limit = 10 } = req.query;
+  async list(req: AuthRequest, res: Response): Promise<void> {
+    try {
+      const adminId = req?.user?.id;
+      const { page = 1, limit = 10 } = req.query;
 
-  //     if (!adminId) {
-  //       throw new AppError(400, 'Valid admin ID is required');
-  //     }
+      if (!adminId) {
+        throw new Error('Valid admin ID is required');
+      }
 
-  //     const offset = (Number(page) - 1) * Number(limit);
+      const offset = (Number(page) - 1) * Number(limit);
 
-  //     const { count, rows: wallets } = await CryptoWallet.findAndCountAll({
-  //       where: { adminId },
-  //       order: [['createdAt', 'DESC']],
-  //       limit: Number(limit),
-  //       offset,
-  //     });
+      const wallets = await CryptoWallet.findAll({
+        where: { adminId },
+      });
 
-  //     logger.info(
-  //       `Listed ${wallets.length} crypto wallets for admin ${adminId}`
-  //     );
-  //     const response: ApiResponse<CryptoWallet[]> = {
-  //       success: true,
-  //       data: wallets,
-  //       pagination: {
-  //         page: Number(page),
-  //         limit: Number(limit),
-  //         total: count,
-  //         totalPages: Math.ceil(count / Number(limit)),
-  //       },
-  //     };
-  //     res.json(response);
-  //   } catch (error) {
-  //     handleError(error, 'list crypto wallets', res);
-  //   }
-  // },
+      logger.info(`Listed ${wallets.length} crypto wallets for admin ${adminId}`);
+      res.json(wallets);
+    } catch (error) {
+      handleError(error, 'list crypto wallets', res);
+    }
+  },
 
-  // async create(req: Request, res: Response): Promise<void> {
-  //   try {
-  //     const adminId = req.admin?.id;
+  async create(req: AuthRequest, res: Response): Promise<void> {
+    try {
+      const adminId = Number(req?.params.adminId);
 
-  //     if (!adminId) {
-  //       throw new AppError(400, 'Valid admin ID is required');
-  //     }
+      if (!adminId) {
+        throw new Error('Valid admin ID is required');
+      }
 
-  //     // Validate request body
-  //     validateCryptoWalletCreation(req.body);
+      const { currency, walletAddress } = req.body;
 
-  //     const { currency, walletAddress } = req.body;
+      const wallet = await CryptoWallet.create({
+        adminId,
+        currency,
+        walletAddress,
+      });
 
-  //     const wallet = await CryptoWallet.create({
-  //       adminId,
-  //       currency,
-  //       walletAddress,
-  //     });
+      logger.info(`Crypto wallet created successfully for admin ${adminId}`);
+      res.status(201).json({
+        success: true,
+        message: 'Crypto wallet created successfully',
+        data: wallet,
+      });
+    } catch (error) {
+      handleError(error, 'create crypto wallet', res);
+    }
+  },
 
-  //     logger.info(`Crypto wallet created successfully for admin ${adminId}`);
-  //     const response: ApiResponse<CryptoWallet> = {
-  //       success: true,
-  //       message: 'Crypto wallet created successfully',
-  //       data: wallet,
-  //     };
-  //     res.status(201).json(response);
-  //   } catch (error) {
-  //     handleError(error, 'create crypto wallet', res);
-  //   }
-  // },
+  async update(req: AuthRequest, res: Response): Promise<void> {
+    try {
+      const { id } = req.params;
+      const adminId = req?.user?.id;
 
-  // async update(req: Request, res: Response): Promise<void> {
-  //   try {
-  //     const { id } = req.params;
-  //     const adminId = req.admin?.id;
+      if (!adminId) {
+        throw new Error('Valid admin ID is required');
+      }
 
-  //     if (!adminId) {
-  //       throw new AppError(400, 'Valid admin ID is required');
-  //     }
+      if (!id || isNaN(Number(id))) {
+        throw new Error('Valid wallet ID is required');
+      }
 
-  //     if (!id || isNaN(Number(id))) {
-  //       throw new AppError(400, 'Valid wallet ID is required');
-  //     }
+      // Example: validate request body
+      // validateCryptoWalletUpdate(req.body);
 
-  //     // Validate request body
-  //     validateCryptoWalletUpdate(req.body);
+      const wallet = await CryptoWallet.findByPk(id);
+      if (!wallet) {
+        throw new Error('Crypto wallet not found');
+      }
 
-  //     const wallet = await CryptoWallet.findByPk(id);
-  //     if (!wallet) {
-  //       throw new AppError(404, 'Crypto wallet not found');
-  //     }
+      if (wallet.adminId !== adminId) {
+        throw new Error('Not authorized to update this wallet');
+      }
 
-  //     if (wallet.adminId !== adminId) {
-  //       throw new AppError(403, 'Not authorized to update this wallet');
-  //     }
+      await wallet.update(req.body);
+      const updatedWallet = await CryptoWallet.findByPk(id);
 
-  //     await wallet.update(req.body);
+      if (!updatedWallet) {
+        throw new Error('Failed to retrieve updated wallet');
+      }
 
-  //     const updatedWallet = await CryptoWallet.findByPk(id);
-  //     if (!updatedWallet) {
-  //       throw new AppError(404, 'Failed to retrieve updated wallet');
-  //     }
+      logger.info(`Crypto wallet updated successfully: ${id}`);
+      res.json({
+        success: true,
+        message: 'Crypto wallet updated successfully',
+        data: updatedWallet,
+      });
+    } catch (error) {
+      handleError(error, 'update crypto wallet', res);
+    }
+  },
 
-  //     logger.info(`Crypto wallet updated successfully: ${id}`);
-  //     const response: ApiResponse<CryptoWallet> = {
-  //       success: true,
-  //       message: 'Crypto wallet updated successfully',
-  //       data: updatedWallet,
-  //     };
-  //     res.json(response);
-  //   } catch (error) {
-  //     handleError(error, 'update crypto wallet', res);
-  //   }
-  // },
+  async remove(req: AuthRequest, res: Response): Promise<void> {
+    try {
+      const { id } = req.params;
+      const adminId = req?.user?.id;
 
-  // async remove(req: Request, res: Response): Promise<void> {
-  //   try {
-  //     const { id } = req.params;
-  //     const adminId = req.admin?.id;
+      if (!adminId) {
+        throw new Error('Valid admin ID is required');
+      }
 
-  //     if (!adminId) {
-  //       throw new AppError(400, 'Valid admin ID is required');
-  //     }
+      if (!id || isNaN(Number(id))) {
+        throw new Error('Valid wallet ID is required');
+      }
 
-  //     if (!id || isNaN(Number(id))) {
-  //       throw new AppError(400, 'Valid wallet ID is required');
-  //     }
+      const wallet = await CryptoWallet.findByPk(id);
+      if (!wallet) {
+        throw new Error('Crypto wallet not found');
+      }
 
-  //     const wallet = await CryptoWallet.findByPk(id);
-  //     if (!wallet) {
-  //       throw new AppError(404, 'Crypto wallet not found');
-  //     }
+      if (wallet.adminId !== adminId) {
+        throw new Error('Not authorized to delete this wallet');
+      }
 
-  //     if (wallet.adminId !== adminId) {
-  //       throw new AppError(403, 'Not authorized to delete this wallet');
-  //     }
+      await wallet.destroy();
 
-  //     await wallet.destroy();
-
-  //     logger.info(`Crypto wallet deleted successfully: ${id}`);
-  //     const response: ApiResponse<null> = {
-  //       success: true,
-  //       message: 'Crypto wallet deleted successfully',
-  //     };
-  //     res.json(response);
-  //   } catch (error) {
-  //     handleError(error, 'delete crypto wallet', res);
-  //   }
-  // },
+      logger.info(`Crypto wallet deleted successfully: ${id}`);
+      res.json({
+        success: true,
+        message: 'Crypto wallet deleted successfully',
+      });
+    } catch (error) {
+      handleError(error, 'delete crypto wallet', res);
+    }
+  },
 };

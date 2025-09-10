@@ -1,6 +1,7 @@
+
 import express, { Router } from 'express';
 import { ShipmentController } from '../controllers/shipmentController';
-import { validate } from '../middleware/validate';
+import { validateBody } from '../middleware/validate';
 import { shipmentSchema } from '../validation/shipment';
 import { upload } from '../middleware/upload';
 
@@ -10,8 +11,8 @@ const controller = new ShipmentController();
 // Create a new shipment with stages
 router.post(
   '/:adminId',
-  upload.single('supportingDocument'),
-  validate(shipmentSchema),
+  upload.any(),
+  // validateBody(shipmentSchema),
   (req, res) => controller.createWithStages(req, res)
 );
 
@@ -33,8 +34,10 @@ router.get('/track/public/:trackingId', (req, res) =>
 );
 
 // Sensitive tracking endpoint
-router.get('/track/sensitive/:trackingId', (req, res) =>
-  controller.trackSensitive(req, res)
-);
+// router.get('/track/sensitive/:trackingId', (req, res) =>
+//   controller.trackSensitive(req, res)
+// );
+router.get('/initiate/:shipmentId', controller.initiateSensitiveTracking)
+router.post('/sensitive/access',controller.grantsSensitiveView)
 
 export default router;

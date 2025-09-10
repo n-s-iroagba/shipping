@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { postRequest } from "@/utils/apiUtils";
+import { routes } from "@/data/routes";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -16,23 +18,10 @@ export default function ForgotPassword() {
     setLoading(true);
 
     try {
-      const response = await fetch("/api/admin/forgot-password", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
+      const response = await postRequest(routes.auth.forgotPassword,{email})
+     
         setSuccess(true);
-      } else {
-        if (data.message.includes("Admin not found")) {
-          setError("No admin account found with that email.");
-        } else {
-          setError("An error occurred. Please try again later.");
-        }
-      }
+  
     } catch (err) {
       console.error(err);
       setError("An error occurred. Please try again later.");
@@ -44,7 +33,7 @@ export default function ForgotPassword() {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md bg-white p-8 rounded-lg shadow">
-        <h2 className="text-2xl font-bold mb-6 text-center">Forgot Password</h2>
+        <h4 className="text-2xl font-bold mb-6 text-center">Enter Email To Change Password</h4>
 
         {error && (
           <div className="mb-4 p-3 bg-red-100 text-red-700 rounded">

@@ -1,25 +1,26 @@
 // routes/documentTemplateRoutes.ts
 import express from 'express';
+import { DocumentTemplateController } from '../controllers/documentTemplateController';
+import { upload } from '../middleware/upload';
 
 const router = express.Router();
-// const controller = new DocumentTemplateController();
+const controller = new DocumentTemplateController();
 
-// // Create a new template
-// router.post("/", uploadTemplateMiddleware, controller.createTemplate);
+// Create a new template
+router.post("/", upload.single('file'), controller.createTemplate);
 
-// // Get all templates
-// router.get("/", controller.getAllTemplates);
+// Get all templates
+router.get("/", controller.getAllTemplates);
 
-// // Get a single template
-// router.get("/:id", controller.getTemplateById);
+// Get a single template
+router.get("/:id", controller.getTemplateById);
 
-// // Update template metadata
-// router.put("/:id", controller.updateTemplate);
+// Update template metadata
+router.put("/:id", upload.single('file'),  controller.updateTemplate);
 
-// // Update template file
-// router.put("/:id/file", uploadTemplateMiddleware, controller.updateTemplateFile);
 
-// // Delete a template
-// router.delete("/:id", controller.deleteTemplate);
+
+// Delete a template
+router.delete("/:id", controller.deleteTemplate);
 
 export default router;

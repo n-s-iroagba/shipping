@@ -1,138 +1,170 @@
-// // @/components/PendingPaymentCard.tsx
-// "use client";
+"use client";
+import { useState } from "react";
+import {
+  FiDollarSign,
+  FiCalendar,
+  FiFileText,
+  FiEdit,
 
-// import { Stage } from "@/types/stage.types";
-// import {
-//   MapPinIcon,
-//   TruckIcon,
-//   CreditCardIcon,
-//   CalendarIcon,
-//   CheckCircleIcon,
-//   ClockIcon,
-//   XCircleIcon,
-// } from "@heroicons/react/24/outline";
+  FiHash,
 
-// interface PendingPaymentCardProps {
-//   Stage: Stage;
-//   onViewDocument: (
-//     stage: Stage,
-//     type: "supportingDocument" | "paymentReceipt",
-//     receiptIndex?: number,
-//   ) => void;
-//   onApprovePayment: (stage: Stage) => void;
-// }
+  FiClock,
+} from "react-icons/fi";
+import { Payment, PaymentStatus } from "@/types/payment.types";
+import { DocumentModal } from "./DocumentModal";
 
-// export default function PendingPaymentCard({
-//   Stage,
-//   onViewDocument,
-//   onApprovePayment,
-// }: PendingPaymentCardProps) {
-//   const getPaymentStatusBadge = (stage: string) => {
-//     const stageConfig = {
-//       NO_PAYMENT_REQUIRED: {
-//         color: "bg-gray-100 text-gray-700",
-//         icon: CheckCircleIcon,
-//         text: "No Payment Required",
-//       },
-//       UNPAID: {
-//         color: "bg-red-100 text-red-700",
-//         icon: XCircleIcon,
-//         text: "Unpaid",
-//       },
-//       PENDING: {
-//         color: "bg-yellow-100 text-yellow-700",
-//         icon: ClockIcon,
-//         text: "Pending",
-//       },
-//       PAID: {
-//         color: "bg-green-100 text-green-700",
-//         icon: CheckCircleIcon,
-//         text: "Paid",
-//       },
-//     };
+interface PaymentCardProps {
+  payment: Payment;
 
-//     const config = stageConfig[stage as keyof typeof stageConfig];
-//     const Icon = config.icon;
+  onEdit: (payment: Payment) => void;
+}
 
-//     return (
-//       <div
-//         className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium ${config.color}`}
-//       >
-//         <Icon className="w-4 h-4" />
-//         {config.text}
-//       </div>
-//     );
-//   };
+export default function PaymentCard({ payment, onEdit }: PaymentCardProps) {
+  const [receiptToView, setReceiptToView] = useState<Blob | null>(null);
 
-//   const formatDate = (date: Date) => {
-//     return new Date(date).toLocaleDateString("en-US", {
-//       year: "numeric",
-//       month: "short",
-//       day: "numeric",
-//       hour: "2-digit",
-//       minute: "2-digit",
-//     });
-//   };
+  const formatDate = (date: Date | string) =>
+    new Date(date).toLocaleString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
 
-//   const formatCurrency = (amount: number) => {
-//     return new Intl.NumberFormat("en-US", {
-//       style: "currency",
-//       currency: "USD",
-//     }).format(amount);
-//   };
+  const getStatusLabel = (status: PaymentStatus): string => {
+    switch (status) {
+      case PaymentStatus.PAID:
+        return "Paid";
+      case PaymentStatus.UNPAID:
+        return "Unpaid";
+      case PaymentStatus.PENDING:
+        return "Pending";
+      case PaymentStatus.NO_PAYMENT_REQUIRED:
+        return "No Payment Required";
+      case PaymentStatus.INCOMPLETE_PAYMENT:
+        return "Incomplete Payment";
+      case PaymentStatus.REJECTED:
+        return "Rejected";
+      default:
+        return "Unknown";
+    }
+  };
 
-//   return (
-//     <div className="bg-white rounded-2xl shadow-lg p-6 border border-blue-100 hover:shadow-xl transition-shadow">
-//       <div className="flex flex-col lg:flex-row gap-6">
-//         {/* Main Info Section */}
-//         <div className="flex-1">
-//           <div className="flex items-start gap-4 mb-4">
-//             <div className="bg-blue-100 p-3 rounded-full">
-//               <TruckIcon className="w-6 h-6 text-blue-600" />
-//             </div>
-//             <div className="flex-1">
-//               <h3 className="text-xl font-semibold text-blue-900 mb-2">
-//                 {Stage.title}
-//               </h3>
-//               <div className="flex items-center gap-2 text-gray-600 mb-2">
-//                 <MapPinIcon className="w-4 h-4" />
-//                 <span>{Stage.location}</span>
-//               </div>
-//               <div className="flex items-center gap-2 text-gray-600 mb-3">
-//                 <CalendarIcon className="w-4 h-4" />
-//                 <span>{formatDate(Stage.dateAndTime)}</span>
-//               </div>
-//               {getPaymentStatusBadge(Stage.paymentStatus)}
-//             </div>
-//           </div>
+  const getStatusBadgeColor = (status: PaymentStatus): string => {
+    switch (status) {
+      case PaymentStatus.PAID:
+        return "bg-green-100 text-green-800";
+      case PaymentStatus.UNPAID:
+        return "bg-red-100 text-red-800";
+      case PaymentStatus.PENDING:
+        return "bg-yellow-100 text-yellow-800";
+      case PaymentStatus.NO_PAYMENT_REQUIRED:
+        return "bg-gray-100 text-gray-800";
+      case PaymentStatus.INCOMPLETE_PAYMENT:
+        return "bg-orange-100 text-orange-800";
+      case PaymentStatus.REJECTED:
+        return "bg-red-200 text-red-900";
+      default:
+        return "bg-gray-100 text-gray-800";
+    }
+  };
 
-//           {/* Payment Action */}
-//           {(Stage.paymentStatus === "UNPAID" ||
-//             Stage.paymentStatus === "PENDING") && (
-//             <div className="space-y-2">
-//               <h4 className="font-medium text-gray-900 text-sm">Payment</h4>
-//               <button
-//                 onClick={() => onApprovePayment(Stage)}
-//                 className="w-full bg-green-600 text-white p-3 rounded-lg hover:bg-green-700 transition-colors flex items-center gap-2 justify-center text-sm font-medium"
-//               >
-//                 <CreditCardIcon className="w-4 h-4" />
-//                 Approve Payment
-//               </button>
-//             </div>
-//           )}
+  return (
+    <div className="bg-white rounded-xl shadow-md border border-gray-200 hover:shadow-lg transition-all duration-300 w-full">
+      {/* Header */}
+      <div className="bg-gradient-to-r from-green-50 to-green-100 px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+        <div className="flex items-center gap-3">
+          <div className="bg-green-600 p-2 rounded-lg">
+            <FiDollarSign className="w-5 h-5 text-white" />
+          </div>
+       
+        </div>
+        <span
+          className={`px-3 py-1 text-xs font-medium rounded-full ${getStatusBadgeColor(
+            payment.status
+          )}`}
+        >
+          {getStatusLabel(payment.status)}
+        </span>
+      </div>
 
-//           {/* Location Info */}
-//           <div className="bg-gray-50 p-3 rounded-lg">
-//             <h4 className="font-medium text-gray-900 text-sm mb-2">
-//               Coordinates
-//             </h4>
-//             <div className="text-xs text-gray-600">
-//               <div>Lat: {Stage.latitude}</div>
-//               <div>Lng: {Stage.longitude}</div>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
+      {/* Content */}
+      <div className="p-6 space-y-4">
+        {/* Payment Info */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="flex items-center gap-3 text-gray-700">
+            <FiHash className="w-5 h-5 text-green-600" />
+            <div>
+              <span className="text-sm font-medium">Stage ID</span>
+              <p className="text-sm">{payment.shippingStageId}</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-3 text-gray-700">
+            <FiDollarSign className="w-5 h-5 text-green-600" />
+            <div>
+              <span className="text-sm font-medium">Amount</span>
+              <p className="text-sm">${payment.amount.toFixed(2)}</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-3 text-gray-700">
+            <FiCalendar className="w-5 h-5 text-green-600" />
+            <div>
+              <span className="text-sm font-medium">Payment Date</span>
+              <p className="text-sm">{formatDate(payment.dateAndTime)}</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-3 text-gray-700">
+            <FiClock className="w-5 h-5 text-green-600" />
+            <div>
+              <span className="text-sm font-medium">Created At</span>
+              <p className="text-sm">{formatDate(payment.createdAt)}</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Notes */}
+        {payment.notes && (
+          <div className="bg-gray-50 rounded-lg p-4">
+            <h4 className="font-medium text-gray-900 mb-1">Notes</h4>
+            <p className="text-gray-700 text-sm">{payment.notes}</p>
+          </div>
+        )}
+
+        {/* Actions */}
+        <div className="flex justify-between items-center pt-4 border-t border-gray-100">
+          {payment.receipt ? (
+            <button
+              onClick={() =>
+                setReceiptToView(new Blob([payment.receipt], { type: "application/pdf" }))
+              }
+              className="flex items-center gap-2 text-sm text-blue-600 hover:text-blue-800"
+            >
+              <FiFileText className="w-4 h-4" /> View Receipt
+            </button>
+          ) : (
+            <span className="text-sm text-gray-500">No receipt uploaded</span>
+          )}
+
+          <div className="flex gap-2">
+            <button
+              onClick={() => onEdit(payment)}
+              className="p-2 text-green-600 hover:bg-green-100 rounded-lg"
+            >
+              <FiEdit className="w-4 h-4" />
+            </button>
+           
+          </div>
+        </div>
+      </div>
+
+      {/* Receipt Modal */}
+      {receiptToView && (
+        <DocumentModal
+          onClose={() => setReceiptToView(null)}
+          document={receiptToView}
+          title="Payment Receipt"
+        />
+      )}
+    </div>
+  );
+}

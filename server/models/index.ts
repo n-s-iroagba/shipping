@@ -1,5 +1,5 @@
 // Export all models
-export { User } from './User';
+export {Admin} from './Admin'
 export { Shipment } from './Shipment';
 export { ShippingStage } from './ShippingStage';
 export { Payment } from './Payment';

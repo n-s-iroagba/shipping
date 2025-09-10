@@ -35,6 +35,7 @@ export const routes = {
 
   payment: {
     unapproved: (adminId: string | number) => `/payment/un-approved/${adminId}`,
+    list:(adminId:string|number)=>`/payment/all/${adminId}`
   },
   templates: {
     list: (adminId: number) => `/templates/${adminId}`,

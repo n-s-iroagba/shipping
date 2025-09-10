@@ -1,3 +1,5 @@
+import { Payment } from "./payment.types";
+
 export enum ShippingStagePaymentStatus {
   PENDING = "PENDING",
   PAID = "PAID",
@@ -18,6 +20,7 @@ export interface Stage {
   supportingDocument?: string | File;
   paymentStatus: ShippingStagePaymentStatus;
   title: string;
+  payments:Payment[]
   location: string;
   longitude: number;
   latitude: number;
@@ -27,5 +30,5 @@ export interface Stage {
 
 export type StageCreationDto = Omit<
   Stage,
-  "id" | "createdAt" | "updatedAt" | "supportingDocument"
+  "id" | "createdAt" | "updatedAt" | "supportingDocument"|'payments'
 > & { supportingDocument?: File | null };
