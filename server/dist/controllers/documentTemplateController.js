@@ -23,10 +23,7 @@ class DocumentTemplateController {
                 }
                 const { name, description } = req.body;
                 const template = yield templateService.createTemplate(Number(adminId), name, req.file, description);
-                res.status(201).json({
-                    success: true,
-                    data: template,
-                });
+                res.status(201).json(template);
             }
             catch (error) {
                 if (error instanceof errors_1.BadRequestError) {
@@ -49,10 +46,10 @@ class DocumentTemplateController {
             const adminId = req.params.adminId;
             try {
                 const templates = yield templateService.getAllTemplates(Number(adminId));
-                res.json({
-                    success: true,
-                    data: templates,
-                });
+                res.json(templates.map((template) => {
+                    const plain = template.get({ plain: true });
+                    return Object.assign(Object.assign({}, plain), { file: plain.file ? Buffer.from(plain.file).toString("base64") : null });
+                }));
             }
             catch (error) {
                 res.status(500).json({
@@ -66,10 +63,8 @@ class DocumentTemplateController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const template = yield templateService.getTemplateById(Number(req.params.id));
-                res.json({
-                    success: true,
-                    data: template,
-                });
+                const plain = template.get({ plain: true }); // 👈 use .get instead of toJSON()
+                res.json(Object.assign(Object.assign({}, plain), { file: plain.file ? Buffer.from(plain.file).toString("base64") : null }));
             }
             catch (error) {
                 if (error instanceof errors_1.NotFoundError) {
@@ -94,11 +89,9 @@ class DocumentTemplateController {
                 const template = yield templateService.updateTemplate(Number(req.params.id), {
                     name,
                     description,
+                    file: req.file ? req.file : undefined
                 });
-                res.json({
-                    success: true,
-                    data: template,
-                });
+                res.json(template);
             }
             catch (error) {
                 if (error instanceof errors_1.NotFoundError) {

@@ -31,9 +31,9 @@ ShippingStage.init({
     location: sequelize_1.DataTypes.STRING,
     paymentStatus: {
         type: sequelize_1.DataTypes.ENUM,
-        values: Object.values(payment_types_1.PaymentStatus), // Updated to use PaymentStatus enum
+        values: Object.values(payment_types_1.ShippingStagePaymentStatus), // Updated to use ShippingStagePaymentStatus enum
         allowNull: false,
-        defaultValue: payment_types_1.PaymentStatus.PENDING,
+        defaultValue: payment_types_1.ShippingStagePaymentStatus.PENDING,
     },
     longitude: sequelize_1.DataTypes.DECIMAL(10, 6),
     latitude: sequelize_1.DataTypes.DECIMAL(10, 6),

@@ -10,9 +10,9 @@ const upload_1 = require("../middleware/upload");
 const router = express_1.default.Router();
 const controller = new documentTemplateController_1.DocumentTemplateController();
 // Create a new template
-router.post("/", upload_1.upload.single('file'), controller.createTemplate);
+router.post("/:adminId", upload_1.upload.single('file'), controller.createTemplate);
 // Get all templates
-router.get("/", controller.getAllTemplates);
+router.get("/all/:adminId", controller.getAllTemplates);
 // Get a single template
 router.get("/:id", controller.getTemplateById);
 // Update template metadata

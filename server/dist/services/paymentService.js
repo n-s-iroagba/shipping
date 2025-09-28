@@ -50,7 +50,7 @@ class PaymentService {
                 if (!stage) {
                     throw new errors_1.NotFoundError('stage not found');
                 }
-                stage.paymentStatus = payment_types_1.PaymentStatus.PENDING;
+                stage.paymentStatus = payment_types_1.ShippingStagePaymentStatus.PENDING;
                 yield stage.save();
                 return payment;
             }

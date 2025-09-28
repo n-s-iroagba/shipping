@@ -12,7 +12,7 @@ const controller = new shipmentController_1.ShipmentController();
 router.post('/:adminId', upload_1.upload.any(), 
 // validateBody(shipmentSchema),
 (req, res) => controller.createWithStages(req, res));
-router.post('/mail', controller.sendMail);
+router.post('/send/mail', controller.sendMail);
 // Get all shipments
 router.get('/admin/:adminId', (req, res) => controller.getAll(req, res));
 // Get a specific shipment by ID

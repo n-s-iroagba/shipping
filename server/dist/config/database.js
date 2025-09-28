@@ -41,44 +41,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.connectDB = exports.sequelize = void 0;
 const sequelize_1 = require("sequelize");
-const dotenv_1 = __importDefault(require("dotenv"));
-const path_1 = __importDefault(require("path"));
-// Load environment variables based on NODE_ENV
-const env = process.env.NODE_ENV || 'development';
-const envPath = path_1.default.resolve(__dirname, `../.env.${env}`);
-dotenv_1.default.config({ path: envPath });
-// Database configuration
-const dbConfig = {
-    database: process.env.DB_NAME,
-    username: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    host: process.env.DB_HOST,
-    dialect: 'mysql',
-    port: parseInt(process.env.DB_PORT || '3306'),
-    logging: process.env.DB_LOGGING === 'true',
-    ssl: process.env.SSL_MODE === 'REQUIRED',
-};
-// Verify environment variables are loaded
-console.log('DB_USER:', process.env.DB_USER); // Debug check
-console.log('DB_NAME:', process.env.DB_NAME); // Debug check
+const _1 = require(".");
 // Initialize Sequelize
-exports.sequelize = new sequelize_1.Sequelize(dbConfig.database, dbConfig.username, dbConfig.password, {
-    host: dbConfig.host,
+exports.sequelize = new sequelize_1.Sequelize(_1.dbConfig.database, _1.dbConfig.username, _1.dbConfig.password, {
+    host: _1.dbConfig.host,
     dialect: 'mysql',
-    port: dbConfig.port,
-    logging: dbConfig.logging ? console.log : false,
+    port: _1.dbConfig.port,
+    logging: _1.dbConfig.logging ? console.log : false,
 });
 // Test database connection and initialize models
 const connectDB = (...args_1) => __awaiter(void 0, [...args_1], void 0, function* (force = false) {
     try {
         yield exports.sequelize.authenticate();
-        console.log(`✅ ${env} Database connected successfully!`);
+        console.log(`✅ ${_1.env} Database connected successfully!`);
         // Import models to ensure they are initialized with associations
         yield Promise.resolve().then(() => __importStar(require('../models/init')));
         // Sync database
@@ -87,7 +65,7 @@ const connectDB = (...args_1) => __awaiter(void 0, [...args_1], void 0, function
             .then(() => console.log('✅ Tables formed with associations'));
     }
     catch (error) {
-        console.error(`❌ Unable to connect to the ${env} database:`, error);
+        console.error(`❌ Unable to connect to the ${_1.env} database:`, error);
         process.exit(1);
     }
 });

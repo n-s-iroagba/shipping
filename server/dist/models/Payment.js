@@ -37,7 +37,7 @@ Payment.init({
         defaultValue: payment_types_1.PaymentStatus.PENDING,
     },
     receipt: {
-        type: sequelize_1.DataTypes.BLOB,
+        type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
     notes: {

@@ -21,11 +21,8 @@ class PaymentController {
         return __awaiter(this, void 0, void 0, function* () {
             const stageId = Number(req.params.stageId);
             try {
-                if (!req.file) {
-                    throw new errors_1.BadRequestError('Receipt file is required');
-                }
-                const { amount, } = req.body;
-                const payment = yield paymentService.createPayment(stageId, parseFloat(amount), req === null || req === void 0 ? void 0 : req.file);
+                const { amount, receipt } = req.body;
+                const payment = yield paymentService.createPayment(stageId, amount, receipt);
                 res.status(201).json({
                     success: true,
                     data: payment,
@@ -104,7 +101,7 @@ class PaymentController {
         return __awaiter(this, void 0, void 0, function* () {
             const { adminId } = req.params;
             try {
-                const payments = Payment_1.Payment.findAll({
+                const payments = yield Payment_1.Payment.findAll({
                     include: [
                         {
                             model: models_1.ShippingStage,
@@ -119,6 +116,7 @@ class PaymentController {
                         },
                     ],
                 });
+                console.log('PAYMENTS HERE', payments);
                 res.json(payments);
             }
             catch (error) {

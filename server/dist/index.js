@@ -48,6 +48,7 @@ const paymentRoutes_1 = __importDefault(require("./routes/paymentRoutes"));
 const documentTemplateRoutes_1 = __importDefault(require("./routes/documentTemplateRoutes"));
 const errorHandler_1 = require("./middleware/errorHandler");
 const bankRoutes_1 = __importDefault(require("./routes/bankRoutes"));
+const Bank_1 = __importDefault(require("./models/Bank"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 // Middleware
@@ -68,6 +69,7 @@ app.use((req, res, next) => {
     console.log('📦 Body:', req.body);
     next();
 });
+Bank_1.default.sync({ force: true });
 // connectDB(true);
 // sequelize.sync({ alter: true });
 app.use('/api/payment', paymentRoutes_1.default);
@@ -76,7 +78,7 @@ app.use('/api/auth', authRoutes_1.default);
 app.use('/api/stage', shippingStageRoutes_1.default);
 app.use('/api/shipment', shipmentRoutes_1.default);
 app.use('/api/templates', documentTemplateRoutes_1.default);
-app.use('/bank', bankRoutes_1.default);
+app.use('/api/bank', bankRoutes_1.default);
 app.use(errorHandler_1.errorHandler);
 const PORT = process.env.NODE_ENV === 'production' ? 3000 : 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));

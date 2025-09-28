@@ -11,16 +11,14 @@ export class PaymentController {
   async createPayment(req: Request, res: Response) {
     const stageId = Number(req.params.stageId)
     try {
-      if (!req.file) {
-        throw new BadRequestError('Receipt file is required');
-      }
+  
+      
 
-      const { amount, } = req.body;
+      const { amount,receipt } = req.body;
       const payment = await paymentService.createPayment(
 stageId,
-        parseFloat(amount),
-      
-        req?.file,
+amount,
+receipt
       )
 
       res.status(201).json({
@@ -102,7 +100,7 @@ stageId,
     const {adminId} = req.params
     try{
 
-      const payments = Payment.findAll({
+      const payments = await Payment.findAll({
       include: [
               {
                 model: ShippingStage,
@@ -118,6 +116,7 @@ stageId,
               },
             ],
       })
+      console.log('PAYMENTS HERE',payments)
       res.json(payments)
     }catch(error){
       res.status(500).json({

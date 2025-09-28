@@ -13,6 +13,7 @@ import { errorHandler } from './middleware/errorHandler';
 import bankRoutes from './routes/bankRoutes';
 
 
+
 dotenv.config();
 
 const app = express();
@@ -37,15 +38,16 @@ app.use((req, res, next) => {
   console.log('📦 Body:', req.body);
   next();
 });
-// connectDB(true);
-// sequelize.sync({ alter: true });
+
+connectDB(true);
+
 app.use('/api/payment',paymentRoutes)
 app.use ('/api/crypto-wallet',cryptoWalletRoutes)
 app.use('/api/auth', authRoutes);
 app.use('/api/stage', shippingStageRoutes);
 app.use('/api/shipment', shipmentRoutes);
 app.use('/api/templates',documentTemplateRoutes)
-app.use('/bank',bankRoutes)
+app.use('/api/bank',bankRoutes)
 app.use(errorHandler)
 
 const PORT = process.env.NODE_ENV==='production'?3000: 5000;

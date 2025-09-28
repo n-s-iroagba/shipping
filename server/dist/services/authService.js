@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthService = void 0;
 exports.createAuthService = createAuthService;
+const config_1 = require("../config");
 const errors_1 = require("../utils/errors");
 const logger_1 = __importDefault(require("../utils/logger"));
 const AdminService_1 = require("./AdminService");
@@ -284,7 +285,7 @@ exports.AuthService = AuthService;
 function createAuthService() {
     const config = {
         jwtSecret: process.env.JWT_SECRET || 'udorakpuenyi',
-        clientUrl: process.env.CLIENT_URL || 'http://localhost:3000',
+        clientUrl: config_1.ClientUrl,
         tokenExpiration: {
             verification: 86400,
             login: 3600,

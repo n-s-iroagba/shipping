@@ -11,7 +11,7 @@ export interface PaymentAttributes {
   amount: number;
   dateAndTime: Date;
   status: PaymentStatus;
-  receipt: Buffer;
+  receipt: string;
   notes?: string;
   createdAt: Date;
   updatedAt: Date;
@@ -29,7 +29,7 @@ export class Payment
   public amount!: number;
   public dateAndTime!: Date;
   public status!: PaymentStatus;
-  public receipt!: Buffer;
+  public receipt!: string;
   public referenceNumber?: string;
   public notes?: string;
   public createdAt!: Date;
@@ -70,7 +70,7 @@ Payment.init(
       defaultValue: PaymentStatus.PENDING,
     },
     receipt: {
-      type: DataTypes.BLOB,
+      type: DataTypes.STRING,
       allowNull: false,
     },
    
