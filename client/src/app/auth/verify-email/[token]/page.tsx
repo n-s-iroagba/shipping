@@ -117,7 +117,7 @@ const VerifyEmail = () => {
             </div>
             <button
               type="submit"
-              className="w-full bg-sky-900 text-black p-2 rounded mt-4 text-white"
+              className="w-full bg-slate-900 text-black p-2 rounded mt-4 text-white"
             >
               Verify
             </button>
@@ -135,7 +135,7 @@ const VerifyEmail = () => {
         <button
           onClick={handleResendCode}
           disabled={!canResend}
-          className={`w-full mt-2 p-2 rounded ${canResend ? "bg-blue-500 text-white" : "bg-gray-300 text-gray-500"}`}
+          className={`w-full mt-2 p-2 rounded ${canResend ? "bg-slate-500 text-white" : "bg-gray-300 text-gray-500"}`}
         >
           Resend Code
         </button>

@@ -64,5 +64,5 @@ input[type="submit"] {
 /* input,
 textarea,
 select {
-  @apply rounded-lg  focus:border-primary-blue focus:ring-1 focus:ring-primary-blue/50 transition-all duration-200;
+  @apply rounded-lg  focus:border-primary-slate focus:ring-1 focus:ring-primary-slate/50 transition-all duration-200;
 } */

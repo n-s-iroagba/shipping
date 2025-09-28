@@ -45,19 +45,19 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-sky-50 via-blue-100 to-cyan-50 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-slate-100 to-cyan-50 p-4">
       <div className="w-full max-w-md">
         {/* Login Card */}
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-sky-100 transform transition-all duration-300 hover:shadow-2xl">
+        <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-100 transform transition-all duration-300 hover:shadow-2xl">
           {/* Header with gradient */}
-          <div className="bg-gradient-to-r from-sky-500 to-blue-600 p-8 text-center">
+          <div className="bg-gradient-to-r from-slate-500 to-slate-600 p-8 text-center">
             <div className="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
               <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
               </svg>
             </div>
             <h1 className="text-2xl font-bold text-white mb-2">Admin Portal</h1>
-            <p className="text-sky-100 text-sm">Sign in to access your dashboard</p>
+            <p className="text-slate-100 text-sm">Sign in to access your dashboard</p>
           </div>
 
           <form onSubmit={handleSubmit} className="p-8 space-y-6">
@@ -88,7 +88,7 @@ export default function LoginPage() {
                     name="email"
                     value={formData.email}
                     onChange={(e) => handleInputChange('email', e.target.value)}
-                    className="pl-10 w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition duration-200"
+                    className="pl-10 w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent transition duration-200"
                     placeholder="admin@example.com"
                     required
                     disabled={isLoading}
@@ -113,7 +113,7 @@ export default function LoginPage() {
                     name="password"
                     value={formData.password}
                     onChange={(e) => handleInputChange('password', e.target.value)}
-                    className="pl-10 pr-10 w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition duration-200"
+                    className="pl-10 pr-10 w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent transition duration-200"
                     placeholder="Enter your password"
                     required
                     disabled={isLoading}
@@ -137,7 +137,7 @@ export default function LoginPage() {
 
             {/* Forgot Password Link */}
             <div className="text-right">
-              <a href="/auth/forgot-password" className="text-sm text-sky-600 hover:text-sky-700 transition duration-200">
+              <a href="/auth/forgot-password" className="text-sm text-slate-600 hover:text-slate-700 transition duration-200">
                 Forgot your password?
               </a>
             </div>
@@ -146,7 +146,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white font-semibold py-3 px-4 rounded-lg shadow-md transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-gradient-to-r from-slate-500 to-slate-600 hover:from-slate-600 hover:to-slate-700 text-white font-semibold py-3 px-4 rounded-lg shadow-md transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? (
                 <div className="flex items-center justify-center">
@@ -163,14 +163,14 @@ export default function LoginPage() {
         </div>
 
         {/* Security Notice */}
-        <div className="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4 text-center">
+        <div className="mt-6 bg-slate-50 border border-slate-200 rounded-lg p-4 text-center">
           <div className="flex items-center justify-center mb-2">
-            <svg className="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 text-slate-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
             </svg>
-            <span className="text-sm text-blue-700 font-medium">Secure Admin Portal</span>
+            <span className="text-sm text-slate-700 font-medium">Secure Admin Portal</span>
           </div>
-          <p className="text-xs text-blue-600">Your login credentials are protected</p>
+          <p className="text-xs text-slate-600">Your login credentials are protected</p>
         </div>
       </div>
     </div>

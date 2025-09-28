@@ -119,8 +119,8 @@ const DocumentTemplateForm: React.FC<DocumentTemplateFormProps> = ({
         <div className="p-6">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center space-x-3">
-              <div className="bg-blue-100 p-2 rounded-full">
-                <DocumentTextIcon className="w-6 h-6 text-blue-600" />
+              <div className="bg-slate-100 p-2 rounded-full">
+                <DocumentTextIcon className="w-6 h-6 text-slate-600" />
               </div>
               <h2 className="text-2xl font-bold text-gray-900">
                 {patch ? "Edit" : "Add"} Document Template
@@ -156,7 +156,7 @@ const DocumentTemplateForm: React.FC<DocumentTemplateFormProps> = ({
                 onChange={handleChange}
                 required
                 placeholder="Enter template name"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent"
               />
             </div>
 
@@ -174,7 +174,7 @@ const DocumentTemplateForm: React.FC<DocumentTemplateFormProps> = ({
                 onChange={handleChange}
                 rows={3}
                 placeholder="Enter template description"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent"
               />
             </div>
 
@@ -191,7 +191,7 @@ const DocumentTemplateForm: React.FC<DocumentTemplateFormProps> = ({
                   <div className="flex text-sm text-gray-600">
                     <label
                       htmlFor="file"
-                      className="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500"
+                      className="relative cursor-pointer bg-white rounded-md font-medium text-slate-600 hover:text-slate-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-slate-500"
                     >
                       <span>Upload a file</span>
                       <input
@@ -229,7 +229,7 @@ const DocumentTemplateForm: React.FC<DocumentTemplateFormProps> = ({
               <button
                 type="submit"
                 disabled={loading}
-                className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="flex-1 px-4 py-2 bg-slate-600 text-white rounded-lg hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 {loading ? "Saving..." : patch ? "Update" : "Add"} Template
               </button>

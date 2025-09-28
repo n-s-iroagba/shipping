@@ -48,14 +48,14 @@ const AdminShipment = () => {
   if (!shipment) return <ErrorAlert message={"No shipment found"} />;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-indigo-100">
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
         {/* Header */}
         <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6 mb-6 sm:mb-8">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-0 mb-4">
             <div className="flex items-center gap-3 sm:gap-4">
-              <div className="bg-blue-100 p-2 sm:p-3 rounded-full flex-shrink-0">
-                <FaTruck className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
+              <div className="bg-slate-100 p-2 sm:p-3 rounded-full flex-shrink-0">
+                <FaTruck className="w-5 h-5 sm:w-6 sm:h-6 text-slate-600" />
               </div>
               <div className="min-w-0 flex-1">
                 <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 truncate">
@@ -71,7 +71,7 @@ const AdminShipment = () => {
                 onClick={() =>
                   router.push(`/admin/shipment/${shipmentId}/edit`)
                 }
-                className="flex items-center justify-center gap-2 bg-blue-600 text-white px-3 sm:px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm sm:text-base"
+                className="flex items-center justify-center gap-2 bg-slate-600 text-white px-3 sm:px-4 py-2 rounded-lg hover:bg-slate-700 transition-colors text-sm sm:text-base"
               >
                 <FaEdit className="w-4 h-4" />
                 <span className="hidden sm:inline">Edit Shipment</span>
@@ -81,7 +81,7 @@ const AdminShipment = () => {
                 onClick={() =>
                   router.push(`/admin/send-mail/?email=${shipment.receipientEmail}`)
                 }
-                className="flex items-center justify-center gap-2 bg-blue-600 text-white px-3 sm:px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm sm:text-base"
+                className="flex items-center justify-center gap-2 bg-slate-600 text-white px-3 sm:px-4 py-2 rounded-lg hover:bg-slate-700 transition-colors text-sm sm:text-base"
               >
                 <FaMailchimp className="w-4 h-4" />
                 <span className="hidden sm:inline">Send Mail To Client</span>
@@ -104,7 +104,7 @@ const AdminShipment = () => {
           {/* Basic Information */}
           <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6">
             <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3 sm:mb-4 flex items-center gap-2">
-              <FaUser className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
+              <FaUser className="w-4 h-4 sm:w-5 sm:h-5 text-slate-600" />
               <span className="truncate">Basic Information</span>
             </h2>
             <div className="space-y-3 sm:space-y-4">
@@ -147,7 +147,7 @@ const AdminShipment = () => {
           {/* Location Information */}
           <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6">
             <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3 sm:mb-4 flex items-center gap-2">
-              <FaMapMarkerAlt className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
+              <FaMapMarkerAlt className="w-4 h-4 sm:w-5 sm:h-5 text-slate-600" />
               <span className="truncate">Location Details</span>
             </h2>
             <div className="space-y-3 sm:space-y-4">
@@ -181,7 +181,7 @@ const AdminShipment = () => {
           {/* Shipment Details */}
           <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6">
             <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3 sm:mb-4 flex items-center gap-2">
-              <FaCube className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
+              <FaCube className="w-4 h-4 sm:w-5 sm:h-5 text-slate-600" />
               <span className="truncate">Shipment Specifications</span>
             </h2>
             <div className="space-y-3 sm:space-y-4">
@@ -224,7 +224,7 @@ const AdminShipment = () => {
           {/* Timeline Information */}
           <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6">
             <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3 sm:mb-4 flex items-center gap-2">
-              <FaCalendarAlt className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
+              <FaCalendarAlt className="w-4 h-4 sm:w-5 sm:h-5 text-slate-600" />
               <span className="truncate">Timeline</span>
             </h2>
             <div className="space-y-3 sm:space-y-4">
@@ -249,7 +249,7 @@ const AdminShipment = () => {
           <h2>Stages</h2>
           <button
             onClick={() => router.push(`/admin/shipment/${shipmentId}/stages`)}
-            className="flex items-center justify-center gap-2 bg-blue-600 text-white px-3 sm:px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm sm:text-base"
+            className="flex items-center justify-center gap-2 bg-slate-600 text-white px-3 sm:px-4 py-2 rounded-lg hover:bg-slate-700 transition-colors text-sm sm:text-base"
           >
             <FaFlag className="w-4 h-4" />
             <span className="hidden sm:inline">View All Stages</span>

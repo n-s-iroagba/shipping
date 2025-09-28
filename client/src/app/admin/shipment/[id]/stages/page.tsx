@@ -23,7 +23,7 @@ const ShipmentStageList = () => {
         className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4"
       >
         <div>
-          <h1 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
+          <h1 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-slate-600">
             Shipping Stages
           </h1>
         </div>
@@ -32,7 +32,7 @@ const ShipmentStageList = () => {
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.98 }}
           onClick={() => router.push(`/admin/shipment/${id}/stages/new`)}
-          className="flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-xl hover:shadow-lg transition-all duration-300 font-medium shadow-md"
+          className="flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-slate-600 text-white px-6 py-3 rounded-xl hover:shadow-lg transition-all duration-300 font-medium shadow-md"
         >
           <FiPlus className="text-lg" />
           Create New Stages

@@ -85,10 +85,10 @@ export default function AdminStageCard({
   return (
     <div className="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 w-full">
       {/* Header */}
-      <div className="bg-gradient-to-r from-blue-50 to-blue-100 px-6 py-4 border-b border-gray-200">
+      <div className="bg-gradient-to-r from-slate-50 to-slate-100 px-6 py-4 border-b border-gray-200">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="bg-blue-600 p-2 rounded-lg">
+            <div className="bg-slate-600 p-2 rounded-lg">
               <FiTruck className="w-5 h-5 text-white" />
             </div>
             <div>
@@ -111,7 +111,7 @@ export default function AdminStageCard({
             <div className="flex gap-1">
               <button
                 onClick={() => onEdit(stage)}
-                className="p-2 text-blue-600 hover:bg-blue-100 rounded-lg transition-colors"
+                className="p-2 text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
                 title="Edit Stage"
               >
                 <FiEdit className="w-4 h-4" />
@@ -135,7 +135,7 @@ export default function AdminStageCard({
           {/* Left Column - Basic Info */}
           <div className="space-y-4">
             <div className="flex items-center gap-3 text-gray-700">
-              <FiCalendar className="w-5 h-5 text-blue-600" />
+              <FiCalendar className="w-5 h-5 text-slate-600" />
               <div>
                 <span className="text-sm font-medium">Date & Time</span>
                 <p className="text-sm">{formatDate(stage.dateAndTime)}</p>
@@ -144,7 +144,7 @@ export default function AdminStageCard({
 
             {stage.feeName && (
               <div className="flex items-center gap-3 text-gray-700">
-                <FiDollarSign className="w-5 h-5 text-blue-600" />
+                <FiDollarSign className="w-5 h-5 text-slate-600" />
                 <div>
                   <span className="text-sm font-medium">Fee</span>
                   <p className="text-sm">{stage.feeName}</p>
@@ -154,7 +154,7 @@ export default function AdminStageCard({
 
             {stage.paymentDate && (
               <div className="flex items-center gap-3 text-gray-700">
-                <FiClock className="w-5 h-5 text-blue-600" />
+                <FiClock className="w-5 h-5 text-slate-600" />
                 <div>
                   <span className="text-sm font-medium">Payment Date</span>
                   <p className="text-sm">{formatDate(stage.paymentDate)}</p>
@@ -166,7 +166,7 @@ export default function AdminStageCard({
           {/* Right Column - Technical Info */}
           <div className="space-y-4">
             <div className="flex items-center gap-3 text-gray-700">
-              <FiHash className="w-5 h-5 text-blue-600" />
+              <FiHash className="w-5 h-5 text-slate-600" />
               <div>
                 <span className="text-sm font-medium">Stage ID</span>
                 <p className="text-sm font-mono">{stage.id}</p>
@@ -174,7 +174,7 @@ export default function AdminStageCard({
             </div>
 
             <div className="flex items-center gap-3 text-gray-700">
-              <FiUser className="w-5 h-5 text-blue-600" />
+              <FiUser className="w-5 h-5 text-slate-600" />
               <div>
                 <span className="text-sm font-medium">Shipment ID</span>
                 <p className="text-sm font-mono">{stage.shipmentId}</p>
@@ -182,7 +182,7 @@ export default function AdminStageCard({
             </div>
 
             <div className="flex items-center gap-3 text-gray-700">
-              <FiMapPin className="w-5 h-5 text-blue-600" />
+              <FiMapPin className="w-5 h-5 text-slate-600" />
               <div>
                 <span className="text-sm font-medium">Coordinates</span>
                 <p className="text-sm">
@@ -237,7 +237,7 @@ export default function AdminStageCard({
                   onClick={() =>
                     handleViewDocument(stage.supportingDocument)
                   }
-                  className="flex items-center gap-2 text-sm text-blue-600 hover:text-blue-800 hover:underline transition-colors"
+                  className="flex items-center gap-2 text-sm text-slate-600 hover:text-slate-800 hover:underline transition-colors"
                 >
                   <FiEye className="w-4 h-4" />
                   View Supporting Document

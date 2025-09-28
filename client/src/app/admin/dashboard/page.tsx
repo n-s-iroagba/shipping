@@ -86,7 +86,7 @@ const Todo = () => {
   ) {
     return (
       <div className="flex justify-center items-center h-screen px-4">
-        <Spinner className="w-8 h-8 text-blue-600" />
+        <Spinner className="w-8 h-8 text-slate-600" />
       </div>
     );
   }
@@ -104,11 +104,11 @@ const Todo = () => {
       <div className="w-full">
         {/* Header - Responsive text sizing */}
         <div className="mb-4 sm:mb-6">
-          <h2 className="text-xl sm:text-2xl font-bold text-blue-900 mb-2 flex items-center gap-2 flex-wrap">
-            <ExclamationTriangleIcon className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 flex-shrink-0" />
+          <h2 className="text-xl sm:text-2xl font-bold text-slate-900 mb-2 flex items-center gap-2 flex-wrap">
+            <ExclamationTriangleIcon className="w-5 h-5 sm:w-6 sm:h-6 text-slate-600 flex-shrink-0" />
             <span className="break-words">Welcome back, {displayName}!</span>
           </h2>
-          <h3 className="text-base sm:text-lg font-semibold text-blue-700">
+          <h3 className="text-base sm:text-lg font-semibold text-slate-700">
             Admin Tasks
           </h3>
         </div>
@@ -122,8 +122,8 @@ const Todo = () => {
               ))}
             </div>
           ) : (
-            <div className="p-4 sm:p-6 bg-blue-50 rounded-lg sm:rounded-xl border border-blue-200 text-center">
-              <p className="text-blue-700 font-medium text-sm sm:text-base">
+            <div className="p-4 sm:p-6 bg-slate-50 rounded-lg sm:rounded-xl border border-slate-200 text-center">
+              <p className="text-slate-700 font-medium text-sm sm:text-base">
                 🎉 All caught up! No pending tasks
               </p>
             </div>
@@ -155,10 +155,10 @@ const Todo = () => {
 
           <motion.div
             variants={itemVariants}
-            className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 border-l-4 border-blue-500"
+            className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 border-l-4 border-slate-500"
           >
             <div className="flex items-center gap-4">
-              <div className="p-3 rounded-full bg-blue-100 text-blue-600">
+              <div className="p-3 rounded-full bg-slate-100 text-slate-600">
                 <FiUser className="text-2xl" />
               </div>
               <div>
@@ -189,10 +189,10 @@ const Todo = () => {
 
           <motion.div
             variants={itemVariants}
-            className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 border-l-4 border-purple-500"
+            className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 border-l-4 border-slate-500"
           >
             <div className="flex items-center gap-4">
-              <div className="p-3 rounded-full bg-purple-100 text-purple-600">
+              <div className="p-3 rounded-full bg-slate-100 text-slate-600">
                 <FiPackage className="text-2xl" />
               </div>
               <div>

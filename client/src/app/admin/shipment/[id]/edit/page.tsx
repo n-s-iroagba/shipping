@@ -76,7 +76,7 @@ export default function EditShipmentPage() {
         </h1>
         <Link
           href={`/admin/shipment/${id}/stages`}
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          className="px-4 py-2 bg-slate-500 text-white rounded hover:bg-slate-600"
         >
           Manage Stages
         </Link>

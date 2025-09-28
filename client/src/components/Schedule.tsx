@@ -28,7 +28,7 @@ const Schedule: React.FC = () => {
     <div className="max-w-3xl mx-auto bg-white shadow-lg rounded-lg p-6">
       <h2 className="text-2xl font-bold text-center mb-4 relative">
         Point-to-Point
-        <div className="absolute left-1/2 transform -translate-x-1/2 mt-1 h-1 w-24 bg-goldenrod rounded-full"></div>
+        <div className="absolute left-1/2 transform -translate-x-1/2 mt-1 h-1 w-24 bg-slate-800 rounded-full"></div>
       </h2>
 
       <div className="flex items-center justify-between gap-4">
@@ -54,13 +54,13 @@ const Schedule: React.FC = () => {
             <input
               readOnly
               value={selectedDate.toDateString()}
-              className="w-full border border-gray-300 rounded-md p-2 text-sm focus:outline-none focus:ring-2 focus:ring-goldenrod text-black"
+              className="w-full border border-gray-300 rounded-md p-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-800 text-black"
             />
           </div>
         </div>
 
         <div className="flex items-center justify-center w-1/6">
-          <button className="w-12 h-12 bg-goldenrod text-white rounded-full flex-col flex items-center justify-center focus:outline-none hover:bg-goldenrod-dark">
+          <button className="w-12 h-12 bg-slate-800 text-white rounded-full flex-col flex items-center justify-center focus:outline-none hover:bg-slate-800-dark">
             <div>
               <FontAwesomeIcon icon={faArrowRight} />
             </div>
@@ -90,7 +90,7 @@ const Schedule: React.FC = () => {
           </select>
           <button
             onClick={handleSearch}
-            className="mt-4 bg-goldenrod text-white py-2 px-4 rounded-md hover:bg-goldenrod-dark focus:outline-none"
+            className="mt-4 bg-slate-800 text-white py-2 px-4 rounded-md hover:bg-slate-800-dark focus:outline-none"
           >
             Search
           </button>

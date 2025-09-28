@@ -24,7 +24,7 @@ export default function BanksPage() {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
-        <Spinner className="w-10 h-10 text-slate-600" />
+        <Spinner className="w-10 h-10 text-slate-800" />
       </div>
     );
   }
@@ -42,7 +42,7 @@ export default function BanksPage() {
           <div className="absolute bottom-2 left-2 w-8 h-8 border-b-2 border-l-2 border-slate-800 opacity-20" />
 
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4 min-w-0">
-            <h1 className="text-2xl font-bold text-slate-900 truncate">Bank</h1>
+            <h1 className="text-2xl font-bold text-slate-800 truncate">Bank</h1>
             {!bank && (
               <button
                 onClick={() => setCreateBank(true)}
@@ -91,10 +91,10 @@ export default function BanksPage() {
               <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <PlusIcon className="w-8 h-8 text-slate-700" />
               </div>
-              <h3 className="text-lg font-semibold text-slate-900 mb-2">
+              <h3 className="text-lg font-semibold text-slate-800 mb-2">
                 No Banks
               </h3>
-              <p className="text-slate-600 mb-4">
+              <p className="text-slate-800 mb-4">
                 Add your first bank to receive payments
               </p>
             </div>

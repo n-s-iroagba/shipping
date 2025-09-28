@@ -152,7 +152,7 @@ export default function EditStageForm() {
                 name="title"
                 value={formData.title}
                 onChange={handleChange}
-                className="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                className="w-full p-2 border border-gray-300 rounded-md focus:ring-slate-500 focus:border-slate-500"
               />
             </div>
 
@@ -173,7 +173,7 @@ export default function EditStageForm() {
                       : ""
                   }
                   onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 pl-10"
+                  className="w-full p-2 border border-gray-300 rounded-md focus:ring-slate-500 focus:border-slate-500 pl-10"
                 />
                 <FaCalendarAlt className="absolute left-3 top-3 text-gray-400" />
               </div>
@@ -188,7 +188,7 @@ export default function EditStageForm() {
                 name="paymentStatus"
                 value={formData.paymentStatus}
                 onChange={handleChange}
-                className="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                className="w-full p-2 border border-gray-300 rounded-md focus:ring-slate-500 focus:border-slate-500"
               >
                 <option value="NO_PAYMENT_REQUIRED">No Payment Required</option>
                 <option value="PENDING">Pending</option>
@@ -208,7 +208,7 @@ export default function EditStageForm() {
                 value={formData.carrierNote}
                 onChange={handleChange}
                 rows={3}
-                className="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                className="w-full p-2 border border-gray-300 rounded-md focus:ring-slate-500 focus:border-slate-500"
               />
             </div>
           </div>
@@ -225,7 +225,7 @@ export default function EditStageForm() {
                   name="location"
                   value={formData.location}
                   onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 pl-10"
+                  className="w-full p-2 border border-gray-300 rounded-md focus:ring-slate-500 focus:border-slate-500 pl-10"
                 />
                 <FaMapMarkerAlt className="absolute left-3 top-3 text-gray-400" />
               </div>
@@ -243,7 +243,7 @@ export default function EditStageForm() {
                   name="longitude"
                   value={formData.longitude}
                   onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full p-2 border border-gray-300 rounded-md focus:ring-slate-500 focus:border-slate-500"
                 />
               </div>
               <div>
@@ -257,7 +257,7 @@ export default function EditStageForm() {
                   name="latitude"
                   value={formData.latitude}
                   onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full p-2 border border-gray-300 rounded-md focus:ring-slate-500 focus:border-slate-500"
                 />
               </div>
             </div>
@@ -272,7 +272,7 @@ export default function EditStageForm() {
                     name="feeName"
                     value={formData.feeName}
                     onChange={handleChange}
-                    className="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full p-2 border border-gray-300 rounded-md focus:ring-slate-500 focus:border-slate-500"
                   />
                 </div>
 
@@ -288,7 +288,7 @@ export default function EditStageForm() {
                         name="feeInDollars"
                         value={formData.feeInDollars}
                         onChange={handleChange}
-                        className="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 pl-10"
+                        className="w-full p-2 border border-gray-300 rounded-md focus:ring-slate-500 focus:border-slate-500 pl-10"
                       />
                       <FaMoneyBillWave className="absolute left-3 top-3 text-gray-400" />
                     </div>
@@ -304,7 +304,7 @@ export default function EditStageForm() {
                       name="amountPaid"
                       value={formData.amountPaid}
                       onChange={handleChange}
-                      className="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full p-2 border border-gray-300 rounded-md focus:ring-slate-500 focus:border-slate-500"
                     />
                   </div>
                 </div>
@@ -316,7 +316,7 @@ export default function EditStageForm() {
                 Supporting Document
               </label>
               <div className="flex items-center gap-4">
-                <label className="flex flex-col items-center px-4 py-6 bg-white text-blue-500 rounded-lg border border-dashed border-gray-300 cursor-pointer hover:bg-gray-50">
+                <label className="flex flex-col items-center px-4 py-6 bg-white text-slate-500 rounded-lg border border-dashed border-gray-300 cursor-pointer hover:bg-gray-50">
                   <FaFileUpload className="w-8 h-8" />
                   <span className="mt-2 text-sm">Upload File</span>
                   <input
@@ -339,7 +339,7 @@ export default function EditStageForm() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="flex items-center gap-2 px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
+            className="flex items-center gap-2 px-6 py-2 bg-slate-600 text-white rounded-md hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 disabled:opacity-50"
           >
             <FaSave className="w-4 h-4" />
             {isSubmitting ? "Saving..." : "Save Changes"}

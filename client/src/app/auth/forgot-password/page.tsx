@@ -48,7 +48,7 @@ export default function ForgotPassword() {
             </div>
             <button
               onClick={() => router.push("/admin/dashboard")}
-              className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+              className="bg-slate-500 text-white py-2 px-4 rounded hover:bg-slate-600"
             >
               Go to Dashboard
             </button>
@@ -71,7 +71,7 @@ export default function ForgotPassword() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 disabled:bg-blue-300"
+              className="w-full bg-slate-500 text-white py-2 px-4 rounded hover:bg-slate-600 disabled:bg-slate-300"
             >
               {loading ? "Sending..." : "Reset Password"}
             </button>

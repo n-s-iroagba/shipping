@@ -94,7 +94,7 @@ const ShipmentTrackingDashboard: React.FC = () => {
   // Loading state
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-slate-50 flex items-center justify-center p-4">
         <div className="text-center space-y-4">
           <div className="relative">
             <Spinner className="w-12 h-12 text-indigo-600 mx-auto" />
@@ -116,7 +116,7 @@ const ShipmentTrackingDashboard: React.FC = () => {
   // Error states
   if (loadingError || error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-slate-50 flex items-center justify-center p-4">
         <div className="max-w-md w-full">
           <ErrorAlert message={error || "Failed to retrieve tracking details, please try again later."} />
           {error && (
@@ -136,7 +136,7 @@ const ShipmentTrackingDashboard: React.FC = () => {
 
   if (!shipment) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-slate-50 flex items-center justify-center p-4">
         <div className="max-w-md w-full">
           <ErrorAlert message="Tracking details not found, please try again later." />
         </div>
@@ -145,7 +145,7 @@ const ShipmentTrackingDashboard: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-slate-50">
       <div className="w-full max-w-6xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
         
         {/* Header Section */}

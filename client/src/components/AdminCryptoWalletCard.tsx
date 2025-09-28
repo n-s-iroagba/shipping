@@ -50,8 +50,8 @@ const AdminCryptoWalletCard: React.FC<AdminCryptoWalletCardProps> = ({
       <div className="p-6">
         <div className="flex items-start justify-between">
           <div className="flex items-center space-x-4">
-            <div className="bg-blue-100 p-3 rounded-full">
-              <WalletIcon className="w-6 h-6 text-blue-600" />
+            <div className="bg-slate-100 p-3 rounded-full">
+              <WalletIcon className="w-6 h-6 text-slate-600" />
             </div>
             <div className="flex-1">
               <div className="flex items-center space-x-2 mb-2">
@@ -88,7 +88,7 @@ const AdminCryptoWalletCard: React.FC<AdminCryptoWalletCardProps> = ({
           <div className="flex space-x-2">
             <button
               onClick={onEdit}
-              className="p-2 text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-colors"
+              className="p-2 text-slate-600 hover:text-slate-800 hover:bg-slate-50 rounded-lg transition-colors"
               title="Edit wallet"
             >
               <PencilIcon className="w-5 h-5" />

@@ -24,7 +24,7 @@ const ScheduleCard = () => {
             <h3 className="font-bold text-sm text-gray-700">{col.title}</h3>
             <p className="text-lg text-gray-900 mt-2">{col.body}</p>
             {index === 1 && (
-              <span className="absolute left-[-12px] top-1/2 transform -translate-y-1/2 text-goldenrod text-xl">
+              <span className="absolute left-[-12px] top-1/2 transform -translate-y-1/2 text-slate-800 text-xl">
                 ➜
               </span>
             )}

@@ -16,7 +16,7 @@ const Information: React.FC<InformationProps> = ({ title, text, images }) => {
   return (
     <div className="p-4 bg-white text-black my-5">
       <h2 className="text-3xl font-bold text-center mb-2">{title}</h2>
-      <div className="h-2 bg-goldenrod mx-auto w-20 mb-4"></div>
+      <div className="h-2 bg-slate-800 mx-auto w-20 mb-4"></div>
 
       <p className="text-center text-gray-700 mb-8">{text}</p>
 

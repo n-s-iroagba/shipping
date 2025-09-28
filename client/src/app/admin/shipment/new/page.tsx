@@ -45,7 +45,7 @@ const InputField: React.FC<InputFieldProps> = ({
       type={type}
       name={name}
       required={required}
-      className={`w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+      className={`w-full p-3 border rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-slate-500 transition-colors ${
         error ? "border-red-500 bg-red-50" : "border-gray-300"
       }`}
       {...props}
@@ -497,7 +497,7 @@ export default function CreateShipmentPage() {
                   value={form.freightType}
                   onChange={handleChange}
                   required
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-slate-500"
                 >
                   <option value="LAND">Land</option>
                   <option value="AIR">Air</option>
@@ -529,7 +529,7 @@ export default function CreateShipmentPage() {
                 onChange={handleChange}
                 required
                 rows={3}
-                className={`w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                className={`w-full p-3 border rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-slate-500 transition-colors ${
                   validationErrors.shipmentDescription
                     ? "border-red-500 bg-red-50"
                     : "border-gray-300"
@@ -604,7 +604,7 @@ export default function CreateShipmentPage() {
                         handleStageChange(index, "dateAndTime", e.target.value)
                       }
                       required
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-slate-500"
                     />
                   </div>
 
@@ -622,7 +622,7 @@ export default function CreateShipmentPage() {
                         )
                       }
                       required
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-slate-500"
                     >
                       {Object.values(ShippingStagePaymentStatus).map(
                         (status) => (
@@ -723,7 +723,7 @@ export default function CreateShipmentPage() {
                               e.target.value,
                             )
                           }
-                          className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                          className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-slate-500"
                         />
                       </div>
                     </>
@@ -740,7 +740,7 @@ export default function CreateShipmentPage() {
                       }
                       required
                       rows={3}
-                      className={`w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                      className={`w-full p-3 border rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-slate-500 transition-colors ${
                         validationErrors[`stage_${index}_carrierNote`]
                           ? "border-red-500 bg-red-50"
                           : "border-gray-300"
@@ -761,7 +761,7 @@ export default function CreateShipmentPage() {
                     <input
                       type="file"
                       onChange={(e) => handleFileChange(index, e)}
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-slate-500"
                       accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
                     />
                     {stage.supportingDocument && (
@@ -777,7 +777,7 @@ export default function CreateShipmentPage() {
     <button
                 type="button"
                 onClick={addStage}
-                className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors flex items-center"
+                className="px-4 py-2 bg-slate-500 text-white rounded-lg hover:bg-slate-600 transition-colors flex items-center"
               >
                 <svg
                   className="w-4 h-4 mr-2"

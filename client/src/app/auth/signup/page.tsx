@@ -79,11 +79,11 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-sky-50 to-blue-100 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 p-4">
       <div className="w-full max-w-md">
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-sky-100">
+        <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-100">
           {/* Header with gradient */}
-          <div className="bg-gradient-to-r from-sky-500 to-blue-600 p-6 text-center">
+          <div className="bg-gradient-to-r from-slate-500 to-slate-600 p-6 text-center">
             <h2 className="text-2xl font-bold text-white">Create Admin Account</h2>
           
           </div>
@@ -103,7 +103,7 @@ export default function SignupPage() {
                   data-cy="name"
                   value={username}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition duration-200"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent transition duration-200"
                   placeholder="Enter your full name"
                 />
               </div>
@@ -119,7 +119,7 @@ export default function SignupPage() {
                   data-cy="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition duration-200"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent transition duration-200"
                   placeholder="your.email@example.com"
                 />
               </div>
@@ -135,7 +135,7 @@ export default function SignupPage() {
                   data-cy="password"
                   value={password}
                   onChange={handlePasswordChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition duration-200"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent transition duration-200"
                   placeholder="Create a strong password"
                 />
                 {password && (
@@ -167,7 +167,7 @@ export default function SignupPage() {
                   data-cy="confirm-password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition duration-200"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent transition duration-200"
                   placeholder="Confirm your password"
                 />
               </div>
@@ -177,7 +177,7 @@ export default function SignupPage() {
               type="submit"
               data-cy="submit"
               disabled={isLoading}
-              className="w-full bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white font-semibold py-3 px-4 rounded-lg shadow-md transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-gradient-to-r from-slate-500 to-slate-600 hover:from-slate-600 hover:to-slate-700 text-white font-semibold py-3 px-4 rounded-lg shadow-md transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? (
                 <div className="flex items-center justify-center">
@@ -194,7 +194,7 @@ export default function SignupPage() {
                 Already have an account?{" "}
                 <a
                   href="/auth/login"
-                  className="text-sky-600 hover:text-sky-700 font-medium transition duration-200"
+                  className="text-slate-600 hover:text-slate-700 font-medium transition duration-200"
                 >
                   Sign in here
                 </a>
@@ -204,7 +204,7 @@ export default function SignupPage() {
         </div>
 
         {/* Password requirements */}
-        <div className="mt-6 bg-white rounded-lg p-4 shadow-sm border border-sky-100">
+        <div className="mt-6 bg-white rounded-lg p-4 shadow-sm border border-slate-100">
           <h3 className="text-sm font-semibold text-gray-700 mb-2">Password Requirements:</h3>
           <ul className="text-xs text-gray-600 space-y-1">
             <li className="flex items-center">

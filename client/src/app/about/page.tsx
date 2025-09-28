@@ -66,21 +66,21 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-blue-50">
+    <div className="min-h-screen bg-slate-50">
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700">
+      <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700">
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-4xl mx-auto text-center text-white">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               About Netly Logistics
             </h1>
-            <p className="text-xl md:text-2xl text-blue-100 mb-8">
+            <p className="text-xl md:text-2xl text-slate-100 mb-8">
               Connecting the world through reliable, secure, and efficient
               shipping solutions
             </p>
             <div className="flex justify-center">
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
-                <TruckIcon className="w-16 h-16 text-blue-200 mx-auto" />
+                <TruckIcon className="w-16 h-16 text-slate-200 mx-auto" />
               </div>
             </div>
           </div>
@@ -95,12 +95,12 @@ export default function AboutPage() {
               const Icon = stat.icon;
               return (
                 <div key={index} className="text-center">
-                  <div className="bg-white rounded-2xl p-6 shadow-lg border border-blue-100">
-                    <Icon className="w-8 h-8 text-blue-600 mx-auto mb-4" />
-                    <div className="text-3xl font-bold text-blue-900 mb-2">
+                  <div className="bg-white rounded-2xl p-6 shadow-lg border border-slate-100">
+                    <Icon className="w-8 h-8 text-slate-600 mx-auto mb-4" />
+                    <div className="text-3xl font-bold text-slate-900 mb-2">
                       {stat.value}
                     </div>
-                    <div className="text-sm text-blue-700">{stat.label}</div>
+                    <div className="text-sm text-slate-700">{stat.label}</div>
                   </div>
                 </div>
               );
@@ -113,8 +113,8 @@ export default function AboutPage() {
       <div className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12 border border-blue-100">
-              <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-8 text-center">
+            <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12 border border-slate-100">
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-8 text-center">
                 Our Story
               </h2>
               <div className="prose prose-lg max-w-none text-gray-700">
@@ -150,7 +150,7 @@ export default function AboutPage() {
       <div className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-12 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-12 text-center">
               Our Services
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -159,12 +159,12 @@ export default function AboutPage() {
                 return (
                   <div
                     key={index}
-                    className="bg-blue-50 rounded-2xl p-8 border border-blue-100"
+                    className="bg-slate-50 rounded-2xl p-8 border border-slate-100"
                   >
-                    <div className="bg-blue-100 p-4 rounded-full w-fit mb-6">
-                      <Icon className="w-8 h-8 text-blue-600" />
+                    <div className="bg-slate-100 p-4 rounded-full w-fit mb-6">
+                      <Icon className="w-8 h-8 text-slate-600" />
                     </div>
-                    <h3 className="text-xl font-semibold text-blue-900 mb-4">
+                    <h3 className="text-xl font-semibold text-slate-900 mb-4">
                       {service.title}
                     </h3>
                     <p className="text-gray-700 leading-relaxed">
@@ -182,22 +182,22 @@ export default function AboutPage() {
       <div className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-12 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-12 text-center">
               Meet Our Team
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {team.map((member, index) => (
                 <div
                   key={index}
-                  className="bg-white rounded-2xl shadow-lg p-8 border border-blue-100 text-center"
+                  className="bg-white rounded-2xl shadow-lg p-8 border border-slate-100 text-center"
                 >
-                  <div className="bg-blue-100 w-20 h-20 rounded-full mx-auto mb-6 flex items-center justify-center">
-                    <UsersIcon className="w-10 h-10 text-blue-600" />
+                  <div className="bg-slate-100 w-20 h-20 rounded-full mx-auto mb-6 flex items-center justify-center">
+                    <UsersIcon className="w-10 h-10 text-slate-600" />
                   </div>
-                  <h3 className="text-xl font-semibold text-blue-900 mb-2">
+                  <h3 className="text-xl font-semibold text-slate-900 mb-2">
                     {member.name}
                   </h3>
-                  <p className="text-blue-600 font-medium mb-4">
+                  <p className="text-slate-600 font-medium mb-4">
                     {member.role}
                   </p>
                   <p className="text-gray-700">{member.description}</p>
@@ -209,37 +209,37 @@ export default function AboutPage() {
       </div>
 
       {/* Contact Section */}
-      <div className="py-16 bg-blue-900">
+      <div className="py-16 bg-slate-900">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center text-white">
             <h2 className="text-3xl md:text-4xl font-bold mb-8">
               Get in Touch
             </h2>
-            <p className="text-xl text-blue-200 mb-12">
+            <p className="text-xl text-slate-200 mb-12">
               Ready to ship with us? Our team is here to help you every step of
               the way.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="flex flex-col items-center">
                 <div className="bg-white/10 backdrop-blur-sm p-4 rounded-full mb-4">
-                  <PhoneIcon className="w-8 h-8 text-blue-200" />
+                  <PhoneIcon className="w-8 h-8 text-slate-200" />
                 </div>
                 <h3 className="text-lg font-semibold mb-2">Call Us</h3>
-                <p className="text-blue-200">+1 (555) 123-4567</p>
+                <p className="text-slate-200">+1 (555) 123-4567</p>
               </div>
               <div className="flex flex-col items-center">
                 <div className="bg-white/10 backdrop-blur-sm p-4 rounded-full mb-4">
-                  <EnvelopeIcon className="w-8 h-8 text-blue-200" />
+                  <EnvelopeIcon className="w-8 h-8 text-slate-200" />
                 </div>
                 <h3 className="text-lg font-semibold mb-2">Email Us</h3>
-                <p className="text-blue-200">support@globalship.com</p>
+                <p className="text-slate-200">support@globalship.com</p>
               </div>
               <div className="flex flex-col items-center">
                 <div className="bg-white/10 backdrop-blur-sm p-4 rounded-full mb-4">
-                  <MapPinIcon className="w-8 h-8 text-blue-200" />
+                  <MapPinIcon className="w-8 h-8 text-slate-200" />
                 </div>
                 <h3 className="text-lg font-semibold mb-2">Visit Us</h3>
-                <p className="text-blue-200">123 Shipping St, Logistics City</p>
+                <p className="text-slate-200">123 Shipping St, Logistics City</p>
               </div>
             </div>
           </div>

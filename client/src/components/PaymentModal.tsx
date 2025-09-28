@@ -113,18 +113,18 @@ const handleUploadReceipts = async () => {
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
         {/* Header */}
-        <div className="bg-gradient-to-r from-sky-500 to-blue-600 p-6 rounded-t-2xl">
+        <div className="bg-gradient-to-r from-slate-500 to-slate-600 p-6 rounded-t-2xl">
           <div className="flex items-center justify-between">
             <h3 className="text-xl font-bold text-white">Make Payment</h3>
             <button
               onClick={onClose}
-              className="text-white hover:text-sky-200 transition-colors"
+              className="text-white hover:text-slate-200 transition-colors"
               disabled={isUploading}
             >
               <XMarkIcon className="h-6 w-6" />
             </button>
           </div>
-          <p className="text-sky-100 mt-2">
+          <p className="text-slate-100 mt-2">
             Total Amount: {formatPrice(feeInDollars, "USD")}
           </p>
         </div>
@@ -140,12 +140,12 @@ const handleUploadReceipts = async () => {
                 onClick={() => setPaymentMethod("crypto")}
                 className={`p-4 rounded-xl border-2 transition-all duration-200 ${
                   paymentMethod === "crypto"
-                    ? "border-sky-500 bg-sky-50 text-sky-700"
-                    : "border-gray-200 bg-white text-gray-600 hover:border-sky-300"
+                    ? "border-slate-500 bg-slate-50 text-slate-700"
+                    : "border-gray-200 bg-white text-gray-600 hover:border-slate-300"
                 }`}
               >
                 <div className="text-center">
-                  <div className="w-8 h-8 bg-sky-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                  <div className="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-2">
                     <span className="text-sm font-bold">₿</span>
                   </div>
                   <span className="font-medium">Cryptocurrency</span>
@@ -155,12 +155,12 @@ const handleUploadReceipts = async () => {
                 onClick={() => setPaymentMethod("fiat")}
                 className={`p-4 rounded-xl border-2 transition-all duration-200 ${
                   paymentMethod === "fiat"
-                    ? "border-sky-500 bg-sky-50 text-sky-700"
-                    : "border-gray-200 bg-white text-gray-600 hover:border-sky-300"
+                    ? "border-slate-500 bg-slate-50 text-slate-700"
+                    : "border-gray-200 bg-white text-gray-600 hover:border-slate-300"
                 }`}
               >
                 <div className="text-center">
-                  <div className="w-8 h-8 bg-sky-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                  <div className="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-2">
                     <span className="text-sm font-bold">$</span>
                   </div>
                   <span className="font-medium">Bank Transfer</span>
@@ -176,7 +176,7 @@ const handleUploadReceipts = async () => {
                 Select Cryptocurrency
               </label>
               <select
-                className="w-full p-3 border-2 border-gray-200 rounded-xl focus:border-sky-500 focus:ring-2 focus:ring-sky-200 transition-colors"
+                className="w-full p-3 border-2 border-gray-200 rounded-xl focus:border-slate-500 focus:ring-2 focus:ring-slate-200 transition-colors"
                 onChange={(e) => {
                   const wallet = cryptoWallets.find(
                     (w) => w.id === Number(e.target.value)
@@ -194,7 +194,7 @@ const handleUploadReceipts = async () => {
               </select>
 
               {selectedWallet && (
-                <div className="mt-4 bg-sky-50 border border-sky-200 rounded-xl p-4">
+                <div className="mt-4 bg-slate-50 border border-slate-200 rounded-xl p-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <h4 className="font-semibold text-gray-700 mb-2">
@@ -230,7 +230,7 @@ const handleUploadReceipts = async () => {
                         />
                         <button
                           onClick={handleCopyAddress}
-                          className="bg-sky-500 text-white p-2 rounded-lg hover:bg-sky-600 transition-colors"
+                          className="bg-slate-500 text-white p-2 rounded-lg hover:bg-slate-600 transition-colors"
                           title="Copy address"
                         >
                           <DocumentDuplicateIcon className="h-5 w-5" />
@@ -244,8 +244,8 @@ const handleUploadReceipts = async () => {
                     </div>
                   </div>
 
-                  <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-                    <p className="text-sm text-blue-700">
+                  <div className="mt-4 p-3 bg-slate-50 border border-slate-200 rounded-lg">
+                    <p className="text-sm text-slate-700">
                       <strong>Important:</strong> Send exactly{" "}
                       {getCryptoAmount(selectedWallet)}{" "}
                       {selectedWallet.currency.toUpperCase()} (
@@ -261,7 +261,7 @@ const handleUploadReceipts = async () => {
           {/* Bank Transfer Section */}
           {paymentMethod === "fiat" && bank && (
             <div className="mb-6">
-              <div className="bg-sky-50 border border-sky-200 rounded-xl p-6">
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-6">
                 <h4 className="font-semibold text-gray-700 mb-4 text-center">
                   Bank Transfer Details
                 </h4>
@@ -315,15 +315,15 @@ const handleUploadReceipts = async () => {
                       <span className="text-sm font-medium text-gray-600">
                         Amount:
                       </span>
-                      <p className="text-sky-600 font-bold text-lg">
+                      <p className="text-slate-600 font-bold text-lg">
                         {formatPrice(feeInDollars, "USD")}
                       </p>
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
-                  <p className="text-sm text-blue-700">
+                <div className="bg-slate-50 border border-slate-200 rounded-lg p-3">
+                  <p className="text-sm text-slate-700">
                     <strong>Note:</strong> Include your name and order reference
                     in the transfer description. Payment processing may take 1-2
                     business days.
@@ -357,7 +357,7 @@ const handleUploadReceipts = async () => {
                 placeholder="Enter amount paid"
                 value={amountPaid}
                 onChange={(e) => setAmountPaid(Number(e.target.value) || "")}
-                className="w-full p-3 mb-4 border-2 border-gray-200 rounded-xl focus:border-sky-500 focus:ring-2 focus:ring-sky-200 transition-colors"
+                className="w-full p-3 mb-4 border-2 border-gray-200 rounded-xl focus:border-slate-500 focus:ring-2 focus:ring-slate-200 transition-colors"
               />
 
               {uploadError && (
@@ -366,7 +366,7 @@ const handleUploadReceipts = async () => {
                 </div>
               )}
 
-              <div className="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:border-sky-400 transition-colors">
+              <div className="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:border-slate-400 transition-colors">
                 <CloudArrowUpIcon className="h-12 w-12 text-gray-400 mx-auto mb-3" />
                 <p className="text-gray-600 mb-2">
                   Drag & drop files here or click to browse
@@ -384,7 +384,7 @@ const handleUploadReceipts = async () => {
                 />
                 <label
                   htmlFor="receipt-upload"
-                  className="inline-block bg-sky-500 text-white px-6 py-2 rounded-lg hover:bg-sky-600 transition-colors cursor-pointer disabled:opacity-50"
+                  className="inline-block bg-slate-500 text-white px-6 py-2 rounded-lg hover:bg-slate-600 transition-colors cursor-pointer disabled:opacity-50"
                 >
                   Choose File
                 </label>
@@ -405,7 +405,7 @@ const handleUploadReceipts = async () => {
             {showReceiptUpload && uploadedReceipt && (
               <button
                 onClick={handleUploadReceipts}
-                className="px-6 py-2 bg-sky-500 text-white rounded-lg hover:bg-sky-600 transition-colors disabled:opacity-50 flex items-center gap-2"
+                className="px-6 py-2 bg-slate-500 text-white rounded-lg hover:bg-slate-600 transition-colors disabled:opacity-50 flex items-center gap-2"
                 disabled={isUploading}
               >
                 {isUploading ? (

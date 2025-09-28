@@ -56,11 +56,11 @@ const TestimonialCarousel = () => {
           <p className="text-gray-700 italic">{testimonial.testimonial}</p>
           <div className="mt-4 flex flex-col items-center">
             <div className="flex justify-center">
-              <FontAwesomeIcon color="goldenrod" icon={faStar} />
-              <FontAwesomeIcon color="goldenrod" icon={faStar} />
-              <FontAwesomeIcon color="goldenrod" icon={faStar} />{" "}
-              <FontAwesomeIcon color="goldenrod" icon={faStar} />
-              <FontAwesomeIcon color="goldenrod" icon={faStar} />
+              <FontAwesomeIcon color="slate-800" icon={faStar} />
+              <FontAwesomeIcon color="slate-800" icon={faStar} />
+              <FontAwesomeIcon color="slate-800" icon={faStar} />{" "}
+              <FontAwesomeIcon color="slate-800" icon={faStar} />
+              <FontAwesomeIcon color="slate-800" icon={faStar} />
             </div>
             <div className="w-16 h-16 relative mb-2">
               <Image

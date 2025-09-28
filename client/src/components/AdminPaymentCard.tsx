@@ -134,7 +134,7 @@ export default function PaymentCard({ payment, onEdit }: PaymentCardProps) {
               onClick={() =>
                 setReceiptToView(payment.receipt)
               }
-              className="flex items-center gap-2 text-sm text-blue-600 hover:text-blue-800"
+              className="flex items-center gap-2 text-sm text-slate-600 hover:text-slate-800"
             >
               <FiFileText className="w-4 h-4" /> View Receipt
             </button>

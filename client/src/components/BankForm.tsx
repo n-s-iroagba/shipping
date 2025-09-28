@@ -80,9 +80,9 @@ export default function BankForm({ patch, existingBank, onClose,adminId }: BankF
    }
  
   return (
-    <div className="bg-white p-6 rounded-2xl shadow-sm border-2 border-sky-50 max-w-xl mx-auto">
-      <h2 className="text-2xl font-bold text-sky-900 mb-6 flex items-center gap-2">
-        <BanknotesIcon className="w-6 h-6 text-sky-700" />
+    <div className="bg-white p-6 rounded-2xl shadow-sm border-2 border-slate-50 max-w-xl mx-auto">
+      <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+        <BanknotesIcon className="w-6 h-6 text-slate-700" />
         {patch ? "Edit Bank" : "Add New Bank"}
       </h2>
 
@@ -93,7 +93,7 @@ export default function BankForm({ patch, existingBank, onClose,adminId }: BankF
           value={bankData.bankName}
           onChange={handleChange}
           placeholder="Bank Name"
-          className="w-full p-3 rounded-xl border-2 border-sky-100 focus:border-sky-500 text-black"
+          className="w-full p-3 rounded-xl border-2 border-slate-100 focus:border-slate-500 text-black"
         />
         <input
           type="text"
@@ -101,7 +101,7 @@ export default function BankForm({ patch, existingBank, onClose,adminId }: BankF
           value={bankData.accountName}
           onChange={handleChange}
           placeholder="Account Name"
-          className="w-full p-3 rounded-xl border-2 border-sky-100 focus:border-sky-500 text-black"
+          className="w-full p-3 rounded-xl border-2 border-slate-100 focus:border-slate-500 text-black"
         />
         <input
           type="text"
@@ -109,7 +109,7 @@ export default function BankForm({ patch, existingBank, onClose,adminId }: BankF
           value={bankData.accountNumber}
           onChange={handleChange}
           placeholder="Account Number"
-          className="w-full p-3 rounded-xl border-2 border-sky-100 focus:border-sky-500 text-black"
+          className="w-full p-3 rounded-xl border-2 border-slate-100 focus:border-slate-500 text-black"
         />
         <input
           type="text"
@@ -117,7 +117,7 @@ export default function BankForm({ patch, existingBank, onClose,adminId }: BankF
           value={bankData.swiftCode}
           onChange={handleChange}
           placeholder="SWIFT Code"
-          className="w-full p-3 rounded-xl border-2 border-sky-100 focus:border-sky-500 text-black"
+          className="w-full p-3 rounded-xl border-2 border-slate-100 focus:border-slate-500 text-black"
         />
         <input
           type="text"
@@ -125,10 +125,10 @@ export default function BankForm({ patch, existingBank, onClose,adminId }: BankF
           value={bankData.routingNumber}
           onChange={handleChange}
           placeholder="Routing Number"
-          className="w-full p-3 rounded-xl border-2 border-sky-100 focus:border-sky-500 text-black"
+          className="w-full p-3 rounded-xl border-2 border-slate-100 focus:border-slate-500 text-black"
         />
 
-        <button className="px-8 py-3 bg-sky-700 text-white rounded-xl hover:bg-sky-800 w-full">
+        <button className="px-8 py-3 bg-slate-700 text-white rounded-xl hover:bg-slate-800 w-full">
          {isSubmitting ?  (
               <>
                 <span className="animate-spin">🌀</span>

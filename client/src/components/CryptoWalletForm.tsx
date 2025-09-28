@@ -92,8 +92,8 @@ const CryptoWalletForm: React.FC<CryptoWalletFormProps> = ({
         <div className="p-6">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center space-x-3">
-              <div className="bg-blue-100 p-2 rounded-full">
-                <WalletIcon className="w-6 h-6 text-blue-600" />
+              <div className="bg-slate-100 p-2 rounded-full">
+                <WalletIcon className="w-6 h-6 text-slate-600" />
               </div>
               <h2 className="text-2xl font-bold text-gray-900">
                 {patch ? "Edit" : "Add"} Crypto Wallet
@@ -127,7 +127,7 @@ const CryptoWalletForm: React.FC<CryptoWalletFormProps> = ({
                 value={formData.currency}
                 onChange={handleChange}
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent"
               >
                 <option value="">Select a currency</option>
                 {currencyOptions.map((option) => (
@@ -153,7 +153,7 @@ const CryptoWalletForm: React.FC<CryptoWalletFormProps> = ({
                 required
                 rows={3}
                 placeholder="Enter the wallet address"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent font-mono text-sm"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent font-mono text-sm"
               />
             </div>
 
@@ -168,7 +168,7 @@ const CryptoWalletForm: React.FC<CryptoWalletFormProps> = ({
               <button
                 type="submit"
                 disabled={loading}
-                className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="flex-1 px-4 py-2 bg-slate-600 text-white rounded-lg hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 {loading ? "Saving..." : patch ? "Update" : "Add"} Wallet
               </button>

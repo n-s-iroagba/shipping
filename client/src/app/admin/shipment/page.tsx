@@ -34,7 +34,7 @@ const ShipmentDashboard: React.FC = () => {
           className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4"
         >
           <div>
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-slate-600">
               Shipment Dashboard
             </h1>
             <p className="text-gray-500 mt-2 text-sm sm:text-base">Welcome back, {displayName}</p>
@@ -44,7 +44,7 @@ const ShipmentDashboard: React.FC = () => {
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => router.push("/admin/shipment/new")}
-            className="flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-xl hover:shadow-lg transition-all duration-300 font-medium shadow-md text-sm sm:text-base"
+            className="flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-slate-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-xl hover:shadow-lg transition-all duration-300 font-medium shadow-md text-sm sm:text-base"
           >
             <FiPlus className="text-lg" />
             <span className="hidden sm:inline">Create New Shipment</span>
@@ -64,7 +64,7 @@ const ShipmentDashboard: React.FC = () => {
               {/* Desktop Table View - Hidden on mobile */}
               <div className="hidden lg:block">
                 <table className="w-full">
-                  <thead className="bg-gradient-to-r from-indigo-50 to-purple-50">
+                  <thead className="bg-gradient-to-r from-indigo-50 to-slate-50">
                     <tr>
                       <th className="px-6 py-4 text-left text-sm font-semibold text-indigo-700 uppercase tracking-wider">
                         <div className="flex items-center gap-2">
@@ -161,7 +161,7 @@ const ShipmentDashboard: React.FC = () => {
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ duration: 0.3 }}
-                      className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg p-4 hover:shadow-md transition-shadow duration-200"
+                      className="bg-gradient-to-r from-indigo-50 to-slate-50 rounded-lg p-4 hover:shadow-md transition-shadow duration-200"
                     >
                       <div className="flex justify-between items-start mb-3">
                         <div className="flex items-center gap-3">
@@ -215,7 +215,7 @@ const ShipmentDashboard: React.FC = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.3 }}
-                    className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg p-4"
+                    className="bg-gradient-to-r from-indigo-50 to-slate-50 rounded-lg p-4"
                   >
                     <div className="flex justify-between items-start mb-3">
                       <div className="flex items-center gap-2">
@@ -258,7 +258,7 @@ const ShipmentDashboard: React.FC = () => {
               </div>
 
               {/* Table Footer - Only show on desktop */}
-              <div className="hidden lg:block px-6 py-4 bg-gradient-to-r from-indigo-50 to-purple-50 border-t border-gray-100">
+              <div className="hidden lg:block px-6 py-4 bg-gradient-to-r from-indigo-50 to-slate-50 border-t border-gray-100">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <div className="text-sm text-gray-600">
                     Showing <span className="font-medium">1</span> to{" "}
@@ -290,7 +290,7 @@ const ShipmentDashboard: React.FC = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => router.push("/admin/shipment/new")}
-                  className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-4 py-2 rounded-lg hover:shadow-lg transition-all duration-300 font-medium"
+                  className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-slate-600 text-white px-4 py-2 rounded-lg hover:shadow-lg transition-all duration-300 font-medium"
                 >
                   <FiPlus />
                   New Shipment
