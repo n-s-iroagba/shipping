@@ -65,6 +65,7 @@ export default function DocumentTemplateCrudPage() {
 
         {createTemplate && (
           <DocumentTemplateForm
+          adminId={adminId}
             onClose={() => {
               setCreateTemplate(false);
               setUploadError(null);
@@ -75,6 +76,7 @@ export default function DocumentTemplateCrudPage() {
 
         {templateToUpdate && (
           <DocumentTemplateForm
+          adminId={adminId}
             existingTemplate={templateToUpdate}
             patch
             onClose={() => {

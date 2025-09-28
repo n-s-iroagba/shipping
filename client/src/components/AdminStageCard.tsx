@@ -14,7 +14,7 @@ import {
   FiClock,
 } from "react-icons/fi";
 
-import { DocumentModal } from "./DocumentModal";
+import  DocumentModal  from "./DocumentModal";
 import { ShippingStagePaymentStatus, Stage } from "@/types/stage.types";
 import { useRouter } from "next/navigation";
 
@@ -28,7 +28,7 @@ export default function AdminStageCard({
   stage,
   onDelete,
 }: AdminStageCardProps) {
-  const [documentToView, setDocumentToView] = useState<Blob | null>(null);
+  const [documentToView, setDocumentToView] = useState<string | ArrayBuffer | Uint8Array<ArrayBufferLike> | null|undefined>(null);
   const router = useRouter();
 
   const formatDate = (date: Date | string) =>
@@ -40,7 +40,7 @@ export default function AdminStageCard({
       minute: "2-digit",
     });
 
-  const handleViewDocument = (document: Blob) => {
+  const handleViewDocument = (document: string | ArrayBuffer | Uint8Array<ArrayBufferLike> | undefined) => {
     setDocumentToView(document);
   };
 
@@ -235,7 +235,7 @@ export default function AdminStageCard({
               {stage.supportingDocument ? (
                 <button
                   onClick={() =>
-                    handleViewDocument(stage.supportingDocument as Blob)
+                    handleViewDocument(stage.supportingDocument)
                   }
                   className="flex items-center gap-2 text-sm text-blue-600 hover:text-blue-800 hover:underline transition-colors"
                 >

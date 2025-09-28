@@ -21,6 +21,7 @@ import {
   FaEdit,
   FaTrash,
   FaFlag,
+  FaMailchimp,
 } from "react-icons/fa";
 
 const AdminShipment = () => {
@@ -74,6 +75,16 @@ const AdminShipment = () => {
               >
                 <FaEdit className="w-4 h-4" />
                 <span className="hidden sm:inline">Edit Shipment</span>
+                <span className="sm:hidden">Edit</span>
+              </button>
+                 <button
+                onClick={() =>
+                  router.push(`/admin/send-mail/?email=${shipment.receipientEmail}`)
+                }
+                className="flex items-center justify-center gap-2 bg-blue-600 text-white px-3 sm:px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm sm:text-base"
+              >
+                <FaMailchimp className="w-4 h-4" />
+                <span className="hidden sm:inline">Send Mail To Client</span>
                 <span className="sm:hidden">Edit</span>
               </button>
               <button

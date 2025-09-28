@@ -4,12 +4,12 @@ import { routes } from "@/data/routes";
 import { useGetList } from "@/hooks/useGet";
 import { Stage } from "@/types/stage.types";
 import { motion } from "framer-motion";
-import { useParams } from "next/navigation";
-import router from "next/router";
+import { useParams,useRouter } from "next/navigation";
 import { FiPlus } from "react-icons/fi";
 
 const ShipmentStageList = () => {
   const { id } = useParams();
+  const router = useRouter()
   const route = id ? routes.stage.getAll(id as string) : "";
   const { data } = useGetList<Stage>(route);
 

@@ -1,12 +1,21 @@
 
 import { Shipment } from './Shipment';
-import { ShippingStage } from './ShippingStage';
+
 import { Payment } from './Payment';
 import { CryptoWallet } from './CryptoWallet';
 import { DocumentTemplate } from './DocumentTemplate';
 import Admin from './Admin';
+import BankDetails from './Bank';
+import { ShippingStage } from './ShippingStage';
 
-// Define all model associations here
+console.log('Models loaded:', {
+  Admin: !!Admin,
+  Shipment: !!Shipment,
+  CryptoWallet: !!CryptoWallet,
+  DocumentTemplate: !!DocumentTemplate,
+  BankDetails: !!BankDetails,
+  shippingStage:!! ShippingStage
+})
 
 // Admin associations
 Admin.hasMany(Shipment, {
@@ -31,20 +40,19 @@ Shipment.belongsTo(Admin, {
 });
 
 
-// Shipment.hasMany(ShippingStage, {
-//   foreignKey: 'shipmentId',
-//   as: 'shippingStages',
-//   onDelete: 'CASCADE',
-//   onUpdate: 'CASCADE',
-// });
+Shipment.hasMany(ShippingStage, {
+  foreignKey: 'shipmentId',
+  as: 'shippingStages',
+  onDelete: 'CASCADE',
+  onUpdate: 'CASCADE',
+});
 
-// // ShippingStage associations
-// ShippingStage.belongsTo(Shipment, {
-//   foreignKey: 'shipmentId',
-//   as: 'shipment',
-// });
+// ShippingStage associations
+ShippingStage.belongsTo(Shipment, {
+  foreignKey: 'shipmentId',
+  as: 'shipment',
+});
 
-// // Payment associations
 
 
 // CryptoWallet associations
@@ -58,7 +66,14 @@ DocumentTemplate.belongsTo(Admin, {
   foreignKey: 'adminId',
   as: 'admin',
 });
-
+BankDetails.belongsTo(Admin,{
+  foreignKey:'adminId',
+  as:'bankOwner'
+})
+Admin.hasOne(BankDetails,{
+  as:'bank',
+  foreignKey:'adminId'
+})
 export {
   Admin,
   Shipment,

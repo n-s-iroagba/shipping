@@ -1,23 +1,18 @@
 import {
   Model,
   DataTypes,
-  type ForeignKey,
   type Optional,
-  type NonAttribute,
+
 } from 'sequelize';
 import { sequelize } from '../config/database';
-import { Shipment } from './associations';
+import { ShippingStagePaymentStatus } from '../types/payment.types';
 
-// Main Attributes
-export enum ShippingStagePaymentStatus {
-  PENDING = 'PENDING',
-  PAID = 'PAID',
-  NO_PAYMENT_REQUIRED = 'NO_PAYMENT_REQUIRED',
-  UNPAID = 'UNPAID',
-  INCOMPLETE_PAYMENT = 'INCOMPLETE_PAYMENT',
-}
+
+
+
+// Updated Attributes Interface
 export interface ShippingStageAttributes {
-  id: string;
+  id: number;
   shipmentId: number;
   title: string;
   location: string;
@@ -25,7 +20,7 @@ export interface ShippingStageAttributes {
   dateAndTime: Date;
   percentageNote?: string;
   feeInDollars?: number | null;
-  paymentStatus: ShippingStagePaymentStatus;
+  paymentStatus: ShippingStagePaymentStatus; // Changed from ShippingStagePaymentStatus to ShippingStagePaymentStatus
   supportingDocument?: Buffer;
   longitude: number;
   latitude: number;
@@ -50,7 +45,7 @@ export class ShippingStage
   extends Model<ShippingStageAttributes, ShippingStageCreationAttributes>
   implements ShippingStageAttributes
 {
-  id!: string;
+  id!: number;
   shipmentId!: number;
   carrierNote!: string;
   dateAndTime!: Date;
@@ -59,7 +54,7 @@ export class ShippingStage
   amountPaid?: number;
   paymentDate?: Date;
   percentageNote?: string;
-  paymentStatus!: ShippingStagePaymentStatus;
+  paymentStatus!: ShippingStagePaymentStatus; // Updated type
   title!: string;
   location!: string;
   supportingDocument?: Buffer;
@@ -93,7 +88,9 @@ ShippingStage.init(
     location: DataTypes.STRING,
     paymentStatus: {
       type: DataTypes.ENUM,
-      values: Object.values(ShippingStagePaymentStatus),
+      values: Object.values(ShippingStagePaymentStatus), // Updated to use ShippingStagePaymentStatus enum
+      allowNull: false,
+      defaultValue: ShippingStagePaymentStatus.PENDING,
     },
     longitude: DataTypes.DECIMAL(10, 6),
     latitude: DataTypes.DECIMAL(10, 6),
@@ -110,5 +107,3 @@ ShippingStage.init(
     tableName: 'ShippingStages',
   }
 );
-
-

@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { ShippingStagePaymentStatus } from '../models/ShippingStage';
 import { shippingStageCreateSchema } from './shippingStageSchemas';
 
 // Shared schemas

@@ -1,5 +1,6 @@
 
 
+import { ClientUrl } from '../config'
 import {Admin} from '../models/Admin'
 import {
   AuthConfig,
@@ -321,7 +322,7 @@ export class AuthService {
 export function createAuthService(): AuthService {
   const config: AuthConfig = {
     jwtSecret: process.env.JWT_SECRET || 'udorakpuenyi',
-    clientUrl: process.env.CLIENT_URL || 'http://localhost:3000',
+    clientUrl: ClientUrl as string,
     tokenExpiration: {
       verification: 86400,
       login: 3600,

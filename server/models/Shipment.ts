@@ -6,7 +6,7 @@ import {
 } from 'sequelize';
 
 import { sequelize } from '../config/database';
-import { ShippingStage } from './ShippingStage';
+
 
 type FreightType = 'LAND' | 'AIR' | 'SEA';
 export type ShipmentStatus = 'RECEIVED (WAREHOUSE)' | 'ONBOARD' | 'IN TRANSIT';
@@ -110,15 +110,3 @@ Shipment.init(
     timestamps: true,
   }
 );
-Shipment.hasMany(ShippingStage, {
-  foreignKey: 'shipmentId',
-  as: 'shippingStages',
-  onDelete: 'CASCADE',
-  onUpdate: 'CASCADE',
-});
-
-// ShippingStage associations
-ShippingStage.belongsTo(Shipment, {
-  foreignKey: 'shipmentId',
-  as: 'shipment',
-});

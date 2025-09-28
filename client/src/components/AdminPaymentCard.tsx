@@ -11,7 +11,7 @@ import {
   FiClock,
 } from "react-icons/fi";
 import { Payment, PaymentStatus } from "@/types/payment.types";
-import { DocumentModal } from "./DocumentModal";
+import  DocumentModal  from "./DocumentModal";
 
 interface PaymentCardProps {
   payment: Payment;
@@ -20,7 +20,7 @@ interface PaymentCardProps {
 }
 
 export default function PaymentCard({ payment, onEdit }: PaymentCardProps) {
-  const [receiptToView, setReceiptToView] = useState<Blob | null>(null);
+  const [receiptToView, setReceiptToView] = useState<string | ArrayBuffer | Uint8Array<ArrayBufferLike> | null>(null);
 
   const formatDate = (date: Date | string) =>
     new Date(date).toLocaleString("en-US", {
@@ -103,7 +103,7 @@ export default function PaymentCard({ payment, onEdit }: PaymentCardProps) {
             <FiDollarSign className="w-5 h-5 text-green-600" />
             <div>
               <span className="text-sm font-medium">Amount</span>
-              <p className="text-sm">${payment.amount.toFixed(2)}</p>
+              <p className="text-sm">${payment.amount}</p>
             </div>
           </div>
           <div className="flex items-center gap-3 text-gray-700">
@@ -135,7 +135,7 @@ export default function PaymentCard({ payment, onEdit }: PaymentCardProps) {
           {payment.receipt ? (
             <button
               onClick={() =>
-                setReceiptToView(new Blob([payment.receipt], { type: "application/pdf" }))
+                setReceiptToView(payment.receipt)
               }
               className="flex items-center gap-2 text-sm text-blue-600 hover:text-blue-800"
             >

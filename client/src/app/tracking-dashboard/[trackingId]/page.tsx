@@ -17,6 +17,7 @@ import { Stage } from "@/types/stage.types";
 import { CryptoWallet } from "@/types/crypto-wallet.types";
 import { Bank } from "@/types/bank.types";
 
+
 const ShipmentTrackingDashboard: React.FC = () => {
   const params = useParams();
   const trackingId = params.trackingId as string;
@@ -35,14 +36,14 @@ const ShipmentTrackingDashboard: React.FC = () => {
   const [viewToken, setViewToken]= useState('')
     const {
       data: wallets,
-      // loading:walletLoading,
-      // error,
-    } = useGetList<CryptoWallet>(routes.cryptoWallet.list(shipment?.adminId||0))
+      loading:walletLoading,
+      error:walletErro,
+    } = useGetList<CryptoWallet>(shipment?routes.cryptoWallet.list(shipment?.adminId):'')
         const {
       data: bank,
-      // loading:walletLoading,
-      // error,
-    } = useGetSingle<Bank>(`/bank/${shipment?.adminId||0}`)
+      loading:bankLoading,
+      error:bankErro,
+    } = useGetSingle<Bank>(shipment?`/bank/${shipment.adminId}`:'')
   console.log(shipment)
   const mostRecentStage = shipment?.shippingStages?.[0];
   const long = mostRecentStage?.longitude || -119.417931;
@@ -79,7 +80,7 @@ setToken(data)
     setPaymentStage(stage)
   }
   if (loading) return <Spinner />;
-  if (loadingError)
+  if (loadingError||error)
     return (
       <ErrorAlert message="Failed to retrieve tracking details, please try again later." />
     );
@@ -173,7 +174,7 @@ setToken(data)
                       Amount Paid: ${mostRecentStage.amountPaid||0}
                     </p>
                     <p className="text-gray-600 mb-2">
-                      Payment Status: {mostRecentStage.paymentStatus}
+                      Payment Status: {mostRecentStage.paymentStatus=='INCOMPLETE_PAYMENT'?'PARTIAL PAYMENT':mostRecentStage.paymentStatus}
                     </p>
                     {mostRecentStage.paymentStatus!=='PAID'&&<button
                     onClick={()=>startPayment(mostRecentStage)}
@@ -183,6 +184,45 @@ setToken(data)
                 <small className="text-sm text-gray-500">
                   {new Date(mostRecentStage.dateAndTime).toLocaleString()}
                 </small>
+                        {viewToken&&mostRecentStage.payments.length !==0 && <div className="mt-3">
+                      <h5 className="font-semibold text-sm text-gray-800 mb-2">
+                        Payments for this stage
+                      </h5>
+                      {mostRecentStage.payments && mostRecentStage.payments.length > 0 ? (
+                        <ul className="space-y-2">
+                          {mostRecentStage.payments.map((payment) => (
+                            <li
+                              key={payment.id}
+                              className="flex justify-between items-center border rounded px-3 py-2 bg-gray-50"
+                            >
+                              <span className="text-sm text-gray-700">
+                                {new Date(
+                                  payment.dateAndTime
+                                ).toLocaleString()}
+                              </span>
+                              <span className="text-sm text-gray-900 font-medium">
+                                ${payment.amount}
+                              </span>
+                              <span
+                                className={`text-xs px-2 py-1 rounded ${
+                                  payment.status === "PENDING"
+                                    ? "bg-yellow-100 text-yellow-700"
+                                    : payment.status === "PAID"
+                                    ? "bg-green-100 text-green-700"
+                                    : "bg-gray-100 text-gray-700"
+                                }`}
+                              >
+                                {payment.status}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      ) : (
+                        <p className="text-sm text-gray-500 italic">
+                          Payments not available (verify access to see)
+                        </p>
+                      )}
+                    </div>}
               </div>
             </div>
           </div>
@@ -229,7 +269,12 @@ setToken(data)
                     </p>
                     <p className="text-gray-600 mb-2">
                       Payment Status: {stat.paymentStatus}
-                    </p></>)}
+                    </p>
+                      {stat.paymentStatus!=='PAID'&&<button
+                    onClick={()=>startPayment(stat)}
+                    >Make Payment</button>}
+                    </>)}
+
                     <small className="text-sm text-gray-500">
                       {new Date(stat.dateAndTime).toLocaleString()}
                     </small>
@@ -252,7 +297,7 @@ setToken(data)
                                 ).toLocaleString()}
                               </span>
                               <span className="text-sm text-gray-900 font-medium">
-                                ${payment.amount.toFixed(2)}
+                                ${payment.amount}
                               </span>
                               <span
                                 className={`text-xs px-2 py-1 rounded ${

@@ -1,5 +1,6 @@
 import { z } from 'zod';
-import { PaymentStatus } from '../models/Payment';
+import { PaymentStatus } from '../types/payment.types';
+
 
 // Common Schemas
 const idSchema = z.number().int().positive();

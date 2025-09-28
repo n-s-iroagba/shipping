@@ -1,14 +1,16 @@
 import {
   Payment,
-  PaymentStatus,
+
   PaymentCreationAttributes,
 } from '../models/Payment';
 import { NotFoundError, BadRequestError } from '../errors/errors';
-import { v4 as uuidv4 } from 'uuid';
+
 import path from 'path';
 import fs from 'fs';
 import { Transaction } from 'sequelize';
 import { ShippingStage, Shipment } from '../models';
+import { PaymentStatus, ShippingStagePaymentStatus } from '../types/payment.types';
+
 
 export class PaymentService {
   private storagePath = path.join(__dirname, '../../uploads/payments');
@@ -24,8 +26,6 @@ export class PaymentService {
     stageId:number,
     amount: number,
     receiptFile:any,
-   
-    notes?: string,
     transaction?: Transaction
   ): Promise<Payment> {
     if (!receiptFile) {
@@ -49,11 +49,16 @@ export class PaymentService {
         dateAndTime: new Date(),
         status: PaymentStatus.PENDING,
         receipt: receiptFile,
-        notes,
       };
 
       payment = await Payment.create(paymentData, { transaction });
+      const stage = await ShippingStage.findByPk(stageId)
+      if(!stage){
+        throw new NotFoundError('stage not found')
+      }
+      stage.paymentStatus=ShippingStagePaymentStatus.PENDING
 
+      await stage.save()
       return payment;
     } catch (error) {
       console.error('Payment creation failed:', error);
@@ -64,14 +69,21 @@ export class PaymentService {
   async updatePaymentStatus(
     id: number,
     status: PaymentStatus,
-    notes?: string,
+    amount:number,
+    shippingStageStatus:ShippingStagePaymentStatus,
     transaction?: Transaction
+
   ): Promise<Payment> {
     // Validate status
     if (!Object.values(PaymentStatus).includes(status)) {
       throw new BadRequestError('Invalid payment status');
     }
+    console.log('amount',amount)
 
+ 
+
+    try {
+      
     const payment = await Payment.findOne({
       where: { id },
       transaction,
@@ -80,13 +92,21 @@ export class PaymentService {
     if (!payment) {
       throw new NotFoundError('Payment not found');
     }
-
-    try {
-      payment.status = status;
-      if (notes !== undefined) {
-        payment.notes = notes;
+    const stage = await ShippingStage.findOne({
+      where:{
+        id:payment.shippingStageId
       }
+    })
+      if (!stage) {
+      throw new NotFoundError('stage not found');
 
+    }
+  payment.amount = payment.amount
+  payment.status =status
+stage.amountPaid = (stage.amountPaid || 0) + amount;
+stage.paymentStatus = shippingStageStatus
+
+    await stage.save()
       await payment.save({ transaction });
       return payment;
     } catch (error) {

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { Dispatch, SetStateAction } from 'react';
 export const formatDate = (daysToAdd: number): string => {
   const date = new Date();

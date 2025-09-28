@@ -1,26 +1,8 @@
 import { Sequelize } from 'sequelize';
-import dotenv from 'dotenv';
-import path from 'path';
+import { dbConfig, env } from '.';
 
-// Load environment variables based on NODE_ENV
-const env = process.env.NODE_ENV || 'development';
-const envPath = path.resolve(__dirname, `../.env.${env}`);
-dotenv.config({ path: envPath });
 
-// Database configuration
-const dbConfig = {
-  database: process.env.DB_NAME as string,
-  username: process.env.DB_USER as string,
-  password: process.env.DB_PASSWORD as string,
-  host: process.env.DB_HOST as string,
-  dialect: 'mysql',
-  port: parseInt(process.env.DB_PORT || '3306'),
-  logging: process.env.DB_LOGGING === 'true',
-  ssl: process.env.SSL_MODE === 'REQUIRED',
-};
-// Verify environment variables are loaded
-console.log('DB_USER:', process.env.DB_USER); // Debug check
-console.log('DB_NAME:', process.env.DB_NAME); // Debug check
+
 // Initialize Sequelize
 export const sequelize = new Sequelize(
   dbConfig.database,

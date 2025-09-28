@@ -15,7 +15,7 @@ router.post(
   // validateBody(shipmentSchema),
   (req, res) => controller.createWithStages(req, res)
 );
-
+router.post('/send/mail',controller.sendMail)
 // Get all shipments
 router.get('/admin/:adminId', (req, res) => controller.getAll(req, res));
 

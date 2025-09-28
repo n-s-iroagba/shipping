@@ -33,9 +33,7 @@ export default function ResetPasswordPage() {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-type VerificationResponse = {
-  verificationToken: string;
-};
+
 
 
 

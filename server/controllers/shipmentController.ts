@@ -3,6 +3,7 @@ import { NotFoundError } from '../errors/errors';
 import { ShipmentService } from '../services/shipmentService';
 import { ShippingStageService } from '../services/ShippingStageService';
 import fs from 'fs';
+import EmailService from '../services/EmailService';
 const service = new ShipmentService();
 
 export class ShipmentController {
@@ -101,21 +102,17 @@ export class ShipmentController {
       }
     }
   }
-
-  // async trackPublic(req: Request, res: Response): Promise<void> {
-  //   try {
-  //     const trackingInfo = await service.getPublicTrackingInfo(
-  //       req.params.trackingId
-  //     );
-  //     res.json(trackingInfo);
-  //   } catch (error) {
-  //     if (error instanceof NotFoundError) {
-  //       res.status(404).json(error);
-  //     } else {
-  //       res.status(500).json({ error: 'Failed to track shipment' });
-  //     }
-  //   }
-  // }
+  async sendMail (req: Request, res: Response): Promise<void> {
+    const {subject, content, email} = req.body
+    try{
+    EmailService.sendCustomEmail(email,subject,content)
+    res.json()
+    }catch (error) {
+      console.error(error)
+        res.status(500).json({ error: 'Failed to send mail' });
+      
+    }
+  }
 
   async trackPublic(req: Request, res: Response): Promise<void> {
     try {

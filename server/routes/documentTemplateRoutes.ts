@@ -7,10 +7,10 @@ const router = express.Router();
 const controller = new DocumentTemplateController();
 
 // Create a new template
-router.post("/", upload.single('file'), controller.createTemplate);
+router.post("/:adminId", upload.single('file'), controller.createTemplate);
 
 // Get all templates
-router.get("/", controller.getAllTemplates);
+router.get("/all/:adminId", controller.getAllTemplates);
 
 // Get a single template
 router.get("/:id", controller.getTemplateById);

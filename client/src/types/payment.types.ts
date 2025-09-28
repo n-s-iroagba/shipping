@@ -1,9 +1,7 @@
+
 export enum PaymentStatus {
   PENDING = 'PENDING',
   PAID = 'PAID',
-  NO_PAYMENT_REQUIRED = 'NO_PAYMENT_REQUIRED',
-  UNPAID = 'UNPAID',
-  INCOMPLETE_PAYMENT = 'INCOMPLETE_PAYMENT',
   REJECTED = 'REJECTED',
 }
 
@@ -13,8 +11,15 @@ export interface Payment {
   amount: number;
   dateAndTime: Date;
   status: PaymentStatus;
-  receipt: Blob;
+  receipt:string | ArrayBuffer | Uint8Array<ArrayBufferLike> | null;
   notes?: string;
   createdAt: Date;
   updatedAt: Date;
+}
+
+export type UpdatePaymentStatus={
+    id: number,
+    status: PaymentStatus,
+    amount:number,
+        shippingStageStatus:PaymentStatus
 }

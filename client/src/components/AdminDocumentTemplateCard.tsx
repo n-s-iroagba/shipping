@@ -1,6 +1,6 @@
 // components/AdminDocumentTemplateCard.tsx
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { DocumentTemplateAttributes } from "@/types/document-template.types";
 import {
   PencilIcon,
@@ -9,6 +9,7 @@ import {
   ArrowDownTrayIcon,
   HashtagIcon,
 } from "@heroicons/react/24/outline";
+import DocumentModal from "./DocumentModal";
 
 interface AdminDocumentTemplateCardProps {
   template: DocumentTemplateAttributes;
@@ -21,6 +22,7 @@ const AdminDocumentTemplateCard: React.FC<AdminDocumentTemplateCardProps> = ({
   onEdit,
   onDelete,
 }) => {
+  const [open, setOpen]=useState(true)
   const handleDownload = async () => {
     try {
       const adminId = localStorage.getItem("admin_id");
@@ -76,6 +78,7 @@ const AdminDocumentTemplateCard: React.FC<AdminDocumentTemplateCardProps> = ({
             </div>
           </div>
 
+
           <div className="flex space-x-2">
             <button
               onClick={handleDownload}
@@ -112,6 +115,12 @@ const AdminDocumentTemplateCard: React.FC<AdminDocumentTemplateCardProps> = ({
           </div>
         )}
       </div>
+<DocumentModal
+  onClose={() => setOpen(false)}
+  fileBase64={Buffer.isBuffer(template.file) ? template.file.toString("base64") : template.file}
+  title={template.name}
+/>
+
     </div>
   );
 };

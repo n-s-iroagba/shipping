@@ -1,0 +1,21 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const authController_1 = require("../controllers/authController");
+const auth_1 = require("../middleware/auth");
+const validate_1 = require("../middleware/validate");
+const auth_validation_1 = require("../validation/auth.validation");
+const router = express_1.default.Router();
+const authController = new authController_1.AuthController();
+router.post('/signup', (0, validate_1.validateBody)(auth_validation_1.registerSchema), authController.signUpAdmin);
+router.post('/login', (0, validate_1.validateBody)(auth_validation_1.loginSchema), authController.login);
+router.post('/forgot-password', (0, validate_1.validateBody)(auth_validation_1.forgotPasswordSchema), authController.forgotPassword);
+router.post('/reset-password', (0, validate_1.validateBody)(auth_validation_1.resetPasswordSchema), authController.resetPassword);
+router.post('/verify-email', (0, validate_1.validateBody)(auth_validation_1.verifyEmailCodeSchema), authController.verifyEmail);
+router.post('/resend-code', (0, validate_1.validateBody)(auth_validation_1.resendCodeSchema), authController.resendCode);
+router.get('/refresh-token', authController.refreshToken);
+router.get('/me', auth_1.authenticate, authController.getMe);
+exports.default = router;

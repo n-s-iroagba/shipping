@@ -1,8 +1,9 @@
 import { Request, Response } from 'express';
 import { BadRequestError, NotFoundError } from '../errors/errors';
-import { Payment, PaymentStatus } from '../models/Payment';
+import { Payment } from '../models/Payment';
 import { PaymentService } from '../services/paymentService';
 import { Shipment, ShippingStage } from '../models';
+import { PaymentStatus } from '../types/payment.types';
 
 const paymentService = new PaymentService();
 
@@ -14,15 +15,13 @@ export class PaymentController {
         throw new BadRequestError('Receipt file is required');
       }
 
-      const { amount, referenceNumber, notes } = req.body;
+      const { amount, } = req.body;
       const payment = await paymentService.createPayment(
 stageId,
         parseFloat(amount),
       
         req?.file,
-        referenceNumber,
-        notes
-      );
+      )
 
       res.status(201).json({
         success: true,
@@ -46,7 +45,7 @@ stageId,
 
   async updatePaymentStatus(req: Request, res: Response) {
     try {
-      const { status, notes } = req.body;
+      const { status,amount,    shippingStageStatus } = req.body;
 
       if (!Object.values(PaymentStatus).includes(status)) {
         throw new BadRequestError('Invalid payment status');
@@ -54,8 +53,10 @@ stageId,
 
       const payment = await paymentService.updatePaymentStatus(
         parseInt(req.params.id),
-        status as PaymentStatus,
-        notes
+        status,
+        amount,
+        shippingStageStatus
+     
       );
 
       res.json({

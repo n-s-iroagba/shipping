@@ -1,6 +1,7 @@
 // schemas/shippingStageSchemas.ts
 import { z } from 'zod';
-import { ShippingStagePaymentStatus } from '../models/ShippingStage';
+import { PaymentStatus } from '../types/payment.types';
+
 
 const decimalSchema = z.preprocess(val => Number(val), z.number());
 
@@ -11,7 +12,7 @@ export const shippingStageCreateSchema = z.object({
   dateAndTime: z.string().datetime(),
   percentageNote: z.string().max(50).optional(),
   feeInDollars: decimalSchema.optional().nullable(),
-  paymentStatus: z.nativeEnum(ShippingStagePaymentStatus),
+  paymentStatus: z.nativeEnum(PaymentStatus),
   longitude: decimalSchema.refine(val => val >= -180 && val <= 180, {
     message: 'Longitude must be between -180 and 180',
   }),

@@ -163,9 +163,12 @@ async trackShipment(trackingId: string) {
     }
     return jwt.sign({name:shipment.recipientName},'1h')
   }
+  
 
   private getCurrentStatus(stages: ShippingStage[]) {
     if (!stages || stages.length === 0) return 'PENDING';
     return stages[stages.length - 1].paymentStatus;
   }
+
+  
 }

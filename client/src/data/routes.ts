@@ -38,7 +38,7 @@ export const routes = {
     list:(adminId:string|number)=>`/payment/all/${adminId}`
   },
   templates: {
-    list: (adminId: number) => `/templates/${adminId}`,
+    list: (adminId: number) => `/templates/all/${adminId}`,
     create: (adminId: number) => `/templates/${adminId}`,
     update: (adminId: number, id: number) => `/templates/${adminId}/${id}`,
     delete: (id: number) => `/templates/${id}`,

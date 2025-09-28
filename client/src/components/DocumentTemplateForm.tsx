@@ -2,7 +2,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { DocumentTemplateAttributes } from "@/types/document-template.types";
-
 import {
   XMarkIcon,
   DocumentTextIcon,
@@ -10,15 +9,32 @@ import {
 } from "@heroicons/react/24/outline";
 import { postRequest, putRequest } from "@/utils/apiUtils";
 
+export const uploadFile = async (file: File) => {
+  const cloudName = "dh2cpesxu";
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("upload_preset", "amafor");
+  formData.append("folder", "amafor");
+
+  const cloudUrl = `https://api.cloudinary.com/v1_1/${cloudName}/auto/upload`; // auto handles pdf, docs, images
+
+  const uploadRes = await fetch(cloudUrl, { method: "POST", body: formData });
+  if (!uploadRes.ok) throw new Error("Failed to upload file to Cloudinary");
+  const data = await uploadRes.json();
+  return data.secure_url as string;
+};
+
 interface DocumentTemplateFormProps {
   existingTemplate?: DocumentTemplateAttributes;
   patch?: boolean;
+  adminId: string | number;
   onClose: () => void;
 }
 
 const DocumentTemplateForm: React.FC<DocumentTemplateFormProps> = ({
   existingTemplate,
   patch = false,
+  adminId,
   onClose,
 }) => {
   const [formData, setFormData] = useState({
@@ -44,36 +60,32 @@ const DocumentTemplateForm: React.FC<DocumentTemplateFormProps> = ({
     setError("");
 
     try {
-      const adminId = localStorage.getItem("admin_id");
-      if (!adminId) {
-        throw new Error("Admin ID not found");
-      }
-
-      // For updates, we may not need a new file
       if (!patch && !file) {
         throw new Error("Please select a file to upload");
       }
 
-      const formDataToSend = new FormData();
-      formDataToSend.append("name", formData.name);
-      if (formData.description) {
-        formDataToSend.append("description", formData.description);
-      }
+      // Upload to Cloudinary if new file
+      let fileUrl: string | undefined;
       if (file) {
-        formDataToSend.append("file", file);
+        fileUrl = await uploadFile(file);
+      }
+
+      // Prepare payload
+      const payload: Record<string, any> = {
+        name: formData.name,
+        description: formData.description,
+      };
+      if (fileUrl) {
+        payload.file = fileUrl; // 👈 store Cloudinary URL instead of raw file
       }
 
       if (patch && existingTemplate) {
-        await putRequest(
-          `/admin/templates/${adminId}/${existingTemplate.id}`,
-          formDataToSend,
-        );
+        await putRequest(`/templates/${adminId}/${existingTemplate.id}`, payload);
       } else {
-        await postRequest(`/admin/templates/${adminId}`, formDataToSend);
+        await postRequest(`/templates/${adminId}`, payload);
       }
 
       onClose();
-      // Refresh the page to show updated data
       window.location.reload();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to save template");
@@ -83,7 +95,7 @@ const DocumentTemplateForm: React.FC<DocumentTemplateFormProps> = ({
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -93,7 +105,6 @@ const DocumentTemplateForm: React.FC<DocumentTemplateFormProps> = ({
     const selectedFile = e.target.files?.[0];
     if (selectedFile) {
       setFile(selectedFile);
-      // Auto-fill name if it's empty
       if (!formData.name) {
         setFormData((prev) => ({ ...prev, name: selectedFile.name }));
       }

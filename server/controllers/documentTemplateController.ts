@@ -21,10 +21,7 @@ export class DocumentTemplateController {
         description
       );
 
-      res.status(201).json({
-        success: true,
-        data: template,
-      });
+      res.status(201).json( template);
     } catch (error) {
       if (error instanceof BadRequestError) {
         res.status(400).json({
@@ -44,10 +41,15 @@ export class DocumentTemplateController {
     const adminId = req.params.adminId
     try {
       const templates = await templateService.getAllTemplates(Number(adminId));
-      res.json({
-        success: true,
-        data: templates,
-      });
+      res.json(
+  templates.map((template) => {
+    const plain = template.get({ plain: true });
+    return {
+      ...plain,
+      file: plain.file ? Buffer.from(plain.file).toString("base64") : null,
+    };
+  })
+)
     } catch (error) {
       res.status(500).json({
         success: false,
@@ -61,10 +63,11 @@ export class DocumentTemplateController {
       const template = await templateService.getTemplateById(
         Number(req.params.id)
       );
-      res.json({
-        success: true,
-        data: template,
-      });
+    const plain = template.get({ plain: true }); // 👈 use .get instead of toJSON()
+res.json({
+  ...plain,
+  file: plain.file ? Buffer.from(plain.file).toString("base64") : null,
+});
     } catch (error) {
       if (error instanceof NotFoundError) {
         res.status(404).json({
@@ -88,13 +91,12 @@ export class DocumentTemplateController {
         {
           name,
           description,
+          file:req.file?req.file:undefined
         }
       );
 
-      res.json({
-        success: true,
-        data: template,
-      });
+      res.json( template,
+      );
     } catch (error) {
       if (error instanceof NotFoundError) {
         res.status(404).json({

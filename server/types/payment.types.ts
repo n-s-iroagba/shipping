@@ -1,0 +1,13 @@
+export enum ShippingStagePaymentStatus {
+  PENDING = 'PENDING',
+  PAID = 'PAID',
+  NO_PAYMENT_REQUIRED = 'NO_PAYMENT_REQUIRED',
+  UNPAID = 'UNPAID',
+  INCOMPLETE_PAYMENT = 'INCOMPLETE_PAYMENT',
+  REJECTED = 'REJECTED',
+}
+export enum PaymentStatus {
+  PENDING = 'PENDING',
+  PAID = 'PAID',
+  REJECTED = 'REJECTED',
+}

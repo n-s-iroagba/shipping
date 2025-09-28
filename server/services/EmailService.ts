@@ -202,7 +202,7 @@ private readonly clientUrl: string
               
               <div class="footer">
                 <p>If you didn't create this account, please ignore this email.</p>
-                <p>&copy; ${new Date().getFullYear()} Admissions Portal. All rights reserved.</p>
+                <p>&copy; ${new Date().getFullYear()} Netly Logistics. All rights reserved.</p>
               </div>
             </div>
           </body>
@@ -211,7 +211,7 @@ private readonly clientUrl: string
 
       await this.sendEmail({
         to: user.email,
-        subject: 'Verify Your Email Address - Admissions Portal',
+        subject: 'Verify Your Email Address - Netly Logistics',
         html,
       })
 
@@ -271,7 +271,7 @@ private readonly clientUrl: string
               
               <div class="footer">
                 <p>If you're having trouble with the button above, copy and paste the URL into your web browser.</p>
-                <p>&copy; ${new Date().getFullYear()} Admissions Portal. All rights reserved.</p>
+                <p>&copy; ${new Date().getFullYear()} Netly Logistics. All rights reserved.</p>
               </div>
             </div>
           </body>
@@ -280,7 +280,7 @@ private readonly clientUrl: string
 
       await this.sendEmail({
         to: email,
-        subject: 'Password Reset Request - Admissions Portal',
+        subject: 'Password Reset Request - Netly Logistics',
         html,
       })
 

@@ -1,18 +1,9 @@
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../config/database';
-import fs from 'fs';
-import path from 'path';
 import { ShippingStage } from '.';
+import { PaymentStatus } from '../types/payment.types';
 
 
-export enum PaymentStatus {
-  PENDING = 'PENDING',
-  PAID = 'PAID',
-  NO_PAYMENT_REQUIRED = 'NO_PAYMENT_REQUIRED',
-  UNPAID = 'UNPAID',
-  INCOMPLETE_PAYMENT = 'INCOMPLETE_PAYMENT',
-  REJECTED = 'REJECTED',
-}
 
 export interface PaymentAttributes {
   id: number;

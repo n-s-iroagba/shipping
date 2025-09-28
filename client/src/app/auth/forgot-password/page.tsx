@@ -18,7 +18,7 @@ export default function ForgotPassword() {
     setLoading(true);
 
     try {
-      const response = await postRequest(routes.auth.forgotPassword,{email})
+      await postRequest(routes.auth.forgotPassword,{email})
      
         setSuccess(true);
   

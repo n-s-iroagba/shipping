@@ -29,13 +29,6 @@ BankDetails.init(
   }
 );
 
-BankDetails.belongsTo(Admin,{
-  foreignKey:'adminId',
-  as:'bankOwner'
-})
-Admin.hasOne(BankDetails,{
-  as:'bank',
-  foreignKey:'adminId'
-})
+
 
 export default BankDetails;

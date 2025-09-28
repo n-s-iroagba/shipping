@@ -34,6 +34,7 @@ export class DocumentTemplateService {
     updates: Partial<{
       name: string;
       description: string;
+      file?:any
     }>
   ): Promise<DocumentTemplate> {
     const template = await this.getTemplateById(id);

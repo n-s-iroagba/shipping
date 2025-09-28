@@ -117,7 +117,7 @@ const VerifyEmail = () => {
             </div>
             <button
               type="submit"
-              className="w-full bg-goldenrod text-black p-2 rounded mt-4 text-black"
+              className="w-full bg-sky-900 text-black p-2 rounded mt-4 text-white"
             >
               Verify
             </button>

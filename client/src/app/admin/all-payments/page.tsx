@@ -58,8 +58,8 @@ export default function PendingPaymentPage() {
 
         {paymentToUpdate && (
           <AdminPaymentForm
-            existingPayment={paymentToUpdate}
-            patch
+            payment={paymentToUpdate}
+            
             onClose={() => {
               setpaymentToUpdate(null);
               setUploadError(null);
