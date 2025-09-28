@@ -10,6 +10,7 @@ import {
   CurrencyDollarIcon,
   UserMinusIcon,
   UserPlusIcon,
+  BanknotesIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -104,10 +105,25 @@ export default function AdminOffcanvas({ children }: AdminOffcanvasProps) {
                 text: "My Shipments",
                 icon: UserPlusIcon,
               },
+                {
+                href: "/admin/all-payments",
+                text: "All Payments",
+                icon: CurrencyDollarIcon,
+              },
               {
                 href: "/admin/pending-payments",
                 text: "My Pending Payments",
                 icon: CurrencyDollarIcon,
+              },
+                {
+                href: "/admin/crypto-wallets",
+                text: "My Wallets",
+                icon: WalletIcon,
+              },
+                {
+                href: "/admin/bank-details",
+                text: "My Bank",
+                icon: BanknotesIcon,
               },
               {
                 href: "/admin/document-templates",
@@ -117,7 +133,7 @@ export default function AdminOffcanvas({ children }: AdminOffcanvasProps) {
 
               {
                 href: "/admin/crypto-wallets",
-                text: "My Wallet",
+                text: "My Wallets",
                 icon: WalletIcon,
               },
             ].map((item, index) => (

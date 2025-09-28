@@ -6,7 +6,8 @@ import {
   DocumentDuplicateIcon,
   CloudArrowUpIcon,
 } from "@heroicons/react/24/outline";
-import { SERVER_URL } from "@/utils/apiUtils";
+import { postRequest, SERVER_URL } from "@/utils/apiUtils";
+import { uploadFile } from "./DocumentTemplateForm";
 
 interface PaymentModalProps {
   statusId: string;
@@ -54,39 +55,40 @@ export default function PaymentModal({
     setUploadError(null);
   };
 
-  const handleUploadReceipts = async () => {
-    if (!uploadedReceipt || !amountPaid) {
-      setUploadError("Please enter amount paid and select a receipt file");
-      return;
+const handleUploadReceipts = async () => {
+  if (!uploadedReceipt || !amountPaid) {
+    setUploadError("Please enter amount paid and select a receipt file");
+    return;
+  }
+
+  setIsUploading(true);
+  setUploadError(null);
+
+  try {
+    // 1. Upload file to Cloudinary
+    const receipt= await uploadFile(uploadedReceipt);
+
+    // 2. Send receipt URL + amount to backend
+    const response = await postRequest(`/payment/${statusId}`,{
+        receipt,
+        amount:amountPaid
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to confirm payment");
     }
 
-    setIsUploading(true);
-    setUploadError(null);
-
-    try {
-      const formData = new FormData();
-      formData.append("receipt", uploadedReceipt);
-      formData.append("amountPaid", String(amountPaid));
-
-      const response = await fetch(`${SERVER_URL}/payment/${statusId}`, {
-        method: "POST",
-        body: formData,
-      });
-
-      if (!response.ok) {
-        throw new Error("Upload failed");
-      }
-
-      // onClose();
-      // window.location.reload();
-    } catch (error) {
-      setUploadError(
-        error instanceof Error ? error.message : "Failed to upload receipt"
-      );
-    } finally {
-      setIsUploading(false);
-    }
-  };
+    // success – close modal
+    // onClose();
+    // window.location.reload();gtt
+  } catch (error) {
+    setUploadError(
+      error instanceof Error ? error.message : "Failed to upload receipt"
+    );
+  } finally {
+    setIsUploading(false);
+  }
+};
 
   const formatPrice = (price: number, currency: string) => {
     return new Intl.NumberFormat("en-NG", {

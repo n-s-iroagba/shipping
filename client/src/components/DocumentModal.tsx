@@ -10,18 +10,22 @@ import {
 
 interface DocumentModalProps {
   onClose: () => void;
-  fileBase64: string | null; // backend always returns base64 string or null
+  fileUrl: string | { url: string } | null; // can be string, object, or null
   title: string;
 }
 
 export default function DocumentModal({
   onClose,
-  fileBase64,
+  fileUrl,
   title,
 }: DocumentModalProps) {
   const [error, setError] = useState<string>("");
 
-  if (!fileBase64) {
+  // Normalize fileUrl into a string
+  const normalizedUrl =
+    typeof fileUrl === "string" ? fileUrl : (fileUrl as any)?.url || null;
+
+  if (!normalizedUrl) {
     return (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-6 z-50">
         <div className="bg-white rounded-2xl shadow-lg max-w-2xl w-full p-6 text-center">
@@ -38,16 +42,17 @@ export default function DocumentModal({
     );
   }
 
-  // Simple detection: PDF starts with "%PDF" which encodes to "JVBER"
-  const isPdf = fileBase64.startsWith("JVBER");
-  const mimeType = isPdf ? "application/pdf" : "image/png"; // fallback to PNG for images
-  const docUrl = `data:${mimeType};base64,${fileBase64}`;
+  const isPdf =
+    typeof normalizedUrl === "string" &&
+    normalizedUrl.toLowerCase().endsWith(".pdf");
 
   const handleDownload = () => {
     try {
-      const link = window.document.createElement("a");
-      link.href = docUrl;
-      link.download = `${title.replace(/\s+/g, "_")}.${isPdf ? "pdf" : "png"}`;
+      const link = document.createElement("a");
+      link.href = normalizedUrl;
+      link.download = `${title.replace(/\s+/g, "_")}${isPdf ? ".pdf" : ""}`;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
       link.click();
     } catch (err) {
       console.error("Download failed:", err);
@@ -87,14 +92,14 @@ export default function DocumentModal({
             </div>
           ) : isPdf ? (
             <iframe
-              src={docUrl}
+              src={normalizedUrl}
               className="w-full h-[70vh] border rounded-lg"
               title="PDF Document"
             />
           ) : (
             <div className="max-h-[70vh] overflow-auto">
               <Image
-                src={docUrl}
+                src={normalizedUrl}
                 alt={title}
                 width={800}
                 height={600}

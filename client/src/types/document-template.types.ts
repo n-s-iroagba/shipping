@@ -2,7 +2,7 @@ export interface DocumentTemplateAttributes {
   id: number;
   adminId: number;
   name: string;
-  file: Buffer;
+  file: string;
   description: string;
 }
 

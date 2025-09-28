@@ -11,7 +11,7 @@ export interface Payment {
   amount: number;
   dateAndTime: Date;
   status: PaymentStatus;
-  receipt:string | ArrayBuffer | Uint8Array<ArrayBufferLike> | null;
+  receipt:string ;
   notes?: string;
   createdAt: Date;
   updatedAt: Date;

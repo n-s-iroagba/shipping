@@ -6,8 +6,8 @@ import {
   PencilIcon,
   TrashIcon,
   DocumentTextIcon,
-  ArrowDownTrayIcon,
   HashtagIcon,
+  EyeIcon,
 } from "@heroicons/react/24/outline";
 import DocumentModal from "./DocumentModal";
 
@@ -22,28 +22,8 @@ const AdminDocumentTemplateCard: React.FC<AdminDocumentTemplateCardProps> = ({
   onEdit,
   onDelete,
 }) => {
-  const [open, setOpen]=useState(true)
-  const handleDownload = async () => {
-    try {
-      const adminId = localStorage.getItem("admin_id");
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:3001"}/admin/templates/${adminId}/${template.id}/download`,
-      );
+  const [open, setOpen]=useState(false)
 
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = template.name;
-      document.body.appendChild(a);
-      a.click();
-      window.URL.revokeObjectURL(url);
-      document.body.removeChild(a);
-    } catch (error) {
-      console.error("Failed to download template:", error);
-      alert("Failed to download template");
-    }
-  };
 
   const getFileExtension = (filename: string) => {
     return filename.split(".").pop()?.toUpperCase() || "FILE";
@@ -80,12 +60,12 @@ const AdminDocumentTemplateCard: React.FC<AdminDocumentTemplateCardProps> = ({
 
 
           <div className="flex space-x-2">
-            <button
-              onClick={handleDownload}
-              className="p-2 text-green-600 hover:text-green-800 hover:bg-green-50 rounded-lg transition-colors"
-              title="Download template"
+   <button
+              onClick={()=>setOpen(true)}
+              className="p-2 text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-colors"
+              title="Edit template"
             >
-              <ArrowDownTrayIcon className="w-5 h-5" />
+              <EyeIcon className="w-5 h-5" />
             </button>
             <button
               onClick={onEdit}
@@ -115,11 +95,11 @@ const AdminDocumentTemplateCard: React.FC<AdminDocumentTemplateCardProps> = ({
           </div>
         )}
       </div>
-<DocumentModal
+{open&&<DocumentModal
   onClose={() => setOpen(false)}
-  fileBase64={Buffer.isBuffer(template.file) ? template.file.toString("base64") : template.file}
+ fileUrl={template.file}
   title={template.name}
-/>
+/>}
 
     </div>
   );

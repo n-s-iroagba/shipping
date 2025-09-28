@@ -12,16 +12,22 @@ import {
 } from "react-icons/fi";
 import { Payment, PaymentStatus } from "@/types/payment.types";
 import  DocumentModal  from "./DocumentModal";
-
+import { Stage } from "@/types/stage.types";
+import { Shipment } from "@/types/shipment.types";
+type PaymentWithAssociations = Payment & {
+  paymentStage?: Stage & {
+    shipment?: Shipment;
+  };
+};
 interface PaymentCardProps {
-  payment: Payment;
+  payment: PaymentWithAssociations;
 
   onEdit: (payment: Payment) => void;
 }
 
 export default function PaymentCard({ payment, onEdit }: PaymentCardProps) {
-  const [receiptToView, setReceiptToView] = useState<string | ArrayBuffer | Uint8Array<ArrayBufferLike> | null>(null);
-
+  const [receiptToView, setReceiptToView] = useState<string>('');
+  console.log(payment.receipt)
   const formatDate = (date: Date | string) =>
     new Date(date).toLocaleString("en-US", {
       year: "numeric",
@@ -35,14 +41,10 @@ export default function PaymentCard({ payment, onEdit }: PaymentCardProps) {
     switch (status) {
       case PaymentStatus.PAID:
         return "Paid";
-      case PaymentStatus.UNPAID:
-        return "Unpaid";
+   
       case PaymentStatus.PENDING:
         return "Pending";
-      case PaymentStatus.NO_PAYMENT_REQUIRED:
-        return "No Payment Required";
-      case PaymentStatus.INCOMPLETE_PAYMENT:
-        return "Incomplete Payment";
+
       case PaymentStatus.REJECTED:
         return "Rejected";
       default:
@@ -54,14 +56,9 @@ export default function PaymentCard({ payment, onEdit }: PaymentCardProps) {
     switch (status) {
       case PaymentStatus.PAID:
         return "bg-green-100 text-green-800";
-      case PaymentStatus.UNPAID:
         return "bg-red-100 text-red-800";
       case PaymentStatus.PENDING:
         return "bg-yellow-100 text-yellow-800";
-      case PaymentStatus.NO_PAYMENT_REQUIRED:
-        return "bg-gray-100 text-gray-800";
-      case PaymentStatus.INCOMPLETE_PAYMENT:
-        return "bg-orange-100 text-orange-800";
       case PaymentStatus.REJECTED:
         return "bg-red-200 text-red-900";
       default:
@@ -95,8 +92,8 @@ export default function PaymentCard({ payment, onEdit }: PaymentCardProps) {
           <div className="flex items-center gap-3 text-gray-700">
             <FiHash className="w-5 h-5 text-green-600" />
             <div>
-              <span className="text-sm font-medium">Stage ID</span>
-              <p className="text-sm">{payment.shippingStageId}</p>
+              <span className="text-sm font-medium">Payment Made By</span>
+              <p className="text-sm">{payment.paymentStage?.shipment?.recipientName }</p>
             </div>
           </div>
           <div className="flex items-center gap-3 text-gray-700">
@@ -160,8 +157,8 @@ export default function PaymentCard({ payment, onEdit }: PaymentCardProps) {
       {/* Receipt Modal */}
       {receiptToView && (
         <DocumentModal
-          onClose={() => setReceiptToView(null)}
-          document={receiptToView}
+          onClose={() => setReceiptToView('')}
+          fileUrl={payment.receipt}
           title="Payment Receipt"
         />
       )}
