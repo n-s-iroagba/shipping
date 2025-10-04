@@ -5,12 +5,6 @@ import dynamic from 'next/dynamic';
 import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 
-const CustomEditor = dynamic(
-  () => import('@/components/Editor'),
-  {
-    ssr: false,
-  }
-);
 
 export default function NewArticlePage() {
  const params = useSearchParams()
@@ -20,6 +14,12 @@ export default function NewArticlePage() {
   const [subject, setSubject] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+const CustomEditor = dynamic(
+  () => import('@/components/Editor'),
+  {
+    ssr: false,
+  }
+);
   const submit = async () => {
     if (!subject.trim()) {
       alert('Please enter a subject');
