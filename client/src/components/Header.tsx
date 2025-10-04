@@ -53,7 +53,7 @@ const Header: React.FC = () => {
   const images: StaticImageData[] = [image1, image2, image3];
 
   return (
-    <header className="py-6 relative bg-cover bg-center h-screen lg:min-h-[80vh] flex flex-col ">
+    <header className="py-6 relative bg-cover bg-center min-h-[100vh] md:min-h-[80vh] flex flex-col ">
       <Navbar />
       
       {/* Background Carousel */}
