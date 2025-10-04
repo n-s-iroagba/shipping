@@ -1,31 +1,29 @@
 'use client';
+
 export const dynamic = 'force-dynamic';
 
-import nextDynamic from 'next/dynamic'; // <- aliased to avoid collision
+import nextDynamic from 'next/dynamic';
 import { postRequest } from '@/utils/apiUtils';
 import { useSearchParams } from 'next/navigation';
-import { useState } from 'react';
-const CustomEditor = nextDynamic(
-  () => import('@/components/Editor'),
-  {
-    ssr: false,
-  }
-);
-export default function NewArticlePage() {
- const params = useSearchParams()
+import { useState, Suspense } from 'react';
+
+// ✅ Dynamically import the editor
+const CustomEditor = nextDynamic(() => import('@/components/Editor'), { ssr: false });
+
+function EmailForm() {
+  const params = useSearchParams();
   const email = params.get('email') as string;
-  console.log(email)
+
   const [editorContent, setEditorContent] = useState<string>('');
   const [subject, setSubject] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
 
   const submit = async () => {
     if (!subject.trim()) {
       alert('Please enter a subject');
       return;
     }
-    
+
     if (!editorContent.trim() || editorContent === '<p><br></p>') {
       alert('Please enter some content');
       return;
@@ -33,13 +31,12 @@ export default function NewArticlePage() {
 
     setIsLoading(true);
     try {
-      await postRequest('/shipment/send/mail', { 
-        subject, 
-        content: editorContent, 
-        email 
+      await postRequest('/shipment/send/mail', {
+        subject,
+        content: editorContent,
+        email,
       });
       alert('Email sent successfully!');
-      // Reset form after successful send
       setSubject('');
       setEditorContent('');
     } catch (error) {
@@ -57,10 +54,13 @@ export default function NewArticlePage() {
           <h1 className="text-2xl font-bold text-gray-800 mb-6">
             Send Email To {email}
           </h1>
-          
+
           {/* Subject Input */}
           <div className="mb-4">
-            <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              htmlFor="subject"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
               Subject
             </label>
             <input
@@ -97,14 +97,16 @@ export default function NewArticlePage() {
             >
               {isLoading ? 'Sending...' : 'Send Email'}
             </button>
-            
+
             <button
-              onClick={() => console.log('Subject:', subject, 'Content:', editorContent)}
+              onClick={() =>
+                console.log('Subject:', subject, 'Content:', editorContent)
+              }
               className="px-6 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors"
             >
               Preview Content
             </button>
-            
+
             <button
               onClick={() => {
                 setSubject('');
@@ -118,5 +120,14 @@ export default function NewArticlePage() {
         </div>
       </div>
     </div>
+  );
+}
+
+// ✅ Wrap in Suspense to fix useSearchParams warning
+export default function NewArticlePage() {
+  return (
+    <Suspense fallback={<div>Loading email form...</div>}>
+      <EmailForm />
+    </Suspense>
   );
 }
