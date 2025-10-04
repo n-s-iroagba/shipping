@@ -50,7 +50,7 @@ export default function Home() {
       <Header />
      <br/>
       <Information
-        title="Meeting Your Shiping needs"
+        title="Meeting Your Shiping Needs"
         text="Discover the best shipping solutions tailored for your needs."
         images={images}
       />
