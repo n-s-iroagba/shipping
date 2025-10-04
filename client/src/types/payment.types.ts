@@ -1,5 +1,7 @@
+import { ShippingStagePaymentStatus } from "./stage.types";
 
 export enum PaymentStatus {
+  
   PENDING = 'PENDING',
   PAID = 'PAID',
   REJECTED = 'REJECTED',
@@ -21,5 +23,5 @@ export type UpdatePaymentStatus={
     id: number,
     status: PaymentStatus,
     amount:number,
-        shippingStageStatus:PaymentStatus
+        shippingStageStatus:ShippingStagePaymentStatus
 }

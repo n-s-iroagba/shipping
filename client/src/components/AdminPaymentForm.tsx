@@ -12,6 +12,7 @@ import {
   UpdatePaymentStatus,
 } from "@/types/payment.types";
 import { putRequest } from "@/utils/apiUtils";
+import { ShippingStagePaymentStatus } from "@/types/stage.types";
 
 interface PaymentApprovalModalProps {
   onClose: () => void;
@@ -24,9 +25,9 @@ export function PaymentApprovalModal({
 }: PaymentApprovalModalProps) {
   const [formData, setFormData] = useState<UpdatePaymentStatus>({
     id: payment.id,
-    status: PaymentStatus.UNPAID,
+    status: PaymentStatus.PENDING,
     amount: 0,
-    shippingStageStatus:PaymentStatus.UNPAID
+    shippingStageStatus:ShippingStagePaymentStatus.NO_PAYMENT_REQUIRED
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");

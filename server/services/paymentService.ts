@@ -25,7 +25,7 @@ export class PaymentService {
   async createPayment(
     stageId:number,
     amount: number,
-    receiptFile:any,
+    receiptFile:string,
     transaction?: Transaction
   ): Promise<Payment> {
     if (!receiptFile) {
