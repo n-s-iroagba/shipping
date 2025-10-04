@@ -191,7 +191,7 @@ export default function VerificationModal({ onClose, token }: VerificationModalP
           {/* Help Text */}
           <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
             <p className="text-sm text-gray-600">
-              <span className="font-medium">Didn't receive the code?</span>
+              <span className="font-medium">Didn&apos;t receive the code?</span>
             </p>
             <p className="text-xs text-gray-500 mt-1">
               Check your spam folder or wait a few minutes before requesting a new code.
