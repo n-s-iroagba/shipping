@@ -23,7 +23,7 @@ export default function DocumentModal({
 
   // Normalize fileUrl into a string
   const normalizedUrl =
-    typeof fileUrl === "string" ? fileUrl : (fileUrl as string)?.url || null;
+    typeof fileUrl === "string" ? fileUrl : (fileUrl)?.url || null;
 
   if (!normalizedUrl) {
     return (

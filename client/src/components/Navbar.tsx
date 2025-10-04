@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserAlt } from "@fortawesome/free-solid-svg-icons";
 import "../assets/styles/Navbar.css";
 import Image from "next/image";
-import image from "../assets/images/logo.png";
+import image from "../assets/images/Netlylogistics.png";
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
