@@ -16,6 +16,7 @@ import {
   FaFileUpload,
 } from "react-icons/fa";
 import { putRequest } from "@/utils/apiUtils";
+import { uploadFile } from "@/components/DocumentTemplateForm";
 
 export default function EditStageForm() {
   const router = useRouter();
@@ -86,10 +87,11 @@ export default function EditStageForm() {
     }));
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const url = await uploadFile(e.target.files?.[0]as File)
     setFormData((prev) => ({
       ...prev,
-      supportingDocument: e.target.files?.[0],
+      supportingDocument: url,
     }));
   };
 

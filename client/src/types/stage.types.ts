@@ -18,7 +18,7 @@ export interface Stage {
   feeInDollars?: number;
   amountPaid?: number;
   paymentDate?: Date;
-  supportingDocument?: string | ArrayBuffer | Uint8Array<ArrayBufferLike> ;
+  supportingDocument?: string  ;
   paymentStatus: ShippingStagePaymentStatus;
   title: string;
   payments:Payment[]
