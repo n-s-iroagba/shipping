@@ -44,6 +44,7 @@ const Header: React.FC = () => {
       await new Promise(resolve => setTimeout(resolve, 500));
       router.push(`/tracking-dashboard/${trackingId.trim()}`);
     } catch (err) {
+      console.error(err)
       setError("Failed to navigate to tracking page");
       setLoading(false);
     }

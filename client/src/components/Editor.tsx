@@ -128,6 +128,7 @@ const CustomEditor = forwardRef<Quill, CustomEditorProps>(
               const safeLength = Math.min(selection.length, length - safeIndex);
               quillRef.current?.setSelection(safeIndex, safeLength);
             } catch (error) {
+              console.error(error)
               // If selection restoration fails, just place cursor at end
               const length = quillRef.current?.getLength() || 0;
               quillRef.current?.setSelection(length - 1, 0);

@@ -71,7 +71,7 @@ const DocumentTemplateForm: React.FC<DocumentTemplateFormProps> = ({
       }
 
       // Prepare payload
-      const payload: Record<string, any> = {
+      const payload: Record<string, string> = {
         name: formData.name,
         description: formData.description,
       };

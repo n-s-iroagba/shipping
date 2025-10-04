@@ -6,7 +6,7 @@ import {
   DocumentDuplicateIcon,
   CloudArrowUpIcon,
 } from "@heroicons/react/24/outline";
-import { postRequest, SERVER_URL } from "@/utils/apiUtils";
+import { postRequest } from "@/utils/apiUtils";
 import { uploadFile } from "./DocumentTemplateForm";
 
 interface PaymentModalProps {

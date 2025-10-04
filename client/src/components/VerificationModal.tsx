@@ -23,7 +23,14 @@ export default function VerificationModal({ onClose, token }: VerificationModalP
     }, 100);
     return () => clearTimeout(timer);
   }, []);
-
+  const handleClose = useCallback(() => {
+    if (loading) return;
+    
+    setIsClosing(true);
+    setTimeout(() => {
+      onClose();
+    }, 200);
+  }, [loading, onClose]);
   // Handle escape key
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -34,16 +41,9 @@ export default function VerificationModal({ onClose, token }: VerificationModalP
     
     document.addEventListener('keydown', handleEscape);
     return () => document.removeEventListener('keydown', handleEscape);
-  }, [loading]);
+  }, [loading,handleClose]);
 
-  const handleClose = useCallback(() => {
-    if (loading) return;
-    
-    setIsClosing(true);
-    setTimeout(() => {
-      onClose();
-    }, 200);
-  }, [loading, onClose]);
+
 
   const handleVerify = useCallback(async () => {
     if (!code.trim() || loading) return;
