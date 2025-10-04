@@ -259,7 +259,7 @@ export default function AdminStageCard({
       {documentToView && (
         <DocumentModal
           onClose={() => setDocumentToView(null)}
-          document={documentToView}
+          fileUrl={documentToView as string} 
           title="Supporting Document"
         />
       )}
