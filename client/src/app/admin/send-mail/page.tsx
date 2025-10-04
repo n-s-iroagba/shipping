@@ -1,11 +1,16 @@
 'use client';
+export const dynamic = 'force-dynamic';
 
+import nextDynamic from 'next/dynamic'; // <- aliased to avoid collision
 import { postRequest } from '@/utils/apiUtils';
-import dynamic from 'next/dynamic';
 import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
-
-
+const CustomEditor = nextDynamic(
+  () => import('@/components/Editor'),
+  {
+    ssr: false,
+  }
+);
 export default function NewArticlePage() {
  const params = useSearchParams()
   const email = params.get('email') as string;
@@ -14,12 +19,7 @@ export default function NewArticlePage() {
   const [subject, setSubject] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-const CustomEditor = dynamic(
-  () => import('@/components/Editor'),
-  {
-    ssr: false,
-  }
-);
+
   const submit = async () => {
     if (!subject.trim()) {
       alert('Please enter a subject');
