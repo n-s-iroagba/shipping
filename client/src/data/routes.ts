@@ -41,4 +41,7 @@ export const routes = {
     download: (adminId: number, id: number) =>
       `/templates/${adminId}/${id}/download`,
   },
+  cryptoWallet: {
+    delete: (id: number) => `/crypto-wallet/${id}`,
+  },
 };
