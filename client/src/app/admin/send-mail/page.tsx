@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, Suspense, useRef } from "react";
+import React, { useState, Suspense } from "react";
 import nextDynamic from "next/dynamic";
 import { useSearchParams, useRouter } from "next/navigation";
 import { motion } from "framer-motion";

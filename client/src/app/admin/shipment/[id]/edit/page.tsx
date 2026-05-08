@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { useRouter, useParams } from "next/navigation";
 import { Shipment } from "@/types/shipment.types";
 import Link from "next/link";
@@ -255,7 +256,7 @@ export default function EditShipmentPage() {
               {shipment.packagePhotos && (
                 <div className="mt-2">
                   <p className="text-sm text-green-600">Photo uploaded!</p>
-                  <img src={shipment.packagePhotos} alt="Package" className="mt-2 h-20 w-20 object-cover rounded" />
+                  <Image src={shipment.packagePhotos} alt="Package" width={80} height={80} className="mt-2 h-20 w-20 object-cover rounded" />
                 </div>
               )}
             </div>

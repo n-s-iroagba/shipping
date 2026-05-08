@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import type { Shipment } from "@/types/shipment.types";
 import { useGetSingle } from "@/hooks/useGet";
@@ -251,9 +252,11 @@ const AdminShipment = () => {
                 <span>Package Photos</span>
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                <img
+                <Image
                   src={shipment.packagePhotos}
                   alt="Package"
+                  width={400}
+                  height={300}
                   className="w-full h-48 object-cover rounded-lg shadow-sm"
                 />
               </div>
