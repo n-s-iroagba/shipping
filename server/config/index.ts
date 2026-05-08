@@ -2,8 +2,9 @@ import dotenv from 'dotenv';
 import path from 'path';
 
 // Load environment variables
-dotenv.config();
 export const env = process.env.NODE_ENV || 'development';
+const envFile = env === 'production' ? '.env' : '.env.development';
+dotenv.config({ path: path.resolve(process.cwd(), envFile) });
 
 export const dbConfig = {
   database: process.env.DB_NAME as string,

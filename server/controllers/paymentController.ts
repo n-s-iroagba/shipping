@@ -50,7 +50,7 @@ receipt
       }
 
       const payment = await paymentService.updatePaymentStatus(
-        parseInt(req.params.id),
+        parseInt(req.params.id as string),
         status,
         amount,
         shippingStageStatus
@@ -127,7 +127,7 @@ receipt
   }
   async deletePayment(req: Request, res: Response) {
     try {
-      await paymentService.deletePayment(parseInt(req.params.id));
+      await paymentService.deletePayment(parseInt(req.params.id as string));
       res.json({
         success: true,
         message: 'Payment deleted successfully',

@@ -21,5 +21,8 @@ COPY . .
 # Build TypeScript
 RUN npm run build
 
+# Set production environment
+ENV NODE_ENV=production
+
 # Start app
 CMD ["node", "dist/index.js"]

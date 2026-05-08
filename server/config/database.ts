@@ -13,6 +13,14 @@ export const sequelize = new Sequelize(
     dialect: 'mysql',
     port: dbConfig.port,
     logging: dbConfig.logging ? console.log : false,
+    dialectOptions: dbConfig.ssl
+      ? {
+          ssl: {
+            require: true,
+            rejectUnauthorized: false, // For Aiven/managed DBs, this is often needed
+          },
+        }
+      : {},
   }
 );
 

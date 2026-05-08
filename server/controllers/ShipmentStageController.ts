@@ -72,7 +72,7 @@ export class ShippingStageController {
       const stages = await this.service.getPaginated(
         Number(page),
         Number(limit),
-        shipmentId
+        shipmentId as string
       );
       res.json(stages);
     } catch (error) {
@@ -90,7 +90,7 @@ export class ShippingStageController {
         stageData.supportingDocument = req.file.path;
       }
 
-      const updatedStage = await this.service.update(stageId, stageData);
+      const updatedStage = await this.service.update(stageId as string, stageData);
       console.log(updatedStage);
       res.json(updatedStage);
       
@@ -103,7 +103,7 @@ export class ShippingStageController {
   public async deleteStage(req: Request, res: Response): Promise<void> {
     try {
       const stageId = req.params.id;
-      await this.service.delete(stageId);
+      await this.service.delete(stageId as string);
       res.status(204).send();
     } catch (error) {
       console.error(error);

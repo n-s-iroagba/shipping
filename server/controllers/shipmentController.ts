@@ -50,7 +50,7 @@ export class ShipmentController {
   async getAll(req: Request, res: Response): Promise<void> {
     const { adminId } = req.params;
     try {
-      const shipments = await service.getAll(adminId);
+      const shipments = await service.getAll(adminId as string);
 
       res.json(shipments);
       return;
@@ -118,7 +118,7 @@ export class ShipmentController {
   async trackPublic(req: Request, res: Response): Promise<void> {
     try {
       const trackingInfo = await service.getPublicTrackingInfo(
-        req.params.trackingId
+        req.params.trackingId as string
       );
       res.json(trackingInfo);
     } catch (error) {
@@ -150,7 +150,7 @@ export class ShipmentController {
         return;
       }
 
-      const trackingInfo = await service.getSensitiveTrackingInfo(trackingId);
+      const trackingInfo = await service.getSensitiveTrackingInfo(trackingId as string);
       res.json(trackingInfo);
     } catch (error) {
       if (error instanceof NotFoundError) {
@@ -166,7 +166,7 @@ export class ShipmentController {
     const shipmentId = req.params.shipmentId
     try {
 
-      const token = await service.initiateSensitiveTracking(shipmentId)
+      const token = await service.initiateSensitiveTracking(shipmentId as string)
       res.json(token)
     } catch (error) {
       res.status(500).json({ error: 'Failed initiate shipment tracking' });

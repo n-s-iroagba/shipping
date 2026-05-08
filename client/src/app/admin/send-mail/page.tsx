@@ -4,11 +4,11 @@ import React, { useState, Suspense, useRef } from "react";
 import nextDynamic from "next/dynamic";
 import { useSearchParams, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { 
-  FiMail, 
-  FiSend, 
-  FiTrash2, 
-  FiArrowLeft, 
+import {
+  FiMail,
+  FiSend,
+  FiTrash2,
+  FiArrowLeft,
   FiAlertCircle,
   FiCheckCircle,
   FiEye
@@ -17,7 +17,7 @@ import { postRequest } from "@/utils/apiUtils";
 import { handleError } from "@/utils/utils";
 
 // Dynamically import the editor with no SSR
-const CustomEditor = nextDynamic(() => import("@/components/Editor"), { 
+const CustomEditor = nextDynamic(() => import("@/components/Editor"), {
   ssr: false,
   loading: () => (
     <div className="h-64 w-full bg-slate-50 animate-pulse rounded-2xl flex items-center justify-center text-slate-400">
@@ -34,7 +34,7 @@ function EmailForm() {
   const [editorContent, setEditorContent] = useState("");
   const [subject, setSubject] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string | null>("");
   const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -59,11 +59,11 @@ function EmailForm() {
         content: editorContent,
         email,
       });
-      
+
       setSuccess(true);
       setSubject("");
       setEditorContent("");
-      
+
       // Reset success after 5 seconds
       setTimeout(() => setSuccess(false), 5000);
     } catch (err) {
@@ -75,21 +75,21 @@ function EmailForm() {
 
   return (
     <div className="min-h-screen bg-slate-50/50 p-4 md:p-8">
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="max-w-4xl mx-auto"
       >
         {/* Top Bar */}
         <div className="flex items-center justify-between mb-8">
-          <button 
+          <button
             onClick={() => router.back()}
             className="flex items-center gap-2 text-slate-500 hover:text-slate-800 transition-colors font-medium"
           >
             <FiArrowLeft />
             Back to Shipments
           </button>
-          
+
           <div className="flex items-center gap-3">
             <span className="hidden sm:block text-sm text-slate-400 font-medium">Recipient:</span>
             <div className="px-4 py-1.5 bg-white border border-slate-200 rounded-full text-sm font-bold text-slate-700 shadow-sm">
@@ -116,7 +116,7 @@ function EmailForm() {
           <div className="p-8 space-y-8">
             {/* Status Messages */}
             {error && (
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 className="p-4 bg-red-50 border border-red-100 rounded-2xl flex items-start gap-3 text-red-600 text-sm font-medium"
@@ -127,7 +127,7 @@ function EmailForm() {
             )}
 
             {success && (
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 className="p-4 bg-emerald-50 border border-emerald-100 rounded-2xl flex items-start gap-3 text-emerald-600 text-sm font-medium"

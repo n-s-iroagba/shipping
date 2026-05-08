@@ -1,5 +1,6 @@
 import express, { urlencoded } from 'express';
 import dotenv from 'dotenv';
+import path from 'path';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import shipmentRoutes from './routes/shipmentRoutes';
@@ -14,7 +15,9 @@ import { errorHandler } from './middleware/errorHandler';
 
 
 
-dotenv.config();
+const env = process.env.NODE_ENV || 'development';
+const envFile = env === 'production' ? '.env' : '.env.development';
+dotenv.config({ path: path.resolve(process.cwd(), envFile) });
 
 const app = express();
 
@@ -47,5 +50,5 @@ app.use('/api/templates',documentTemplateRoutes)
 
 app.use(errorHandler)
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
