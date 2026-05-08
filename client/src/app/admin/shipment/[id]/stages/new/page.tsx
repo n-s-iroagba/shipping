@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ChangeEvent, FormEvent, useCallback, useState } from "react";
+import React, { FormEvent, useCallback, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
@@ -8,7 +8,6 @@ import {
   FiTrash2, 
   FiSave, 
   FiArrowLeft, 
-  FiTruck, 
   FiCalendar, 
   FiMapPin, 
   FiDollarSign, 
