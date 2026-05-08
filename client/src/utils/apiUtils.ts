@@ -2,7 +2,9 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 
 export const SERVER_URL =
-  process.env.NODE_ENV==='production'?process.env.NEXT_PUBLIC_SERVER_URL : "http://localhost:5000/api";
+  process.env.NODE_ENV === "production"
+    ? `${process.env.NEXT_PUBLIC_SERVER_URL}api`
+    : "http://localhost:3000/api";
 
 
 const api = axios.create({
@@ -12,9 +14,9 @@ const api = axios.create({
 
 // Separate axios instance for refresh token requests to avoid interceptor loops
 const refreshApi = axios.create({
-  baseURL:  SERVER_URL,
+  baseURL: SERVER_URL,
   timeout: 10000,
-    headers: {
+  headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json'
   },
@@ -200,7 +202,7 @@ api.interceptors.response.use(
           url: '/auth/refresh-token'
         })
 
-        const refreshResponse = await refreshApi.get( '/auth/refresh-token', {
+        const refreshResponse = await refreshApi.get('/auth/refresh-token', {
           headers: {
             'Content-Type': 'application/json'
           }
@@ -263,12 +265,12 @@ export const postRequest = async <T = any>(
   data: object | FormData,
   isFormData = false,
 ) => {
-  try{
-  const response = await api.post<T>(url, data, {
-    headers: isFormData ? { "Content-Type": "multipart/form-data" } : undefined,
-  });
-  return response.data;
-      } catch(error){
+  try {
+    const response = await api.post<T>(url, data, {
+      headers: isFormData ? { "Content-Type": "multipart/form-data" } : undefined,
+    });
+    return response.data;
+  } catch (error) {
     throw error
   }
 };
@@ -279,22 +281,22 @@ export const putRequest = async <T = any>(
   data: object | FormData,
   isFormData = false,
 ) => {
-   try{
-  const response = await api.put<T>(url, data, {
-    headers: isFormData ? { "Content-Type": "multipart/form-data" } : undefined,
-  });
-  return response.data;
-      } catch(error){
+  try {
+    const response = await api.put<T>(url, data, {
+      headers: isFormData ? { "Content-Type": "multipart/form-data" } : undefined,
+    });
+    return response.data;
+  } catch (error) {
     throw error
   }
 };
 
 // DELETE
 export const deleteRequest = async <T = any>(url: string) => {
-   try{
-  const response = await api.delete<T>(url);
-  return response.data;
-    } catch(error){
+  try {
+    const response = await api.delete<T>(url);
+    return response.data;
+  } catch (error) {
     throw error
   }
 };
