@@ -6,11 +6,9 @@ import {
   XMarkIcon,
   Bars3Icon,
   UserCircleIcon,
-  WalletIcon,
+  UserPlusIcon,
   CurrencyDollarIcon,
   UserMinusIcon,
-  UserPlusIcon,
-  BanknotesIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -115,27 +113,7 @@ export default function AdminOffcanvas({ children }: AdminOffcanvasProps) {
                 text: "My Pending Payments",
                 icon: CurrencyDollarIcon,
               },
-                {
-                href: "/admin/crypto-wallets",
-                text: "My Wallets",
-                icon: WalletIcon,
-              },
-                {
-                href: "/admin/bank-details",
-                text: "My Bank",
-                icon: BanknotesIcon,
-              },
-              {
-                href: "/admin/document-templates",
-                text: "My Document Templates",
-                icon: UserCircleIcon,
-              },
 
-              {
-                href: "/admin/crypto-wallets",
-                text: "My Wallets",
-                icon: WalletIcon,
-              },
             ].map((item, index) => (
               <Link
                 key={index}

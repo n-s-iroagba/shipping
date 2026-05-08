@@ -56,8 +56,8 @@ export class AuthController {
    */
   resendCode = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const { token, id } = req.body
-      const newToken = await this.authService.generateNewCode(token)
+      const { verificationToken } = req.body
+      const newToken = await this.authService.generateNewCode(verificationToken)
       res.json(newToken)
     } catch (error) {
       next(error)

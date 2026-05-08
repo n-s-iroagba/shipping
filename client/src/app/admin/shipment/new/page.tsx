@@ -7,9 +7,9 @@ import {
   StageCreationDto,
 } from "@/types/stage.types";
 import { postRequest } from "@/utils/apiUtils";
-import { handleError } from "@/utils/utils";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { uploadFile } from "@/utils/utils";
 
 interface ValidationErrors {
   [key: string]: string;
@@ -68,6 +68,7 @@ export default function CreateShipmentPage() {
     freightType: "LAND",
     weight: 0,
     dimensionInInches: "",
+    packagePhotos: "",
     shippingStages: [
       {
         title: "Initial Pickup",
@@ -112,6 +113,22 @@ export default function CreateShipmentPage() {
     amountPaid: 0,
     paymentDate: new Date(),
   });
+
+  const handlePackagePhotoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    try {
+      setSubmitting(true);
+      const url = await uploadFile(file, 'image');
+      setForm(prev => ({ ...prev, packagePhotos: url }));
+      setSuccessMessage("Package photo uploaded successfully!");
+    } catch (err) {
+      handleError(err, setError);
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   const validateEmail = (email: string): boolean => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -295,6 +312,9 @@ export default function CreateShipmentPage() {
       formData.append("weight", form.weight.toString());
       formData.append("dimensionInInches", form.dimensionInInches);
       formData.append("status", form.status);
+      if (form.packagePhotos) {
+        formData.append("packagePhotos", form.packagePhotos);
+      }
 
       // Append shippingStages data
       form.shippingStages.forEach((stage, index) => {
@@ -517,6 +537,21 @@ export default function CreateShipmentPage() {
                 onChange={handleChange}
                 required
               />
+
+              <div>
+                <label className="block text-sm font-medium mb-1 text-gray-700">
+                  Package Photos
+                </label>
+                <input
+                  type="file"
+                  onChange={handlePackagePhotoUpload}
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-slate-500"
+                  accept="image/*"
+                />
+                {form.packagePhotos && (
+                  <p className="text-sm text-green-600 mt-1">Photo uploaded!</p>
+                )}
+              </div>
             </div>
 
             <div className="mt-4">

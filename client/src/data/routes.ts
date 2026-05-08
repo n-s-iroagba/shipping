@@ -17,6 +17,7 @@ export const routes = {
     update: (id: number) => `/shipment/${id}`,
     delete: (id: number) => `/shipment/${id}`,
     trackPublic: (trackingId: string) => `/shipment/track/public/${trackingId}`,
+    trackSensitive: (trackingId: string) => `/shipment/track/sensitive/${trackingId}`,
   },
   stage: {
     create: (shipmentId: string) => `stage/bulk/${shipmentId}`,
@@ -26,12 +27,7 @@ export const routes = {
     delete: (stageId: number) => `/stage/${stageId}`,
   },
 
-  cryptoWallet: {
-    list: (adminId: number) => `/crypto-wallet/${adminId}`,
-    create: (adminId: number) => `/crypto-wallet/${adminId}`,
-    update: (id: number) => `/crypto-wallet/${id}`,
-    delete: (id: number) => `/crypto-wallet/${id}`,
-  },
+
 
   payment: {
     unapproved: (adminId: string | number) => `/payment/un-approved/${adminId}`,

@@ -32,6 +32,7 @@ export class Shipment extends Model<
   declare viewCode:string
    declare viewToken:string
   declare freightType: FreightType;
+  declare packagePhotos?: string;
 }
 
 Shipment.init(
@@ -97,6 +98,10 @@ Shipment.init(
     },
     viewToken:{
       type:DataTypes.STRING
+    },
+    packagePhotos:{
+      type:DataTypes.TEXT,
+      allowNull:true
     },
     status: {
       type: DataTypes.ENUM('RECEIVED (WAREHOUSE)', 'ONBOARD', 'IN TRANSIT'),

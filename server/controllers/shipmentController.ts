@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import jwt from 'jsonwebtoken';
 import { NotFoundError } from '../errors/errors';
 import { ShipmentService } from '../services/shipmentService';
 import { ShippingStageService } from '../services/ShippingStageService';
@@ -102,21 +103,21 @@ export class ShipmentController {
       }
     }
   }
-  async sendMail (req: Request, res: Response): Promise<void> {
-    const {subject, content, email} = req.body
-    try{
-    EmailService.sendCustomEmail(email,subject,content)
-    res.json()
-    }catch (error) {
+  async sendMail(req: Request, res: Response): Promise<void> {
+    const { subject, content, email } = req.body
+    try {
+      EmailService.sendCustomEmail(email, subject, content)
+      res.json()
+    } catch (error) {
       console.error(error)
-        res.status(500).json({ error: 'Failed to send mail' });
-      
+      res.status(500).json({ error: 'Failed to send mail' });
+
     }
   }
 
   async trackPublic(req: Request, res: Response): Promise<void> {
     try {
-      const trackingInfo = await service.getSensitiveTrackingInfo(
+      const trackingInfo = await service.getPublicTrackingInfo(
         req.params.trackingId
       );
       res.json(trackingInfo);
@@ -130,24 +131,55 @@ export class ShipmentController {
     }
   }
 
-    async initiateSensitiveTracking(req:Request, res:Response){
+  async trackSensitive(req: Request, res: Response): Promise<void> {
+    try {
+      const { trackingId } = req.params;
+      const authHeader = req.headers.authorization;
+
+      if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        res.status(401).json({ error: 'Missing or invalid token' });
+        return;
+      }
+
+      const token = authHeader.split(' ')[1];
+      try {
+        const secret = process.env.JWT_SECRET || 'fallback_secret';
+        jwt.verify(token, secret);
+      } catch (err) {
+        res.status(401).json({ error: 'Token expired or invalid' });
+        return;
+      }
+
+      const trackingInfo = await service.getSensitiveTrackingInfo(trackingId);
+      res.json(trackingInfo);
+    } catch (error) {
+      if (error instanceof NotFoundError) {
+        res.status(404).json(error);
+      } else {
+        console.error(error);
+        res.status(500).json({ error: 'Failed to fetch sensitive shipment details' });
+      }
+    }
+  }
+
+  async initiateSensitiveTracking(req: Request, res: Response) {
     const shipmentId = req.params.shipmentId
     try {
 
-       const token =await service.initiateSensitiveTracking(shipmentId)
-   res.json(token)
-    }catch(error){
- res.status(500).json({ error: 'Failed initiate shipment tracking' });
+      const token = await service.initiateSensitiveTracking(shipmentId)
+      res.json(token)
+    } catch (error) {
+      res.status(500).json({ error: 'Failed initiate shipment tracking' });
     }
-}
+  }
 
-async grantsSensitiveView (req:Request,res:Response){
-   try {
+  async grantsSensitiveView(req: Request, res: Response) {
+    try {
 
-      const token= await service.issueSenstiveViewToken(req.body)
- res.json(token)
-    }catch(error){
- res.status(500).json({ error: 'Failed initiate shipment tracking' });
+      const token = await service.issueSenstiveViewToken(req.body)
+      res.json(token)
+    } catch (error) {
+      res.status(500).json({ error: 'Failed initiate shipment tracking' });
     }
-}
+  }
 }

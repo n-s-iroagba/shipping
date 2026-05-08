@@ -1,3 +1,6 @@
+import Link from "next/link";
+import { companyEmail } from "@/data/constants";
+
 const Footer = () => {
   return (
     <footer className="bg-gray-900 text-white py-6 mt-10">
@@ -17,23 +20,23 @@ const Footer = () => {
             <h2 className="text-lg font-bold">Quick Links</h2>
             <ul className="mt-2 space-y-2">
               <li>
-                <a href="/track" className="hover:text-yellow-500">
+                <Link href="/#tracking-section" className="hover:text-indigo-400 transition-colors">
                   Track Shipment
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/services" className="hover:text-yellow-500">
-                  Services
-                </a>
+                <Link href="/services" className="hover:text-indigo-400 transition-colors">
+                  Our Services
+                </Link>
               </li>
               <li>
-                <a href="/about" className="hover:text-yellow-500">
-                  About Us
-                </a>
+                <Link href="/about" className="hover:text-indigo-400 transition-colors">
+                  About Netly
+                </Link>
               </li>
               <li>
-                <a href="/contact" className="hover:text-yellow-500">
-                  Contact
+                <a href={`mailto:${companyEmail}`} className="hover:text-indigo-400 transition-colors">
+                  Contact Support
                 </a>
               </li>
             </ul>

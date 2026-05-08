@@ -58,32 +58,42 @@ export default function Home() {
       <ContactInfo />
       <TestimonialCarousel />
 
-      <div className="flex justify-center items-center h-48">
-        <form onSubmit={handleTrackShipment} className="flex items-center">
-          <input
-            type="text"
-            placeholder="Enter Tracking ID"
-            value={trackingId}
-            onChange={(e) => setTrackingId(e.target.value)}
-            className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          />
-          <button
-            type="submit"
-            disabled={loading}
-            className={`ml-4 bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${
-              loading ? "opacity-50 cursor-not-allowed" : ""
-            }`}
-          >
-            {loading ? "Tracking..." : "Track Shipment"}
-          </button>
-        </form>
-      </div>
+      {/* Secondary Tracking Section */}
+      <section id="tracking-section" className="py-20 bg-slate-50">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <div className="bg-white p-12 rounded-[3rem] shadow-2xl shadow-slate-200 border border-slate-100">
+            <h3 className="text-3xl font-black text-slate-900 mb-4 uppercase tracking-tighter">
+              Quick Tracking
+            </h3>
+            <p className="text-slate-500 mb-10 max-w-md mx-auto">
+              Enter your tracking number below for instant status updates on your global shipment.
+            </p>
+            
+            <form onSubmit={handleTrackShipment} className="relative max-w-lg mx-auto">
+              <input
+                type="text"
+                placeholder="Enter Tracking ID (e.g. TRK123456)"
+                value={trackingId}
+                onChange={(e) => setTrackingId(e.target.value)}
+                className="w-full pl-8 pr-48 py-6 bg-slate-50 border-2 border-slate-100 rounded-3xl focus:border-indigo-500 focus:bg-white transition-all outline-none text-lg font-bold"
+              />
+              <button
+                type="submit"
+                disabled={loading}
+                className="absolute right-2 top-2 bottom-2 px-8 bg-slate-900 text-white rounded-2xl font-bold hover:bg-slate-800 transition-all disabled:opacity-50"
+              >
+                {loading ? "..." : "Track Now"}
+              </button>
+            </form>
 
-      {error && (
-        <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
-          <p className="text-red-600">{error}</p>
+            {error && (
+              <div className="mt-6 text-red-600 font-bold text-sm animate-pulse">
+                {error}
+              </div>
+            )}
+          </div>
         </div>
-      )}
+      </section>
 
       <ScheduleCard />
       <Footer />

@@ -47,6 +47,11 @@ const CustomEditor = forwardRef<Quill, CustomEditorProps>(
         toolbar: [
           [{ header: [1, 2, 3, 4, 5, 6, false] }],
           ['bold', 'italic', 'underline', 'strike'],
+          [{ color: [] }, { background: [] }],
+          [{ list: 'ordered' }, { list: 'bullet' }],
+          [{ align: [] }],
+          ['link', 'image'],
+          ['clean'],
         ],
       };
 

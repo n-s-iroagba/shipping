@@ -244,12 +244,16 @@ api.interceptors.response.use(
   }
 )
 // GET
-export const getRequest = async <T = any>(url: string, params?: object) => {
-   try{
-  const response = await api.get<T>(url, { params });
-  return response.data;
-      } catch(error){
-    throw error
+export const getRequest = async <T = any>(
+  url: string,
+  params?: object,
+  config?: any
+) => {
+  try {
+    const response = await api.get<T>(url, { params, ...config });
+    return response.data;
+  } catch (error) {
+    throw error;
   }
 };
 

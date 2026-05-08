@@ -17,8 +17,7 @@ const AdminStageList: React.FC<AdminStageListProps> = ({ stages }) => {
 
   const totalPages = Math.ceil(stages.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const currentItems =
-    stages || [].slice(startIndex, startIndex + ITEMS_PER_PAGE) || [];
+  const currentItems = (stages || []).slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
   const handlePrev = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
   const handleNext = () =>

@@ -5,12 +5,12 @@ import cors from 'cors';
 import shipmentRoutes from './routes/shipmentRoutes';
 import authRoutes from './routes/authRoutes';
 import shippingStageRoutes from './routes/shippingStageRoutes';
-import cryptoWalletRoutes from './routes/cryptoWalletRoutes';
+
 import { connectDB, sequelize } from './config/database';
 import paymentRoutes from './routes/paymentRoutes';
 import documentTemplateRoutes from './routes/documentTemplateRoutes';
 import { errorHandler } from './middleware/errorHandler';
-import bankRoutes from './routes/bankRoutes';
+
 
 
 
@@ -25,10 +25,7 @@ app.use(cookieParser());
 
 // CORS configuration
 const corsOptions = {
-  origin:
-    process.env.NODE_ENV === 'production'
-      ? process.env.CLIENT_URL || 'https://www.netlylogistics.com'
-      : 'http://localhost:3000',
+  origin: process.env.CLIENT_URL || 'http://localhost:3000',
   credentials: true, // Allow cookies to be sent
   optionsSuccessStatus: 200,
 };
@@ -42,13 +39,13 @@ app.use((req, res, next) => {
 connectDB(true);
 
 app.use('/api/payment',paymentRoutes)
-app.use ('/api/crypto-wallet',cryptoWalletRoutes)
+
 app.use('/api/auth', authRoutes);
 app.use('/api/stage', shippingStageRoutes);
 app.use('/api/shipment', shipmentRoutes);
 app.use('/api/templates',documentTemplateRoutes)
-app.use('/api/bank',bankRoutes)
+
 app.use(errorHandler)
 
-const PORT = process.env.NODE_ENV==='production'?3000: 5000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));

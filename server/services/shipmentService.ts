@@ -109,28 +109,24 @@ async trackShipment(trackingId: string) {
   async getPublicTrackingInfo(trackingId: string) {
     const shipment = await this.trackShipment(trackingId);
 
-    // Filter sensitive data
+    // Filter sensitive data - return ONLY minimal details
     return {
       id: shipment.id,
       shipmentID: shipment.shipmentID,
-      senderName: shipment.senderName,
-      receivingAddress: shipment.destination,
-      recipientName: shipment.recipientName,
       status: shipment.status,
+      origin: shipment.origin,
+      destination: shipment.destination,
       shippingStages: shipment.shippingStages?.map((stage: ShippingStage) => ({
         title: stage.title,
         location: stage.location,
         dateAndTime: stage.dateAndTime,
-        carriernote: stage.paymentStatus,
-        longitude: stage.longitude,
-        latitude: stage.latitude,
       })),
     };
   }
 
   async getSensitiveTrackingInfo(trackingId: string) {
     const shipment = await this.trackShipment(trackingId);
-    return shipment;
+    return shipment; // Full details including packagePhotos, senderName, recipientEmail, etc.
   }
 
     async initiateSensitiveTracking  (shipmentId:string){
@@ -161,7 +157,8 @@ async trackShipment(trackingId: string) {
     if(shipment.viewCode !== data.code){
       throw new Error('Unauthorised to view shipment')
     }
-    return jwt.sign({name:shipment.recipientName},'1h')
+    const secret = process.env.JWT_SECRET || 'fallback_secret';
+    return jwt.sign({name:shipment.recipientName}, secret, { expiresIn: '1h' });
   }
   
 

@@ -1,10 +1,9 @@
 import dotenv from 'dotenv';
 import path from 'path';
 
-// Load environment variables based on NODE_ENV
+// Load environment variables
+dotenv.config();
 export const env = process.env.NODE_ENV || 'development';
-const envPath = path.resolve(__dirname, `../.env.${env}`);
-dotenv.config({ path: envPath });
 
 export const dbConfig = {
   database: process.env.DB_NAME as string,

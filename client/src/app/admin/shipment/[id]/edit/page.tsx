@@ -8,6 +8,7 @@ import { useGetSingle } from "@/hooks/useGet";
 import ErrorAlert from "@/components/ErrorAlert";
 import { Spinner } from "@/components/Spinner";
 import { putRequest } from "@/utils/apiUtils";
+import { uploadFile, handleError } from "@/utils/utils";
 
 export default function EditShipmentPage() {
   const router = useRouter();
@@ -45,6 +46,21 @@ export default function EditShipmentPage() {
       ...prev!,
       expectedTimeOfArrival: new Date(e.target.value),
     }));
+  };
+
+  const handlePackagePhotoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    try {
+      setSubmitting(true);
+      const url = await uploadFile(file, 'image');
+      setShipment(prev => ({ ...prev!, packagePhotos: url }));
+    } catch (err) {
+      handleError(err, (msg) => alert(msg));
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -225,6 +241,23 @@ export default function EditShipmentPage() {
                 onChange={handleDateChange}
                 className="w-full p-2 border rounded"
               />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-1">
+                Package Photos
+              </label>
+              <input
+                type="file"
+                onChange={handlePackagePhotoUpload}
+                className="w-full p-2 border rounded"
+                accept="image/*"
+              />
+              {shipment.packagePhotos && (
+                <div className="mt-2">
+                  <p className="text-sm text-green-600">Photo uploaded!</p>
+                  <img src={shipment.packagePhotos} alt="Package" className="mt-2 h-20 w-20 object-cover rounded" />
+                </div>
+              )}
             </div>
           </div>
 

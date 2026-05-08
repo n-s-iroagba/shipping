@@ -22,6 +22,7 @@ export interface Shipment {
   dimensionInInches: string;
   receipientEmail: string;
   shippingStages: Stage[];
+  packagePhotos?: string;
 }
 
 export type CreateShipmentDto = Omit<

@@ -11,7 +11,7 @@ import { Spinner } from "@/components/Spinner";
 import { motion } from "framer-motion";
 import { FiTruck, FiUser, FiMapPin, FiPackage } from "react-icons/fi";
 import { Shipment } from "@/types/shipment.types";
-import { CryptoWallet } from "@/types/crypto-wallet.types";
+
 import { Stage } from "@/types/stage.types";
 import ErrorAlert from "@/components/ErrorAlert";
 import TodoAlert from "@/components/TodoAlert";
@@ -26,11 +26,7 @@ const Todo = () => {
     data: shipments,
   } = useGetList<Shipment>(routes.shipment.list(adminId));
 
-  const {
-    data: wallets,
-    error: walletError,
-    loading: walletLoading,
-  } = useGetList<CryptoWallet>(routes.cryptoWallet.list(adminId));
+
 
   const {
     data: payments,
@@ -59,15 +55,7 @@ const Todo = () => {
       },
     },
   };
-  if (!wallets.length) {
-    todos.push(
-      <TodoAlert
-        key="wallet-alert"
-        message="You do not have any wallets, add wallets to start managing transactions"
-        link="/admin/crypto-wallets"
-      />,
-    );
-  }
+
 
   if (payments.length) {
     todos.push(
@@ -81,7 +69,7 @@ const Todo = () => {
 
   if (
     authLoading ||
-     walletLoading || paymentLoading
+     paymentLoading
     ||loading
   ) {
     return (
@@ -91,11 +79,10 @@ const Todo = () => {
     );
   }
 
-  if( walletError || paymentError||error
-  ){
+  if (paymentError || error) {
     return (
-    <ErrorAlert message={paymentError || walletError || "Not Authorised"} />
-  );
+      <ErrorAlert message={paymentError || "Not Authorised"} />
+    );
   }
 
   return (

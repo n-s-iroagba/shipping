@@ -11,7 +11,6 @@ import {
   Shipment,
   ShippingStage,
   Payment,
-  CryptoWallet,
   DocumentTemplate,
 } from './index';
 
@@ -22,7 +21,6 @@ export {
   Shipment,
   ShippingStage,
   Payment,
-  CryptoWallet,
   DocumentTemplate,
 };
 
@@ -59,11 +57,7 @@ export const testAssociations = () => {
   // Test Payment associations
   console.log('Payment associations:', Object.keys(Payment.associations));
 
-  // Test CryptoWallet associations
-  console.log(
-    'CryptoWallet associations:',
-    Object.keys(CryptoWallet.associations)
-  );
+
 
   console.log('✅ Association test complete');
 };

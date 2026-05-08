@@ -19,16 +19,16 @@ import Admin from '../models/Admin'
 
 export class TokenService {
   private readonly defaultOptions: Partial<TokenGenerationOptions> = {
-    issuer: 'your-app-name',
-    audience: 'your-app-admins',
+    issuer: process.env.JWT_ISSUER || 'netly-logistics',
+    audience: process.env.JWT_AUDIENCE || 'netly-logistics-admins',
   }
 
   // Token expiration defaults
   private readonly tokenExpirations = {
-    access: '15m' as StringValue,
-    refresh: '7d' as StringValue,
-    resetPassword: '1h' as StringValue,
-    emailVerification: '24h' as StringValue,
+    access: (process.env.JWT_ACCESS_EXPIRATION || '15m') as StringValue,
+    refresh: (process.env.JWT_REFRESH_EXPIRATION || '7d') as StringValue,
+    resetPassword: (process.env.JWT_RESET_PASSWORD_EXPIRATION || '1h') as StringValue,
+    emailVerification: (process.env.JWT_EMAIL_VERIFICATION_EXPIRATION || '24h') as StringValue,
   }
 
   constructor(
@@ -213,7 +213,7 @@ export class TokenService {
    */
   generateRefreshToken(
     payload: Omit<JwtPayload, 'iat' | 'exp' | 'nbf' | 'tokenType'>,
-    expiresIn: number | StringValue = '7d'
+    expiresIn: number | StringValue = (process.env.JWT_REFRESH_EXPIRATION as StringValue) || '7d'
   ): string {
     // Create minimal payload with only essential fields
     const refreshPayload: JwtPayload = {

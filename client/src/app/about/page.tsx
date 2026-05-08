@@ -11,6 +11,8 @@ import {
   EnvelopeIcon,
 } from "@heroicons/react/24/outline";
 
+import { brandName, companyEmail, telephoneNumber } from "@/data/constants";
+
 export default function AboutPage() {
   const stats = [
     { label: "Years of Experience", value: "15+", icon: ClockIcon },
@@ -50,7 +52,7 @@ export default function AboutPage() {
     {
       name: "Sarah Johnson",
       role: "Chief Executive Officer",
-      description: "Leading GlobalShip with 20+ years of logistics experience.",
+      description: `Leading ${brandName} with 20+ years of logistics experience.`,
     },
     {
       name: "Michael Chen",
@@ -72,7 +74,7 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-4xl mx-auto text-center text-white">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              About Netly Logistics
+              About {brandName}
             </h1>
             <p className="text-xl md:text-2xl text-slate-100 mb-8">
               Connecting the world through reliable, secure, and efficient
@@ -119,7 +121,7 @@ export default function AboutPage() {
               </h2>
               <div className="prose prose-lg max-w-none text-gray-700">
                 <p className="text-lg leading-relaxed mb-6">
-                  Founded in 2008, GlobalShip began as a small logistics company
+                  Founded in 2008, {brandName} began as a small logistics company
                   with a big vision: to make international shipping accessible,
                   reliable, and transparent for everyone. What started as a
                   local courier service has grown into a global network spanning
@@ -134,7 +136,7 @@ export default function AboutPage() {
                   commitment to excellence.
                 </p>
                 <p className="text-lg leading-relaxed">
-                  At GlobalShip, we believe that distance should never be a
+                  At {brandName}, we believe that distance should never be a
                   barrier to connection. Whether you&apos;re sending a gift to
                   family abroad, shipping products to customers worldwide, or
                   managing complex supply chains, we&apos;re here to bridge the
@@ -225,21 +227,21 @@ export default function AboutPage() {
                   <PhoneIcon className="w-8 h-8 text-slate-200" />
                 </div>
                 <h3 className="text-lg font-semibold mb-2">Call Us</h3>
-                <p className="text-slate-200">+1 (555) 123-4567</p>
+                <p className="text-slate-200">{telephoneNumber || "+1 (800) 555-LOGI"}</p>
               </div>
-              <div className="flex flex-col items-center">
-                <div className="bg-white/10 backdrop-blur-sm p-4 rounded-full mb-4">
+              <a href={`mailto:${companyEmail}`} className="flex flex-col items-center group">
+                <div className="bg-white/10 backdrop-blur-sm p-4 rounded-full mb-4 group-hover:bg-white/20 transition-all">
                   <EnvelopeIcon className="w-8 h-8 text-slate-200" />
                 </div>
                 <h3 className="text-lg font-semibold mb-2">Email Us</h3>
-                <p className="text-slate-200">support@globalship.com</p>
-              </div>
+                <p className="text-slate-200 group-hover:text-indigo-400 transition-colors">{companyEmail}</p>
+              </a>
               <div className="flex flex-col items-center">
                 <div className="bg-white/10 backdrop-blur-sm p-4 rounded-full mb-4">
                   <MapPinIcon className="w-8 h-8 text-slate-200" />
                 </div>
                 <h3 className="text-lg font-semibold mb-2">Visit Us</h3>
-                <p className="text-slate-200">123 Shipping St, Logistics City</p>
+                <p className="text-slate-200">Chemin Rieu 12, 1208 Geneva Switzerland</p>
               </div>
             </div>
           </div>
