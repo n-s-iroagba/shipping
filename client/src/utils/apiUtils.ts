@@ -2,7 +2,7 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 
 export const SERVER_URL =
-  process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:3000/api";
+  process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:5000/api";
 
 
 const api = axios.create({

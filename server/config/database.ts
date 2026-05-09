@@ -1,5 +1,8 @@
 import { Sequelize } from 'sequelize';
 import { dbConfig, env } from '.';
+import checkTableStructure from '../scripts/check-table-structure';
+import { updateExistingPaymentStatus } from '../scripts/update-existing-payment-status';
+import updatePaymentStatusEnum from '../scripts/update-payment-status-migration';
 
 
 
@@ -15,11 +18,11 @@ export const sequelize = new Sequelize(
     logging: dbConfig.logging ? console.log : false,
     dialectOptions: dbConfig.ssl
       ? {
-          ssl: {
-            require: true,
-            rejectUnauthorized: false, // For Aiven/managed DBs, this is often needed
-          },
-        }
+        ssl: {
+          require: true,
+          rejectUnauthorized: false, // For Aiven/managed DBs, this is often needed
+        },
+      }
       : {},
   }
 );
@@ -37,8 +40,40 @@ export const connectDB = async (force: boolean = false) => {
     await sequelize
       .sync({ force: force })
       .then(() => console.log('✅ Tables formed with associations'));
+    // Run the check
+    await checkTableStructure()
+      .then(() => {
+        console.log('\nTable structure check completed');
+        process.exit(0);
+      })
+      .catch((error) => {
+        console.error('Check failed:', error);
+        process.exit(1);
+      });
+    await updatePaymentStatusEnum()
+      .then(() => {
+        console.log('Migration script finished successfully');
+        process.exit(0);
+      })
+      .catch((error) => {
+        console.error('Migration script failed:', error);
+        process.exit(1);
+      });
+    await updateExistingPaymentStatus()
+      .then(() => {
+        console.log('\n🎉 PaymentStatus column update completed successfully!');
+        console.log('Your ShippingStage model can now use the REJECTED status.');
+        process.exit(0);
+      })
+      .catch((error) => {
+        console.error('Script failed:', error);
+        process.exit(1);
+      });
+
   } catch (error) {
     console.error(`❌ Unable to connect to the ${env} database:`, error);
     process.exit(1);
   }
 };
+
+
