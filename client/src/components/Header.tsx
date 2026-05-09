@@ -6,7 +6,7 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { useRouter } from "next/navigation";
 import Image, { StaticImageData } from "next/image";
-import { MagnifyingGlassIcon, TruckIcon } from "@heroicons/react/24/outline";
+import { MagnifyingGlassIcon, ShieldCheckIcon } from "@heroicons/react/24/outline";
 import image1 from "../assets/images/header.jpg";
 import image2 from "../assets/images/transporttradefair.jpg";
 import image3 from "../assets/images/ship.png";
@@ -73,7 +73,7 @@ const Header: React.FC = () => {
             <div key={index} className="w-full h-full">
               <Image
                 src={image}
-                alt={`Logistics showcase ${index + 1}`}
+                alt={`Arbor Global confidential logistics ${index + 1}`}
                 className="w-full h-screen lg:h-[80vh] object-cover"
                 priority={index === 0}
                 placeholder="blur"
@@ -83,8 +83,8 @@ const Header: React.FC = () => {
         </Carousel>
       </div>
 
-      {/* Enhanced Overlay with Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-900/60 via-slate-900/50 to-slate-800/70 z-[1]"></div>
+      {/* Premium Dark Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0B1D3A]/75 via-[#0B1D3A]/60 to-[#0B1D3A]/80 z-[1]"></div>
 
       {/* Content */}
       <div className="relative z-10 flex flex-col justify-between flex-grow text-center text-white px-4">
@@ -93,20 +93,24 @@ const Header: React.FC = () => {
         <div className="flex-1 flex flex-col justify-center items-center mt-8 lg:mt-16">
           <div className="mb-8 space-y-4">
             <div className="inline-flex items-center gap-3 mb-6">
-              <div className="p-3 bg-slate-800/80 backdrop-blur-sm rounded-full">
-                <TruckIcon className="w-8 h-8 text-white" />
+              <div className="p-3 bg-[#C9A84C]/20 backdrop-blur-sm rounded-full border border-[#C9A84C]/30">
+                <ShieldCheckIcon className="w-8 h-8 text-[#C9A84C]" />
               </div>
             </div>
             
-            <h1 className="text-3xl sm:text-4xl lg:text-6xl font-light tracking-wide mb-2">
-              LEADER IN
-            </h1>
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-wider bg-gradient-to-r from-white to-slate-200 bg-clip-text text-transparent">
-              SHIPPING LOGISTICS
+            <p className="text-[11px] font-semibold tracking-[0.4em] uppercase text-[#C9A84C] mb-4">
+              Confidential &middot; Discreet &middot; Secure
+            </p>
+            
+            <h1
+              className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-wide mb-2"
+              style={{ fontFamily: "var(--font-playfair), serif" }}
+            >
+              Arbor Global
             </h1>
             
-            <p className="text-lg sm:text-xl text-slate-200 mt-6 max-w-2xl mx-auto leading-relaxed">
-              Fast, reliable, and secure shipping solutions worldwide
+            <p className="text-lg sm:text-xl text-white/70 mt-6 max-w-2xl mx-auto leading-relaxed">
+              Bespoke logistics for individuals who demand absolute discretion and uncompromising security
             </p>
           </div>
         </div>
@@ -116,20 +120,20 @@ const Header: React.FC = () => {
           <div className="w-full max-w-lg mx-4">
             <form
               onSubmit={handleFormSubmit}
-              className="bg-white/95 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-2xl border border-slate-200"
+              className="bg-white/95 backdrop-blur-xl p-6 sm:p-8 rounded-2xl shadow-2xl border border-white/20"
             >
               {/* Form Header */}
               <div className="mb-6 text-center">
                 <div className="inline-flex items-center gap-2 mb-3">
-                  <div className="p-2 bg-slate-800 rounded-full">
-                    <MagnifyingGlassIcon className="w-5 h-5 text-white" />
+                  <div className="p-2 bg-[#0B1D3A] rounded-full">
+                    <MagnifyingGlassIcon className="w-5 h-5 text-[#C9A84C]" />
                   </div>
-                  <h2 className="text-xl font-bold text-slate-800">
-                    TRACK YOUR SHIPMENT
+                  <h2 className="text-lg font-bold text-[#0B1D3A] tracking-wide uppercase">
+                    Track Consignment
                   </h2>
                 </div>
-                <p className="text-sm text-slate-600">
-                  Enter your tracking ID to get real-time updates
+                <p className="text-sm text-slate-500">
+                  Enter your private tracking reference for real-time status
                 </p>
               </div>
 
@@ -144,16 +148,16 @@ const Header: React.FC = () => {
               <div className="mb-6">
                 <label
                   htmlFor="tracking-id"
-                  className="block text-sm font-semibold text-slate-700 mb-2"
+                  className="block text-[10px] font-semibold text-[#0B1D3A] mb-2 tracking-[0.2em] uppercase"
                 >
-                  TRACKING ID
+                  Tracking Reference
                 </label>
                 <div className="relative">
                   <input
                     type="text"
                     id="tracking-id"
-                    className="w-full px-4 py-3 text-slate-800 bg-white border-2 border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-800 focus:border-slate-800 transition-colors placeholder-slate-400 font-medium"
-                    placeholder="Enter your tracking ID"
+                    className="w-full px-4 py-3.5 text-[#0B1D3A] bg-slate-50 border-2 border-slate-200 rounded-xl focus:ring-2 focus:ring-[#C9A84C]/30 focus:border-[#C9A84C] transition-colors placeholder-slate-400 font-medium"
+                    placeholder="Enter your tracking reference"
                     value={trackingId}
                     onChange={handleInputChange}
                     disabled={loading}
@@ -164,34 +168,31 @@ const Header: React.FC = () => {
                     <MagnifyingGlassIcon className="w-5 h-5 text-slate-400" />
                   </div>
                 </div>
-                <p className="mt-1 text-xs text-slate-500">
-                  Example: TRK123456789 or similar format
-                </p>
               </div>
 
               {/* Submit Button */}
               <button
                 type="submit"
                 disabled={loading || !trackingId.trim()}
-                className="w-full bg-slate-800 text-white py-3 px-6 rounded-lg hover:bg-slate-900 disabled:bg-slate-400 disabled:cursor-not-allowed transition-all duration-200 font-semibold text-base transform hover:scale-[1.02] shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
+                className="w-full bg-[#0B1D3A] text-white py-3.5 px-6 rounded-xl hover:bg-[#132d54] disabled:bg-slate-300 disabled:cursor-not-allowed transition-all duration-200 font-semibold text-sm tracking-wide uppercase transform hover:scale-[1.01] shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
               >
                 {loading ? (
                   <>
                     <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></div>
-                    <span>Tracking...</span>
+                    <span>Locating...</span>
                   </>
                 ) : (
                   <>
-                    <TruckIcon className="w-5 h-5" />
-                    <span>Track Shipment</span>
+                    <ShieldCheckIcon className="w-5 h-5" />
+                    <span>Track Consignment</span>
                   </>
                 )}
               </button>
 
               {/* Additional Info */}
               <div className="mt-4 text-center">
-                <p className="text-xs text-slate-500">
-                  Need help? Contact our support team 24/7
+                <p className="text-[10px] text-slate-400 tracking-wider uppercase">
+                  256-bit encrypted &middot; Confidential tracking
                 </p>
               </div>
             </form>
@@ -205,7 +206,7 @@ const Header: React.FC = () => {
           {images.map((_, index) => (
             <div
               key={index}
-              className="w-2 h-2 bg-white/50 rounded-full animate-pulse"
+              className="w-1.5 h-1.5 bg-[#C9A84C]/50 rounded-full animate-pulse"
               style={{
                 animationDelay: `${index * 2}s`,
                 animationDuration: '6s'

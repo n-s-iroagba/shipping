@@ -86,8 +86,9 @@ export default function AdminOffcanvas({ children }: AdminOffcanvasProps) {
           <div className="mb-4 p-3 lg:p-4 border-b border-slate-700">
             <UserCircleIcon className="h-8 w-8 lg:h-10 lg:w-10 text-slate-100 mx-auto" />
             <h2 className="mt-2 text-center text-base lg:text-lg font-semibold text-slate-100">
-              Admin Dashboard
+              Arbor Global
             </h2>
+            <p className="text-center text-[10px] font-semibold tracking-[0.3em] uppercase text-[#C9A84C]">Operations</p>
           </div>
 
           {/* Navigation Items - Improved mobile spacing */}

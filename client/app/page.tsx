@@ -17,11 +17,11 @@ import { useState } from "react";
 
 export default function Home() {
   const images = [
-    { src: image1, text: "Automobile Shipping Services" },
-    { src: image2, text: "Goods and valuables logistics" },
-    { src: image3, text: "Container shipping and logistics" },
-    { src: image4, text: "International all over the world" },
-    { src: image5, text: "Trade facilitation" },
+    { src: image1, text: "Luxury Vehicle Transport" },
+    { src: image2, text: "Maritime Asset Relocation" },
+    { src: image3, text: "Temperature-Controlled Logistics" },
+    { src: image4, text: "Global Concierge Delivery" },
+    { src: image5, text: "Bespoke Trade Solutions" },
   ];
 
   const [trackingId, setTrackingId] = useState("");
@@ -39,7 +39,7 @@ export default function Home() {
       window.location.href = `/tracking-dashboard/${trackingId}`;
     } catch (err) {
       console.error(err);
-      setError("Shipment not found or tracking ID is invalid");
+      setError("Consignment not found or tracking reference is invalid");
     } finally {
       setLoading(false);
     }
@@ -48,10 +48,10 @@ export default function Home() {
   return (
     <div className="bg-white">
       <Header />
-     <br/>
+
       <Information
-        title="Meeting Your Shiping Needs"
-        text="Discover the best shipping solutions tailored for your needs."
+        title="Discreet Global Logistics"
+        text="Bespoke shipping solutions designed for clients who value privacy, security, and absolute discretion."
         images={images}
       />
       <Schedule />
@@ -59,35 +59,41 @@ export default function Home() {
       <TestimonialCarousel />
 
       {/* Secondary Tracking Section */}
-      <section id="tracking-section" className="py-20 bg-slate-50">
+      <section id="tracking-section" className="py-24 bg-[#0B1D3A]/[0.03]">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <div className="bg-white p-12 rounded-[3rem] shadow-2xl shadow-slate-200 border border-slate-100">
-            <h3 className="text-3xl font-black text-slate-900 mb-4 uppercase tracking-tighter">
-              Quick Tracking
+          <div className="bg-white p-14 rounded-3xl shadow-2xl shadow-slate-200/50 border border-slate-100">
+            <p className="text-[10px] font-semibold tracking-[0.4em] uppercase text-[#C9A84C] mb-4">
+              Private Access
+            </p>
+            <h3
+              className="text-3xl font-bold text-[#0B1D3A] mb-4"
+              style={{ fontFamily: "var(--font-playfair), serif" }}
+            >
+              Track Your Consignment
             </h3>
             <p className="text-slate-500 mb-10 max-w-md mx-auto">
-              Enter your tracking number below for instant status updates on your global shipment.
+              Enter your private tracking reference below for encrypted, real-time status updates.
             </p>
             
             <form onSubmit={handleTrackShipment} className="relative max-w-lg mx-auto">
               <input
                 type="text"
-                placeholder="Enter Tracking ID (e.g. TRK123456)"
+                placeholder="Enter Private Tracking Reference"
                 value={trackingId}
                 onChange={(e) => setTrackingId(e.target.value)}
-                className="w-full pl-8 pr-48 py-6 bg-slate-50 border-2 border-slate-100 rounded-3xl focus:border-indigo-500 focus:bg-white transition-all outline-none text-lg font-bold"
+                className="w-full pl-8 pr-48 py-6 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-[#C9A84C] focus:bg-white transition-all outline-none text-lg font-medium"
               />
               <button
                 type="submit"
                 disabled={loading}
-                className="absolute right-2 top-2 bottom-2 px-8 bg-slate-900 text-white rounded-2xl font-bold hover:bg-slate-800 transition-all disabled:opacity-50"
+                className="absolute right-2 top-2 bottom-2 px-8 bg-[#0B1D3A] text-white rounded-xl font-semibold text-sm tracking-wide uppercase hover:bg-[#132d54] transition-all disabled:opacity-50"
               >
                 {loading ? "..." : "Track Now"}
               </button>
             </form>
 
             {error && (
-              <div className="mt-6 text-red-600 font-bold text-sm animate-pulse">
+              <div className="mt-6 text-red-600 font-medium text-sm">
                 {error}
               </div>
             )}

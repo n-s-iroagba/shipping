@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserAlt, faBars, faXmark, faTruckFast } from "@fortawesome/free-solid-svg-icons";
+import { faUserAlt, faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { motion, AnimatePresence } from "framer-motion";
 import "../assets/styles/Navbar.css";
 
@@ -36,18 +37,32 @@ const Navbar: React.FC = () => {
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 px-6 py-4 flex items-center justify-between ${
           scrolled 
-            ? "bg-white/90 backdrop-blur-md text-slate-900 shadow-xl" 
+            ? "bg-white/95 backdrop-blur-xl text-[#0B1D3A] shadow-xl" 
             : "bg-transparent text-white"
         }`}
       >
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 group">
-          <div className={`p-2 rounded-xl transition-colors ${scrolled ? "bg-slate-900 text-white" : "bg-white text-slate-900"}`}>
-            <FontAwesomeIcon icon={faTruckFast} className="text-xl" />
+          <Image
+            src="/arbor-logo.png"
+            alt="Arbor Global"
+            width={44}
+            height={44}
+            className="rounded-lg"
+          />
+          <div className="flex flex-col leading-none">
+            <span
+              className="text-xl font-bold tracking-[0.2em] uppercase"
+              style={{ fontFamily: "var(--font-playfair), serif" }}
+            >
+              Arbor
+            </span>
+            <span className={`text-[10px] font-semibold tracking-[0.35em] uppercase ${
+              scrolled ? "text-[#C9A84C]" : "text-[#C9A84C]"
+            }`}>
+              Global
+            </span>
           </div>
-          <span className="text-2xl font-black tracking-tighter uppercase italic">
-            Netly<span className="text-indigo-500">Logistics</span>
-          </span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -56,10 +71,10 @@ const Navbar: React.FC = () => {
             <Link
               key={link.name}
               href={link.href}
-              className="text-sm font-bold uppercase tracking-widest hover:text-indigo-500 transition-colors relative group"
+              className="text-[11px] font-semibold uppercase tracking-[0.2em] hover:text-[#C9A84C] transition-colors relative group"
             >
               {link.name}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-indigo-500 transition-all group-hover:w-full"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-px bg-[#C9A84C] transition-all group-hover:w-full"></span>
             </Link>
           ))}
         </div>
@@ -68,14 +83,14 @@ const Navbar: React.FC = () => {
         <div className="flex items-center gap-4">
           <Link 
             href="/auth/login"
-            className={`hidden sm:flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm transition-all ${
+            className={`hidden sm:flex items-center gap-2 px-6 py-2.5 rounded-lg font-semibold text-[11px] tracking-[0.15em] uppercase transition-all border ${
               scrolled 
-                ? "bg-slate-900 text-white hover:bg-slate-800" 
-                : "bg-white/10 text-white hover:bg-white/20 border border-white/20"
+                ? "bg-[#0B1D3A] text-white border-[#0B1D3A] hover:bg-[#132d54]" 
+                : "bg-transparent text-white border-white/30 hover:bg-white/10"
             }`}
           >
             <FontAwesomeIcon icon={faUserAlt} className="text-xs" />
-            Sign In
+            Client Portal
           </Link>
 
           {/* Mobile Toggle */}
@@ -103,7 +118,8 @@ const Navbar: React.FC = () => {
                   key={link.name}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="text-3xl font-black text-slate-900 uppercase tracking-tighter"
+                  className="text-2xl font-semibold text-[#0B1D3A] uppercase tracking-[0.15em]"
+                  style={{ fontFamily: "var(--font-playfair), serif" }}
                 >
                   {link.name}
                 </Link>
@@ -112,13 +128,13 @@ const Navbar: React.FC = () => {
               <Link
                 href="/auth/login"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-between p-6 bg-slate-50 rounded-3xl group"
+                className="flex items-center justify-between p-6 bg-[#0B1D3A]/5 rounded-2xl group"
               >
                 <div>
-                  <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Administrative Access</p>
-                  <p className="text-xl font-bold text-slate-900">Partner Login</p>
+                  <p className="text-[10px] font-semibold text-[#C9A84C] uppercase tracking-[0.3em] mb-1">Private Access</p>
+                  <p className="text-lg font-bold text-[#0B1D3A]">Client Portal</p>
                 </div>
-                <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-slate-900 shadow-sm group-hover:bg-slate-900 group-hover:text-white transition-all">
+                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-[#0B1D3A] shadow-sm group-hover:bg-[#0B1D3A] group-hover:text-white transition-all">
                   <FontAwesomeIcon icon={faUserAlt} />
                 </div>
               </Link>

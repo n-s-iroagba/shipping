@@ -1,52 +1,52 @@
 export const testimonials = [
   {
-    name: "Alice Johnson",
+    name: "A.J., Private Collector",
     testimonial:
-      "Netly Logistics has made shipping so much easier for my business. Their reliability and speed are unmatched!",
+      "Arbor Global handled the transport of my entire collection across three continents with absolute discretion. Not a single item was compromised.",
   },
   {
-    name: "Sarah Williams",
+    name: "S.W., Family Office",
     testimonial:
-      "I love how Netly Logistics keeps me updated every step of the way. My deliveries always arrive on time!",
+      "The level of confidentiality and care Arbor Global provides is unlike anything we've experienced. They understand the needs of our principals.",
   },
   {
-    name: "Jessica Martinez",
+    name: "J.M., Art Advisor",
     testimonial:
-      "Netly Logistics' customer service is outstanding! They helped me streamline my supply chain effortlessly.",
+      "Arbor Global's white-glove service for high-value art shipments is unmatched. Their secure chain of custody gives us complete peace of mind.",
   },
   {
-    name: "Emily Davis",
+    name: "E.D., Estate Manager",
     testimonial:
-      "Fast, secure, and affordable—Netly Logistics is the best shipping partner we've ever had.",
+      "When discretion is non-negotiable, Arbor Global delivers. They've managed sensitive relocations for our family with impeccable professionalism.",
   },
   {
-    name: "Olivia Thomas",
+    name: "O.T., Investment Group",
     testimonial:
-      "Expanding internationally was a breeze with Netly Logistics. Their logistics solutions are top-notch!",
+      "Expanding our operations globally required a logistics partner we could trust implicitly. Arbor Global exceeded every expectation.",
   },
   {
-    name: "Michael Smith",
+    name: "M.S., Private Client",
     testimonial:
-      "Netly Logistics has eliminated all my shipping headaches. Their tracking system is fantastic!",
+      "Arbor Global's encrypted tracking and NDA-protected operations gave me confidence to ship irreplaceable personal items internationally.",
   },
   {
-    name: "David Brown",
+    name: "D.B., Wealth Advisor",
     testimonial:
-      "I trust Netly Logistics with all my shipments. Their efficiency and reliability give me peace of mind.",
+      "I recommend Arbor Global to all my ultra-high-net-worth clients. Their security protocols and discretion are best-in-class.",
   },
   {
-    name: "James Anderson",
+    name: "J.A., Diplomatic Services",
     testimonial:
-      "With Netly Logistics, I never worry about delays. They always deliver on time, no matter the distance.",
+      "Arbor Global understands the complexities of diplomatic logistics. Their team handles sensitive consignments with the utmost care and confidentiality.",
   },
   {
-    name: "Daniel Wilson",
+    name: "D.W., Celebrity Management",
     testimonial:
-      "The professionalism and attention to detail at Netly Logistics are second to none. Highly recommended!",
+      "In our industry, privacy is everything. Arbor Global ensures our clients' shipments are handled without any public exposure.",
   },
   {
-    name: "Matthew White",
+    name: "M.W., Corporate Affairs",
     testimonial:
-      "Netly Logistics takes care of all our logistics needs, so we can focus on growing our business.",
+      "Arbor Global's concierge approach to logistics has transformed how we handle confidential corporate relocations across borders.",
   },
 ];
