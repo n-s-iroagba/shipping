@@ -4,22 +4,25 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #000000;
-  --overlay: rgba(0, 0, 0, 0.75);
+  --foreground: #0B1D3A;
+  --brand-navy: #0B1D3A;
+  --brand-gold: #C9A84C;
+  --brand-navy-light: #132d54;
+  --overlay: rgba(11, 29, 58, 0.75);
 }
 
 /* Modern utility classes */
 .modern-shadow {
   box-shadow:
-    0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    0 4px 6px -1px rgba(11, 29, 58, 0.1),
+    0 2px 4px -1px rgba(11, 29, 58, 0.06);
 }
 
 .modern-gradient {
   background: linear-gradient(
     135deg,
-    var(--primary) 0%,
-    var(--primary-dark) 100%
+    var(--brand-navy) 0%,
+    var(--brand-navy-light) 100%
   );
 }
 
@@ -29,7 +32,7 @@
 
 .modern-button {
   @apply px-6 py-3 rounded-lg font-medium transition-all duration-300 
-  bg-[#DAA520] hover:bg-[#B8860B] text-white shadow-md hover:shadow-lg 
+  bg-[#0B1D3A] hover:bg-[#132d54] text-white shadow-md hover:shadow-lg 
   active:scale-95;
 }
 
@@ -50,19 +53,18 @@ html {
 
 /* Modern focus styles */
 :focus-visible {
-  outline: 2px solid black;
+  outline: 2px solid var(--brand-gold);
   outline-offset: 2px;
 }
 
 /* Modern button styles */
 button,
 input[type="submit"] {
-  @apply rounded-lg transition-all duration-200 hover:shadow-lg active:scale-95;
+  @apply rounded-lg transition-all duration-200;
 }
 
-/* Modern input styles */
-/* input,
-textarea,
-select {
-  @apply rounded-lg  focus:border-primary-slate focus:ring-1 focus:ring-primary-slate/50 transition-all duration-200;
-} */
+/* Selection color */
+::selection {
+  background: rgba(201, 168, 76, 0.2);
+  color: #0B1D3A;
+}

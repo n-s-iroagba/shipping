@@ -95,8 +95,8 @@ export default function VerificationModal({ onClose, token }: VerificationModalP
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-100">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-indigo-100 rounded-full">
-              <ShieldCheckIcon className="w-6 h-6 text-indigo-600" />
+            <div className="p-2 bg-[#0B1D3A]/10 rounded-full">
+              <ShieldCheckIcon className="w-6 h-6 text-[#0B1D3A]" />
             </div>
             <div>
               <h3 id="verification-title" className="text-lg font-semibold text-gray-900">
@@ -146,7 +146,7 @@ export default function VerificationModal({ onClose, token }: VerificationModalP
                 onChange={handleInputChange}
                 placeholder="Enter 6-digit code"
                 maxLength={6}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors text-center text-lg font-mono tracking-widest"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C9A84C]/100 focus:border-[#C9A84C] transition-colors text-center text-lg font-mono tracking-widest"
                 disabled={loading}
                 autoComplete="one-time-code"
                 inputMode="numeric"
@@ -171,7 +171,7 @@ export default function VerificationModal({ onClose, token }: VerificationModalP
               <button
                 type="submit"
                 disabled={loading || !code.trim()}
-                className="flex-1 sm:flex-none px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:bg-indigo-400 disabled:cursor-not-allowed transition-colors font-medium flex items-center justify-center gap-2 min-w-[120px]"
+                className="flex-1 sm:flex-none px-6 py-3 bg-[#0B1D3A] text-white rounded-lg hover:bg-[#132d54] disabled:bg-[#C9A84C] disabled:cursor-not-allowed transition-colors font-medium flex items-center justify-center gap-2 min-w-[120px]"
               >
                 {loading ? (
                   <>

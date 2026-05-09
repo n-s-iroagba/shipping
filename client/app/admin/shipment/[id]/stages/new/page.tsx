@@ -150,7 +150,7 @@ export default function BulkCreateStagesForm() {
             <button
               type="button"
               onClick={addStage}
-              className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 px-6 py-2.5 rounded-xl transition-all font-bold shadow-lg shadow-indigo-900/20"
+              className="flex items-center gap-2 bg-[#0B1D3A] hover:bg-[#0B1D3A] px-6 py-2.5 rounded-xl transition-all font-bold shadow-lg shadow-[#0B1D3A]-900/20"
             >
               <FiPlus />
               Add Another Stage
@@ -219,7 +219,7 @@ export default function BulkCreateStagesForm() {
                         placeholder="Stage Title (e.g. In Transit)"
                         value={stage.title}
                         onChange={e => updateStage(index, "title", e.target.value)}
-                        className="w-full px-5 py-3 bg-slate-50 border border-slate-200 rounded-2xl focus:border-indigo-500 focus:bg-white outline-none transition-all"
+                        className="w-full px-5 py-3 bg-slate-50 border border-slate-200 rounded-2xl focus:border-[#C9A84C] focus:bg-white outline-none transition-all"
                       />
                       <div className="relative">
                         <FiCalendar className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
@@ -228,14 +228,14 @@ export default function BulkCreateStagesForm() {
                           required
                           value={stage.dateAndTime}
                           onChange={e => updateStage(index, "dateAndTime", e.target.value)}
-                          className="w-full pl-11 pr-5 py-3 bg-slate-50 border border-slate-200 rounded-2xl focus:border-indigo-500 focus:bg-white outline-none transition-all"
+                          className="w-full pl-11 pr-5 py-3 bg-slate-50 border border-slate-200 rounded-2xl focus:border-[#C9A84C] focus:bg-white outline-none transition-all"
                         />
                       </div>
                       <textarea
                         placeholder="Carrier Note / Status Update"
                         value={stage.carrierNote}
                         onChange={e => updateStage(index, "carrierNote", e.target.value)}
-                        className="w-full px-5 py-3 bg-slate-50 border border-slate-200 rounded-2xl focus:border-indigo-500 focus:bg-white outline-none transition-all h-[106px] resize-none"
+                        className="w-full px-5 py-3 bg-slate-50 border border-slate-200 rounded-2xl focus:border-[#C9A84C] focus:bg-white outline-none transition-all h-[106px] resize-none"
                       />
                     </div>
 
@@ -248,7 +248,7 @@ export default function BulkCreateStagesForm() {
                           placeholder="Current Location Name"
                           value={stage.location}
                           onChange={e => updateStage(index, "location", e.target.value)}
-                          className="w-full pl-11 pr-5 py-3 bg-slate-50 border border-slate-200 rounded-2xl focus:border-indigo-500 focus:bg-white outline-none transition-all"
+                          className="w-full pl-11 pr-5 py-3 bg-slate-50 border border-slate-200 rounded-2xl focus:border-[#C9A84C] focus:bg-white outline-none transition-all"
                         />
                       </div>
                       <div className="grid grid-cols-2 gap-3">
@@ -258,7 +258,7 @@ export default function BulkCreateStagesForm() {
                           placeholder="Latitude"
                           value={stage.latitude || ""}
                           onChange={e => updateStage(index, "latitude", +e.target.value)}
-                          className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl focus:border-indigo-500 focus:bg-white outline-none transition-all"
+                          className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl focus:border-[#C9A84C] focus:bg-white outline-none transition-all"
                         />
                         <input
                           type="number"
@@ -266,7 +266,7 @@ export default function BulkCreateStagesForm() {
                           placeholder="Longitude"
                           value={stage.longitude || ""}
                           onChange={e => updateStage(index, "longitude", +e.target.value)}
-                          className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl focus:border-indigo-500 focus:bg-white outline-none transition-all"
+                          className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl focus:border-[#C9A84C] focus:bg-white outline-none transition-all"
                         />
                       </div>
                       <div className="p-4 bg-slate-50 border border-slate-200 rounded-2xl">
@@ -274,7 +274,7 @@ export default function BulkCreateStagesForm() {
                         <input
                           type="file"
                           onChange={e => updateStage(index, "supportingDocument", e.target.files?.[0] || null)}
-                          className="text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-bold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
+                          className="text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-bold file:bg-[#0B1D3A]/5 file:text-[#0B1D3A] hover:file:bg-[#0B1D3A]/10"
                         />
                       </div>
                     </div>
@@ -285,7 +285,7 @@ export default function BulkCreateStagesForm() {
                       <select
                         value={stage.paymentStatus}
                         onChange={e => updateStage(index, "paymentStatus", e.target.value)}
-                        className="w-full px-5 py-3 bg-slate-50 border border-slate-200 rounded-2xl focus:border-indigo-500 focus:bg-white outline-none transition-all appearance-none cursor-pointer"
+                        className="w-full px-5 py-3 bg-slate-50 border border-slate-200 rounded-2xl focus:border-[#C9A84C] focus:bg-white outline-none transition-all appearance-none cursor-pointer"
                       >
                         {Object.values(ShippingStagePaymentStatus).map(v => (
                           <option key={v} value={v}>{v.replace(/_/g, ' ')}</option>
@@ -303,7 +303,7 @@ export default function BulkCreateStagesForm() {
                               placeholder="Fee Name (e.g. Tax)"
                               value={stage.feeName}
                               onChange={e => updateStage(index, "feeName", e.target.value)}
-                              className="w-full px-5 py-3 bg-indigo-50/30 border border-indigo-100 rounded-2xl focus:border-indigo-500 focus:bg-white outline-none transition-all"
+                              className="w-full px-5 py-3 bg-[#0B1D3A]/5/30 border border-[#0B1D3A]/10 rounded-2xl focus:border-[#C9A84C] focus:bg-white outline-none transition-all"
                             />
                             <div className="grid grid-cols-2 gap-3">
                               <div className="relative">
@@ -313,7 +313,7 @@ export default function BulkCreateStagesForm() {
                                   placeholder="Fee Amount"
                                   value={stage.feeInDollars || ""}
                                   onChange={e => updateStage(index, "feeInDollars", +e.target.value)}
-                                  className="w-full pl-8 pr-4 py-3 bg-indigo-50/30 border border-indigo-100 rounded-2xl focus:border-indigo-500 focus:bg-white outline-none transition-all text-sm"
+                                  className="w-full pl-8 pr-4 py-3 bg-[#0B1D3A]/5/30 border border-[#0B1D3A]/10 rounded-2xl focus:border-[#C9A84C] focus:bg-white outline-none transition-all text-sm"
                                 />
                               </div>
                               <div className="relative">
@@ -323,7 +323,7 @@ export default function BulkCreateStagesForm() {
                                   placeholder="Paid"
                                   value={stage.amountPaid || ""}
                                   onChange={e => updateStage(index, "amountPaid", +e.target.value)}
-                                  className="w-full pl-8 pr-4 py-3 bg-indigo-50/30 border border-indigo-100 rounded-2xl focus:border-indigo-500 focus:bg-white outline-none transition-all text-sm"
+                                  className="w-full pl-8 pr-4 py-3 bg-[#0B1D3A]/5/30 border border-[#0B1D3A]/10 rounded-2xl focus:border-[#C9A84C] focus:bg-white outline-none transition-all text-sm"
                                 />
                               </div>
                             </div>

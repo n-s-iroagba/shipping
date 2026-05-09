@@ -1,88 +1,97 @@
 "use client";
 
 import {
-  TruckIcon,
   GlobeAltIcon,
   ShieldCheckIcon,
   ClockIcon,
   UsersIcon,
-  MapPinIcon,
   PhoneIcon,
   EnvelopeIcon,
+  MapPinIcon,
+  LockClosedIcon,
 } from "@heroicons/react/24/outline";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
-import { brandName, companyEmail, telephoneNumber } from "@/data/constants";
+import { brandName, companyEmail, telephoneNumber, companyAddress } from "@/data/constants";
 
 export default function AboutPage() {
   const stats = [
-    { label: "Years of Experience", value: "15+", icon: ClockIcon },
-    { label: "Countries Served", value: "50+", icon: GlobeAltIcon },
-    { label: "Happy Customers", value: "10K+", icon: UsersIcon },
-    { label: "Successful Deliveries", value: "100K+", icon: TruckIcon },
+    { label: "Years of Excellence", value: "15+", icon: ClockIcon },
+    { label: "Jurisdictions Served", value: "50+", icon: GlobeAltIcon },
+    { label: "Distinguished Clients", value: "10K+", icon: UsersIcon },
+    { label: "Secure Consignments", value: "100K+", icon: ShieldCheckIcon },
   ];
 
   const services = [
     {
-      title: "International Shipping",
+      title: "Confidential Transport",
       description:
-        "Reliable delivery services to over 50 countries worldwide with real-time tracking.",
+        "End-to-end encrypted logistics with NDA-protected operations for items requiring absolute discretion.",
+      icon: LockClosedIcon,
+    },
+    {
+      title: "Global Concierge",
+      description:
+        "Dedicated relationship managers providing 24/7 white-glove service across 50+ jurisdictions.",
       icon: GlobeAltIcon,
     },
     {
-      title: "Express Delivery",
+      title: "Priority Dispatch",
       description:
-        "Fast and secure express shipping for urgent packages and documents.",
+        "Time-critical delivery with private charter options and diplomatic-grade customs facilitation.",
       icon: ClockIcon,
     },
     {
-      title: "Freight Services",
+      title: "Secure Asset Handling",
       description:
-        "Comprehensive freight solutions for businesses of all sizes.",
-      icon: TruckIcon,
-    },
-    {
-      title: "Secure Handling",
-      description:
-        "Advanced security measures and insurance coverage for valuable items.",
+        "Military-grade security protocols and comprehensive insurance for high-value and irreplaceable items.",
       icon: ShieldCheckIcon,
     },
   ];
 
   const team = [
     {
-      name: "Sarah Johnson",
-      role: "Chief Executive Officer",
-      description: `Leading ${brandName} with 20+ years of logistics experience.`,
+      name: "S. Laurent",
+      role: "Managing Director",
+      description: `Leading ${brandName} with 20+ years in private logistics and asset protection.`,
     },
     {
-      name: "Michael Chen",
+      name: "M. Chen",
       role: "Head of Operations",
-      description: "Ensuring smooth operations across all shipping channels.",
+      description: "Overseeing secure logistics channels across all global corridors.",
     },
     {
-      name: "Emily Rodriguez",
-      role: "Customer Relations Director",
+      name: "E. Rodriguez",
+      role: "Director, Client Relations",
       description:
-        "Dedicated to providing exceptional customer service experience.",
+        "Ensuring an exceptional and discreet experience for every distinguished client.",
     },
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-white">
+      <Navbar />
+
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700">
-        <div className="container mx-auto px-4 py-16">
+      <div className="bg-gradient-to-br from-[#0B1D3A] via-[#0f2847] to-[#0B1D3A]">
+        <div className="container mx-auto px-4 pt-32 pb-20">
           <div className="max-w-4xl mx-auto text-center text-white">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
+            <p className="text-[10px] font-semibold tracking-[0.4em] uppercase text-[#C9A84C] mb-6">
+              Our Heritage
+            </p>
+            <h1
+              className="text-4xl md:text-6xl font-bold mb-6"
+              style={{ fontFamily: "var(--font-playfair), serif" }}
+            >
               About {brandName}
             </h1>
-            <p className="text-xl md:text-2xl text-slate-100 mb-8">
-              Connecting the world through reliable, secure, and efficient
-              shipping solutions
+            <p className="text-lg md:text-xl text-white/60 mb-8 max-w-2xl mx-auto">
+              Discreet global logistics for individuals and institutions who demand absolute confidentiality
             </p>
             <div className="flex justify-center">
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
-                <TruckIcon className="w-16 h-16 text-slate-200 mx-auto" />
+              <div className="bg-[#C9A84C]/10 backdrop-blur-sm rounded-2xl p-8 border border-[#C9A84C]/20">
+                <ShieldCheckIcon className="w-16 h-16 text-[#C9A84C] mx-auto" />
               </div>
             </div>
           </div>
@@ -90,7 +99,7 @@ export default function AboutPage() {
       </div>
 
       {/* Stats Section */}
-      <div className="py-16">
+      <div className="py-20">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
             {stats.map((stat, index) => {
@@ -98,11 +107,11 @@ export default function AboutPage() {
               return (
                 <div key={index} className="text-center">
                   <div className="bg-white rounded-2xl p-6 shadow-lg border border-slate-100">
-                    <Icon className="w-8 h-8 text-slate-600 mx-auto mb-4" />
-                    <div className="text-3xl font-bold text-slate-900 mb-2">
+                    <Icon className="w-8 h-8 text-[#C9A84C] mx-auto mb-4" />
+                    <div className="text-3xl font-bold text-[#0B1D3A] mb-2">
                       {stat.value}
                     </div>
-                    <div className="text-sm text-slate-700">{stat.label}</div>
+                    <div className="text-sm text-slate-500">{stat.label}</div>
                   </div>
                 </div>
               );
@@ -112,35 +121,36 @@ export default function AboutPage() {
       </div>
 
       {/* Our Story Section */}
-      <div className="py-16">
+      <div className="py-20 bg-[#0B1D3A]/[0.02]">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12 border border-slate-100">
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-8 text-center">
+            <div className="bg-white rounded-3xl shadow-lg p-8 md:p-12 border border-slate-100">
+              <p className="text-[10px] font-semibold tracking-[0.4em] uppercase text-[#C9A84C] mb-4 text-center">
+                Est. 2008
+              </p>
+              <h2
+                className="text-3xl md:text-4xl font-bold text-[#0B1D3A] mb-8 text-center"
+                style={{ fontFamily: "var(--font-playfair), serif" }}
+              >
                 Our Story
               </h2>
-              <div className="prose prose-lg max-w-none text-gray-700">
+              <div className="prose prose-lg max-w-none text-slate-600">
                 <p className="text-lg leading-relaxed mb-6">
-                  Founded in 2008, {brandName} began as a small logistics company
-                  with a big vision: to make international shipping accessible,
-                  reliable, and transparent for everyone. What started as a
-                  local courier service has grown into a global network spanning
-                  over 50 countries.
+                  Founded in 2008, {brandName} was established to address a critical gap in global logistics:
+                  the need for truly confidential, secure, and bespoke shipping services for high-net-worth
+                  individuals, family offices, and distinguished institutions.
                 </p>
                 <p className="text-lg leading-relaxed mb-6">
-                  Our journey has been driven by innovation and
-                  customer-centricity. We were among the first to introduce
-                  real-time package tracking, automated customs clearance, and
-                  AI-powered route optimization. Today, we handle over 100,000
-                  successful deliveries annually while maintaining our
-                  commitment to excellence.
+                  From our headquarters in Geneva, we have built an unparalleled network spanning
+                  over 50 jurisdictions, with dedicated secure corridors and NDA-protected operations
+                  at every touchpoint. Our team comprises former diplomatic couriers, security specialists,
+                  and luxury concierge professionals.
                 </p>
                 <p className="text-lg leading-relaxed">
-                  At {brandName}, we believe that distance should never be a
-                  barrier to connection. Whether you&apos;re sending a gift to
-                  family abroad, shipping products to customers worldwide, or
-                  managing complex supply chains, we&apos;re here to bridge the
-                  gap with reliable, secure, and efficient shipping solutions.
+                  At {brandName}, we understand that for our clients, discretion is not a luxury—it is
+                  a necessity. Whether relocating a private collection, transporting sensitive documents,
+                  or managing complex cross-border logistics, we provide an uncompromising standard of
+                  care, security, and confidentiality.
                 </p>
               </div>
             </div>
@@ -149,10 +159,16 @@ export default function AboutPage() {
       </div>
 
       {/* Services Section */}
-      <div className="py-16 bg-white">
+      <div className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-12 text-center">
+            <p className="text-[10px] font-semibold tracking-[0.4em] uppercase text-[#C9A84C] mb-4 text-center">
+              Capabilities
+            </p>
+            <h2
+              className="text-3xl md:text-4xl font-bold text-[#0B1D3A] mb-12 text-center"
+              style={{ fontFamily: "var(--font-playfair), serif" }}
+            >
               Our Services
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -161,15 +177,15 @@ export default function AboutPage() {
                 return (
                   <div
                     key={index}
-                    className="bg-slate-50 rounded-2xl p-8 border border-slate-100"
+                    className="bg-[#0B1D3A]/[0.02] rounded-2xl p-8 border border-slate-100 hover:border-[#C9A84C]/30 transition-all"
                   >
-                    <div className="bg-slate-100 p-4 rounded-full w-fit mb-6">
-                      <Icon className="w-8 h-8 text-slate-600" />
+                    <div className="bg-[#C9A84C]/10 p-4 rounded-xl w-fit mb-6">
+                      <Icon className="w-8 h-8 text-[#C9A84C]" />
                     </div>
-                    <h3 className="text-xl font-semibold text-slate-900 mb-4">
+                    <h3 className="text-xl font-semibold text-[#0B1D3A] mb-4">
                       {service.title}
                     </h3>
-                    <p className="text-gray-700 leading-relaxed">
+                    <p className="text-slate-500 leading-relaxed">
                       {service.description}
                     </p>
                   </div>
@@ -181,11 +197,17 @@ export default function AboutPage() {
       </div>
 
       {/* Team Section */}
-      <div className="py-16">
+      <div className="py-20 bg-[#0B1D3A]/[0.02]">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-12 text-center">
-              Meet Our Team
+            <p className="text-[10px] font-semibold tracking-[0.4em] uppercase text-[#C9A84C] mb-4 text-center">
+              Leadership
+            </p>
+            <h2
+              className="text-3xl md:text-4xl font-bold text-[#0B1D3A] mb-12 text-center"
+              style={{ fontFamily: "var(--font-playfair), serif" }}
+            >
+              Our Team
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {team.map((member, index) => (
@@ -193,16 +215,16 @@ export default function AboutPage() {
                   key={index}
                   className="bg-white rounded-2xl shadow-lg p-8 border border-slate-100 text-center"
                 >
-                  <div className="bg-slate-100 w-20 h-20 rounded-full mx-auto mb-6 flex items-center justify-center">
-                    <UsersIcon className="w-10 h-10 text-slate-600" />
+                  <div className="bg-[#0B1D3A] w-20 h-20 rounded-full mx-auto mb-6 flex items-center justify-center">
+                    <UsersIcon className="w-10 h-10 text-[#C9A84C]" />
                   </div>
-                  <h3 className="text-xl font-semibold text-slate-900 mb-2">
+                  <h3 className="text-xl font-semibold text-[#0B1D3A] mb-2">
                     {member.name}
                   </h3>
-                  <p className="text-slate-600 font-medium mb-4">
+                  <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-[#C9A84C] mb-4">
                     {member.role}
                   </p>
-                  <p className="text-gray-700">{member.description}</p>
+                  <p className="text-slate-500">{member.description}</p>
                 </div>
               ))}
             </div>
@@ -211,42 +233,49 @@ export default function AboutPage() {
       </div>
 
       {/* Contact Section */}
-      <div className="py-16 bg-slate-900">
+      <div className="py-20 bg-[#0B1D3A]">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center text-white">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8">
+            <p className="text-[10px] font-semibold tracking-[0.4em] uppercase text-[#C9A84C] mb-4">
+              Private Enquiries
+            </p>
+            <h2
+              className="text-3xl md:text-4xl font-bold mb-8"
+              style={{ fontFamily: "var(--font-playfair), serif" }}
+            >
               Get in Touch
             </h2>
-            <p className="text-xl text-slate-200 mb-12">
-              Ready to ship with us? Our team is here to help you every step of
-              the way.
+            <p className="text-lg text-white/50 mb-12">
+              All enquiries are treated with the utmost confidentiality. Our concierge team is available around the clock.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="flex flex-col items-center">
-                <div className="bg-white/10 backdrop-blur-sm p-4 rounded-full mb-4">
-                  <PhoneIcon className="w-8 h-8 text-slate-200" />
+                <div className="bg-[#C9A84C]/10 backdrop-blur-sm p-4 rounded-full mb-4 border border-[#C9A84C]/20">
+                  <PhoneIcon className="w-8 h-8 text-[#C9A84C]" />
                 </div>
                 <h3 className="text-lg font-semibold mb-2">Call Us</h3>
-                <p className="text-slate-200">{telephoneNumber || "+1 (800) 555-LOGI"}</p>
+                <p className="text-white/50">{telephoneNumber || "+41 22 000 0000"}</p>
               </div>
               <a href={`mailto:${companyEmail}`} className="flex flex-col items-center group">
-                <div className="bg-white/10 backdrop-blur-sm p-4 rounded-full mb-4 group-hover:bg-white/20 transition-all">
-                  <EnvelopeIcon className="w-8 h-8 text-slate-200" />
+                <div className="bg-[#C9A84C]/10 backdrop-blur-sm p-4 rounded-full mb-4 border border-[#C9A84C]/20 group-hover:bg-[#C9A84C]/20 transition-all">
+                  <EnvelopeIcon className="w-8 h-8 text-[#C9A84C]" />
                 </div>
                 <h3 className="text-lg font-semibold mb-2">Email Us</h3>
-                <p className="text-slate-200 group-hover:text-indigo-400 transition-colors">{companyEmail}</p>
+                <p className="text-white/50 group-hover:text-[#C9A84C] transition-colors">{companyEmail}</p>
               </a>
               <div className="flex flex-col items-center">
-                <div className="bg-white/10 backdrop-blur-sm p-4 rounded-full mb-4">
-                  <MapPinIcon className="w-8 h-8 text-slate-200" />
+                <div className="bg-[#C9A84C]/10 backdrop-blur-sm p-4 rounded-full mb-4 border border-[#C9A84C]/20">
+                  <MapPinIcon className="w-8 h-8 text-[#C9A84C]" />
                 </div>
                 <h3 className="text-lg font-semibold mb-2">Visit Us</h3>
-                <p className="text-slate-200">Chemin Rieu 12, 1208 Geneva Switzerland</p>
+                <p className="text-white/50">{companyAddress}</p>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 }

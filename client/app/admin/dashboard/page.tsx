@@ -125,10 +125,10 @@ const Todo = () => {
         >
           <motion.div
             variants={itemVariants}
-            className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 border-l-4 border-indigo-500"
+            className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 border-l-4 border-[#C9A84C]"
           >
             <div className="flex items-center gap-4">
-              <div className="p-3 rounded-full bg-indigo-100 text-indigo-600">
+              <div className="p-3 rounded-full bg-[#0B1D3A]/10 text-[#0B1D3A]">
                 <FiTruck className="text-2xl" />
               </div>
               <div>

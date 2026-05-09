@@ -184,7 +184,7 @@ export default function EditStageForm() {
               <div className="space-y-8">
                 <section>
                   <h3 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-2">
-                    <span className="w-8 h-8 bg-indigo-50 text-indigo-600 rounded-lg flex items-center justify-center text-sm">01</span>
+                    <span className="w-8 h-8 bg-[#0B1D3A]/5 text-[#0B1D3A] rounded-lg flex items-center justify-center text-sm">01</span>
                     General Information
                   </h3>
                   
@@ -196,7 +196,7 @@ export default function EditStageForm() {
                         name="title"
                         value={formData.title || ""}
                         onChange={handleChange}
-                        className="w-full px-5 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-indigo-500 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all outline-none"
+                        className="w-full px-5 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-[#C9A84C] focus:bg-white focus:ring-4 focus:ring-[#C9A84C]/10 transition-all outline-none"
                         placeholder="e.g. Arrived at Sorting Facility"
                       />
                     </div>
@@ -217,7 +217,7 @@ export default function EditStageForm() {
                           onChange={(e) => {
                             setFormData(prev => ({ ...prev, dateAndTime: new Date(e.target.value) }));
                           }}
-                          className="w-full pl-12 pr-5 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-indigo-500 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all outline-none"
+                          className="w-full pl-12 pr-5 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-[#C9A84C] focus:bg-white focus:ring-4 focus:ring-[#C9A84C]/10 transition-all outline-none"
                         />
                       </div>
                     </div>
@@ -230,7 +230,7 @@ export default function EditStageForm() {
                         value={formData.carrierNote || ""}
                         onChange={handleChange}
                         rows={4}
-                        className="w-full px-5 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-indigo-500 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all outline-none resize-none"
+                        className="w-full px-5 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-[#C9A84C] focus:bg-white focus:ring-4 focus:ring-[#C9A84C]/10 transition-all outline-none resize-none"
                         placeholder="Enter detailed status updates..."
                       />
                     </div>
@@ -239,7 +239,7 @@ export default function EditStageForm() {
 
                 <section>
                   <h3 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-2">
-                    <span className="w-8 h-8 bg-indigo-50 text-indigo-600 rounded-lg flex items-center justify-center text-sm">02</span>
+                    <span className="w-8 h-8 bg-[#0B1D3A]/5 text-[#0B1D3A] rounded-lg flex items-center justify-center text-sm">02</span>
                     Location Details
                   </h3>
                   
@@ -253,7 +253,7 @@ export default function EditStageForm() {
                           name="location"
                           value={formData.location || ""}
                           onChange={handleChange}
-                          className="w-full pl-12 pr-5 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-indigo-500 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all outline-none"
+                          className="w-full pl-12 pr-5 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-[#C9A84C] focus:bg-white focus:ring-4 focus:ring-[#C9A84C]/10 transition-all outline-none"
                           placeholder="City, State, Country"
                         />
                       </div>
@@ -271,7 +271,7 @@ export default function EditStageForm() {
                             name="latitude"
                             value={formData.latitude ?? ""}
                             onChange={handleChange}
-                            className="w-full pl-12 pr-5 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-indigo-500 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all outline-none"
+                            className="w-full pl-12 pr-5 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-[#C9A84C] focus:bg-white focus:ring-4 focus:ring-[#C9A84C]/10 transition-all outline-none"
                           />
                         </div>
                       </div>
@@ -286,7 +286,7 @@ export default function EditStageForm() {
                             name="longitude"
                             value={formData.longitude ?? ""}
                             onChange={handleChange}
-                            className="w-full pl-12 pr-5 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-indigo-500 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all outline-none"
+                            className="w-full pl-12 pr-5 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-[#C9A84C] focus:bg-white focus:ring-4 focus:ring-[#C9A84C]/10 transition-all outline-none"
                           />
                         </div>
                       </div>
@@ -299,7 +299,7 @@ export default function EditStageForm() {
               <div className="space-y-8">
                 <section className="bg-slate-50/50 p-8 rounded-3xl border border-slate-100">
                   <h3 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-2">
-                    <span className="w-8 h-8 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-sm">03</span>
+                    <span className="w-8 h-8 bg-[#0B1D3A]/10 text-[#0B1D3A] rounded-lg flex items-center justify-center text-sm">03</span>
                     Financial Status
                   </h3>
                   
@@ -311,7 +311,7 @@ export default function EditStageForm() {
                         name="paymentStatus"
                         value={formData.paymentStatus || ""}
                         onChange={handleChange}
-                        className="w-full px-5 py-4 bg-white border-2 border-slate-100 rounded-2xl focus:border-indigo-500 focus:ring-4 focus:ring-indigo-50 transition-all outline-none appearance-none"
+                        className="w-full px-5 py-4 bg-white border-2 border-slate-100 rounded-2xl focus:border-[#C9A84C] focus:ring-4 focus:ring-[#C9A84C]/10 transition-all outline-none appearance-none"
                       >
                         <option value={ShippingStagePaymentStatus.NO_PAYMENT_REQUIRED}>No Payment Required</option>
                         <option value={ShippingStagePaymentStatus.PENDING}>Pending Approval</option>
@@ -335,7 +335,7 @@ export default function EditStageForm() {
                               name="feeName"
                               value={formData.feeName || ""}
                               onChange={handleChange}
-                              className="w-full pl-12 pr-5 py-4 bg-white border-2 border-slate-100 rounded-2xl focus:border-indigo-500 focus:ring-4 focus:ring-indigo-50 transition-all outline-none"
+                              className="w-full pl-12 pr-5 py-4 bg-white border-2 border-slate-100 rounded-2xl focus:border-[#C9A84C] focus:ring-4 focus:ring-[#C9A84C]/10 transition-all outline-none"
                               placeholder="e.g. Customs Clearance Fee"
                             />
                           </div>
@@ -352,7 +352,7 @@ export default function EditStageForm() {
                                 name="feeInDollars"
                                 value={formData.feeInDollars ?? ""}
                                 onChange={handleChange}
-                                className="w-full pl-12 pr-5 py-4 bg-white border-2 border-slate-100 rounded-2xl focus:border-indigo-500 focus:ring-4 focus:ring-indigo-50 transition-all outline-none"
+                                className="w-full pl-12 pr-5 py-4 bg-white border-2 border-slate-100 rounded-2xl focus:border-[#C9A84C] focus:ring-4 focus:ring-[#C9A84C]/10 transition-all outline-none"
                               />
                             </div>
                           </div>
@@ -366,7 +366,7 @@ export default function EditStageForm() {
                                 name="amountPaid"
                                 value={formData.amountPaid ?? ""}
                                 onChange={handleChange}
-                                className="w-full pl-12 pr-5 py-4 bg-white border-2 border-slate-100 rounded-2xl focus:border-indigo-500 focus:ring-4 focus:ring-indigo-50 transition-all outline-none"
+                                className="w-full pl-12 pr-5 py-4 bg-white border-2 border-slate-100 rounded-2xl focus:border-[#C9A84C] focus:ring-4 focus:ring-[#C9A84C]/10 transition-all outline-none"
                               />
                             </div>
                           </div>
@@ -378,7 +378,7 @@ export default function EditStageForm() {
 
                 <section>
                   <h3 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-2">
-                    <span className="w-8 h-8 bg-indigo-50 text-indigo-600 rounded-lg flex items-center justify-center text-sm">04</span>
+                    <span className="w-8 h-8 bg-[#0B1D3A]/5 text-[#0B1D3A] rounded-lg flex items-center justify-center text-sm">04</span>
                     Supporting Documents
                   </h3>
                   
@@ -396,17 +396,17 @@ export default function EditStageForm() {
                         className={`flex flex-col items-center justify-center p-8 border-2 border-dashed rounded-3xl transition-all cursor-pointer ${
                           isUploading 
                             ? "bg-slate-50 border-slate-200 cursor-not-allowed" 
-                            : "bg-slate-50 border-slate-200 hover:border-indigo-400 hover:bg-indigo-50/30"
+                            : "bg-slate-50 border-slate-200 hover:border-[#C9A84C] hover:bg-[#0B1D3A]/5/30"
                         }`}
                       >
                         {isUploading ? (
                           <div className="flex flex-col items-center gap-3">
-                            <FiLoader className="w-10 h-10 text-indigo-500 animate-spin" />
-                            <span className="text-sm font-bold text-indigo-600">Uploading to cloud...</span>
+                            <FiLoader className="w-10 h-10 text-[#C9A84C] animate-spin" />
+                            <span className="text-sm font-bold text-[#0B1D3A]">Uploading to cloud...</span>
                           </div>
                         ) : (
                           <div className="flex flex-col items-center gap-3">
-                            <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm text-slate-400 group-hover:text-indigo-500 transition-colors">
+                            <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm text-slate-400 group-hover:text-[#C9A84C] transition-colors">
                               <FiFileText className="w-6 h-6" />
                             </div>
                             <div className="text-center">

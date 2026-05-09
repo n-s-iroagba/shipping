@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import ErrorAlert from "@/components/ErrorAlert";
 import { postRequest } from "@/utils/apiUtils";
 import { routes } from "@/data/routes";
@@ -33,11 +34,11 @@ export default function SignupPage() {
   };
 
   const getPasswordStrengthColor = () => {
-    if (passwordStrength === 0) return "bg-gray-200";
+    if (passwordStrength === 0) return "bg-slate-200";
     if (passwordStrength <= 25) return "bg-red-500";
-    if (passwordStrength <= 50) return "bg-orange-500";
-    if (passwordStrength <= 75) return "bg-yellow-500";
-    return "bg-green-500";
+    if (passwordStrength <= 50) return "bg-amber-500";
+    if (passwordStrength <= 75) return "bg-[#C9A84C]";
+    return "bg-emerald-500";
   };
 
   const getPasswordStrengthText = () => {
@@ -79,13 +80,27 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0B1D3A] via-[#0f2847] to-[#0B1D3A] p-4">
       <div className="w-full max-w-md">
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-100">
-          {/* Header with gradient */}
-          <div className="bg-gradient-to-r from-slate-500 to-slate-600 p-6 text-center">
-            <h2 className="text-2xl font-bold text-white">Create Admin Account</h2>
-          
+        <div className="bg-white rounded-2xl shadow-2xl overflow-hidden border border-white/10">
+          {/* Header */}
+          <div className="bg-[#0B1D3A] p-6 text-center border-b border-white/5">
+            <Image
+              src="/arbor-logo.png"
+              alt="Arbor Global"
+              width={48}
+              height={48}
+              className="mx-auto mb-3 rounded-lg"
+            />
+            <h2
+              className="text-2xl font-bold text-white"
+              style={{ fontFamily: "var(--font-playfair), serif" }}
+            >
+              Create Account
+            </h2>
+            <p className="text-[10px] font-semibold tracking-[0.3em] uppercase text-[#C9A84C] mt-1">
+              Client Registration
+            </p>
           </div>
 
           <form onSubmit={handleSubmit} className="p-8 space-y-6">
@@ -93,7 +108,7 @@ export default function SignupPage() {
 
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-[10px] font-semibold text-[#0B1D3A] mb-2 tracking-[0.2em] uppercase">
                   Full Name
                 </label>
                 <input
@@ -103,13 +118,13 @@ export default function SignupPage() {
                   data-cy="name"
                   value={username}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent transition duration-200"
+                  className="w-full px-4 py-3.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/30 focus:border-[#C9A84C] transition duration-200 bg-slate-50"
                   placeholder="Enter your full name"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-[10px] font-semibold text-[#0B1D3A] mb-2 tracking-[0.2em] uppercase">
                   Email Address
                 </label>
                 <input
@@ -119,13 +134,13 @@ export default function SignupPage() {
                   data-cy="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent transition duration-200"
-                  placeholder="your.email@example.com"
+                  className="w-full px-4 py-3.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/30 focus:border-[#C9A84C] transition duration-200 bg-slate-50"
+                  placeholder="your@email.com"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-[10px] font-semibold text-[#0B1D3A] mb-2 tracking-[0.2em] uppercase">
                   Password
                 </label>
                 <input
@@ -135,20 +150,20 @@ export default function SignupPage() {
                   data-cy="password"
                   value={password}
                   onChange={handlePasswordChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent transition duration-200"
+                  className="w-full px-4 py-3.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/30 focus:border-[#C9A84C] transition duration-200 bg-slate-50"
                   placeholder="Create a strong password"
                 />
                 {password && (
                   <div className="mt-2">
                     <div className="flex justify-between items-center mb-1">
-                      <span className="text-xs text-gray-600">Password strength:</span>
-                      <span className="text-xs font-medium text-gray-700">
+                      <span className="text-[10px] text-slate-500 uppercase tracking-wider">Strength:</span>
+                      <span className="text-[10px] font-semibold text-[#0B1D3A]">
                         {getPasswordStrengthText()}
                       </span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div className="w-full bg-slate-100 rounded-full h-1.5">
                       <div
-                        className={`h-2 rounded-full transition-all duration-300 ${getPasswordStrengthColor()}`}
+                        className={`h-1.5 rounded-full transition-all duration-300 ${getPasswordStrengthColor()}`}
                         style={{ width: `${passwordStrength}%` }}
                       ></div>
                     </div>
@@ -157,7 +172,7 @@ export default function SignupPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-[10px] font-semibold text-[#0B1D3A] mb-2 tracking-[0.2em] uppercase">
                   Confirm Password
                 </label>
                 <input
@@ -167,7 +182,7 @@ export default function SignupPage() {
                   data-cy="confirm-password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent transition duration-200"
+                  className="w-full px-4 py-3.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/30 focus:border-[#C9A84C] transition duration-200 bg-slate-50"
                   placeholder="Confirm your password"
                 />
               </div>
@@ -177,7 +192,7 @@ export default function SignupPage() {
               type="submit"
               data-cy="submit"
               disabled={isLoading}
-              className="w-full bg-gradient-to-r from-slate-500 to-slate-600 hover:from-slate-600 hover:to-slate-700 text-white font-semibold py-3 px-4 rounded-lg shadow-md transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-[#0B1D3A] hover:bg-[#132d54] text-white font-semibold py-3.5 px-4 rounded-xl shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/30 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? (
                 <div className="flex items-center justify-center">
@@ -190,11 +205,11 @@ export default function SignupPage() {
             </button>
 
             <div className="text-center">
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-slate-500">
                 Already have an account?{" "}
                 <a
                   href="/auth/login"
-                  className="text-slate-600 hover:text-slate-700 font-medium transition duration-200"
+                  className="text-[#C9A84C] hover:text-[#b89540] font-medium transition duration-200"
                 >
                   Sign in here
                 </a>
@@ -204,23 +219,23 @@ export default function SignupPage() {
         </div>
 
         {/* Password requirements */}
-        <div className="mt-6 bg-white rounded-lg p-4 shadow-sm border border-slate-100">
-          <h3 className="text-sm font-semibold text-gray-700 mb-2">Password Requirements:</h3>
-          <ul className="text-xs text-gray-600 space-y-1">
+        <div className="mt-6 bg-white/5 backdrop-blur rounded-xl p-4 border border-white/10">
+          <h3 className="text-[10px] font-semibold text-[#C9A84C] mb-3 tracking-[0.2em] uppercase">Security Requirements</h3>
+          <ul className="text-xs text-white/50 space-y-1.5">
             <li className="flex items-center">
-              <span className={`w-2 h-2 rounded-full mr-2 ${password.length >= 8 ? 'bg-green-500' : 'bg-gray-300'}`}></span>
+              <span className={`w-1.5 h-1.5 rounded-full mr-2 ${password.length >= 8 ? 'bg-emerald-400' : 'bg-white/20'}`}></span>
               At least 8 characters
             </li>
             <li className="flex items-center">
-              <span className={`w-2 h-2 rounded-full mr-2 ${/[A-Z]/.test(password) ? 'bg-green-500' : 'bg-gray-300'}`}></span>
+              <span className={`w-1.5 h-1.5 rounded-full mr-2 ${/[A-Z]/.test(password) ? 'bg-emerald-400' : 'bg-white/20'}`}></span>
               One uppercase letter
             </li>
             <li className="flex items-center">
-              <span className={`w-2 h-2 rounded-full mr-2 ${/[0-9]/.test(password) ? 'bg-green-500' : 'bg-gray-300'}`}></span>
+              <span className={`w-1.5 h-1.5 rounded-full mr-2 ${/[0-9]/.test(password) ? 'bg-emerald-400' : 'bg-white/20'}`}></span>
               One number
             </li>
             <li className="flex items-center">
-              <span className={`w-2 h-2 rounded-full mr-2 ${/[^A-Za-z0-9]/.test(password) ? 'bg-green-500' : 'bg-gray-300'}`}></span>
+              <span className={`w-1.5 h-1.5 rounded-full mr-2 ${/[^A-Za-z0-9]/.test(password) ? 'bg-emerald-400' : 'bg-white/20'}`}></span>
               One special character
             </li>
           </ul>

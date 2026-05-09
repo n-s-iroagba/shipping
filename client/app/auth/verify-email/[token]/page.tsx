@@ -142,22 +142,22 @@ export default function VerifyEmailPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-slate-100 to-indigo-50 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0B1D3A] via-[#0f2847] to-[#0B1D3A] p-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-md"
       >
-        <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-100 relative">
+        <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-white/10 relative">
           {/* Header */}
-          <div className="bg-slate-900 p-10 text-center relative overflow-hidden">
-            <div className="absolute top-0 right-0 -mr-8 -mt-8 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
+          <div className="bg-[#0B1D3A] p-10 text-center relative overflow-hidden">
+            <div className="absolute top-0 right-0 -mr-8 -mt-8 w-32 h-32 bg-[#C9A84C]/5 rounded-full blur-2xl" />
             <div className="relative z-10">
-              <div className="w-16 h-16 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center mx-auto mb-6 border border-white/20">
-                <FiShield className="w-8 h-8 text-white" />
+              <div className="w-16 h-16 bg-[#C9A84C]/10 backdrop-blur-md rounded-2xl flex items-center justify-center mx-auto mb-6 border border-[#C9A84C]/20">
+                <FiShield className="w-8 h-8 text-[#C9A84C]" />
               </div>
-              <h1 className="text-2xl font-bold text-white mb-2">Verify Your Email</h1>
-              <p className="text-slate-400 text-sm">We've sent a 6-digit code to your inbox</p>
+              <h1 className="text-2xl font-bold text-white mb-2" style={{ fontFamily: "var(--font-playfair), serif" }}>Verify Your Email</h1>
+              <p className="text-white/50 text-sm">We&apos;ve sent a 6-digit code to your inbox</p>
             </div>
           </div>
 
@@ -198,7 +198,7 @@ export default function VerifyEmailPage() {
                     value={digit}
                     onChange={(e) => handleChange(index, e.target.value)}
                     onKeyDown={(e) => handleKeyDown(index, e)}
-                    className="w-full h-14 sm:h-16 text-center text-xl font-bold bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-indigo-500 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all duration-200 outline-none text-slate-800"
+                    className="w-full h-14 sm:h-16 text-center text-xl font-bold bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-[#C9A84C] focus:bg-white focus:ring-4 focus:ring-[#C9A84C]/10 transition-all duration-200 outline-none text-[#0B1D3A]"
                   />
                 ))}
               </div>
@@ -206,7 +206,7 @@ export default function VerifyEmailPage() {
               <button
                 type="submit"
                 disabled={isLoading || code.some(d => !d)}
-                className="w-full py-4 bg-slate-900 text-white rounded-2xl font-bold shadow-lg shadow-slate-200 hover:bg-slate-800 transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full py-4 bg-[#0B1D3A] text-white rounded-2xl font-bold shadow-lg shadow-[#0B1D3A]/20 hover:bg-[#132d54] transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {isLoading ? (
                   <FiRefreshCw className="w-5 h-5 animate-spin" />
@@ -225,7 +225,7 @@ export default function VerifyEmailPage() {
                 <button
                   onClick={handleResendCode}
                   disabled={!canResend || isResending}
-                  className="text-sm font-bold text-indigo-600 hover:text-indigo-700 disabled:text-slate-400 transition-colors flex items-center gap-2"
+                  className="text-sm font-bold text-[#C9A84C] hover:text-[#b89540] disabled:text-slate-400 transition-colors flex items-center gap-2"
                 >
                   <FiRefreshCw className={`w-4 h-4 ${isResending ? 'animate-spin' : ''}`} />
                   Resend Verification Code
@@ -244,8 +244,8 @@ export default function VerifyEmailPage() {
         </div>
 
         {/* Support Link */}
-        <p className="mt-8 text-center text-sm text-slate-500">
-          Need help? <a href="mailto:support@klitzcybersecurity.com" className="font-bold text-slate-700 hover:underline">Contact Support</a>
+        <p className="mt-8 text-center text-sm text-white/40">
+          Need help? <a href="mailto:concierge@arborglobal.com" className="font-bold text-[#C9A84C] hover:underline">Contact Concierge</a>
         </p>
       </motion.div>
     </div>

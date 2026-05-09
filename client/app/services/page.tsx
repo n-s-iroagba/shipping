@@ -10,47 +10,47 @@ import {
   FiAirplay, 
   FiShield, 
   FiGlobe, 
-  FiClock,
+  FiLock,
   FiBox,
   FiFileText
 } from "react-icons/fi";
 
 const services = [
   {
-    title: "Ground Freight",
-    description: "Secure and timely road transportation across continents with real-time tracking and specialized handling.",
+    title: "Private Ground Transport",
+    description: "Armoured and unmarked road transport with GPS-monitored secure corridors across continents.",
     icon: <FiTruck className="w-8 h-8" />,
-    color: "bg-blue-50 text-blue-600"
+    color: "bg-[#0B1D3A]/5 text-[#0B1D3A]"
   },
   {
-    title: "Ocean Freight",
-    description: "Cost-effective international shipping for large volumes with comprehensive port-to-port and door-to-door services.",
+    title: "Maritime Asset Relocation",
+    description: "Confidential ocean freight for large-scale relocations with climate-controlled containerisation and armed escort options.",
     icon: <FiAnchor className="w-8 h-8" />,
-    color: "bg-indigo-50 text-indigo-600"
+    color: "bg-[#0B1D3A]/5 text-[#0B1D3A]"
   },
   {
-    title: "Air Freight",
-    description: "The fastest way to move your high-value or time-sensitive goods globally with premium carrier partnerships.",
+    title: "Priority Air Charter",
+    description: "Private and commercial air freight for time-critical, high-value consignments with diplomatic customs facilitation.",
     icon: <FiAirplay className="w-8 h-8" />,
-    color: "bg-sky-50 text-sky-600"
+    color: "bg-[#0B1D3A]/5 text-[#0B1D3A]"
   },
   {
-    title: "Secure Warehousing",
-    description: "State-of-the-art storage facilities with 24/7 monitoring, inventory management, and fulfillment services.",
+    title: "Secure Vault Storage",
+    description: "State-of-the-art vault facilities with biometric access, 24/7 surveillance, and comprehensive insurance coverage.",
     icon: <FiShield className="w-8 h-8" />,
-    color: "bg-emerald-50 text-emerald-600"
+    color: "bg-[#0B1D3A]/5 text-[#0B1D3A]"
   },
   {
-    title: "Customs Brokerage",
-    description: "Expert guidance through complex international regulations to ensure your shipments clear customs without delay.",
+    title: "Customs & Compliance",
+    description: "Expert navigation of international regulations, sanctions screening, and privileged customs clearance channels.",
     icon: <FiFileText className="w-8 h-8" />,
-    color: "bg-amber-50 text-amber-600"
+    color: "bg-[#0B1D3A]/5 text-[#0B1D3A]"
   },
   {
-    title: "Last Mile Delivery",
-    description: "Precision delivery to the final destination, ensuring a premium experience for your end customers.",
+    title: "White-Glove Delivery",
+    description: "Concierge-level final delivery with identity verification, photographic proof, and NDA-protected chain of custody.",
     icon: <FiBox className="w-8 h-8" />,
-    color: "bg-rose-50 text-rose-600"
+    color: "bg-[#0B1D3A]/5 text-[#0B1D3A]"
   }
 ];
 
@@ -66,31 +66,32 @@ export default function ServicesPage() {
       <Navbar />
       
       {/* Hero Header */}
-      <header className="relative bg-slate-900 pt-32 pb-20 px-6 overflow-hidden">
-        <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-white/5 rounded-full blur-3xl" />
+      <header className="relative bg-[#0B1D3A] pt-32 pb-20 px-6 overflow-hidden">
+        <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-[#C9A84C]/5 rounded-full blur-3xl" />
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 text-white/80 text-xs font-bold uppercase tracking-widest mb-6 border border-white/10"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#C9A84C]/10 text-[#C9A84C] text-[10px] font-semibold uppercase tracking-[0.3em] mb-6 border border-[#C9A84C]/20"
           >
-            <FiGlobe className="animate-pulse" /> Global Solutions
+            <FiGlobe className="animate-pulse" /> Bespoke Solutions
           </motion.div>
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-5xl md:text-7xl font-black text-white mb-6 uppercase tracking-tighter"
+            className="text-5xl md:text-7xl font-bold text-white mb-6"
+            style={{ fontFamily: "var(--font-playfair), serif" }}
           >
-            Our <span className="text-indigo-500">Services</span>
+            Our <span className="text-[#C9A84C]">Services</span>
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-slate-400 text-lg max-w-2xl mx-auto"
+            className="text-white/50 text-lg max-w-2xl mx-auto"
           >
-            We provide a comprehensive suite of logistics and shipping solutions designed to meet the demands of modern global commerce.
+            A comprehensive suite of confidential logistics solutions designed for clients who demand discretion, security, and excellence.
           </motion.p>
         </div>
       </header>
@@ -104,20 +105,20 @@ export default function ServicesPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="group p-8 bg-white border border-slate-100 rounded-[2rem] shadow-xl shadow-slate-200/50 hover:shadow-2xl hover:border-indigo-100 transition-all cursor-default"
+              className="group p-8 bg-white border border-slate-100 rounded-3xl shadow-xl shadow-slate-200/50 hover:shadow-2xl hover:border-[#C9A84C]/20 transition-all cursor-default"
             >
-              <div className={`w-16 h-16 rounded-2xl ${service.color} flex items-center justify-center mb-6 transition-transform group-hover:scale-110 group-hover:rotate-3`}>
+              <div className={`w-16 h-16 rounded-2xl ${service.color} flex items-center justify-center mb-6 transition-transform group-hover:scale-110`}>
                 {service.icon}
               </div>
-              <h3 className="text-2xl font-bold text-slate-900 mb-4 tracking-tight">{service.title}</h3>
+              <h3 className="text-2xl font-bold text-[#0B1D3A] mb-4 tracking-tight">{service.title}</h3>
               <p className="text-slate-500 leading-relaxed">
                 {service.description}
               </p>
               <div className="mt-8 pt-8 border-t border-slate-50 flex items-center justify-between">
-                <span className="text-xs font-black text-slate-400 uppercase tracking-widest">Learn More</span>
+                <span className="text-[10px] font-semibold text-[#C9A84C] uppercase tracking-[0.2em]">Enquire</span>
                 <div 
                   onClick={handleContactClick}
-                  className="w-8 h-8 rounded-full bg-slate-50 text-slate-400 flex items-center justify-center group-hover:bg-indigo-600 group-hover:text-white transition-all cursor-pointer"
+                  className="w-8 h-8 rounded-full bg-slate-50 text-slate-400 flex items-center justify-center group-hover:bg-[#0B1D3A] group-hover:text-[#C9A84C] transition-all cursor-pointer"
                 >
                   →
                 </div>
@@ -127,26 +128,32 @@ export default function ServicesPage() {
         </div>
 
         {/* Call to Action */}
-        <section className="mt-24 p-12 bg-indigo-600 rounded-[3rem] text-white text-center relative overflow-hidden">
-          <div className="absolute top-0 right-0 -mr-24 -mt-24 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 left-0 -ml-24 -mb-24 w-64 h-64 bg-indigo-400 rounded-full blur-3xl" />
+        <section className="mt-24 p-12 bg-[#0B1D3A] rounded-3xl text-white text-center relative overflow-hidden">
+          <div className="absolute top-0 right-0 -mr-24 -mt-24 w-64 h-64 bg-[#C9A84C]/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 left-0 -ml-24 -mb-24 w-64 h-64 bg-[#C9A84C]/5 rounded-full blur-3xl" />
           <div className="relative z-10">
-            <h2 className="text-3xl md:text-5xl font-black mb-6 uppercase tracking-tighter">Ready to ship?</h2>
-            <p className="text-indigo-100 mb-10 max-w-xl mx-auto text-lg">
-              Get in touch with our logistics experts today for a customized quote tailored to your business needs.
+            <FiLock className="w-10 h-10 text-[#C9A84C] mx-auto mb-6" />
+            <h2
+              className="text-3xl md:text-5xl font-bold mb-6"
+              style={{ fontFamily: "var(--font-playfair), serif" }}
+            >
+              Ready to Begin?
+            </h2>
+            <p className="text-white/50 mb-10 max-w-xl mx-auto text-lg">
+              Contact our private logistics team for a confidential consultation tailored to your requirements.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <button 
                 onClick={handleContactClick}
-                className="px-10 py-4 bg-white text-indigo-600 rounded-2xl font-bold hover:bg-slate-50 transition-all"
+                className="px-10 py-4 bg-[#C9A84C] text-[#0B1D3A] rounded-xl font-bold hover:bg-[#d4b55c] transition-all"
               >
-                Request a Quote
+                Private Consultation
               </button>
               <button 
                 onClick={handleContactClick}
-                className="px-10 py-4 bg-white/10 text-white rounded-2xl font-bold border border-white/20 hover:bg-white/20 transition-all"
+                className="px-10 py-4 bg-white/5 text-white rounded-xl font-bold border border-white/10 hover:bg-white/10 transition-all"
               >
-                Contact Sales
+                Contact Concierge
               </button>
             </div>
           </div>

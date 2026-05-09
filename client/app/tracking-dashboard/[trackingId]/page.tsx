@@ -123,7 +123,7 @@ export default function ShipmentTrackingDashboard() {
         <ErrorAlert message={activeError} />
         <button
           onClick={() => window.location.reload()}
-          className="mt-4 w-full py-3 bg-indigo-600 text-white rounded-xl font-medium shadow-lg"
+          className="mt-4 w-full py-3 bg-[#0B1D3A] text-white rounded-xl font-medium shadow-lg"
         >
           Retry
         </button>
@@ -135,17 +135,17 @@ export default function ShipmentTrackingDashboard() {
   if (!shipmentData) return null;
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 selection:bg-indigo-100 pb-20">
+    <div className="min-h-screen bg-slate-50 text-[#0B1D3A] selection:bg-[#C9A84C]/20 pb-20">
       {/* Hero Header */}
       <header className="relative bg-white border-b border-slate-200 pt-12 pb-8 px-6 overflow-hidden">
-        <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-indigo-50 rounded-full blur-3xl opacity-50" />
+        <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-[#C9A84C]/5 rounded-full blur-3xl opacity-50" />
         <div className="absolute bottom-0 left-0 -ml-16 -mb-16 w-64 h-64 bg-slate-100 rounded-full blur-3xl opacity-50" />
 
         <div className="relative max-w-2xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 text-xs font-bold uppercase tracking-wider mb-4"
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C9A84C]/10 text-[#C9A84C] text-xs font-bold uppercase tracking-wider mb-4"
           >
             <FiPackage className="w-3 h-3" />
             Tracking Active
@@ -187,15 +187,15 @@ export default function ShipmentTrackingDashboard() {
               <motion.div
                 animate={{ x: [0, 40, 0] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                className="w-2 h-2 bg-indigo-400 rounded-full shadow-[0_0_8px_rgba(129,140,248,0.8)]"
+                className="w-2 h-2 bg-[#C9A84C] rounded-full shadow-[0_0_8px_rgba(201,168,76,0.8)]"
               />
             </div>
 
             <div className="flex flex-col items-center gap-2 z-10 bg-white">
-              <div className="w-12 h-12 rounded-2xl bg-indigo-600 flex items-center justify-center shadow-lg shadow-indigo-200">
+              <div className="w-12 h-12 rounded-2xl bg-[#0B1D3A] flex items-center justify-center shadow-lg shadow-[#0B1D3A]/20">
                 <FiMapPin className="w-6 h-6 text-white" />
               </div>
-              <span className="text-sm font-bold uppercase tracking-tight text-indigo-600">{shipmentData.destination}</span>
+              <span className="text-sm font-bold uppercase tracking-tight text-[#0B1D3A]">{shipmentData.destination}</span>
             </div>
           </div>
         </section>
@@ -208,18 +208,18 @@ export default function ShipmentTrackingDashboard() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-indigo-600 rounded-3xl p-8 text-white text-center shadow-xl shadow-indigo-100 relative overflow-hidden"
+              className="bg-[#0B1D3A] rounded-3xl p-8 text-white text-center shadow-xl shadow-[#0B1D3A]/10 relative overflow-hidden"
             >
-              <div className="absolute top-0 right-0 -mr-8 -mt-8 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
-              <FiLock className="w-10 h-10 mx-auto mb-4 opacity-80" />
+              <div className="absolute top-0 right-0 -mr-8 -mt-8 w-32 h-32 bg-[#C9A84C]/5 rounded-full blur-2xl" />
+              <FiLock className="w-10 h-10 mx-auto mb-4 text-[#C9A84C]" />
               <h2 className="text-xl font-bold mb-2">Access Full Details</h2>
-              <p className="text-indigo-100 text-sm mb-6 leading-relaxed">
-                Verification is required to view package photos, sender details, and full shipment history.
+              <p className="text-white/50 text-sm mb-6 leading-relaxed">
+                Verification is required to view package photos, sender details, and full consignment history.
               </p>
               <button
                 onClick={handleRequestSensitive}
                 disabled={isInitiating}
-                className="w-full py-4 bg-white text-indigo-600 rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-slate-50 transition-colors shadow-lg active:scale-95"
+                className="w-full py-4 bg-[#C9A84C] text-[#0B1D3A] rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-[#d4b55c] transition-colors shadow-lg active:scale-95"
               >
                 {isInitiating ? "Sending OTP..." : "Verify Identity"}
                 <FiChevronRight className="w-5 h-5" />
@@ -351,7 +351,7 @@ export default function ShipmentTrackingDashboard() {
             <div className="relative pl-6 space-y-8 before:absolute before:left-0 before:top-2 before:bottom-2 before:w-px before:bg-slate-200">
               {shipmentData.shippingStages.slice(0, 3).map((stage, idx) => (
                 <div key={idx} className="relative">
-                  <div className="absolute -left-[31px] top-1 w-3 h-3 rounded-full border-2 border-slate-50 bg-indigo-500 shadow-[0_0_0_4px_rgba(248,250,252,1)]" />
+                  <div className="absolute -left-[31px] top-1 w-3 h-3 rounded-full border-2 border-slate-50 bg-[#C9A84C] shadow-[0_0_0_4px_rgba(248,250,252,1)]" />
                   <h4 className="font-bold text-slate-800 text-sm">{stage.title}</h4>
                   <p className="text-xs text-slate-400 font-bold uppercase tracking-widest mt-1">
                     {stage.location} • {new Date(stage.dateAndTime).toLocaleDateString()}

@@ -45,7 +45,7 @@ export default function PendingPaymentPage() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-slate-50 to-indigo-100">
+      <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-slate-50 to-[#C9A84C]/10">
         <div className="text-center space-y-4">
           <Spinner className="w-12 h-12 text-slate-600 mx-auto" />
           <p className="text-slate-700 font-medium">Loading payments...</p>
@@ -56,7 +56,7 @@ export default function PendingPaymentPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-indigo-100 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-[#C9A84C]/10 flex items-center justify-center p-4">
         <div className="max-w-md w-full">
           <ErrorAlert 
             message={error || "Failed to load payments"} 
@@ -68,14 +68,14 @@ export default function PendingPaymentPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-indigo-50 to-slate-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-[#0B1D3A]/5 to-slate-50">
       {/* Header Section */}
       <div className="sticky top-0 z-10 bg-white/80 backdrop-blur-md border-b border-slate-200">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
           <div className="max-w-6xl mx-auto">
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
               <div>
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-slate-900 to-indigo-800 bg-clip-text text-transparent">
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-slate-900 to-[#0B1D3A] bg-clip-text text-transparent">
                   {displayName}&apos;s Payments
                 </h1>
                 <p className="text-slate-600 mt-1 text-sm sm:text-base">
@@ -136,7 +136,7 @@ export default function PendingPaymentPage() {
               <div className="text-center max-w-md">
                 <div className="bg-white rounded-3xl p-8 sm:p-12 shadow-xl border border-slate-100">
                   <div className="flex justify-center mb-6">
-                    <div className="p-4 bg-gradient-to-br from-slate-100 to-indigo-100 rounded-full">
+                    <div className="p-4 bg-gradient-to-br from-slate-100 to-[#C9A84C]/10 rounded-full">
                       <DocumentTextIcon className="w-12 h-12 sm:w-16 sm:h-16 text-slate-600" />
                     </div>
                   </div>

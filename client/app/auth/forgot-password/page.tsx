@@ -37,22 +37,22 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-slate-100 to-amber-50 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0B1D3A] via-[#0f2847] to-[#0B1D3A] p-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-md"
       >
-        <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-100 relative">
+        <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-white/10 relative">
           {/* Header */}
-          <div className="bg-slate-900 p-10 text-center relative overflow-hidden">
-            <div className="absolute top-0 right-0 -mr-8 -mt-8 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
+          <div className="bg-[#0B1D3A] p-10 text-center relative overflow-hidden">
+            <div className="absolute top-0 right-0 -mr-8 -mt-8 w-32 h-32 bg-[#C9A84C]/5 rounded-full blur-2xl" />
             <div className="relative z-10">
-              <div className="w-16 h-16 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center mx-auto mb-6 border border-white/20">
-                <FiMail className="w-8 h-8 text-white" />
+              <div className="w-16 h-16 bg-[#C9A84C]/10 backdrop-blur-md rounded-2xl flex items-center justify-center mx-auto mb-6 border border-[#C9A84C]/20">
+                <FiMail className="w-8 h-8 text-[#C9A84C]" />
               </div>
-              <h1 className="text-2xl font-bold text-white mb-2">Reset Password</h1>
-              <p className="text-slate-400 text-sm">We'll send you a link to reset your password</p>
+              <h1 className="text-2xl font-bold text-white mb-2" style={{ fontFamily: "var(--font-playfair), serif" }}>Reset Password</h1>
+              <p className="text-white/50 text-sm">We&apos;ll send you a secure link to reset your password</p>
             </div>
           </div>
 
@@ -75,7 +75,7 @@ export default function ForgotPasswordPage() {
                 </div>
                 <button
                   onClick={() => router.push("/auth/login")}
-                  className="w-full py-4 bg-slate-900 text-white rounded-2xl font-bold hover:bg-slate-800 transition-all active:scale-[0.98]"
+                  className="w-full py-4 bg-[#0B1D3A] text-white rounded-2xl font-bold hover:bg-[#132d54] transition-all active:scale-[0.98]"
                 >
                   Return to Login
                 </button>
@@ -97,7 +97,7 @@ export default function ForgotPasswordPage() {
                 )}
 
                 <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-700 ml-1">Email Address</label>
+                  <label className="text-[10px] font-semibold text-[#0B1D3A] ml-1 tracking-[0.2em] uppercase">Email Address</label>
                   <div className="relative">
                     <FiMail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
                     <input
@@ -105,7 +105,7 @@ export default function ForgotPasswordPage() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="admin@example.com"
-                      className="w-full pl-12 pr-4 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-indigo-500 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all duration-200 outline-none text-slate-800"
+                      className="w-full pl-12 pr-4 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-[#C9A84C] focus:bg-white focus:ring-4 focus:ring-[#C9A84C]/10 transition-all duration-200 outline-none text-[#0B1D3A]"
                       required
                     />
                   </div>
@@ -114,7 +114,7 @@ export default function ForgotPasswordPage() {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full py-4 bg-slate-900 text-white rounded-2xl font-bold shadow-lg shadow-slate-200 hover:bg-slate-800 transition-all active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2"
+                  className="w-full py-4 bg-[#0B1D3A] text-white rounded-2xl font-bold shadow-lg shadow-[#0B1D3A]/20 hover:bg-[#132d54] transition-all active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2"
                 >
                   {isLoading ? (
                     <FiSend className="w-5 h-5 animate-spin" />

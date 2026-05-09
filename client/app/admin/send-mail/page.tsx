@@ -100,15 +100,15 @@ function EmailForm() {
 
         <div className="bg-white rounded-3xl shadow-xl shadow-slate-200/50 overflow-hidden border border-slate-100">
           {/* Header */}
-          <div className="bg-slate-900 p-8 text-white relative overflow-hidden">
-            <div className="absolute top-0 right-0 -mr-12 -mt-12 w-48 h-48 bg-white/5 rounded-full blur-3xl" />
+          <div className="bg-[#0B1D3A] p-8 text-white relative overflow-hidden">
+            <div className="absolute top-0 right-0 -mr-12 -mt-12 w-48 h-48 bg-[#C9A84C]/5 rounded-full blur-3xl" />
             <div className="relative z-10 flex items-center gap-6">
-              <div className="w-14 h-14 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/20">
-                <FiMail className="w-7 h-7" />
+              <div className="w-14 h-14 bg-[#C9A84C]/10 backdrop-blur-md rounded-2xl flex items-center justify-center border border-[#C9A84C]/20">
+                <FiMail className="w-7 h-7 text-[#C9A84C]" />
               </div>
               <div>
                 <h1 className="text-2xl font-bold">Compose Email</h1>
-                <p className="text-slate-400 text-sm">Draft a professional message to your client</p>
+                <p className="text-white/50 text-sm">Draft a confidential message to your client</p>
               </div>
             </div>
           </div>
@@ -140,20 +140,20 @@ function EmailForm() {
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Subject */}
               <div className="space-y-2">
-                <label className="text-sm font-bold text-slate-700 ml-1">Email Subject</label>
+                <label className="text-[10px] font-semibold text-[#0B1D3A] ml-1 tracking-[0.2em] uppercase">Email Subject</label>
                 <input
                   type="text"
                   value={subject}
                   onChange={(e) => setSubject(e.target.value)}
                   placeholder="e.g., Update on Shipment #TRK123456"
-                  className="w-full px-5 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-indigo-500 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all duration-200 outline-none text-slate-800 font-medium placeholder:text-slate-400"
+                  className="w-full px-5 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-[#C9A84C] focus:bg-white focus:ring-4 focus:ring-[#C9A84C]/10 transition-all duration-200 outline-none text-[#0B1D3A] font-medium placeholder:text-slate-400"
                 />
               </div>
 
               {/* Editor */}
               <div className="space-y-2">
-                <label className="text-sm font-bold text-slate-700 ml-1">Message Body</label>
-                <div className="rounded-2xl border-2 border-slate-100 overflow-hidden focus-within:border-indigo-500 focus-within:ring-4 focus-within:ring-indigo-50 transition-all duration-200">
+                <label className="text-[10px] font-semibold text-[#0B1D3A] ml-1 tracking-[0.2em] uppercase">Message Body</label>
+                <div className="rounded-2xl border-2 border-slate-100 overflow-hidden focus-within:border-[#C9A84C] focus-within:ring-4 focus-within:ring-[#C9A84C]/10 transition-all duration-200">
                   <CustomEditor
                     value={editorContent}
                     onChange={(content: string) => setEditorContent(content)}
@@ -170,7 +170,7 @@ function EmailForm() {
                 <button
                   type="submit"
                   disabled={isLoading || !email}
-                  className="flex-1 py-4 bg-slate-900 text-white rounded-2xl font-bold shadow-lg shadow-slate-200 hover:bg-slate-800 transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+                  className="flex-1 py-4 bg-[#0B1D3A] text-white rounded-2xl font-bold shadow-lg shadow-[#0B1D3A]/20 hover:bg-[#132d54] transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
                 >
                   {isLoading ? (
                     <FiSend className="w-5 h-5 animate-spin" />
@@ -213,7 +213,7 @@ export default function SendMailPage() {
   return (
     <Suspense fallback={
       <div className="min-h-screen flex items-center justify-center bg-slate-50">
-        <div className="w-8 h-8 border-4 border-slate-900 border-t-transparent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-4 border-[#0B1D3A] border-t-transparent rounded-full animate-spin" />
       </div>
     }>
       <EmailForm />

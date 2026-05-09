@@ -49,7 +49,7 @@ const AdminShipment = () => {
   if (!shipment) return <ErrorAlert message={"No shipment found"} />;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-indigo-100">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-[#C9A84C]/10">
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
         {/* Header */}
         <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6 mb-6 sm:mb-8">

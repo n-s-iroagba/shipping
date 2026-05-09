@@ -38,7 +38,7 @@ const Information: React.FC<InformationProps> = ({ title, text, images }) => {
               <p className="text-white text-lg font-bold leading-tight mb-2">
                 {image.text}
               </p>
-              <div className="flex items-center gap-2 text-indigo-400 text-xs font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0">
+              <div className="flex items-center gap-2 text-[#C9A84C] text-xs font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0">
                 Track Service <span>→</span>
               </div>
             </div>
