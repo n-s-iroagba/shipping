@@ -24,6 +24,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ShipmentController = void 0;
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const errors_1 = require("../errors/errors");
 const shipmentService_1 = require("../services/shipmentService");
 const fs_1 = __importDefault(require("fs"));
@@ -141,7 +142,7 @@ class ShipmentController {
     trackPublic(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const trackingInfo = yield service.getSensitiveTrackingInfo(req.params.trackingId);
+                const trackingInfo = yield service.getPublicTrackingInfo(req.params.trackingId);
                 res.json(trackingInfo);
             }
             catch (error) {
@@ -151,6 +152,38 @@ class ShipmentController {
                 else {
                     console.error(error);
                     res.status(500).json({ error: 'Failed to track shipment' });
+                }
+            }
+        });
+    }
+    trackSensitive(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { trackingId } = req.params;
+                const authHeader = req.headers.authorization;
+                if (!authHeader || !authHeader.startsWith('Bearer ')) {
+                    res.status(401).json({ error: 'Missing or invalid token' });
+                    return;
+                }
+                const token = authHeader.split(' ')[1];
+                try {
+                    const secret = process.env.JWT_SECRET || 'fallback_secret';
+                    jsonwebtoken_1.default.verify(token, secret);
+                }
+                catch (err) {
+                    res.status(401).json({ error: 'Token expired or invalid' });
+                    return;
+                }
+                const trackingInfo = yield service.getSensitiveTrackingInfo(trackingId);
+                res.json(trackingInfo);
+            }
+            catch (error) {
+                if (error instanceof errors_1.NotFoundError) {
+                    res.status(404).json(error);
+                }
+                else {
+                    console.error(error);
+                    res.status(500).json({ error: 'Failed to fetch sensitive shipment details' });
                 }
             }
         });

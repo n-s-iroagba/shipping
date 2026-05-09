@@ -38,18 +38,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importStar(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
+const path_1 = __importDefault(require("path"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const cors_1 = __importDefault(require("cors"));
 const shipmentRoutes_1 = __importDefault(require("./routes/shipmentRoutes"));
 const authRoutes_1 = __importDefault(require("./routes/authRoutes"));
 const shippingStageRoutes_1 = __importDefault(require("./routes/shippingStageRoutes"));
-const cryptoWalletRoutes_1 = __importDefault(require("./routes/cryptoWalletRoutes"));
+const database_1 = require("./config/database");
 const paymentRoutes_1 = __importDefault(require("./routes/paymentRoutes"));
 const documentTemplateRoutes_1 = __importDefault(require("./routes/documentTemplateRoutes"));
 const errorHandler_1 = require("./middleware/errorHandler");
-const bankRoutes_1 = __importDefault(require("./routes/bankRoutes"));
-const Bank_1 = __importDefault(require("./models/Bank"));
-dotenv_1.default.config();
+const env = process.env.NODE_ENV || 'development';
+const envFile = env === 'production' ? '.env' : '.env.development';
+dotenv_1.default.config({ path: path_1.default.resolve(process.cwd(), envFile) });
 const app = (0, express_1.default)();
 // Middleware
 app.use((0, express_1.urlencoded)());
@@ -57,9 +58,7 @@ app.use(express_1.default.json());
 app.use((0, cookie_parser_1.default)());
 // CORS configuration
 const corsOptions = {
-    origin: process.env.NODE_ENV === 'production'
-        ? process.env.CLIENT_URL || 'https://www.netlylogistics.com'
-        : 'http://localhost:3000',
+    origin: process.env.CLIENT_URL || 'http://localhost:3000',
     credentials: true, // Allow cookies to be sent
     optionsSuccessStatus: 200,
 };
@@ -69,16 +68,12 @@ app.use((req, res, next) => {
     console.log('📦 Body:', req.body);
     next();
 });
-Bank_1.default.sync({ force: true });
-// connectDB(true);
-// sequelize.sync({ alter: true });
+(0, database_1.connectDB)();
 app.use('/api/payment', paymentRoutes_1.default);
-app.use('/api/crypto-wallet', cryptoWalletRoutes_1.default);
 app.use('/api/auth', authRoutes_1.default);
 app.use('/api/stage', shippingStageRoutes_1.default);
 app.use('/api/shipment', shipmentRoutes_1.default);
 app.use('/api/templates', documentTemplateRoutes_1.default);
-app.use('/api/bank', bankRoutes_1.default);
 app.use(errorHandler_1.errorHandler);
-const PORT = process.env.NODE_ENV === 'production' ? 3000 : 5000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));

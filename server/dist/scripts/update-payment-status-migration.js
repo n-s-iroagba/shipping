@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = updatePaymentStatusEnum;
 // scripts/mysql-update-payment-status.ts
 const database_1 = require("../config/database"); // Adjust path to your database config
 function updatePaymentStatusEnum() {
@@ -41,12 +42,3 @@ function updatePaymentStatusEnum() {
     });
 }
 // Run the migration
-updatePaymentStatusEnum()
-    .then(() => {
-    console.log('Migration script finished successfully');
-    process.exit(0);
-})
-    .catch((error) => {
-    console.error('Migration script failed:', error);
-    process.exit(1);
-});

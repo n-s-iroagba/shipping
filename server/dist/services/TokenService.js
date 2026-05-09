@@ -15,15 +15,15 @@ class TokenService {
         this.resetPasswordSecret = resetPasswordSecret;
         this.emailVerificationSecret = emailVerificationSecret;
         this.defaultOptions = {
-            issuer: 'your-app-name',
-            audience: 'your-app-admins',
+            issuer: process.env.JWT_ISSUER || 'netly-logistics',
+            audience: process.env.JWT_AUDIENCE || 'netly-logistics-admins',
         };
         // Token expiration defaults
         this.tokenExpirations = {
-            access: '15m',
-            refresh: '7d',
-            resetPassword: '1h',
-            emailVerification: '24h',
+            access: (process.env.JWT_ACCESS_EXPIRATION || '15m'),
+            refresh: (process.env.JWT_REFRESH_EXPIRATION || '7d'),
+            resetPassword: (process.env.JWT_RESET_PASSWORD_EXPIRATION || '1h'),
+            emailVerification: (process.env.JWT_EMAIL_VERIFICATION_EXPIRATION || '24h'),
         };
         if (!secret) {
             logger_1.default.error('JWT secret is required for TokenService initialization');
@@ -176,7 +176,7 @@ class TokenService {
     /**
      * Generate refresh token with different secret (if provided)
      */
-    generateRefreshToken(payload, expiresIn = '7d') {
+    generateRefreshToken(payload, expiresIn = process.env.JWT_REFRESH_EXPIRATION || '7d') {
         // Create minimal payload with only essential fields
         const refreshPayload = {
             id: payload.id,

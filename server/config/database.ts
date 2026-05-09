@@ -44,30 +44,24 @@ export const connectDB = async (force: boolean = false) => {
     await checkTableStructure()
       .then(() => {
         console.log('\nTable structure check completed');
-        process.exit(0);
       })
       .catch((error) => {
         console.error('Check failed:', error);
-        process.exit(1);
       });
     await updatePaymentStatusEnum()
       .then(() => {
         console.log('Migration script finished successfully');
-        process.exit(0);
       })
       .catch((error) => {
         console.error('Migration script failed:', error);
-        process.exit(1);
       });
     await updateExistingPaymentStatus()
       .then(() => {
         console.log('\n🎉 PaymentStatus column update completed successfully!');
         console.log('Your ShippingStage model can now use the REJECTED status.');
-        process.exit(0);
       })
       .catch((error) => {
         console.error('Script failed:', error);
-        process.exit(1);
       });
 
   } catch (error) {

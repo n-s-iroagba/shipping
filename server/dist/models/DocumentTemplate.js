@@ -17,7 +17,7 @@ DocumentTemplate.init({
         type: sequelize_1.DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'Users',
+            model: 'Admins',
             key: 'id',
         },
     },

@@ -49,8 +49,8 @@ class AuthController {
          */
         this.resendCode = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             try {
-                const { token, id } = req.body;
-                const newToken = yield this.authService.generateNewCode(token);
+                const { verificationToken } = req.body;
+                const newToken = yield this.authService.generateNewCode(verificationToken);
                 res.json(newToken);
             }
             catch (error) {

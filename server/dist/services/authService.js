@@ -284,12 +284,12 @@ exports.AuthService = AuthService;
 // factory/auth.factory.ts
 function createAuthService() {
     const config = {
-        jwtSecret: process.env.JWT_SECRET || 'udorakpuenyi',
+        jwtSecret: process.env.JWT_SECRET || 'netly-secret-key',
         clientUrl: config_1.ClientUrl,
         tokenExpiration: {
-            verification: 86400,
-            login: 3600,
-            refresh: 86400 * 7,
+            verification: parseInt(process.env.JWT_EMAIL_VERIFICATION_EXPIRATION_SEC || '86400'),
+            login: parseInt(process.env.JWT_ACCESS_EXPIRATION_SEC || '3600'),
+            refresh: parseInt(process.env.JWT_REFRESH_EXPIRATION_SEC || '604800'),
         },
     };
     logger_1.default.info('AuthService factory creating new instance');

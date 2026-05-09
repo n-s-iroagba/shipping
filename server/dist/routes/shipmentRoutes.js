@@ -24,9 +24,7 @@ router.delete('/:id', (req, res) => controller.delete(req, res));
 // Public tracking endpoint
 router.get('/track/public/:trackingId', (req, res) => controller.trackPublic(req, res));
 // Sensitive tracking endpoint
-// router.get('/track/sensitive/:trackingId', (req, res) =>
-//   controller.trackSensitive(req, res)
-// );
+router.get('/track/sensitive/:trackingId', (req, res) => controller.trackSensitive(req, res));
 router.get('/initiate/:shipmentId', controller.initiateSensitiveTracking);
 router.post('/sensitive/access', controller.grantsSensitiveView);
 exports.default = router;

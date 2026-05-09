@@ -39,7 +39,7 @@ app.use((req, res, next) => {
   next();
 });
 
-connectDB(true);
+connectDB();
 
 app.use('/api/payment',paymentRoutes)
 

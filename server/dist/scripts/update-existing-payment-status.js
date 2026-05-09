@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.updateExistingPaymentStatus = updateExistingPaymentStatus;
 // scripts/update-existing-payment-status.ts
 const database_1 = require("../config/database"); // Adjust path to your database config
 function updateExistingPaymentStatus() {
@@ -60,13 +61,3 @@ function updateExistingPaymentStatus() {
     });
 }
 // Run the script
-updateExistingPaymentStatus()
-    .then(() => {
-    console.log('\n🎉 PaymentStatus column update completed successfully!');
-    console.log('Your ShippingStage model can now use the REJECTED status.');
-    process.exit(0);
-})
-    .catch((error) => {
-    console.error('Script failed:', error);
-    process.exit(1);
-});

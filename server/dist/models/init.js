@@ -13,7 +13,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.testAssociations = exports.syncModels = exports.DocumentTemplate = exports.CryptoWallet = exports.Payment = exports.ShippingStage = exports.Shipment = exports.Admin = exports.sequelize = void 0;
+exports.testAssociations = exports.syncModels = exports.DocumentTemplate = exports.Payment = exports.ShippingStage = exports.Shipment = exports.Admin = exports.sequelize = void 0;
 const database_1 = require("../config/database");
 Object.defineProperty(exports, "sequelize", { enumerable: true, get: function () { return database_1.sequelize; } });
 // Import all models through the index file
@@ -22,7 +22,6 @@ Object.defineProperty(exports, "Admin", { enumerable: true, get: function () { r
 Object.defineProperty(exports, "Shipment", { enumerable: true, get: function () { return index_1.Shipment; } });
 Object.defineProperty(exports, "ShippingStage", { enumerable: true, get: function () { return index_1.ShippingStage; } });
 Object.defineProperty(exports, "Payment", { enumerable: true, get: function () { return index_1.Payment; } });
-Object.defineProperty(exports, "CryptoWallet", { enumerable: true, get: function () { return index_1.CryptoWallet; } });
 Object.defineProperty(exports, "DocumentTemplate", { enumerable: true, get: function () { return index_1.DocumentTemplate; } });
 // Function to sync all models with the database
 const syncModels = (options) => __awaiter(void 0, void 0, void 0, function* () {
@@ -47,8 +46,6 @@ const testAssociations = () => {
     console.log('ShippingStage associations:', Object.keys(index_1.ShippingStage.associations));
     // Test Payment associations
     console.log('Payment associations:', Object.keys(index_1.Payment.associations));
-    // Test CryptoWallet associations
-    console.log('CryptoWallet associations:', Object.keys(index_1.CryptoWallet.associations));
     console.log('✅ Association test complete');
 };
 exports.testAssociations = testAssociations;

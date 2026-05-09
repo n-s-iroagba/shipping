@@ -17,11 +17,12 @@ exports.EmailService = exports.transporter = void 0;
 const nodemailer_1 = __importDefault(require("nodemailer"));
 const logger_1 = __importDefault(require("../utils/logger"));
 exports.transporter = nodemailer_1.default.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
+    host: process.env.EMAIL_HOST || 'smtp.gmail.com',
+    port: parseInt(process.env.EMAIL_PORT || '465'),
+    secure: process.env.EMAIL_SECURE === 'true' || true,
     auth: {
-        user: 'wealthfundingtradestation@gmail.com',
-        pass: 'anft vmyj ianz sftx',
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
     },
 });
 class EmailService {
@@ -31,8 +32,10 @@ class EmailService {
     sendEmail(options) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
+                const fromName = process.env.EMAIL_FROM_NAME || 'Netly Logistics';
+                const fromAddress = process.env.EMAIL_FROM_ADDRESS || process.env.EMAIL_USER;
                 const mailOptions = {
-                    from: '"Klitz Cybersecurity" <support@klitzcybersecurity.com>',
+                    from: `"${fromName}" <${fromAddress}>`,
                     to: options.to,
                     subject: options.subject,
                     html: options.html,
@@ -72,85 +75,117 @@ class EmailService {
         return `
       <style>
         body { 
-          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+          font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
           line-height: 1.6; 
-          color: #333; 
+          color: #1e293b; 
           margin: 0; 
           padding: 0; 
-          background-color: #f4f4f4;
+          background-color: #f8fafc;
         }
         .container { 
           max-width: 600px; 
-          margin: 0 auto; 
-          background: white; 
-          border-radius: 8px; 
+          margin: 20px auto; 
+          background: #ffffff; 
+          border-radius: 16px; 
           overflow: hidden; 
-          box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+          box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+          border: 1px solid #e2e8f0;
         }
         .header { 
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-          color: white; 
-          padding: 30px 20px; 
+          background: #0f172a;
+          color: #ffffff; 
+          padding: 40px 20px; 
           text-align: center; 
         }
-        .content { padding: 30px; }
+        .header h1 {
+          margin: 0;
+          font-size: 24px;
+          font-weight: 800;
+          letter-spacing: -0.025em;
+        }
+        .content { 
+          padding: 40px; 
+          background: #ffffff;
+        }
         .button { 
           display: inline-block; 
-          background: #007bff; 
-          color: white !important; 
-          padding: 12px 24px; 
+          background: #2563eb; 
+          color: #ffffff !important; 
+          padding: 14px 28px; 
           text-decoration: none; 
-          border-radius: 6px; 
-          margin: 20px 0;
-          font-weight: 600;
-          transition: background-color 0.3s;
+          border-radius: 12px; 
+          margin: 24px 0;
+          font-weight: 700;
+          font-size: 16px;
+          text-align: center;
+          transition: background-color 0.2s;
         }
-        .button:hover { background: #0056b3; }
-        .button.danger { background: #dc3545; }
-        .button.danger:hover { background: #c82333; }
-        .button.success { background: #28a745; }
-        .button.success:hover { background: #218838; }
         .details-box { 
-          background: #f8f9fa; 
-          padding: 20px; 
-          border-radius: 6px; 
-          margin: 20px 0;
-          border-left: 4px solid #007bff;
+          background: #f1f5f9; 
+          padding: 24px; 
+          border-radius: 12px; 
+          margin: 24px 0;
+          border-left: 4px solid #2563eb;
         }
         .warning-box { 
-          background: #fff3cd; 
-          border: 1px solid #ffeaa7; 
-          padding: 15px; 
-          border-radius: 6px; 
-          margin: 20px 0;
-          border-left: 4px solid #ffc107;
-        }
-        .error-box {
-          background: #f8d7da;
-          border: 1px solid #f5c6cb;
-          padding: 15px;
-          border-radius: 6px;
-          margin: 20px 0;
-          border-left: 4px solid #dc3545;
+          background: #fffbeb; 
+          border: 1px solid #fef3c7; 
+          padding: 20px; 
+          border-radius: 12px; 
+          margin: 24px 0;
+          border-left: 4px solid #f59e0b;
+          color: #92400e;
         }
         .footer { 
-          background: #f8f9fa;
-          padding: 20px; 
+          background: #f1f5f9;
+          padding: 30px; 
           text-align: center;
-          font-size: 12px; 
-          color: #666; 
-          border-top: 1px solid #eee;
+          font-size: 13px; 
+          color: #64748b; 
+          border-top: 1px solid #e2e8f0;
         }
+        .footer p { margin: 8px 0; }
         .text-center { text-align: center; }
-        .mt-0 { margin-top: 0; }
+        .divider {
+          height: 1px;
+          background: #e2e8f0;
+          margin: 32px 0;
+        }
       </style>
+    `;
+    }
+    wrapInTemplate(title, content, subtitle) {
+        return `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          ${this.getBaseEmailStyles()}
+        </head>
+        <body>
+          <div class="container">
+            <div class="header">
+              <h1>${title}</h1>
+              ${subtitle ? `<p style="margin: 10px 0 0 0; opacity: 0.8; font-size: 14px;">${subtitle}</p>` : ''}
+            </div>
+            <div class="content">
+              ${content}
+            </div>
+            <div class="footer">
+              <p>&copy; ${new Date().getFullYear()} ${process.env.BRAND_NAME || 'Netly Logistics'}. All rights reserved.</p>
+              <p>Safe, Fast, and Reliable Shipping Solutions.</p>
+            </div>
+          </div>
+        </body>
+      </html>
     `;
     }
     // Verification Email
     sendVerificationEmail(user, code) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const verificationUrl = `${this.clientUrl}/verify-email/${user.verificationToken}`;
+                const verificationUrl = `${this.clientUrl}/auth/verify-email/${user.verificationToken}`;
                 const html = `
         <!DOCTYPE html>
         <html>
@@ -171,7 +206,7 @@ class EmailService {
                 
                 <div class="details-box">
                   <h3 class="mt-0">Verification Code</h3>
-                  <p style="font-size: 24px; font-weight: bold; color: #007bff; margin: 10px 0;">${code}</p>
+                  <p style="font-size: 24px; font-weight: bold; color: #2563eb; margin: 10px 0;">${code}</p>
                   <p><em>You can also use the button below for quick verification</em></p>
                 </div>
                 
@@ -180,7 +215,7 @@ class EmailService {
                 </div>
                 
                 <p><strong>Alternative method:</strong> Copy and paste this link in your browser:</p>
-                <p style="word-break: break-all; color: #007bff; background: #f8f9fa; padding: 10px; border-radius: 4px;">${verificationUrl}</p>
+                <p style="word-break: break-all; color: #2563eb; background: #f8f9fa; padding: 10px; border-radius: 4px;">${verificationUrl}</p>
                 
                 <div class="warning-box">
                   <strong>⚠️ Important:</strong>
@@ -193,7 +228,7 @@ class EmailService {
               
               <div class="footer">
                 <p>If you didn't create this account, please ignore this email.</p>
-                <p>&copy; ${new Date().getFullYear()} Netly Logistics. All rights reserved.</p>
+                <p>&copy; ${new Date().getFullYear()} ${process.env.BRAND_NAME || 'Netly Logistics'}. All rights reserved.</p>
               </div>
             </div>
           </body>
@@ -262,7 +297,7 @@ class EmailService {
               
               <div class="footer">
                 <p>If you're having trouble with the button above, copy and paste the URL into your web browser.</p>
-                <p>&copy; ${new Date().getFullYear()} Netly Logistics. All rights reserved.</p>
+                <p>&copy; ${new Date().getFullYear()} ${process.env.BRAND_NAME || 'Netly Logistics'}. All rights reserved.</p>
               </div>
             </div>
           </body>
@@ -307,7 +342,7 @@ class EmailService {
             
             <div class="details-box">
               <h3 class="mt-0">Security Verification Code</h3>
-              <p style="font-size: 24px; font-weight: bold; color: #007bff; margin: 10px 0; letter-spacing: 2px;">${code}</p>
+              <p style="font-size: 24px; font-weight: bold; color: #2563eb; margin: 10px 0; letter-spacing: 2px;">${code}</p>
               <p><em>Use this code to access sensitive shipment details</em></p>
             </div>
             <div class="warning-box">
@@ -348,7 +383,7 @@ class EmailService {
             const subject = 'Secure Access Code for Sensitive Shipment Data';
             try {
                 yield exports.transporter.sendMail({
-                    from: `"Netly Logistics Security" <${process.env.EMAIL_USER}>`,
+                    from: `"${process.env.BRAND_NAME || 'Netly Logistics'} Security" <${process.env.EMAIL_USER}>`,
                     to: shipment.receipientEmail,
                     subject: subject,
                     html: html,
@@ -366,7 +401,8 @@ class EmailService {
     sendCustomEmail(to, subject, html, text, attachments) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                yield this.sendEmail({ to, subject, html, text, attachments });
+                const wrappedHtml = this.wrapInTemplate(subject, html);
+                yield this.sendEmail({ to, subject, html: wrappedHtml, text, attachments });
                 logger_1.default.info('Custom email sent successfully', { to, subject });
             }
             catch (error) {
@@ -449,4 +485,4 @@ exports.EmailService = EmailService;
 //   }
 // }
 // Update your Payment model to include these new fields:
-exports.default = new EmailService(`${process.env.NODE_ENV === 'production' ? process.env.CLIENT_URL : 'http://localhost:3000'}`);
+exports.default = new EmailService(`${process.env.CLIENT_URL || 'http://localhost:3000'}`);

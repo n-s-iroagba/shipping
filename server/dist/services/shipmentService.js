@@ -108,21 +108,17 @@ class ShipmentService {
         return __awaiter(this, void 0, void 0, function* () {
             var _a;
             const shipment = yield this.trackShipment(trackingId);
-            // Filter sensitive data
+            // Filter sensitive data - return ONLY minimal details
             return {
                 id: shipment.id,
                 shipmentID: shipment.shipmentID,
-                senderName: shipment.senderName,
-                receivingAddress: shipment.destination,
-                recipientName: shipment.recipientName,
                 status: shipment.status,
+                origin: shipment.origin,
+                destination: shipment.destination,
                 shippingStages: (_a = shipment.shippingStages) === null || _a === void 0 ? void 0 : _a.map((stage) => ({
                     title: stage.title,
                     location: stage.location,
                     dateAndTime: stage.dateAndTime,
-                    carriernote: stage.paymentStatus,
-                    longitude: stage.longitude,
-                    latitude: stage.latitude,
                 })),
             };
         });
@@ -130,7 +126,7 @@ class ShipmentService {
     getSensitiveTrackingInfo(trackingId) {
         return __awaiter(this, void 0, void 0, function* () {
             const shipment = yield this.trackShipment(trackingId);
-            return shipment;
+            return shipment; // Full details including packagePhotos, senderName, recipientEmail, etc.
         });
     }
     initiateSensitiveTracking(shipmentId) {
@@ -160,7 +156,8 @@ class ShipmentService {
             if (shipment.viewCode !== data.code) {
                 throw new Error('Unauthorised to view shipment');
             }
-            return jsonwebtoken_1.default.sign({ name: shipment.recipientName }, '1h');
+            const secret = process.env.JWT_SECRET || 'fallback_secret';
+            return jsonwebtoken_1.default.sign({ name: shipment.recipientName }, secret, { expiresIn: '1h' });
         });
     }
     getCurrentStatus(stages) {

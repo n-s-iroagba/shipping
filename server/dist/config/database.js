@@ -41,16 +41,30 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.connectDB = exports.sequelize = void 0;
 const sequelize_1 = require("sequelize");
 const _1 = require(".");
+const check_table_structure_1 = __importDefault(require("../scripts/check-table-structure"));
+const update_existing_payment_status_1 = require("../scripts/update-existing-payment-status");
+const update_payment_status_migration_1 = __importDefault(require("../scripts/update-payment-status-migration"));
 // Initialize Sequelize
 exports.sequelize = new sequelize_1.Sequelize(_1.dbConfig.database, _1.dbConfig.username, _1.dbConfig.password, {
     host: _1.dbConfig.host,
     dialect: 'mysql',
     port: _1.dbConfig.port,
     logging: _1.dbConfig.logging ? console.log : false,
+    dialectOptions: _1.dbConfig.ssl
+        ? {
+            ssl: {
+                require: true,
+                rejectUnauthorized: false, // For Aiven/managed DBs, this is often needed
+            },
+        }
+        : {},
 });
 // Test database connection and initialize models
 const connectDB = (...args_1) => __awaiter(void 0, [...args_1], void 0, function* (force = false) {
@@ -63,6 +77,29 @@ const connectDB = (...args_1) => __awaiter(void 0, [...args_1], void 0, function
         yield exports.sequelize
             .sync({ force: force })
             .then(() => console.log('✅ Tables formed with associations'));
+        // Run the check
+        yield (0, check_table_structure_1.default)()
+            .then(() => {
+            console.log('\nTable structure check completed');
+        })
+            .catch((error) => {
+            console.error('Check failed:', error);
+        });
+        yield (0, update_payment_status_migration_1.default)()
+            .then(() => {
+            console.log('Migration script finished successfully');
+        })
+            .catch((error) => {
+            console.error('Migration script failed:', error);
+        });
+        yield (0, update_existing_payment_status_1.updateExistingPaymentStatus)()
+            .then(() => {
+            console.log('\n🎉 PaymentStatus column update completed successfully!');
+            console.log('Your ShippingStage model can now use the REJECTED status.');
+        })
+            .catch((error) => {
+            console.error('Script failed:', error);
+        });
     }
     catch (error) {
         console.error(`❌ Unable to connect to the ${_1.env} database:`, error);

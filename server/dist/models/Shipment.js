@@ -67,6 +67,10 @@ Shipment.init({
     viewToken: {
         type: sequelize_1.DataTypes.STRING
     },
+    packagePhotos: {
+        type: sequelize_1.DataTypes.TEXT,
+        allowNull: true
+    },
     status: {
         type: sequelize_1.DataTypes.ENUM('RECEIVED (WAREHOUSE)', 'ONBOARD', 'IN TRANSIT'),
         allowNull: false,

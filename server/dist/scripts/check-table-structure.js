@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = checkTableStructure;
 // scripts/check-table-structure.ts
 const database_1 = require("../config/database"); // Adjust path to your database config
 function checkTableStructure() {
@@ -47,13 +48,3 @@ function checkTableStructure() {
         }
     });
 }
-// Run the check
-checkTableStructure()
-    .then(() => {
-    console.log('\nTable structure check completed');
-    process.exit(0);
-})
-    .catch((error) => {
-    console.error('Check failed:', error);
-    process.exit(1);
-});
