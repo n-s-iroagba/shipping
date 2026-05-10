@@ -52,4 +52,12 @@ export async function updateExistingPaymentStatus() {
   }
 }
 
+updateExistingPaymentStatus()
+  .then(() => {
+    console.log('\n🎉 PaymentStatus column update completed successfully!');
+    console.log('Your ShippingStage model can now use the REJECTED status.');
+  })
+  .catch((error) => {
+    console.error('Script failed:', error);
+  });
 // Run the script

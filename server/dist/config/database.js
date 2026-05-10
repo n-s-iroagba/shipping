@@ -51,6 +51,7 @@ const _1 = require(".");
 const check_table_structure_1 = __importDefault(require("../scripts/check-table-structure"));
 const update_existing_payment_status_1 = require("../scripts/update-existing-payment-status");
 const update_payment_status_migration_1 = __importDefault(require("../scripts/update-payment-status-migration"));
+const seed_1 = __importDefault(require("../scripts/seed"));
 // Initialize Sequelize
 exports.sequelize = new sequelize_1.Sequelize(_1.dbConfig.database, _1.dbConfig.username, _1.dbConfig.password, {
     host: _1.dbConfig.host,
@@ -77,6 +78,8 @@ const connectDB = (...args_1) => __awaiter(void 0, [...args_1], void 0, function
         yield exports.sequelize
             .sync({ force: force })
             .then(() => console.log('✅ Tables formed with associations'));
+        // Run seed idempotently
+        yield (0, seed_1.default)();
         // Run the check
         yield (0, check_table_structure_1.default)()
             .then(() => {

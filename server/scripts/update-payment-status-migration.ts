@@ -31,3 +31,11 @@ export default async function updatePaymentStatusEnum() {
 }
 
 // Run the migration
+
+updatePaymentStatusEnum()
+  .then(() => {
+    console.log('Migration script finished successfully');
+  })
+  .catch((error) => {
+    console.error('Migration script failed:', error);
+  });

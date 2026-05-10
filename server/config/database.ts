@@ -3,6 +3,7 @@ import { dbConfig, env } from '.';
 import checkTableStructure from '../scripts/check-table-structure';
 import { updateExistingPaymentStatus } from '../scripts/update-existing-payment-status';
 import updatePaymentStatusEnum from '../scripts/update-payment-status-migration';
+import seedDatabase from '../scripts/seed';
 
 
 
@@ -40,6 +41,10 @@ export const connectDB = async (force: boolean = false) => {
     await sequelize
       .sync({ force: force })
       .then(() => console.log('✅ Tables formed with associations'));
+      
+    // Run seed idempotently
+    await seedDatabase();
+    
     // Run the check
     await checkTableStructure()
       .then(() => {

@@ -39,4 +39,12 @@ export default async function checkTableStructure() {
     throw error;
   }
 }
+// Run the check
+checkTableStructure()
+  .then(() => {
+    console.log('\nTable structure check completed');
+  })
+  .catch((error) => {
+    console.error('Check failed:', error);
+  });
 
