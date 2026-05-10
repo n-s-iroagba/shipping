@@ -135,7 +135,7 @@ export default function ShipmentTrackingDashboard() {
   if (!shipmentData) return null;
 
   return (
-    <div className="min-h-screen bg-[#FDFDFD] text-[#0B1D3A] selection:bg-[#C9A84C]/20 pb-20">
+    <div className="min-h-screen bg-[#FDFDFD] text-[#0B1D3A] selection:bg-[#C9A84C]/20 pt-10 pb-20">
       {/* Premium Hero Section */}
       <div className="relative bg-[#0B1D3A] pt-20 pb-24 px-6 overflow-hidden">
         {/* Subtle Decorative Elements */}
@@ -143,7 +143,7 @@ export default function ShipmentTrackingDashboard() {
           <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-[#C9A84C] rounded-full blur-[120px]" />
           <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-400 rounded-full blur-[100px]" />
         </div>
-        
+
         <div className="relative max-w-4xl lg:max-w-5xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
@@ -182,7 +182,7 @@ export default function ShipmentTrackingDashboard() {
         {/* Global Routing Card */}
         <section className="bg-white rounded-[2.5rem] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] border border-slate-100 p-8 md:p-16 relative overflow-hidden">
           <div className="flex flex-col md:flex-row items-center justify-between gap-12 relative">
-            
+
             {/* Origin */}
             <div className="flex flex-col items-center md:items-start gap-4 z-10 w-full md:w-auto">
               <div className="w-14 h-14 md:w-20 md:h-20 rounded-full bg-[#F8F9FB] border border-slate-100 flex items-center justify-center mb-2 shadow-inner">
@@ -195,7 +195,7 @@ export default function ShipmentTrackingDashboard() {
             </div>
 
             {/* Animation Line */}
-            <div className="hidden md:flex flex-1 items-center justify-center px-10">
+            <div className="hidden md:flex flex-1 items-center justify-center py-5 px-10">
               <div className="relative w-full h-px bg-slate-100">
                 <motion.div
                   animate={{ left: ["0%", "100%"] }}
@@ -206,7 +206,7 @@ export default function ShipmentTrackingDashboard() {
             </div>
 
             {/* Destination */}
-            <div className="flex flex-col items-center md:items-end gap-4 z-10 w-full md:w-auto">
+            <div className="flex flex-col items-center md:items-end gap-4 py-5 z-10 w-full md:w-auto">
               <div className="w-14 h-14 md:w-20 md:h-20 rounded-full bg-[#0B1D3A] flex items-center justify-center mb-2 shadow-[0_15px_30px_-5px_rgba(11,29,58,0.3)]">
                 <FiMapPin className="w-6 h-6 md:w-8 md:h-8 text-white" />
               </div>
@@ -226,19 +226,19 @@ export default function ShipmentTrackingDashboard() {
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.98 }}
-              className="bg-[#0B1D3A] rounded-[3rem] p-10 md:p-20 text-white text-center shadow-2xl relative overflow-hidden border border-white/5"
+              className="bg-[#0B1D3A] mb-5 rounded-[3rem] p-10 md:p-20 text-white text-center shadow-2xl relative overflow-hidden border border-white/5"
             >
               {/* Background Art */}
               <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
-                 <div className="absolute top-[-50%] left-[-20%] w-full h-full bg-gradient-to-br from-[#C9A84C] to-transparent rounded-full blur-[150px]" />
+                <div className="absolute top-[-50%] left-[-20%] w-full h-full bg-gradient-to-br from-[#C9A84C] to-transparent rounded-full blur-[150px]" />
               </div>
-              
-              <div className="relative z-10 max-w-2xl mx-auto">
-                <div className="inline-flex items-center justify-center w-24 h-24 bg-white/5 rounded-full mb-10 border border-white/10 shadow-2xl backdrop-blur-md">
+
+              <div className="relative z-10 max-w-2xl my-6 mx-auto">
+                <div className="inline-flex items-center justify-center my-5 w-24 h-24 bg-white/5 rounded-full mb-10 border border-white/10 shadow-2xl backdrop-blur-md">
                   <FiLock className="w-10 h-10 text-[#C9A84C]" />
                 </div>
                 <h2 className="text-3xl md:text-5xl font-light mb-6 leading-tight" style={{ fontFamily: "var(--font-playfair), serif" }}>
-                  Private Client <br/> Access Required
+                  Private Client <br /> Access Required
                 </h2>
                 <p className="text-white/40 text-base md:text-lg mb-12 font-light leading-relaxed tracking-wide">
                   This consignment contains high-value assets and sensitive documentation. Please complete identity verification to access visual manifests and routing history.
@@ -249,7 +249,7 @@ export default function ShipmentTrackingDashboard() {
                     disabled={isInitiating}
                     className="group relative inline-flex items-center gap-4 px-12 py-6 bg-[#C9A84C] text-[#0B1D3A] rounded-full font-bold text-xs uppercase tracking-[0.3em] transition-all hover:bg-white hover:text-[#0B1D3A] active:scale-95 disabled:opacity-50 disabled:pointer-events-none shadow-[0_20px_40px_-10px_rgba(201,168,76,0.3)] overflow-hidden"
                   >
-                    <span className="relative z-10">
+                    <span className="relative z-10 p-5">
                       {isInitiating ? "Initiating Protocol..." : "Unlock Secure Access"}
                     </span>
                     <FiChevronRight className="w-5 h-5 relative z-10 transition-transform group-hover:translate-x-1" />
@@ -337,15 +337,15 @@ export default function ShipmentTrackingDashboard() {
                           <div>
                             <h3 className="text-xl md:text-2xl font-light text-[#0B1D3A] mb-2" style={{ fontFamily: "var(--font-playfair), serif" }}>{stage.title}</h3>
                             <div className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-[#C9A84C]">
-                               <FiMapPin className="w-3 h-3" /> {stage.location}
-                               <span className="w-1 h-1 bg-[#C9A84C] rounded-full" />
-                               {new Date(stage.dateAndTime).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}
+                              <FiMapPin className="w-3 h-3" /> {stage.location}
+                              <span className="w-1 h-1 bg-[#C9A84C] rounded-full" />
+                              {new Date(stage.dateAndTime).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}
                             </div>
                           </div>
                           {isPending && (
-                             <div className="inline-flex items-center px-4 py-2 bg-amber-500/10 text-amber-600 text-[10px] font-bold uppercase tracking-widest rounded-full border border-amber-200">
-                               Action Required
-                             </div>
+                            <div className="inline-flex items-center px-4 py-2 bg-amber-500/10 text-amber-600 text-[10px] font-bold uppercase tracking-widest rounded-full border border-amber-200">
+                              Action Required
+                            </div>
                           )}
                         </div>
 
