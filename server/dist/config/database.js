@@ -45,7 +45,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.connectDB = exports.sequelize = void 0;
 const sequelize_1 = require("sequelize");
 const _1 = require(".");
-// Scripts will be dynamically imported to avoid circular dependencies
 // Initialize Sequelize
 exports.sequelize = new sequelize_1.Sequelize(_1.dbConfig.database, _1.dbConfig.username, _1.dbConfig.password, {
     host: _1.dbConfig.host,
