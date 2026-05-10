@@ -325,7 +325,7 @@ export default function ShipmentTrackingDashboard() {
                         className={`bg-white rounded-[2rem] p-6 md:p-10 border ${isPending ? 'border-amber-200 shadow-xl shadow-amber-100/50' : 'border-slate-100 shadow-xl'} relative group overflow-hidden`}
                       >
                         {isPending && (
-                          <div className="absolute top-6 right-6 animate-pulse z-10 mr-6">
+                          <div className="animate-pulse">
                             <FiAlertCircle className="w-6 h-6 text-amber-500" />
                           </div>
                         )}
