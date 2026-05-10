@@ -49,6 +49,32 @@ export default async function seedDatabase() {
       console.log('ℹ️ Sample shipment already exists, skipping seed.');
     }
 
+    // 3. Seed Second Shipment for specific user
+    const secondShipmentID = 'TRK-ARBOR-002';
+    let secondShipment = await Shipment.findOne({ where: { shipmentID: secondShipmentID } });
+
+    if (!secondShipment) {
+      await Shipment.create({
+        shipmentID: secondShipmentID,
+        senderName: 'Arbor Global Logistics',
+        recipientName: 'Nnamdi Solomon',
+        shipmentDescription: 'Priority Executive Consignment',
+        origin: 'Dubai, UAE',
+        destination: 'Lagos, Nigeria',
+        pickupPoint: 'Arbor Private Terminal DXB',
+        dimensionInInches: '12x12x12',
+        expectedTimeOfArrival: new Date(new Date().getTime() + 3 * 24 * 60 * 60 * 1000), // 3 days from now
+        receipientEmail: 'nnamdisolomon1@gmail.com',
+        weight: 5.0,
+        freightType: 'AIR',
+        status: 'IN TRANSIT',
+        adminId: admin.id,
+      } as any);
+      console.log(`✅ Second sample shipment created (${secondShipmentID}) for nnamdisolomon1@gmail.com.`);
+    } else {
+      console.log('ℹ️ Second sample shipment already exists, skipping seed.');
+    }
+
     console.log('Database seeding completed successfully.');
   } catch (error) {
     console.error('Failed to seed database:', error);
