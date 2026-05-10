@@ -183,7 +183,7 @@ export default function ShipmentTrackingDashboard() {
         {/* Global Routing Card */}
         <section className="bg-white rounded-[2.5rem] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] border border-slate-100 p-6 md:p-16 relative overflow-hidden">
           <div className="flex flex-col md:flex-row items-center justify-between gap-12 relative">
-            
+
             {/* Origin */}
             <div className="flex flex-col items-center md:items-start gap-4 z-10 w-full md:w-auto">
               <div className="w-14 h-14 md:w-20 md:h-20 rounded-full bg-[#F8F9FB] border border-slate-100 flex items-center justify-center mb-2 shadow-inner">
@@ -283,8 +283,8 @@ export default function ShipmentTrackingDashboard() {
               )}
 
               {/* Sender & Receiver Info */}
-              <section className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                <div className="bg-white rounded-[2rem] p-6 md:p-10 border border-slate-100 shadow-xl relative group overflow-hidden">
+              <section className="grid grid-cols-1 sm:grid-cols-2 gap-1">
+                <div className="bg-white rounded-[2rem] p-6 md:p-10 pl-6 border border-slate-100 shadow-xl relative group overflow-hidden">
                   <span className="text-[10px] font-bold text-[#C9A84C] uppercase tracking-[0.3em] block mb-4">Originating Principal</span>
                   <p className="text-xl md:text-2xl font-light text-[#0B1D3A]" style={{ fontFamily: "var(--font-playfair), serif" }}>{fullInfo.senderName}</p>
                 </div>
@@ -295,7 +295,7 @@ export default function ShipmentTrackingDashboard() {
               </section>
 
               {/* Description */}
-              <section className="bg-white rounded-[2rem] p-6 md:p-10 border border-slate-100 shadow-xl relative group overflow-hidden">
+              <section className="bg-white rounded-[2rem] p-6 md:p-10 pl-6 border border-slate-100 shadow-xl relative group overflow-hidden">
                 <span className="text-[10px] font-bold text-[#C9A84C] uppercase tracking-[0.3em] block mb-4 flex items-center gap-2">
                   <FiInfo className="w-3 h-3" /> Consignment Manifest
                 </span>
