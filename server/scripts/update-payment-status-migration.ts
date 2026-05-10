@@ -27,8 +27,6 @@ export default async function updatePaymentStatusEnum() {
   } catch (error) {
     console.error('Migration failed:', error);
     throw error;
-  } finally {
-    await sequelize.close();
   }
 }
 

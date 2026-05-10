@@ -50,28 +50,27 @@ const TestimonialCarousel = () => {
       {testimonials.map((testimonial, idx) => (
         <div
           key={idx}
-          className="bg-white p-6 rounded-lg shadow-md text-center"
+          className="bg-white p-6 md:p-8 rounded-2xl shadow-md text-center mx-2 mb-8 border border-gray-100"
         >
-          <div className=""></div>
-          <p className="text-gray-700 italic">{testimonial.testimonial}</p>
-          <div className="mt-4 flex flex-col items-center">
-            <div className="flex justify-center">
-              <FontAwesomeIcon color="slate-800" icon={faStar} />
-              <FontAwesomeIcon color="slate-800" icon={faStar} />
-              <FontAwesomeIcon color="slate-800" icon={faStar} />{" "}
-              <FontAwesomeIcon color="slate-800" icon={faStar} />
-              <FontAwesomeIcon color="slate-800" icon={faStar} />
-            </div>
-            <div className="w-16 h-16 relative mb-2">
+          <div className="flex justify-center mb-4 gap-1">
+            <FontAwesomeIcon className="text-[#C9A84C]" icon={faStar} />
+            <FontAwesomeIcon className="text-[#C9A84C]" icon={faStar} />
+            <FontAwesomeIcon className="text-[#C9A84C]" icon={faStar} />
+            <FontAwesomeIcon className="text-[#C9A84C]" icon={faStar} />
+            <FontAwesomeIcon className="text-[#C9A84C]" icon={faStar} />
+          </div>
+          <p className="text-gray-700 italic text-sm md:text-base leading-relaxed mb-6">&quot;{testimonial.testimonial}&quot;</p>
+          <div className="flex flex-col items-center">
+            <div className="w-16 h-16 relative mb-3 rounded-full border-2 border-[#C9A84C]/20 p-1">
               <Image
                 src={images[idx] || "/placeholder.svg"}
-                alt={`Testimonial from ${testimonial.name}`}
+                alt={`Client ${testimonial.name}`}
                 className="rounded-full"
                 layout="fill"
                 objectFit="cover"
               />
             </div>
-            <p className="text-gray-600 font-semibold">- {testimonial.name}</p>
+            <p className="text-[#0B1D3A] font-bold text-sm tracking-wide uppercase">{testimonial.name}</p>
           </div>
         </div>
       ))}

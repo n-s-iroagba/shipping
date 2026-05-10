@@ -12,22 +12,15 @@ const ScheduleCard = () => {
   ];
 
   return (
-    <div className="container mx-auto mt-6 bg-white">
-      <div className="grid grid-cols-2 lg:grid-cols-6 gap-4">
+    <div className="container mx-auto mt-6 px-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
         {columns.map((col, index) => (
           <div
             key={index}
-            className={`relative bg-white shadow-md rounded-md p-4 text-center ${
-              index === 1 ? "with-arrow" : ""
-            }`}
+            className="bg-white shadow-md rounded-xl p-5 text-center border border-gray-100 flex flex-col justify-center items-center hover:shadow-lg transition-shadow"
           >
-            <h3 className="font-bold text-sm text-gray-700">{col.title}</h3>
-            <p className="text-lg text-gray-900 mt-2">{col.body}</p>
-            {index === 1 && (
-              <span className="absolute left-[-12px] top-1/2 transform -translate-y-1/2 text-slate-800 text-xl">
-                ➜
-              </span>
-            )}
+            <h3 className="font-bold text-xs uppercase tracking-wider text-[#C9A84C] mb-2">{col.title}</h3>
+            <p className="text-sm font-semibold text-[#0B1D3A] break-words w-full">{col.body}</p>
           </div>
         ))}
       </div>

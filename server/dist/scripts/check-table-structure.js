@@ -43,8 +43,5 @@ function checkTableStructure() {
             console.error('Failed to check table structure:', error);
             throw error;
         }
-        finally {
-            yield database_1.sequelize.close();
-        }
     });
 }

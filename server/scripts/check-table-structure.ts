@@ -37,8 +37,6 @@ export default async function checkTableStructure() {
   } catch (error) {
     console.error('Failed to check table structure:', error);
     throw error;
-  } finally {
-    await sequelize.close();
   }
 }
 

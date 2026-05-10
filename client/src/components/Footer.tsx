@@ -4,11 +4,11 @@ import { companyEmail } from "@/data/constants";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#0B1D3A] text-white py-16 mt-10">
-      <div className="container mx-auto px-6">
+    <footer className="bg-[#0B1D3A] text-white py-16 mt-10 overflow-hidden">
+      <div className="container mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
           {/* Company Info */}
-          <div>
+          <div className="flex flex-col items-center md:items-start">
             <div className="flex items-center gap-3 justify-center md:justify-start mb-4">
               <Image
                 src="/arbor-logo.png"

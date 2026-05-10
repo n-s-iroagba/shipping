@@ -49,8 +49,6 @@ export async function updateExistingPaymentStatus() {
   } catch (error) {
     console.error('Failed to update paymentStatus column:', error);
     throw error;
-  } finally {
-    await sequelize.close();
   }
 }
 

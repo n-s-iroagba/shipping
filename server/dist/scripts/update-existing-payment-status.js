@@ -55,9 +55,6 @@ function updateExistingPaymentStatus() {
             console.error('Failed to update paymentStatus column:', error);
             throw error;
         }
-        finally {
-            yield database_1.sequelize.close();
-        }
     });
 }
 // Run the script

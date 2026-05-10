@@ -36,9 +36,6 @@ function updatePaymentStatusEnum() {
             console.error('Migration failed:', error);
             throw error;
         }
-        finally {
-            yield database_1.sequelize.close();
-        }
     });
 }
 // Run the migration
