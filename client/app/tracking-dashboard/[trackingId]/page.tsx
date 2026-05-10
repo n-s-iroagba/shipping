@@ -284,21 +284,18 @@ export default function ShipmentTrackingDashboard() {
 
               {/* Sender & Receiver Info */}
               <section className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                <div className="bg-white rounded-[2rem] p-10 border border-slate-100 shadow-xl relative group overflow-hidden">
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-slate-50 rounded-bl-[100%] transition-colors group-hover:bg-[#C9A84C]/10" />
+                <div className="bg-white rounded-[2rem] p-6 md:p-10 border border-slate-100 shadow-xl relative group overflow-hidden">
                   <span className="text-[10px] font-bold text-[#C9A84C] uppercase tracking-[0.3em] block mb-4">Originating Principal</span>
-                  <p className="text-2xl font-light text-[#0B1D3A]" style={{ fontFamily: "var(--font-playfair), serif" }}>{fullInfo.senderName}</p>
+                  <p className="text-xl md:text-2xl font-light text-[#0B1D3A]" style={{ fontFamily: "var(--font-playfair), serif" }}>{fullInfo.senderName}</p>
                 </div>
-                <div className="bg-white rounded-[2rem] p-10 border border-slate-100 shadow-xl relative group overflow-hidden">
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-slate-50 rounded-bl-[100%] transition-colors group-hover:bg-[#C9A84C]/10" />
+                <div className="bg-white rounded-[2rem] p-6 md:p-10 border border-slate-100 shadow-xl relative group overflow-hidden">
                   <span className="text-[10px] font-bold text-[#C9A84C] uppercase tracking-[0.3em] block mb-4">Designated Receiver</span>
-                  <p className="text-2xl font-light text-[#0B1D3A]" style={{ fontFamily: "var(--font-playfair), serif" }}>{fullInfo.recipientName}</p>
+                  <p className="text-xl md:text-2xl font-light text-[#0B1D3A]" style={{ fontFamily: "var(--font-playfair), serif" }}>{fullInfo.recipientName}</p>
                 </div>
               </section>
 
               {/* Description */}
               <section className="bg-white rounded-[2rem] p-6 md:p-10 border border-slate-100 shadow-xl relative group overflow-hidden">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-slate-50 rounded-bl-[100%] transition-colors group-hover:bg-[#C9A84C]/10" />
                 <span className="text-[10px] font-bold text-[#C9A84C] uppercase tracking-[0.3em] block mb-4 flex items-center gap-2">
                   <FiInfo className="w-3 h-3" /> Consignment Manifest
                 </span>
@@ -327,9 +324,6 @@ export default function ShipmentTrackingDashboard() {
                         transition={{ delay: idx * 0.1 }}
                         className={`bg-white rounded-[2rem] p-6 md:p-10 border ${isPending ? 'border-amber-200 shadow-xl shadow-amber-100/50' : 'border-slate-100 shadow-xl'} relative group overflow-hidden`}
                       >
-                        {!isPending && <div className="absolute top-0 right-0 w-24 h-24 bg-slate-50 rounded-bl-[100%] transition-colors group-hover:bg-[#C9A84C]/10" />}
-                        {isPending && <div className="absolute top-0 right-0 w-24 h-24 bg-amber-50 rounded-bl-[100%] transition-colors group-hover:bg-amber-100/50" />}
-                        
                         {isPending && (
                           <div className="absolute top-6 right-6 animate-pulse z-10">
                             <FiAlertCircle className="w-6 h-6 text-amber-500" />
