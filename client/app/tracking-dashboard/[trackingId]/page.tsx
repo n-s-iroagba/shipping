@@ -185,7 +185,7 @@ export default function ShipmentTrackingDashboard() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-12 relative">
 
             {/* Origin */}
-            <div className="flex flex-col items-center md:items-start gap-4 z-10 w-full md:w-auto">
+            <div className="my-6 flex flex-col items-center md:items-start gap-4 z-10 w-full md:w-auto">
               <div className="w-14 h-14 md:w-20 md:h-20 rounded-full bg-[#F8F9FB] border border-slate-100 flex items-center justify-center mb-2 shadow-inner">
                 <FiMapPin className="w-6 h-6 md:w-8 md:h-8 text-[#C9A84C]" />
               </div>
