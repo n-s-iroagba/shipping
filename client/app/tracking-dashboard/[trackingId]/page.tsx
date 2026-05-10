@@ -305,7 +305,7 @@ export default function ShipmentTrackingDashboard() {
               </section>
 
               {/* Timeline (Sensitive) */}
-              <section className="space-y-6">
+              <section className="space-y-6 my-6">
                 <div className="flex items-center gap-4 text-[#0B1D3A] font-bold text-[10px] uppercase tracking-[0.4em] px-4 mb-8">
                   <FiClock className="w-4 h-4 text-[#C9A84C]" />
                   <span>Comprehensive Routing History</span>
