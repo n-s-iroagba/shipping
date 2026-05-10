@@ -393,7 +393,7 @@ export default function ShipmentTrackingDashboard() {
         {!isSensitive && (
           <section className="space-y-12 md:space-y-16 pt-8">
             <div className="flex items-center gap-4 text-[#0B1D3A] font-bold text-[10px] uppercase tracking-[0.4em] px-4">
-              <FiClock className="w-4 h-4 text-[#C9A84C]" />
+              <FiClock className="w-4 my-10 h-4 text-[#C9A84C]" />
               <span>Routing Overview</span>
             </div>
             <div className="relative pl-10 space-y-12 before:absolute before:left-[19px] before:top-2 before:bottom-2 before:w-px before:bg-slate-100">
