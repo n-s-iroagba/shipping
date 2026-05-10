@@ -144,7 +144,7 @@ export default function ShipmentTrackingDashboard() {
           <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-400 rounded-full blur-[100px]" />
         </div>
 
-        <div className="relative max-w-4xl lg:max-w-5xl mx-auto text-center">
+        <div className="relative mt-5 max-w-4xl lg:max-w-5xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
