@@ -20,6 +20,7 @@ import { routes } from "@/data/routes";
 import { Spinner } from "@/components/Spinner";
 import ErrorAlert from "@/components/ErrorAlert";
 import VerificationModal from "@/components/VerificationModal";
+import Footer from "@/components/Footer";
 import { getRequest } from "@/utils/apiUtils";
 import { handleError } from "@/utils/utils";
 import type { Shipment } from "@/types/shipment.types";
@@ -177,7 +178,7 @@ export default function ShipmentTrackingDashboard() {
         </div>
       </div>
 
-      <main className="max-w-4xl lg:max-w-5xl mx-auto px-4 md:px-8 -mt-12 space-y-12 relative z-20">
+      <main className="max-w-4xl lg:max-w-5xl mx-auto px-4 md:px-8 -mt-16 space-y-24 md:space-y-40 relative z-20">
 
         {/* Global Routing Card */}
         <section className="bg-white rounded-[2.5rem] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] border border-slate-100 p-8 md:p-16 relative overflow-hidden">
@@ -243,11 +244,11 @@ export default function ShipmentTrackingDashboard() {
                 <p className="text-white/40 text-base md:text-lg mb-12 font-light leading-relaxed tracking-wide">
                   This consignment contains high-value assets and sensitive documentation. Please complete identity verification to access visual manifests and routing history.
                 </p>
-                <div className="flex justify-center">
+                <div className="flex justify-center px-4">
                   <button
                     onClick={handleRequestSensitive}
                     disabled={isInitiating}
-                    className="group relative inline-flex items-center gap-4 px-12 py-6 bg-[#C9A84C] text-[#0B1D3A] rounded-full font-bold text-xs uppercase tracking-[0.3em] transition-all hover:bg-white hover:text-[#0B1D3A] active:scale-95 disabled:opacity-50 disabled:pointer-events-none shadow-[0_20px_40px_-10px_rgba(201,168,76,0.3)] overflow-hidden"
+                    className="group relative inline-flex items-center justify-center gap-4 px-8 py-5 md:px-14 md:py-7 bg-[#C9A84C] text-[#0B1D3A] rounded-full font-bold text-[10px] md:text-xs uppercase tracking-[0.2em] md:tracking-[0.3em] transition-all hover:bg-white hover:text-[#0B1D3A] active:scale-95 disabled:opacity-50 disabled:pointer-events-none shadow-[0_20px_40px_-10px_rgba(201,168,76,0.3)] overflow-hidden w-full sm:w-auto"
                   >
                     <span className="relative z-10">
                       {isInitiating ? "Initiating Protocol..." : "Unlock Secure Access"}
@@ -421,6 +422,8 @@ export default function ShipmentTrackingDashboard() {
           onClose={() => setShowVerifyModal(false)}
         />
       )}
+
+      <Footer />
     </div>
   );
 }
