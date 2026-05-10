@@ -20,6 +20,7 @@ import { routes } from "@/data/routes";
 import { Spinner } from "@/components/Spinner";
 import ErrorAlert from "@/components/ErrorAlert";
 import VerificationModal from "@/components/VerificationModal";
+import Footer from "@/components/Footer";
 import { getRequest } from "@/utils/apiUtils";
 import { handleError } from "@/utils/utils";
 import type { Shipment } from "@/types/shipment.types";
@@ -137,28 +138,28 @@ export default function ShipmentTrackingDashboard() {
   return (
     <div className="min-h-screen bg-[#FDFDFD] text-[#0B1D3A] selection:bg-[#C9A84C]/20 pb-20">
       {/* Premium Hero Section */}
-      <div className="relative bg-[#0B1D3A] pt-20 pb-24 px-6 overflow-hidden">
+      <div className="relative bg-[#0B1D3A] pt-28 pb-32 px-6 overflow-hidden">
         {/* Subtle Decorative Elements */}
         <div className="absolute top-0 right-0 w-full h-full opacity-10 pointer-events-none">
-          <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-[#C9A84C] rounded-full blur-[120px]" />
-          <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-400 rounded-full blur-[100px]" />
+          <div className="absolute top-[-10%] right-[-10%] w-[60%] h-[60%] bg-[#C9A84C] rounded-full blur-[140px]" />
+          <div className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-blue-500 rounded-full blur-[120px]" />
         </div>
         
-        <div className="relative max-w-4xl lg:max-w-5xl mx-auto text-center">
+        <div className="relative max-w-5xl lg:max-w-6xl mx-auto text-center px-4">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-white/5 border border-white/10 text-[#C9A84C] text-[10px] font-bold uppercase tracking-[0.3em] mb-10 backdrop-blur-sm"
+            className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full bg-white/5 border border-white/10 text-[#C9A84C] text-[10px] font-bold uppercase tracking-[0.4em] mb-12 backdrop-blur-sm shadow-2xl"
           >
-            <FiLock className="w-3 h-3" />
-            Secure Concierge Tracking
+            <FiLock className="w-3.5 h-3.5" />
+            Secure Private Portal
           </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-6xl font-light tracking-tight mb-6 text-white"
+            className="text-4xl md:text-7xl font-light tracking-tight mb-8 text-white leading-tight"
             style={{ fontFamily: "var(--font-playfair), serif" }}
           >
             {shipmentData.shipmentID}
@@ -168,16 +169,16 @@ export default function ShipmentTrackingDashboard() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
-            className="flex items-center justify-center gap-4 text-white/50 text-xs font-medium tracking-widest uppercase"
+            className="flex items-center justify-center gap-6 text-white/40 text-[10px] md:text-xs font-bold tracking-[0.4em] uppercase"
           >
-            <span className="w-12 h-px bg-white/10" />
+            <span className="w-16 h-px bg-white/10" />
             {shipmentData.status}
-            <span className="w-12 h-px bg-white/10" />
+            <span className="w-16 h-px bg-white/10" />
           </motion.div>
         </div>
       </div>
 
-      <main className="max-w-4xl lg:max-w-5xl mx-auto px-4 md:px-8 -mt-12 space-y-12 relative z-20">
+      <main className="max-w-5xl lg:max-w-6xl mx-auto px-6 md:px-12 -mt-16 space-y-24 md:space-y-40 relative z-20 pb-32">
 
         {/* Global Routing Card */}
         <section className="bg-white rounded-[2.5rem] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] border border-slate-100 p-8 md:p-16 relative overflow-hidden">
@@ -226,33 +227,33 @@ export default function ShipmentTrackingDashboard() {
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.98 }}
-              className="bg-[#0B1D3A] rounded-[3rem] p-10 md:p-20 text-white text-center shadow-2xl relative overflow-hidden border border-white/5"
+              className="bg-[#0B1D3A] rounded-[4rem] p-12 md:p-28 text-white text-center shadow-3xl relative overflow-hidden border border-white/5"
             >
               {/* Background Art */}
               <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
-                 <div className="absolute top-[-50%] left-[-20%] w-full h-full bg-gradient-to-br from-[#C9A84C] to-transparent rounded-full blur-[150px]" />
+                 <div className="absolute top-[-50%] left-[-20%] w-full h-full bg-gradient-to-br from-[#C9A84C] to-transparent rounded-full blur-[180px]" />
               </div>
               
-              <div className="relative z-10 max-w-2xl mx-auto">
-                <div className="inline-flex items-center justify-center w-24 h-24 bg-white/5 rounded-full mb-10 border border-white/10 shadow-2xl backdrop-blur-md">
-                  <FiLock className="w-10 h-10 text-[#C9A84C]" />
+              <div className="relative z-10 max-w-3xl mx-auto">
+                <div className="inline-flex items-center justify-center w-28 h-28 bg-white/5 rounded-full mb-12 border border-white/10 shadow-2xl backdrop-blur-md">
+                  <FiLock className="w-12 h-12 text-[#C9A84C]" />
                 </div>
-                <h2 className="text-3xl md:text-5xl font-light mb-6 leading-tight" style={{ fontFamily: "var(--font-playfair), serif" }}>
-                  Private Client <br/> Access Required
+                <h2 className="text-4xl md:text-6xl font-light mb-8 leading-tight tracking-tight" style={{ fontFamily: "var(--font-playfair), serif" }}>
+                  Bespoke <br/> Identity Verification
                 </h2>
-                <p className="text-white/40 text-base md:text-lg mb-12 font-light leading-relaxed tracking-wide">
-                  This consignment contains high-value assets and sensitive documentation. Please complete identity verification to access visual manifests and routing history.
+                <p className="text-white/50 text-base md:text-xl mb-16 font-light leading-relaxed tracking-wide max-w-xl mx-auto">
+                  Access to visual manifests, high-resolution documentation, and detailed transit logs is restricted to authorized principals only.
                 </p>
-                <div className="flex justify-center">
+                <div className="flex justify-center w-full">
                   <button
                     onClick={handleRequestSensitive}
                     disabled={isInitiating}
-                    className="group relative inline-flex items-center gap-4 px-12 py-6 bg-[#C9A84C] text-[#0B1D3A] rounded-full font-bold text-xs uppercase tracking-[0.3em] transition-all hover:bg-white hover:text-[#0B1D3A] active:scale-95 disabled:opacity-50 disabled:pointer-events-none shadow-[0_20px_40px_-10px_rgba(201,168,76,0.3)] overflow-hidden"
+                    className="group relative w-full sm:w-auto inline-flex items-center justify-center gap-6 px-16 py-7 bg-[#C9A84C] text-[#0B1D3A] rounded-full font-bold text-[10px] md:text-xs uppercase tracking-[0.4em] transition-all hover:bg-white hover:text-[#0B1D3A] active:scale-95 disabled:opacity-50 disabled:pointer-events-none shadow-[0_25px_50px_-12px_rgba(201,168,76,0.4)] overflow-hidden"
                   >
                     <span className="relative z-10">
-                      {isInitiating ? "Initiating Protocol..." : "Unlock Secure Access"}
+                      {isInitiating ? "Initiating Protocol..." : "Validate Credentials"}
                     </span>
-                    <FiChevronRight className="w-5 h-5 relative z-10 transition-transform group-hover:translate-x-1" />
+                    <FiChevronRight className="w-5 h-5 relative z-10 transition-transform group-hover:translate-x-2" />
                   </button>
                 </div>
               </div>
@@ -413,6 +414,8 @@ export default function ShipmentTrackingDashboard() {
         )}
 
       </main>
+
+      <Footer />
 
       {/* Verification Modal */}
       {showVerifyModal && (
