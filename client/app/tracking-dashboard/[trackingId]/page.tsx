@@ -181,11 +181,11 @@ export default function ShipmentTrackingDashboard() {
       <main className="max-w-4xl lg:max-w-5xl mx-auto px-4 md:px-8 -mt-16 space-y-12 md:space-y-16 relative z-20">
 
         {/* Global Routing Card */}
-        <section className="bg-white rounded-[2.5rem] my-6 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] border border-slate-100 p-8 md:p-16 relative overflow-hidden">
+        <section className="bg-white rounded-[2.5rem] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] border border-slate-100 p-6 md:p-16 relative overflow-hidden">
           <div className="flex flex-col md:flex-row items-center justify-between gap-12 relative">
-
+            
             {/* Origin */}
-            <div className="my-6 flex flex-col items-center md:items-start gap-4 z-10 w-full md:w-auto">
+            <div className="flex flex-col items-center md:items-start gap-4 z-10 w-full md:w-auto">
               <div className="w-14 h-14 md:w-20 md:h-20 rounded-full bg-[#F8F9FB] border border-slate-100 flex items-center justify-center mb-2 shadow-inner">
                 <FiMapPin className="w-6 h-6 md:w-8 md:h-8 text-[#C9A84C]" />
               </div>
@@ -196,7 +196,7 @@ export default function ShipmentTrackingDashboard() {
             </div>
 
             {/* Animation Line */}
-            <div className="hidden md:flex flex-1 items-center justify-center py-5 px-10">
+            <div className="hidden md:flex flex-1 items-center justify-center px-10">
               <div className="relative w-full h-px bg-slate-100">
                 <motion.div
                   animate={{ left: ["0%", "100%"] }}
@@ -207,7 +207,7 @@ export default function ShipmentTrackingDashboard() {
             </div>
 
             {/* Destination */}
-            <div className="flex flex-col items-center md:items-end gap-4 py-5 z-10 w-full md:w-auto">
+            <div className="flex flex-col items-center md:items-end gap-4 z-10 w-full md:w-auto">
               <div className="w-14 h-14 md:w-20 md:h-20 rounded-full bg-[#0B1D3A] flex items-center justify-center mb-2 shadow-[0_15px_30px_-5px_rgba(11,29,58,0.3)]">
                 <FiMapPin className="w-6 h-6 md:w-8 md:h-8 text-white" />
               </div>
@@ -234,8 +234,8 @@ export default function ShipmentTrackingDashboard() {
                 <div className="absolute top-[-50%] left-[-20%] w-full h-full bg-gradient-to-br from-[#C9A84C] to-transparent rounded-full blur-[150px]" />
               </div>
 
-              <div className="relative z-10 max-w-2xl my-6 mx-auto">
-                <div className="inline-flex items-center justify-center my-5 w-24 h-24 bg-white/5 rounded-full mb-10 border border-white/10 shadow-2xl backdrop-blur-md">
+              <div className="relative z-10 max-w-2xl mx-auto">
+                <div className="inline-flex items-center justify-center w-24 h-24 bg-white/5 rounded-full mb-10 border border-white/10 shadow-2xl backdrop-blur-md">
                   <FiLock className="w-10 h-10 text-[#C9A84C]" />
                 </div>
                 <h2 className="text-3xl md:text-5xl font-light mb-6 leading-tight" style={{ fontFamily: "var(--font-playfair), serif" }}>
