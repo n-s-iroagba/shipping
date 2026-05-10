@@ -135,7 +135,6 @@ export default function ShipmentTrackingDashboard() {
   if (!shipmentData) return null;
 
   return (
-  return (
     <div className="min-h-screen bg-[#FDFDFD] text-[#0B1D3A] selection:bg-[#C9A84C]/20 pb-20">
       {/* Premium Hero Section */}
       <div className="relative bg-[#0B1D3A] pt-20 pb-24 px-6 overflow-hidden">
