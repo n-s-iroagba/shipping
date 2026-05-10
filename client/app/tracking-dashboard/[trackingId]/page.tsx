@@ -177,7 +177,7 @@ export default function ShipmentTrackingDashboard() {
         </div>
       </div>
 
-      <main className="max-w-4xl lg:max-w-5xl mx-auto px-4 md:px-8 -mt-20 space-y-20 md:space-y-32 relative z-20">
+      <main className="max-w-4xl lg:max-w-5xl mx-auto px-4 md:px-8 -mt-16 space-y-12 md:space-y-16 relative z-20">
 
         {/* Global Routing Card */}
         <section className="bg-white rounded-[2.5rem] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] border border-slate-100 p-8 md:p-16 relative overflow-hidden">
@@ -262,7 +262,7 @@ export default function ShipmentTrackingDashboard() {
               key="sensitive-info"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="space-y-10 md:space-y-14"
+              className="space-y-12 md:space-y-16"
             >
               {/* Package Photos */}
               {fullInfo.packagePhotos && (
@@ -391,7 +391,7 @@ export default function ShipmentTrackingDashboard() {
 
         {/* Timeline (Minimal) */}
         {!isSensitive && (
-          <section className="space-y-10">
+          <section className="space-y-12 md:space-y-16 pt-8">
             <div className="flex items-center gap-4 text-[#0B1D3A] font-bold text-[10px] uppercase tracking-[0.4em] px-4">
               <FiClock className="w-4 h-4 text-[#C9A84C]" />
               <span>Routing Overview</span>
