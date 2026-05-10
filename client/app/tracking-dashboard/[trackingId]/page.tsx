@@ -297,22 +297,20 @@ export default function ShipmentTrackingDashboard() {
               </section>
 
               {/* Description */}
-              <section className="bg-white rounded-[3rem] p-10 md:p-16 border border-slate-100 shadow-[0_20px_50px_rgba(0,0,0,0.05)]">
-                <div className="flex items-center gap-4 mb-8 text-[#0B1D3A] font-bold text-[10px] uppercase tracking-[0.4em]">
-                  <FiInfo className="w-4 h-4 text-[#C9A84C]" />
-                  <span>Consignment Manifest</span>
-                </div>
-                <p className="text-[#0B1D3A]/70 leading-relaxed text-lg md:text-2xl font-light italic" style={{ fontFamily: "var(--font-playfair), serif" }}>
+              <section className="bg-white rounded-[2rem] p-6 md:p-10 border border-slate-100 shadow-xl relative group overflow-hidden">
+                <div className="absolute top-0 right-0 w-24 h-24 bg-slate-50 rounded-bl-[100%] transition-colors group-hover:bg-[#C9A84C]/10" />
+                <span className="text-[10px] font-bold text-[#C9A84C] uppercase tracking-[0.3em] block mb-4 flex items-center gap-2">
+                  <FiInfo className="w-3 h-3" /> Consignment Manifest
+                </span>
+                <p className="text-xl md:text-2xl font-light text-[#0B1D3A] italic leading-relaxed" style={{ fontFamily: "var(--font-playfair), serif" }}>
                   "{fullInfo.shipmentDescription || "Manifest remains confidential."}"
                 </p>
               </section>
 
               {/* Timeline (Sensitive) */}
               <section className="space-y-6">
-                <div className="flex items-center gap-3 text-[#0B1D3A] font-bold text-xs uppercase tracking-[0.2em] px-2 mb-8">
-                  <div className="w-8 h-8 rounded-full bg-[#0B1D3A]/5 flex items-center justify-center">
-                    <FiClock className="w-4 h-4 text-[#C9A84C]" />
-                  </div>
+                <div className="flex items-center gap-4 text-[#0B1D3A] font-bold text-[10px] uppercase tracking-[0.4em] px-4 mb-8">
+                  <FiClock className="w-4 h-4 text-[#C9A84C]" />
                   <span>Comprehensive Routing History</span>
                 </div>
                 <div className="space-y-6">
@@ -327,10 +325,13 @@ export default function ShipmentTrackingDashboard() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: idx * 0.1 }}
-                        className={`bg-white rounded-[2.5rem] p-8 md:p-12 border ${isPending ? 'border-amber-100 bg-amber-50/10' : 'border-slate-50 shadow-[0_15px_40px_rgba(0,0,0,0.03)]'} relative group overflow-hidden`}
+                        className={`bg-white rounded-[2rem] p-6 md:p-10 border ${isPending ? 'border-amber-200 shadow-xl shadow-amber-100/50' : 'border-slate-100 shadow-xl'} relative group overflow-hidden`}
                       >
+                        {!isPending && <div className="absolute top-0 right-0 w-24 h-24 bg-slate-50 rounded-bl-[100%] transition-colors group-hover:bg-[#C9A84C]/10" />}
+                        {isPending && <div className="absolute top-0 right-0 w-24 h-24 bg-amber-50 rounded-bl-[100%] transition-colors group-hover:bg-amber-100/50" />}
+                        
                         {isPending && (
-                          <div className="absolute top-8 right-8 animate-pulse">
+                          <div className="absolute top-6 right-6 animate-pulse z-10">
                             <FiAlertCircle className="w-6 h-6 text-amber-500" />
                           </div>
                         )}
