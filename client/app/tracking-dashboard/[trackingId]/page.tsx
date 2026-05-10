@@ -141,21 +141,22 @@ export default function ShipmentTrackingDashboard() {
         <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-[#C9A84C]/5 rounded-full blur-3xl opacity-50" />
         <div className="absolute bottom-0 left-0 -ml-16 -mb-16 w-64 h-64 bg-slate-100 rounded-full blur-3xl opacity-50" />
 
-        <div className="relative max-w-2xl mx-auto text-center">
+        <div className="relative max-w-4xl lg:max-w-5xl mx-auto text-center px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C9A84C]/10 text-[#C9A84C] text-xs font-bold uppercase tracking-wider mb-4"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#C9A84C]/10 border border-[#C9A84C]/20 text-[#C9A84C] text-xs font-bold uppercase tracking-[0.2em] mb-6"
           >
-            <FiPackage className="w-3 h-3" />
-            Tracking Active
+            <FiPackage className="w-3.5 h-3.5" />
+            Active Consignment
           </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-3xl font-extrabold tracking-tight mb-2"
+            className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 text-[#0B1D3A]"
+            style={{ fontFamily: "var(--font-playfair), serif" }}
           >
             {shipmentData.shipmentID}
           </motion.h1>
@@ -164,38 +165,39 @@ export default function ShipmentTrackingDashboard() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-slate-500 font-medium"
+            className="text-slate-500 font-medium tracking-wide uppercase text-xs md:text-sm"
           >
             {shipmentData.status}
           </motion.p>
         </div>
       </header>
 
-      <main className="max-w-2xl mx-auto px-6 py-10 space-y-8">
+      <main className="max-w-4xl lg:max-w-5xl mx-auto px-4 md:px-8 py-10 md:py-16 space-y-10 md:space-y-14">
 
         {/* Origin & Destination Card */}
-        <section className="bg-white rounded-3xl shadow-sm border border-slate-200 p-8">
+        <section className="bg-white rounded-[2rem] shadow-xl shadow-slate-200/40 border border-slate-100 p-6 md:p-12 relative overflow-hidden">
+          <div className="absolute top-0 right-0 -mr-8 -mt-8 w-32 h-32 bg-[#C9A84C]/5 rounded-full blur-2xl pointer-events-none" />
           <div className="flex items-center justify-between relative">
-            <div className="flex flex-col items-center gap-2 z-10 bg-white">
-              <div className="w-12 h-12 rounded-2xl bg-slate-100 flex items-center justify-center">
-                <FiMapPin className="w-6 h-6 text-slate-600" />
+            <div className="flex flex-col items-center gap-3 z-10 bg-white px-2">
+              <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center">
+                <FiMapPin className="w-5 h-5 md:w-6 md:h-6 text-slate-400" />
               </div>
-              <span className="text-sm font-bold uppercase tracking-tight">{shipmentData.origin || "Origin"}</span>
+              <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.15em] text-slate-500 text-center max-w-[100px] md:max-w-[150px] break-words">{shipmentData.origin || "Origin"}</span>
             </div>
 
-            <div className="absolute left-12 right-12 top-6 h-px bg-slate-100 flex items-center justify-center">
+            <div className="absolute left-16 right-16 md:left-24 md:right-24 top-6 md:top-8 h-[2px] bg-slate-100 flex items-center justify-center rounded-full overflow-hidden">
               <motion.div
-                animate={{ x: [0, 40, 0] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                className="w-2 h-2 bg-[#C9A84C] rounded-full shadow-[0_0_8px_rgba(201,168,76,0.8)]"
+                animate={{ x: [-100, 100, -100] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                className="w-1/3 h-full bg-gradient-to-r from-transparent via-[#C9A84C]/50 to-transparent"
               />
             </div>
 
-            <div className="flex flex-col items-center gap-2 z-10 bg-white">
-              <div className="w-12 h-12 rounded-2xl bg-[#0B1D3A] flex items-center justify-center shadow-lg shadow-[#0B1D3A]/20">
-                <FiMapPin className="w-6 h-6 text-white" />
+            <div className="flex flex-col items-center gap-3 z-10 bg-white px-2">
+              <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-[#0B1D3A] flex items-center justify-center shadow-xl shadow-[#0B1D3A]/20">
+                <FiMapPin className="w-5 h-5 md:w-6 md:h-6 text-[#C9A84C]" />
               </div>
-              <span className="text-sm font-bold uppercase tracking-tight text-[#0B1D3A]">{shipmentData.destination}</span>
+              <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.15em] text-[#0B1D3A] text-center max-w-[100px] md:max-w-[150px] break-words">{shipmentData.destination}</span>
             </div>
           </div>
         </section>
@@ -208,75 +210,89 @@ export default function ShipmentTrackingDashboard() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-[#0B1D3A] rounded-3xl p-8 text-white text-center shadow-xl shadow-[#0B1D3A]/10 relative overflow-hidden"
+              className="bg-[#0B1D3A] rounded-[2rem] p-8 md:p-14 text-white text-center shadow-2xl shadow-[#0B1D3A]/20 relative overflow-hidden border border-[#132d54]"
             >
-              <div className="absolute top-0 right-0 -mr-8 -mt-8 w-32 h-32 bg-[#C9A84C]/5 rounded-full blur-2xl" />
-              <FiLock className="w-10 h-10 mx-auto mb-4 text-[#C9A84C]" />
-              <h2 className="text-xl font-bold mb-2">Access Full Details</h2>
-              <p className="text-white/50 text-sm mb-6 leading-relaxed">
-                Verification is required to view package photos, sender details, and full consignment history.
-              </p>
-              <button
-                onClick={handleRequestSensitive}
-                disabled={isInitiating}
-                className="w-full py-4 bg-[#C9A84C] text-[#0B1D3A] rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-[#d4b55c] transition-colors shadow-lg active:scale-95"
-              >
-                {isInitiating ? "Sending OTP..." : "Verify Identity"}
-                <FiChevronRight className="w-5 h-5" />
-              </button>
+              <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-[#C9A84C]/10 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute bottom-0 left-0 -ml-16 -mb-16 w-64 h-64 bg-blue-900/20 rounded-full blur-3xl pointer-events-none" />
+              
+              <div className="relative z-10">
+                <div className="w-20 h-20 mx-auto bg-white/5 rounded-full flex items-center justify-center mb-6 border border-white/10">
+                  <FiLock className="w-8 h-8 text-[#C9A84C]" />
+                </div>
+                <h2 className="text-2xl md:text-3xl font-bold mb-4" style={{ fontFamily: "var(--font-playfair), serif" }}>Unlock Full Consignment Details</h2>
+                <p className="text-white/60 text-sm md:text-base mb-10 max-w-lg mx-auto leading-relaxed">
+                  Confidential verification is required to access sensitive documents, package photos, sender identities, and comprehensive routing history.
+                </p>
+                <button
+                  onClick={handleRequestSensitive}
+                  disabled={isInitiating}
+                  className="w-full sm:w-auto px-10 py-5 mx-auto bg-[#C9A84C] text-[#0B1D3A] rounded-xl font-bold flex items-center justify-center gap-3 hover:bg-[#d4b55c] transition-all shadow-[0_0_20px_rgba(201,168,76,0.3)] active:scale-95 text-sm uppercase tracking-widest disabled:opacity-70 disabled:pointer-events-none"
+                >
+                  {isInitiating ? "Initiating Protocol..." : "Verify Identity"}
+                  <FiChevronRight className="w-5 h-5" />
+                </button>
+              </div>
             </motion.section>
           ) : (
             <motion.div
               key="sensitive-info"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="space-y-8"
+              className="space-y-10 md:space-y-14"
             >
               {/* Package Photos */}
               {fullInfo.packagePhotos && (
-                <section className="space-y-4">
-                  <div className="flex items-center gap-2 text-slate-400 font-bold text-xs uppercase tracking-widest px-2">
-                    <FiImage className="w-4 h-4" />
-                    <span>Package Photos</span>
+                <section className="space-y-5">
+                  <div className="flex items-center gap-3 text-[#0B1D3A] font-bold text-xs uppercase tracking-[0.2em] px-2">
+                    <div className="w-8 h-8 rounded-full bg-[#0B1D3A]/5 flex items-center justify-center">
+                      <FiImage className="w-4 h-4 text-[#C9A84C]" />
+                    </div>
+                    <span>Visual Assets</span>
                   </div>
-                  <div className="rounded-3xl overflow-hidden border border-slate-200 bg-white shadow-sm p-4">
+                  <div className="rounded-[2rem] overflow-hidden border border-slate-200 bg-white shadow-xl shadow-slate-200/40 p-3 md:p-4">
                     <img
                       src={fullInfo.packagePhotos}
-                      alt="Package"
-                      className="w-full h-64 object-cover rounded-2xl"
+                      alt="Consignment"
+                      className="w-full h-64 md:h-[450px] object-cover rounded-[1.5rem]"
                     />
                   </div>
                 </section>
               )}
 
               {/* Sender & Receiver Info */}
-              <section className="grid grid-cols-2 gap-4">
-                <div className="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Sender</span>
-                  <p className="font-bold text-slate-800">{fullInfo.senderName}</p>
+              <section className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="bg-white rounded-3xl p-8 border border-slate-100 shadow-xl shadow-slate-200/40 relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-2 h-full bg-gradient-to-b from-slate-100 to-slate-200" />
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] block mb-3">Originating Party</span>
+                  <p className="text-xl md:text-2xl font-bold text-[#0B1D3A]" style={{ fontFamily: "var(--font-playfair), serif" }}>{fullInfo.senderName}</p>
                 </div>
-                <div className="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Receiver</span>
-                  <p className="font-bold text-slate-800">{fullInfo.recipientName}</p>
+                <div className="bg-white rounded-3xl p-8 border border-slate-100 shadow-xl shadow-slate-200/40 relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-2 h-full bg-gradient-to-b from-[#C9A84C]/50 to-[#C9A84C]" />
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] block mb-3">Receiving Party</span>
+                  <p className="text-xl md:text-2xl font-bold text-[#0B1D3A]" style={{ fontFamily: "var(--font-playfair), serif" }}>{fullInfo.recipientName}</p>
                 </div>
               </section>
 
               {/* Description */}
-              <section className="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm">
-                <div className="flex items-center gap-2 mb-4 text-slate-400 font-bold text-xs uppercase tracking-widest">
-                  <FiInfo className="w-4 h-4" />
-                  <span>Shipment Description</span>
+              <section className="bg-white rounded-[2rem] p-8 md:p-10 border border-slate-100 shadow-xl shadow-slate-200/40">
+                <div className="flex items-center gap-3 mb-6 text-[#0B1D3A] font-bold text-xs uppercase tracking-[0.2em]">
+                  <div className="w-8 h-8 rounded-full bg-[#0B1D3A]/5 flex items-center justify-center">
+                    <FiInfo className="w-4 h-4 text-[#C9A84C]" />
+                  </div>
+                  <span>Manifest Description</span>
                 </div>
-                <p className="text-slate-600 leading-relaxed font-medium">
-                  {fullInfo.shipmentDescription || "No description provided."}
+                <p className="text-slate-600 leading-loose md:text-lg">
+                  {fullInfo.shipmentDescription || "No manifestation notes recorded."}
                 </p>
               </section>
 
               {/* Timeline (Sensitive) */}
-              <section className="space-y-4">
-                <div className="flex items-center gap-2 text-slate-400 font-bold text-xs uppercase tracking-widest px-2">
-                  <FiClock className="w-4 h-4" />
-                  <span>Detailed History</span>
+              <section className="space-y-6">
+                <div className="flex items-center gap-3 text-[#0B1D3A] font-bold text-xs uppercase tracking-[0.2em] px-2 mb-8">
+                  <div className="w-8 h-8 rounded-full bg-[#0B1D3A]/5 flex items-center justify-center">
+                    <FiClock className="w-4 h-4 text-[#C9A84C]" />
+                  </div>
+                  <span>Comprehensive Routing History</span>
                 </div>
                 <div className="space-y-4">
                   {displayStages.map((stage, idx) => {
@@ -286,10 +302,10 @@ export default function ShipmentTrackingDashboard() {
                     return (
                       <motion.div
                         key={idx}
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: idx * 0.1 }}
-                        className={`bg-white rounded-3xl p-6 border ${isPending ? 'border-amber-200 bg-amber-50/30' : 'border-slate-200'} shadow-sm relative`}
+                        className={`bg-white rounded-[2rem] p-6 md:p-8 border ${isPending ? 'border-amber-200 shadow-xl shadow-amber-100/50' : 'border-slate-100 shadow-xl shadow-slate-200/40'} relative`}
                       >
                         {isPending && (
                           <div className="absolute top-4 right-4 animate-pulse">
@@ -343,9 +359,11 @@ export default function ShipmentTrackingDashboard() {
 
         {/* Timeline (Minimal) */}
         {!isSensitive && (
-          <section className="space-y-4">
-            <div className="flex items-center gap-2 text-slate-400 font-bold text-xs uppercase tracking-widest px-2">
-              <FiClock className="w-4 h-4" />
+          <section className="space-y-6">
+            <div className="flex items-center gap-3 text-[#0B1D3A] font-bold text-xs uppercase tracking-[0.2em] px-2 mb-8">
+              <div className="w-8 h-8 rounded-full bg-[#0B1D3A]/5 flex items-center justify-center">
+                <FiClock className="w-4 h-4 text-[#C9A84C]" />
+              </div>
               <span>Timeline Highlights</span>
             </div>
             <div className="relative pl-6 space-y-8 before:absolute before:left-0 before:top-2 before:bottom-2 before:w-px before:bg-slate-200">
