@@ -41,10 +41,10 @@ export const connectDB = async (force: boolean = false) => {
     await sequelize
       .sync({ force: force })
       .then(() => console.log('✅ Tables formed with associations'));
-      
+
     // Run seed idempotently
     await seedDatabase();
-    
+
     // Run the check
     await checkTableStructure()
       .then(() => {

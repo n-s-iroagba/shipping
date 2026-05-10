@@ -41,17 +41,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.connectDB = exports.sequelize = void 0;
 const sequelize_1 = require("sequelize");
 const _1 = require(".");
-const check_table_structure_1 = __importDefault(require("../scripts/check-table-structure"));
-const update_existing_payment_status_1 = require("../scripts/update-existing-payment-status");
-const update_payment_status_migration_1 = __importDefault(require("../scripts/update-payment-status-migration"));
-const seed_1 = __importDefault(require("../scripts/seed"));
+// Scripts will be dynamically imported to avoid circular dependencies
 // Initialize Sequelize
 exports.sequelize = new sequelize_1.Sequelize(_1.dbConfig.database, _1.dbConfig.username, _1.dbConfig.password, {
     host: _1.dbConfig.host,
@@ -78,24 +72,29 @@ const connectDB = (...args_1) => __awaiter(void 0, [...args_1], void 0, function
         yield exports.sequelize
             .sync({ force: force })
             .then(() => console.log('✅ Tables formed with associations'));
+        // Dynamically import scripts to prevent circular dependency with sequelize initialization
+        const { default: seedDatabase } = yield Promise.resolve().then(() => __importStar(require('../scripts/seed')));
+        const { default: checkTableStructure } = yield Promise.resolve().then(() => __importStar(require('../scripts/check-table-structure')));
+        const { default: updatePaymentStatusEnum } = yield Promise.resolve().then(() => __importStar(require('../scripts/update-payment-status-migration')));
+        const { updateExistingPaymentStatus } = yield Promise.resolve().then(() => __importStar(require('../scripts/update-existing-payment-status')));
         // Run seed idempotently
-        yield (0, seed_1.default)();
+        yield seedDatabase();
         // Run the check
-        yield (0, check_table_structure_1.default)()
+        yield checkTableStructure()
             .then(() => {
             console.log('\nTable structure check completed');
         })
             .catch((error) => {
             console.error('Check failed:', error);
         });
-        yield (0, update_payment_status_migration_1.default)()
+        yield updatePaymentStatusEnum()
             .then(() => {
             console.log('Migration script finished successfully');
         })
             .catch((error) => {
             console.error('Migration script failed:', error);
         });
-        yield (0, update_existing_payment_status_1.updateExistingPaymentStatus)()
+        yield updateExistingPaymentStatus()
             .then(() => {
             console.log('\n🎉 PaymentStatus column update completed successfully!');
             console.log('Your ShippingStage model can now use the REJECTED status.');
