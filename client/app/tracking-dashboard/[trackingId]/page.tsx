@@ -24,6 +24,7 @@ import { getRequest } from "@/utils/apiUtils";
 import { handleError } from "@/utils/utils";
 import type { Shipment } from "@/types/shipment.types";
 import { ShippingStagePaymentStatus } from "@/types/stage.types";
+import Footer from "@/components/Footer";
 
 /** ------------  Types  ------------ */
 interface PublicTrackingInfo {
@@ -421,19 +422,7 @@ export default function ShipmentTrackingDashboard() {
           onClose={() => setShowVerifyModal(false)}
         />
       )}
-      {/* Premium Footer */}
-      <footer className="mt-32 border-t border-slate-100 bg-white py-20 px-6">
-        <div className="max-w-4xl lg:max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10 text-center md:text-left">
-          <div className="space-y-4">
-            <h3 className="text-xl font-light tracking-widest text-[#0B1D3A]" style={{ fontFamily: "var(--font-playfair), serif" }}>ARBOR GLOBAL</h3>
-            <p className="text-xs text-slate-400 font-bold uppercase tracking-[0.2em]">Secure Logistics & Concierge</p>
-          </div>
-          <div className="flex flex-col md:items-end gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-400">
-            <p>© 2026 Arbor Global Private Ltd.</p>
-            <p>Terms of Confidentiality • Privacy Protocol</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
