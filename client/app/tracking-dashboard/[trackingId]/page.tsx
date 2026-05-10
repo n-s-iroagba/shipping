@@ -181,7 +181,7 @@ export default function ShipmentTrackingDashboard() {
       <main className="max-w-4xl lg:max-w-5xl mx-auto px-4 md:px-8 -mt-16 space-y-12 md:space-y-16 relative z-20">
 
         {/* Global Routing Card */}
-        <section className="bg-white rounded-[2.5rem] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] border border-slate-100 p-8 md:p-16 relative overflow-hidden">
+        <section className="bg-white rounded-[2.5rem] my-6 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] border border-slate-100 p-8 md:p-16 relative overflow-hidden">
           <div className="flex flex-col md:flex-row items-center justify-between gap-12 relative">
 
             {/* Origin */}
