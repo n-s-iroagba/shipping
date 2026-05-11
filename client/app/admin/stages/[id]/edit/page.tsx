@@ -3,13 +3,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  FiSave, 
-  FiX, 
-  FiCalendar, 
-  FiMapPin, 
-  FiDollarSign, 
-  FiFileText, 
+import {
+  FiSave,
+  FiX,
+  FiCalendar,
+  FiMapPin,
+  FiDollarSign,
+  FiFileText,
   FiTruck,
   FiNavigation,
   FiCheckCircle,
@@ -60,7 +60,7 @@ export default function EditStageForm() {
       <Spinner />
     </div>
   );
-  
+
   if (fetchError) return <ErrorAlert message={fetchError} />;
   if (!stage) return <ErrorAlert message="Stage not found" />;
 
@@ -110,7 +110,7 @@ export default function EditStageForm() {
 
       await putRequest(routes.stage.update(stage.id), payload);
       setSuccess(true);
-      
+
       setTimeout(() => {
         router.push(`/admin/shipment/${stage.shipmentId}/stages`);
       }, 1500);
@@ -122,14 +122,14 @@ export default function EditStageForm() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto p-4 md:p-8">
-      <motion.div 
+    <div className="max-w-5xl p-4 md:p-8">
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-100"
       >
         {/* Header */}
-        <div className="bg-slate-900 p-8 text-white relative overflow-hidden">
+        <div className="bg-slate-900 p-4 md:p-8 text-white relative overflow-hidden">
           <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-white/5 rounded-full blur-3xl" />
           <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div className="flex items-center gap-6">
@@ -141,7 +141,7 @@ export default function EditStageForm() {
                 <p className="text-slate-400 text-sm mt-1">Update tracking details and status for Stage #{stage.id}</p>
               </div>
             </div>
-            
+
             <button
               onClick={() => router.back()}
               className="flex items-center gap-2 bg-white/10 hover:bg-white/20 px-5 py-2.5 rounded-xl transition-all font-medium text-sm border border-white/10"
@@ -155,7 +155,7 @@ export default function EditStageForm() {
         <div className="p-8">
           <AnimatePresence>
             {error && (
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
@@ -167,7 +167,7 @@ export default function EditStageForm() {
             )}
 
             {success && (
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
                 className="mb-8 p-4 bg-emerald-50 border border-emerald-100 text-emerald-600 rounded-2xl flex items-start gap-3 text-sm font-medium"
@@ -187,7 +187,7 @@ export default function EditStageForm() {
                     <span className="w-8 h-8 bg-[#0B1D3A]/5 text-[#0B1D3A] rounded-lg flex items-center justify-center text-sm">01</span>
                     General Information
                   </h3>
-                  
+
                   <div className="space-y-6">
                     <div>
                       <label className="text-sm font-bold text-slate-700 ml-1 mb-2 block">Stage Title</label>
@@ -242,7 +242,7 @@ export default function EditStageForm() {
                     <span className="w-8 h-8 bg-[#0B1D3A]/5 text-[#0B1D3A] rounded-lg flex items-center justify-center text-sm">02</span>
                     Location Details
                   </h3>
-                  
+
                   <div className="space-y-6">
                     <div>
                       <label className="text-sm font-bold text-slate-700 ml-1 mb-2 block">Location Name</label>
@@ -302,7 +302,7 @@ export default function EditStageForm() {
                     <span className="w-8 h-8 bg-[#0B1D3A]/10 text-[#0B1D3A] rounded-lg flex items-center justify-center text-sm">03</span>
                     Financial Status
                   </h3>
-                  
+
                   <div className="space-y-6">
                     <div>
                       <label className="text-sm font-bold text-slate-700 ml-1 mb-2 block">Payment Status</label>
@@ -322,7 +322,7 @@ export default function EditStageForm() {
                     </div>
 
                     {formData.paymentStatus !== ShippingStagePaymentStatus.NO_PAYMENT_REQUIRED && (
-                      <motion.div 
+                      <motion.div
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
                         className="space-y-6"
@@ -381,7 +381,7 @@ export default function EditStageForm() {
                     <span className="w-8 h-8 bg-[#0B1D3A]/5 text-[#0B1D3A] rounded-lg flex items-center justify-center text-sm">04</span>
                     Supporting Documents
                   </h3>
-                  
+
                   <div className="space-y-4">
                     <div className="relative group">
                       <input
@@ -391,13 +391,12 @@ export default function EditStageForm() {
                         id="stage-document"
                         disabled={isUploading}
                       />
-                      <label 
+                      <label
                         htmlFor="stage-document"
-                        className={`flex flex-col items-center justify-center p-8 border-2 border-dashed rounded-3xl transition-all cursor-pointer ${
-                          isUploading 
-                            ? "bg-slate-50 border-slate-200 cursor-not-allowed" 
+                        className={`flex flex-col items-center justify-center p-8 border-2 border-dashed rounded-3xl transition-all cursor-pointer ${isUploading
+                            ? "bg-slate-50 border-slate-200 cursor-not-allowed"
                             : "bg-slate-50 border-slate-200 hover:border-[#C9A84C] hover:bg-[#0B1D3A]/5/30"
-                        }`}
+                          }`}
                       >
                         {isUploading ? (
                           <div className="flex flex-col items-center gap-3">
@@ -419,7 +418,7 @@ export default function EditStageForm() {
                     </div>
 
                     {formData.supportingDocument && (
-                      <motion.div 
+                      <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
                         className="flex items-center justify-between p-4 bg-emerald-50 border border-emerald-100 rounded-2xl"
@@ -433,9 +432,9 @@ export default function EditStageForm() {
                             <p className="text-[10px] text-emerald-600 truncate max-w-[200px]">{formData.supportingDocument}</p>
                           </div>
                         </div>
-                        <a 
-                          href={formData.supportingDocument} 
-                          target="_blank" 
+                        <a
+                          href={formData.supportingDocument}
+                          target="_blank"
                           rel="noopener noreferrer"
                           className="text-xs font-bold text-emerald-700 hover:underline px-3"
                         >
@@ -472,7 +471,7 @@ export default function EditStageForm() {
           </form>
         </div>
       </motion.div>
-      
+
       <p className="mt-8 text-center text-slate-400 text-xs font-medium uppercase tracking-widest">
         Secured Shipping Management System v2.0
       </p>
