@@ -74,7 +74,7 @@ function EmailForm() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50/50 p-4 md:p-8">
+    <div className="min-h-screen bg-slate-50/50  md:p-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -98,9 +98,9 @@ function EmailForm() {
           </div>
         </div>
 
-        <div className="bg-white rounded-3xl shadow-xl shadow-slate-200/50 overflow-hidden border border-slate-100">
+        <div className="bg-white p-2 rounded-3xl shadow-xl shadow-slate-200/50 overflow-hidden border border-slate-100">
           {/* Header */}
-          <div className="bg-[#0B1D3A] p-8 text-white relative overflow-hidden">
+          <div className="bg-[#0B1D3A] p-8 text-white relative overflow-hidden p-4">
             <div className="absolute top-0 right-0 -mr-12 -mt-12 w-48 h-48 bg-[#C9A84C]/5 rounded-full blur-3xl" />
             <div className="relative z-10 flex items-center gap-6">
               <div className="w-14 h-14 bg-[#C9A84C]/10 backdrop-blur-md rounded-2xl flex items-center justify-center border border-[#C9A84C]/20">
@@ -139,7 +139,7 @@ function EmailForm() {
 
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Subject */}
-              <div className="space-y-2">
+              <div className="space-y-2 p-4">
                 <label className="text-[10px] font-semibold text-[#0B1D3A] ml-1 tracking-[0.2em] uppercase">Email Subject</label>
                 <input
                   type="text"
@@ -151,7 +151,7 @@ function EmailForm() {
               </div>
 
               {/* Editor */}
-              <div className="space-y-2">
+              <div className="space-y-2 p-4">
                 <label className="text-[10px] font-semibold text-[#0B1D3A] ml-1 tracking-[0.2em] uppercase">Message Body</label>
                 <div className="rounded-2xl border-2 border-slate-100 overflow-hidden focus-within:border-[#C9A84C] focus-within:ring-4 focus-within:ring-[#C9A84C]/10 transition-all duration-200">
                   <CustomEditor
@@ -166,7 +166,7 @@ function EmailForm() {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+              <div className="flex flex-col sm:flex-row gap-4 p-4">
                 <button
                   type="submit"
                   disabled={isLoading || !email}
@@ -199,11 +199,8 @@ function EmailForm() {
           </div>
         </div>
 
-        {/* Footer Info */}
-        <div className="mt-8 flex items-center justify-center gap-2 text-slate-400 text-sm">
-          <FiEye className="w-4 h-4" />
-          <span>All outgoing emails are logged for security purposes</span>
-        </div>
+
+
       </motion.div>
     </div>
   );

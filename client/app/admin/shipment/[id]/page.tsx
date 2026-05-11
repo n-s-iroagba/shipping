@@ -78,7 +78,7 @@ const AdminShipment = () => {
                 <span className="hidden sm:inline">Edit Shipment</span>
                 <span className="sm:hidden">Edit</span>
               </button>
-                 <button
+              <button
                 onClick={() =>
                   router.push(`/admin/send-mail/?email=${shipment.receipientEmail}`)
                 }
@@ -86,7 +86,7 @@ const AdminShipment = () => {
               >
                 <FaMailchimp className="w-4 h-4" />
                 <span className="hidden sm:inline">Send Mail To Client</span>
-                <span className="sm:hidden">Edit</span>
+                <span className="sm:hidden">Mail</span>
               </button>
               <button
                 onClick={() => setShowShipmentDeleteModal(true)}
@@ -236,8 +236,8 @@ const AdminShipment = () => {
                 <div className="font-semibold text-gray-900 text-sm sm:text-base">
                   {shipment.expectedTimeOfArrival
                     ? new Date(
-                        shipment.expectedTimeOfArrival,
-                      ).toLocaleDateString()
+                      shipment.expectedTimeOfArrival,
+                    ).toLocaleDateString()
                     : "Not set"}
                 </div>
               </div>

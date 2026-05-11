@@ -9,7 +9,7 @@ import {
 import { postRequest } from "@/utils/apiUtils";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { uploadFile } from "@/utils/utils";
+import { handleError, uploadFile } from "@/utils/utils";
 
 interface ValidationErrors {
   [key: string]: string;
@@ -89,7 +89,7 @@ export default function CreateShipmentPage() {
   });
 
   const [submitting, setSubmitting] = useState<boolean>(false);
-  const [error, setError] = useState<string >('');
+  const [error, setError] = useState<string | null >('');
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [validationErrors, setValidationErrors] = useState<ValidationErrors>(
     {},
