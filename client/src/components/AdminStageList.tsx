@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import AdminStageCard from "./AdminStageCard"; // assumed to be your custom component
 import { Stage } from "@/types/stage.types";
 import { DeleteConfirmationModal } from "./DeleteConfirmationModal";
+import { useRouter } from "next/navigation";
+import { FaFlag } from "react-icons/fa";
 
 interface AdminStageListProps {
   stages: Stage[];
@@ -14,6 +16,7 @@ const ITEMS_PER_PAGE = 6;
 const AdminStageList: React.FC<AdminStageListProps> = ({ stages }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [stageToBeDeleted, setStageToBeDeleted] = useState<Stage | null>(null);
+  const router = useRouter()
 
   const totalPages = Math.ceil(stages.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -25,6 +28,8 @@ const AdminStageList: React.FC<AdminStageListProps> = ({ stages }) => {
 
   return (
     <div className="space-y-4">
+
+
       {/* Cards Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {currentItems.length &&

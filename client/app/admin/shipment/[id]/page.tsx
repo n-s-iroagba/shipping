@@ -266,13 +266,13 @@ const AdminShipment = () => {
 
         {/* Admin Stage List */}
         <div className="w-full">
-          <h2>Stages</h2>
+          <h2 className="mb-3">Stages</h2>
           <button
             onClick={() => router.push(`/admin/shipment/${shipmentId}/stages`)}
-            className="flex items-center justify-center gap-2 bg-slate-600 text-white px-3 sm:px-4 py-2 rounded-lg hover:bg-slate-700 transition-colors text-sm sm:text-base"
+            className="flex items-center mb-3 justify-center gap-2 bg-slate-600 text-white px-3 sm:px-4 py-2 rounded-lg hover:bg-slate-700 transition-colors text-sm sm:text-base"
           >
             <FaFlag className="w-4 h-4" />
-            <span className="hidden sm:inline">View All Stages</span>
+            <span className="hidden sm:inline text-slate-900">View All Stages</span>
             <span className="sm:hidden"></span>
           </button>
           <AdminStageList stages={shipment.shippingStages} />
