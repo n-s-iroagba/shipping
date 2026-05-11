@@ -47,7 +47,7 @@ const ShipmentDashboard: React.FC = () => {
             className="flex items-center gap-2 bg-gradient-to-r from-[#0B1D3A] to-slate-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-xl hover:shadow-lg transition-all duration-300 font-medium shadow-md text-sm sm:text-base"
           >
             <FiPlus className="text-lg" />
-            <span className="hidden sm:inline">Create New Shipment</span>
+            <span className="hidden sm:inline text-slate-900">Create New Shipment</span>
             <span className="sm:hidden">New</span>
           </motion.button>
         </motion.div>
