@@ -86,7 +86,7 @@ export default function Home() {
               <button
                 type="submit"
                 disabled={loading}
-                className="px-8 py-4 bg-[#0B1D3A] text-white rounded-xl font-semibold text-sm tracking-wide uppercase hover:bg-[#132d54] transition-all disabled:opacity-50 shrink-0 shadow-md"
+                className="px-8 py-4 bg-[#0B1D3A] text-white rounded-xl font-semibold text-sm  uppercase hover:bg-[#132d54] transition-all disabled:opacity-50 shrink-0 shadow-md"
               >
                 {loading ? "..." : "Track Now"}
               </button>
