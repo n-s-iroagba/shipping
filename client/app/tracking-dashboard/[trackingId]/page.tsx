@@ -140,7 +140,7 @@ export default function ShipmentTrackingDashboard() {
   return (
     <div className="min-h-screen bg-[#FDFDFD] text-[#0B1D3A] selection:bg-[#C9A84C]/20 pt-10 pb-20">
       {/* Premium Hero Section */}
-      <div className="relative bg-[#0B1D3A] pt-10 pb-32 px-6 overflow-hidden">
+      <div className="relative bg-[#0B1D3A] pt-10 pb-32 px-6 ">
 
 
         <div className="relative   max-w-4xl lg:max-w-5xl mx-auto text-center">
