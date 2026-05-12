@@ -81,12 +81,12 @@ export default function AboutPage() {
               Our Heritage
             </p>
             <h1
-              className="text-5xl md:text-8xl font-bold mb-10 text-white leading-[1.1]"
+              className="text-5xl md:text-8xl font-bold mb-10 text-black leading-[1.1]"
               style={{ fontFamily: "var(--font-playfair), serif" }}
             >
               About {brandName}
             </h1>
-            <p className="text-xl md:text-2xl text-white/70 mb-16 max-w-2xl mx-auto font-light leading-relaxed tracking-wide">
+            <p className="text-xl md:text-2xl text-black mb-16 max-w-2xl mx-auto font-light leading-relaxed tracking-wide">
               Discreet global logistics for individuals and institutions who demand absolute confidentiality
             </p>
             <div className="flex justify-center">
@@ -162,7 +162,7 @@ export default function AboutPage() {
         </section>
 
         {/* Services Section */}
-        <section className="bg-white py-32 md:py-48">
+        <section className="bg-white mt-6 py-32 md:py-48">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <p className="text-[10px] font-bold tracking-[0.5em] uppercase text-[#C9A84C] mb-6 text-center">
@@ -200,7 +200,7 @@ export default function AboutPage() {
         </section>
 
         {/* Team Section */}
-        <section className="bg-[#0B1D3A]/[0.02] py-32 md:py-48">
+        <section className="bg-[#0B1D3A]/[0.02] py-32 md:py-48 my-12">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <p className="text-[10px] font-bold tracking-[0.5em] uppercase text-[#C9A84C] mb-6 text-center">
@@ -239,7 +239,7 @@ export default function AboutPage() {
 
         {/* Contact Section */}
         <section className="bg-[#0B1D3A] py-32 md:py-56 rounded-[4rem] mx-4 md:mx-8">
-          <div className="container mx-auto px-4">
+          <div className=" mx-auto p-8">
             <div className="max-w-4xl mx-auto text-center text-white">
               <p className="text-[10px] font-bold tracking-[0.5em] uppercase text-[#C9A84C] mb-8">
                 Private Enquiries
