@@ -126,7 +126,7 @@ export default function BulkCreateStagesForm() {
         className="space-y-8"
       >
         {/* Header Section */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 bg-slate-900 p-8 rounded-3xl shadow-xl text-white relative overflow-hidden">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 bg-slate-900 p-8 rounded-3xl shadow-xl text-white relative overflow-hidden">
           <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-white/5 rounded-full blur-3xl" />
           <div className="relative z-10 flex items-center gap-6">
             <div className="w-16 h-16 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/20 shadow-xl">
@@ -138,11 +138,11 @@ export default function BulkCreateStagesForm() {
             </div>
           </div>
           
-          <div className="relative z-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full md:w-auto mt-6 md:mt-0">
+          <div className="relative z-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full lg:w-auto mt-6 lg:mt-0">
             <button
               type="button"
               onClick={() => router.back()}
-              className="flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 px-5 py-3 sm:py-2.5 rounded-xl transition-all font-medium border border-white/10 w-full sm:w-auto"
+              className="flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 px-6 py-3 sm:py-2.5 rounded-xl transition-all font-medium border border-white/10 w-full sm:w-auto whitespace-nowrap"
             >
               <FiArrowLeft />
               Cancel
@@ -150,7 +150,7 @@ export default function BulkCreateStagesForm() {
             <button
               type="button"
               onClick={addStage}
-              className="flex items-center justify-center gap-2 bg-slate-700 hover:bg-slate-600 text-white px-6 py-3 sm:py-2.5 rounded-xl transition-all font-bold shadow-lg w-full sm:w-auto"
+              className="flex items-center justify-center gap-2 bg-slate-700 hover:bg-slate-600 text-white px-6 py-3 sm:py-2.5 rounded-xl transition-all font-bold shadow-lg w-full sm:w-auto whitespace-nowrap"
             >
               <FiPlus />
               Add Another Stage
@@ -180,15 +180,14 @@ export default function BulkCreateStagesForm() {
           </motion.div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-8">
-          <AnimatePresence mode="popLayout">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-8">
+          <AnimatePresence>
             {stages.map((stage, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 20 }}
-                layout
                 className="bg-white rounded-3xl border border-slate-100 shadow-xl shadow-slate-200/50 overflow-hidden"
               >
                 <div className="bg-slate-50 px-8 py-4 border-b border-slate-100 flex items-center justify-between">

@@ -30,18 +30,18 @@ export const transporter = nodemailer.createTransport({
 });
 
 
- export class EmailService {
-private readonly clientUrl: string
+export class EmailService {
+  private readonly clientUrl: string
   constructor(clientUrl: string) {
-    this.clientUrl =clientUrl
+    this.clientUrl = clientUrl
   }
 
 
   private async sendEmail(options: EmailOptions): Promise<void> {
     try {
-      const fromName = process.env.EMAIL_FROM_NAME || 'Netly Logistics';
+      const fromName = process.env.EMAIL_FROM_NAME || 'Arbor Global';
       const fromAddress = process.env.EMAIL_FROM_ADDRESS || process.env.EMAIL_USER;
-      
+
       const mailOptions = {
         from: `"${fromName}" <${fromAddress}>`,
         to: options.to,
@@ -184,7 +184,7 @@ private readonly clientUrl: string
               ${content}
             </div>
             <div class="footer">
-              <p>&copy; ${new Date().getFullYear()} ${process.env.BRAND_NAME || 'Netly Logistics'}. All rights reserved.</p>
+              <p>&copy; ${new Date().getFullYear()} ${process.env.BRAND_NAME || 'Arbor Global'}. All rights reserved.</p>
               <p>Safe, Fast, and Reliable Shipping Solutions.</p>
             </div>
           </div>
@@ -194,7 +194,7 @@ private readonly clientUrl: string
   }
 
   // Verification Email
-  async sendVerificationEmail(user: Admin,code:string): Promise<void> {
+  async sendVerificationEmail(user: Admin, code: string): Promise<void> {
     try {
       const verificationUrl = `${this.clientUrl}/auth/verify-email/${user.verificationToken}`
       const html = `
@@ -239,7 +239,7 @@ private readonly clientUrl: string
               
               <div class="footer">
                 <p>If you didn't create this account, please ignore this email.</p>
-                <p>&copy; ${new Date().getFullYear()} ${process.env.BRAND_NAME || 'Netly Logistics'}. All rights reserved.</p>
+                <p>&copy; ${new Date().getFullYear()} ${process.env.BRAND_NAME || 'Arbor Global'}. All rights reserved.</p>
               </div>
             </div>
           </body>
@@ -248,7 +248,7 @@ private readonly clientUrl: string
 
       await this.sendEmail({
         to: user.email,
-        subject: 'Verify Your Email Address - Netly Logistics',
+        subject: 'Verify Your Email Address - Arbor Global',
         html,
       })
 
@@ -308,7 +308,7 @@ private readonly clientUrl: string
               
               <div class="footer">
                 <p>If you're having trouble with the button above, copy and paste the URL into your web browser.</p>
-                <p>&copy; ${new Date().getFullYear()} ${process.env.BRAND_NAME || 'Netly Logistics'}. All rights reserved.</p>
+                <p>&copy; ${new Date().getFullYear()} ${process.env.BRAND_NAME || 'Arbor Global'}. All rights reserved.</p>
               </div>
             </div>
           </body>
@@ -317,7 +317,7 @@ private readonly clientUrl: string
 
       await this.sendEmail({
         to: email,
-        subject: 'Password Reset Request - Netly Logistics',
+        subject: 'Password Reset Request - Arbor Global',
         html,
       })
 
@@ -330,10 +330,10 @@ private readonly clientUrl: string
       throw new Error('Failed to send password reset email')
     }
   }
-async sendInitialiseSensitiveTrackingEmail (shipment: Shipment, code: string) {
+  async sendInitialiseSensitiveTrackingEmail(shipment: Shipment, code: string) {
 
-  
-  const html = `
+
+    const html = `
     <!DOCTYPE html>
     <html>
       <head>
@@ -362,7 +362,7 @@ async sendInitialiseSensitiveTrackingEmail (shipment: Shipment, code: string) {
               <ul style="margin: 10px 0;">
                 <li>This verification code will expire in 15 minutes</li>
                 <li>Do not share this code with anyone</li>
-                <li>Netly Logistics will never ask for this code via phone or email</li>
+                <li>Arbor Global will never ask for this code via phone or email</li>
               </ul>
             </div>
             
@@ -385,7 +385,7 @@ async sendInitialiseSensitiveTrackingEmail (shipment: Shipment, code: string) {
           
           <div class="footer">
             <p>If you did not request access to sensitive shipment information, please ignore this email and contact our support team immediately.</p>
-            <p>&copy; ${new Date().getFullYear()} Netly Logistics. All rights reserved.</p>
+            <p>&copy; ${new Date().getFullYear()} Arbor Global. All rights reserved.</p>
             <p style="font-size: 12px; color: #999;">This is an automated message, please do not reply to this email.</p>
           </div>
         </div>
@@ -393,22 +393,22 @@ async sendInitialiseSensitiveTrackingEmail (shipment: Shipment, code: string) {
     </html>
   `;
 
-  const subject = 'Secure Access Code for Sensitive Shipment Data';
-  
-  try {
-    await transporter.sendMail({
-      from: `"${process.env.BRAND_NAME || 'Netly Logistics'} Security" <${process.env.EMAIL_USER}>`,
-      to: shipment.receipientEmail,
-      subject: subject,
-      html: html,
-    });
-    
-    console.log(`Sensitive data access email sent to ${shipment.receipientEmail} for shipment ${shipment.trackingNumber}`);
-  } catch (e) {
-    console.error('Failed to send sensitive data access email:', e);
-    throw new Error('Failed to send sensitive data access email');
-  }
-};
+    const subject = 'Secure Access Code for Sensitive Shipment Data';
+
+    try {
+      await transporter.sendMail({
+        from: `"${process.env.BRAND_NAME || 'Arbor Global'} Security" <${process.env.EMAIL_USER}>`,
+        to: shipment.receipientEmail,
+        subject: subject,
+        html: html,
+      });
+
+      console.log(`Sensitive data access email sent to ${shipment.receipientEmail} for shipment ${shipment.trackingNumber}`);
+    } catch (e) {
+      console.error('Failed to send sensitive data access email:', e);
+      throw new Error('Failed to send sensitive data access email');
+    }
+  };
 
   // Generic method for custom emails
   async sendCustomEmail(
@@ -464,7 +464,7 @@ async sendInitialiseSensitiveTrackingEmail (shipment: Shipment, code: string) {
   }
 }
 
-  // Test email connection
+// Test email connection
 //   async testConnection(): Promise<boolean> {
 //     try {
 //       await transporter.verify()
