@@ -147,7 +147,7 @@ export default function ShipmentTrackingDashboard() {
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center my-8 gap-3 px-5 py-2  bg-white/5 border border-white/10 text-[#C9A84C] text-[10px] font-bold uppercase tracking-[0.3em] mb-10 backdrop-blur-sm"
+            className="inline-flex items-center my-8 gap-3 px-5 py-2  bg-white/5 border  text-[#C9A84C] text-[10px] font-bold uppercase tracking-[0.3em] mb-10 backdrop-blur-sm"
           >
             <FiLock className="w-3 h-3" />
             Secure Concierge Tracking
