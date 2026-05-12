@@ -50,7 +50,7 @@ const TestimonialCarousel = () => {
       {testimonials.map((testimonial, idx) => (
         <div
           key={idx}
-          className="bg-white py-6 px-2 rounded-2xl shadow-md text-center mx-2 mb-8 border border-gray-100"
+          className="bg-white p-2 md:p-8 rounded-2xl shadow-md text-center mx-2 my-8 border border-gray-100"
         >
           <div className="flex justify-center mb-4 gap-1">
             <FontAwesomeIcon className="text-[#C9A84C]" icon={faStar} />
