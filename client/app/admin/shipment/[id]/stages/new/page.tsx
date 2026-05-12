@@ -123,38 +123,41 @@ export default function BulkCreateStagesForm() {
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="space-y-8"
+        className="flex flex-col gap-10"
       >
         {/* Header Section */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 bg-slate-900 p-8 rounded-3xl shadow-xl text-white relative overflow-hidden">
-          <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-white/5 rounded-full blur-3xl" />
-          <div className="relative z-10 flex items-center gap-6">
-            <div className="w-16 h-16 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/20 shadow-xl">
-              <FiPlus className="w-8 h-8" />
-            </div>
-            <div>
-              <h1 className="text-3xl font-bold tracking-tight">Add New Stages</h1>
-              <p className="text-slate-400 text-sm mt-1">Creating journey milestones for Shipment #{shipmentId}</p>
-            </div>
-          </div>
+        <div className="bg-[#0B1D3A] rounded-[2rem] shadow-xl text-white relative overflow-hidden px-6 py-8 md:px-10 md:py-10">
+          <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-[#C9A84C]/10 rounded-full blur-3xl pointer-events-none" />
           
-          <div className="relative z-10 flex flex-wrap items-center gap-4 w-full lg:w-auto mt-6 lg:mt-0">
-            <button
-              type="button"
-              onClick={() => router.back()}
-              className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 px-6 py-3 rounded-xl transition-all font-medium border border-white/10 min-w-[140px]"
-            >
-              <FiArrowLeft />
-              Cancel
-            </button>
-            <button
-              type="button"
-              onClick={addStage}
-              className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-[#C9A84C] hover:bg-[#b89945] text-[#0B1D3A] px-6 py-3 rounded-xl transition-all font-bold shadow-lg min-w-[200px]"
-            >
-              <FiPlus />
-              Add Another Stage
-            </button>
+          <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between">
+            <div className="flex items-center gap-6 mb-8 md:mb-0">
+              <div className="w-16 h-16 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/20 shadow-xl shrink-0">
+                <FiPlus className="w-8 h-8 text-[#C9A84C]" />
+              </div>
+              <div>
+                <h1 className="text-3xl font-bold tracking-tight text-white">Add New Stages</h1>
+                <p className="text-white/60 text-sm mt-1">Creating journey milestones for Shipment #{shipmentId}</p>
+              </div>
+            </div>
+            
+            <div className="flex flex-wrap sm:flex-nowrap items-center gap-4">
+              <button
+                type="button"
+                onClick={() => router.back()}
+                className="w-full sm:w-auto flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 text-white px-6 py-4 rounded-xl transition-all font-medium border border-white/10"
+              >
+                <FiArrowLeft />
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={addStage}
+                className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#C9A84C] hover:bg-[#b89945] text-[#0B1D3A] px-6 py-4 rounded-xl transition-all font-bold shadow-lg"
+              >
+                <FiPlus />
+                Add Another Stage
+              </button>
+            </div>
           </div>
         </div>
 
