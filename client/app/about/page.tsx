@@ -77,7 +77,7 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 pt-48 pb-40">
           <div className="max-w-4xl mx-auto text-center">
             <p className="text-[10px] font-bold tracking-[0.5em] uppercase text-[#C9A84C] mb-8">
-              Our Heritage
+
             </p>
             <h1
               className="text-5xl md:text-8xl font-bold mb-10 text-black leading-[1.1]"
