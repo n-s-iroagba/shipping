@@ -128,9 +128,8 @@ export default function ServicesPage() {
         </div>
 
         {/* Call to Action */}
-        <section className="mt-32 md:mt-48 py-24 px-8 md:py-32 md:px-16 bg-[#0B1D3A] rounded-[3rem] text-white text-center relative overflow-hidden shadow-2xl">
-          <div className="absolute top-0 right-0 -mr-24 -mt-24 w-64 h-64 bg-[#C9A84C]/5 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 left-0 -ml-24 -mb-24 w-64 h-64 bg-[#C9A84C]/5 rounded-full blur-3xl" />
+        <section className="mt-32 md:mt-48 py-24 px-8 md:py-32 md:px-16 bg-[#0B1D3A] rounded-[3rem] text-white text-center shadow-2xl">
+
           <div className="relative z-10">
             <FiLock className="w-10 h-10 text-[#C9A84C] mx-auto mb-6" />
             <h2
