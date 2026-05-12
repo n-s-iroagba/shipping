@@ -193,10 +193,11 @@ export default function ShipmentTrackingDashboard() {
             loading="lazy"
             style={{ border: 0 }}
           />
-          <div className="absolute top-2 right-2 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium text-gray-700 shadow-sm">
-            Live Location
-          </div>
+
         </div>
+        <h3 className="text-lg sm:text-xl font-semibold text-gray-900">
+          Current Location: {displayStages[0].location}
+        </h3>
       </div>
 
 
