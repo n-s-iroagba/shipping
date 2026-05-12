@@ -234,7 +234,7 @@ export default function ShipmentTrackingDashboard() {
                 <div className="absolute top-[-50%] left-[-20%] w-full h-full bg-gradient-to-br from-[#C9A84C] to-transparent rounded-full blur-[150px]" />
               </div>
 
-              <div className="relative z-10 max-w-2xl mx-auto">
+              <div className="relative z-10 max-w-2xl mx-auto pt-5 md:pt-0">
                 <div className="inline-flex items-center mt-5 justify-center w-24 h-24 bg-white/5 rounded-full mb-10 border border-white/10 shadow-2xl backdrop-blur-md">
                   <FiLock className="w-10 h-10 text-[#C9A84C]" />
                 </div>
