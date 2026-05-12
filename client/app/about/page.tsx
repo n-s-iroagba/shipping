@@ -75,7 +75,7 @@ export default function AboutPage() {
 
       {/* Hero Section */}
       <div className="bg-gradient-to-br from-[#0B1D3A] via-[#0f2847] to-[#0B1D3A]">
-        <div className="container mx-auto px-4 pt-48 pb-32">
+        <div className="container mx-auto px-4 pt-48 pb-40">
           <div className="max-w-4xl mx-auto text-center">
             <p className="text-[10px] font-bold tracking-[0.5em] uppercase text-[#C9A84C] mb-8">
               Our Heritage
@@ -98,9 +98,9 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <main className="space-y-32 md:space-y-48 pb-32">
+      <main className="pb-32">
         {/* Stats Section */}
-        <section className="pt-24 md:pt-32">
+        <section className="py-32 md:py-48">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
               {stats.map((stat, index) => {
@@ -124,7 +124,7 @@ export default function AboutPage() {
         </section>
 
         {/* Our Story Section */}
-        <section className="bg-[#0B1D3A]/[0.02] py-24 md:py-32">
+        <section className="bg-[#0B1D3A]/[0.02] py-32 md:py-48">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <div className="bg-white rounded-[3rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.08)] p-10 md:p-24 border border-slate-100">
@@ -162,7 +162,7 @@ export default function AboutPage() {
         </section>
 
         {/* Services Section */}
-        <section className="bg-white">
+        <section className="bg-white py-32 md:py-48">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <p className="text-[10px] font-bold tracking-[0.5em] uppercase text-[#C9A84C] mb-6 text-center">
@@ -200,7 +200,7 @@ export default function AboutPage() {
         </section>
 
         {/* Team Section */}
-        <section className="bg-[#0B1D3A]/[0.02] py-24 md:py-32">
+        <section className="bg-[#0B1D3A]/[0.02] py-32 md:py-48">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <p className="text-[10px] font-bold tracking-[0.5em] uppercase text-[#C9A84C] mb-6 text-center">
