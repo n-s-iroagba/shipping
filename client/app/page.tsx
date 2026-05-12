@@ -60,7 +60,7 @@ export default function Home() {
 
       {/* Secondary Tracking Section */}
       <section id="tracking-section" className="py-24 bg-[#0B1D3A]/[0.03]">
-        <div className="mx-2 px-6 text-center">
+        <div className="w-full px-6 text-center">
           <div className="bg-white p-8 md:p-14 rounded-3xl shadow-2xl shadow-slate-200/50 border border-slate-100">
             <p className="text-[10px] font-semibold tracking-[0.4em] uppercase text-[#C9A84C] mb-4">
               Private Access
