@@ -75,7 +75,7 @@ export default function AboutPage() {
 
       {/* Hero Section */}
       <div className="bg-gradient-to-br from-[#0B1D3A] via-[#0f2847] to-[#0B1D3A]">
-        <div className="container mx-auto px-4 pt-32 pb-20">
+        <div className="container mx-auto px-4 pt-32 pb-20 ">
           <div className="max-w-4xl mx-auto text-center text-white">
             <p className="text-[10px] font-semibold tracking-[0.4em] uppercase text-[#C9A84C] mb-6">
               Our Heritage
@@ -125,7 +125,7 @@ export default function AboutPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="bg-white rounded-3xl shadow-lg p-8 md:p-12 border border-slate-100">
-              <p className="text-[10px] font-semibold tracking-[0.4em] uppercase text-[#C9A84C] mb-4 text-center">
+              <p className="text-[10px] py-8 font-semibold tracking-[0.4em] uppercase text-[#C9A84C] mb-4 text-center">
                 Est. 2008
               </p>
               <h2
