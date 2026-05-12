@@ -89,6 +89,16 @@ const AdminShipment = () => {
                 <span className="sm:hidden">Mail</span>
               </button>
               <button
+                onClick={() =>
+                  router.push(`/admin/shipment/${shipment.id}/stages/new`)
+                }
+                className="flex items-center justify-center gap-2 bg-slate-600 text-white px-3 sm:px-4 py-2 rounded-lg hover:bg-slate-700 transition-colors text-sm sm:text-base"
+              >
+                <FaFlag className="w-4 h-4" />
+                <span className="hidden sm:inline">Add Stage</span>
+                <span className="sm:hidden">Add Stage</span>
+              </button>
+              <button
                 onClick={() => setShowShipmentDeleteModal(true)}
                 className="flex items-center justify-center gap-2 bg-red-600 text-white px-3 sm:px-4 py-2 rounded-lg hover:bg-red-700 transition-colors text-sm sm:text-base"
               >
