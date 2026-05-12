@@ -66,7 +66,7 @@ export default function ServicesPage() {
       <Navbar />
       
       {/* Hero Header */}
-      <header className="relative bg-[#0B1D3A] pt-32 pb-20 px-6 overflow-hidden">
+      <header className="relative bg-[#0B1D3A] pt-48 pb-32 px-6 overflow-hidden">
         <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-[#C9A84C]/5 rounded-full blur-3xl" />
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <motion.div
@@ -96,8 +96,8 @@ export default function ServicesPage() {
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-6 py-24">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <main className="max-w-7xl mx-auto px-6 py-32 md:py-48">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
           {services.map((service, index) => (
             <motion.div
               key={index}
@@ -105,7 +105,7 @@ export default function ServicesPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="group p-8 bg-white border border-slate-100 rounded-3xl shadow-xl shadow-slate-200/50 hover:shadow-2xl hover:border-[#C9A84C]/20 transition-all cursor-default"
+              className="group p-10 md:p-12 bg-white border border-slate-100 rounded-3xl shadow-xl shadow-slate-200/50 hover:shadow-2xl hover:border-[#C9A84C]/20 transition-all cursor-default"
             >
               <div className={`w-16 h-16 rounded-2xl ${service.color} flex items-center justify-center mb-6 transition-transform group-hover:scale-110`}>
                 {service.icon}
@@ -128,7 +128,7 @@ export default function ServicesPage() {
         </div>
 
         {/* Call to Action */}
-        <section className="mt-24 p-12 bg-[#0B1D3A] rounded-3xl text-white text-center relative overflow-hidden">
+        <section className="mt-32 md:mt-48 py-24 px-8 md:py-32 md:px-16 bg-[#0B1D3A] rounded-[3rem] text-white text-center relative overflow-hidden shadow-2xl">
           <div className="absolute top-0 right-0 -mr-24 -mt-24 w-64 h-64 bg-[#C9A84C]/5 rounded-full blur-3xl" />
           <div className="absolute bottom-0 left-0 -ml-24 -mb-24 w-64 h-64 bg-[#C9A84C]/5 rounded-full blur-3xl" />
           <div className="relative z-10">
