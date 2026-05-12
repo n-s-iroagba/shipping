@@ -127,7 +127,7 @@ export default function BulkCreateStagesForm() {
       >
         {/* Header Section */}
         <div className="bg-[#0B1D3A] rounded-[2rem] shadow-xl text-white  px-6 py-8 md:px-10 md:py-10">
-          <div className=" top-0 right-0 mr-16 mt-16 w-64 h-64 bg-[#C9A84C]/10 rounded-full blur-3xl pointer-events-none" />
+          <div className=" top-0 right-0 mr-16 my-8 w-64 h-64 bg-[#C9A84C]/10 rounded-full blur-3xl pointer-events-none" />
 
           <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between">
             <div className="flex items-center gap-6 mb-8 md:mb-0">
