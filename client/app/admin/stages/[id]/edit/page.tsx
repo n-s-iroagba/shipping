@@ -297,7 +297,7 @@ export default function EditStageForm() {
 
               {/* Right Column: Payment & Files */}
               <div className="space-y-8">
-                <section className="bg-slate-50/50 p-8 rounded-3xl border border-slate-100">
+                <section className="bg-slate-50/50 p-8 ">
                   <h3 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-2">
                     <span className="w-8 h-8 bg-[#0B1D3A]/10 text-[#0B1D3A] rounded-lg flex items-center justify-center text-sm">03</span>
                     Financial Status
