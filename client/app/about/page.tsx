@@ -74,7 +74,7 @@ export default function AboutPage() {
 
       {/* Hero Section */}
       <div className="bg-gradient-to-br from-[#0B1D3A] via-[#0f2847] to-[#0B1D3A]">
-        <div className="container mx-auto px-4 pt-48 pb-40">
+        <div className=" mx-auto px-4 pt-48 pb-40">
           <div className="max-w-4xl mx-auto text-center">
             <p className="text-[10px] font-bold tracking-[0.5em] uppercase text-[#C9A84C] mb-8">
 
