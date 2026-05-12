@@ -3,14 +3,14 @@
 import React, { FormEvent, useCallback, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  FiPlus, 
-  FiTrash2, 
-  FiSave, 
-  FiArrowLeft, 
-  FiCalendar, 
-  FiMapPin, 
-  FiDollarSign, 
+import {
+  FiPlus,
+  FiTrash2,
+  FiSave,
+  FiArrowLeft,
+  FiCalendar,
+  FiMapPin,
+  FiDollarSign,
   FiFileText,
   FiAlertCircle,
   FiLoader,
@@ -93,12 +93,12 @@ export default function BulkCreateStagesForm() {
 
     try {
       const formData = new FormData();
-      
+
       // Append stages as stringified JSON (without file)
       stages.forEach((stage, i) => {
         const stagePayload = { ...stage, supportingDocument: undefined };
         formData.append(`stages[${i}]`, JSON.stringify(stagePayload));
-        
+
         // Append file with the key the backend expects: supportingDocument_index
         if (stage.supportingDocument) {
           formData.append(`supportingDocument_${i}`, stage.supportingDocument);
@@ -106,7 +106,7 @@ export default function BulkCreateStagesForm() {
       });
 
       await postRequest(routes.stage.create(shipmentId), formData, true);
-      
+
       setSuccess(true);
       setTimeout(() => {
         router.push(`/admin/shipment/${shipmentId}/stages`);
@@ -120,15 +120,15 @@ export default function BulkCreateStagesForm() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pt-24 md:pt-12">
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="flex flex-col gap-10"
       >
         {/* Header Section */}
-        <div className="bg-[#0B1D3A] rounded-[2rem] shadow-xl text-white relative overflow-hidden px-6 py-8 md:px-10 md:py-10">
-          <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-[#C9A84C]/10 rounded-full blur-3xl pointer-events-none" />
-          
+        <div className="bg-[#0B1D3A] rounded-[2rem] shadow-xl text-white  px-6 py-8 md:px-10 md:py-10">
+          <div className=" top-0 right-0 mr-16 mt-16 w-64 h-64 bg-[#C9A84C]/10 rounded-full blur-3xl pointer-events-none" />
+
           <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between">
             <div className="flex items-center gap-6 mb-8 md:mb-0">
               <div className="w-16 h-16 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/20 shadow-xl shrink-0">
@@ -139,7 +139,7 @@ export default function BulkCreateStagesForm() {
                 <p className="text-white/60 text-sm mt-1">Creating journey milestones for Shipment #{shipmentId}</p>
               </div>
             </div>
-            
+
             <div className="flex flex-wrap sm:flex-nowrap items-center gap-4">
               <button
                 type="button"
@@ -162,7 +162,7 @@ export default function BulkCreateStagesForm() {
         </div>
 
         {error && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             className="p-4 bg-red-50 border border-red-100 text-red-600 rounded-2xl flex items-start gap-3 font-medium shadow-sm"
@@ -173,7 +173,7 @@ export default function BulkCreateStagesForm() {
         )}
 
         {success && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             className="p-4 bg-emerald-50 border border-emerald-100 text-emerald-600 rounded-2xl flex items-start gap-3 font-medium shadow-sm"
@@ -293,7 +293,7 @@ export default function BulkCreateStagesForm() {
                           <option key={v} value={v}>{v.replace(/_/g, ' ')}</option>
                         ))}
                       </select>
-                      
+
                       <AnimatePresence>
                         {stage.paymentStatus !== ShippingStagePaymentStatus.NO_PAYMENT_REQUIRED && (
                           <motion.div
