@@ -4,12 +4,12 @@ import React from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
-import { 
-  FiTruck, 
-  FiAnchor, 
-  FiAirplay, 
-  FiShield, 
-  FiGlobe, 
+import {
+  FiTruck,
+  FiAnchor,
+  FiAirplay,
+  FiShield,
+  FiGlobe,
   FiLock,
   FiBox,
   FiFileText
@@ -64,10 +64,10 @@ export default function ServicesPage() {
   return (
     <div className="bg-white min-h-screen">
       <Navbar />
-      
+
       {/* Hero Header */}
-      <header className="relative bg-[#0B1D3A] pt-56 md:pt-64 pb-32 md:pb-48 px-6 overflow-hidden">
-        <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-[#C9A84C]/5 rounded-full blur-3xl" />
+      <header className=" bg-[#0B1D3A] pt-48 pb-32 px-6 overflow-hidden">
+        <div className=" -mr-16 -mt-16 w-64 h-64 bg-[#C9A84C]/5 rounded-full blur-3xl" />
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -76,7 +76,7 @@ export default function ServicesPage() {
           >
             <FiGlobe className="animate-pulse" /> Bespoke Solutions
           </motion.div>
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
@@ -85,7 +85,7 @@ export default function ServicesPage() {
           >
             Our <span className="text-[#C9A84C]">Services</span>
           </motion.h1>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
@@ -116,7 +116,7 @@ export default function ServicesPage() {
               </p>
               <div className="mt-8 pt-8 border-t border-slate-50 flex items-center justify-between">
                 <span className="text-[10px] font-semibold text-[#C9A84C] uppercase tracking-[0.2em]">Enquire</span>
-                <div 
+                <div
                   onClick={handleContactClick}
                   className="w-8 h-8 rounded-full bg-slate-50 text-slate-400 flex items-center justify-center group-hover:bg-[#0B1D3A] group-hover:text-[#C9A84C] transition-all cursor-pointer"
                 >
@@ -128,30 +128,30 @@ export default function ServicesPage() {
         </div>
 
         {/* Call to Action */}
-        <section className="mt-32 md:mt-48 py-32 px-8 md:py-48 md:px-16 bg-[#0B1D3A] rounded-[4rem] text-white text-center relative overflow-hidden shadow-2xl">
-          <div className="absolute top-0 right-0 -mr-24 -mt-24 w-96 h-96 bg-[#C9A84C]/5 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 left-0 -ml-24 -mb-24 w-96 h-96 bg-[#C9A84C]/5 rounded-full blur-3xl" />
+        <section className="mt-32 md:mt-48 py-24 px-8 md:py-32 md:px-16 bg-[#0B1D3A] rounded-[3rem] text-white text-center relative overflow-hidden shadow-2xl">
+          <div className="absolute top-0 right-0 -mr-24 -mt-24 w-64 h-64 bg-[#C9A84C]/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 left-0 -ml-24 -mb-24 w-64 h-64 bg-[#C9A84C]/5 rounded-full blur-3xl" />
           <div className="relative z-10">
-            <FiLock className="w-12 h-12 text-[#C9A84C] mx-auto mb-10" />
+            <FiLock className="w-10 h-10 text-[#C9A84C] mx-auto mb-6" />
             <h2
-              className="text-4xl md:text-6xl font-bold mb-10"
+              className="text-3xl md:text-5xl font-bold mb-6"
               style={{ fontFamily: "var(--font-playfair), serif" }}
             >
               Ready to Begin?
             </h2>
-            <p className="text-white/50 mb-16 max-w-xl mx-auto text-xl leading-relaxed font-light">
+            <p className="text-white/50 mb-10 max-w-xl mx-auto text-lg">
               Contact our private logistics team for a confidential consultation tailored to your requirements.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-              <button 
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <button
                 onClick={handleContactClick}
-                className="px-12 py-5 md:py-6 md:px-14 text-lg bg-[#C9A84C] text-[#0B1D3A] rounded-xl font-bold hover:bg-[#d4b55c] transition-all"
+                className="px-10 py-4 bg-[#C9A84C] text-[#0B1D3A] rounded-xl font-bold hover:bg-[#d4b55c] transition-all"
               >
                 Private Consultation
               </button>
-              <button 
+              <button
                 onClick={handleContactClick}
-                className="px-12 py-5 md:py-6 md:px-14 text-lg bg-white/5 text-white rounded-xl font-bold border border-white/10 hover:bg-white/10 transition-all"
+                className="px-10 py-4 bg-white/5 text-white rounded-xl font-bold border border-white/10 hover:bg-white/10 transition-all"
               >
                 Contact Concierge
               </button>
