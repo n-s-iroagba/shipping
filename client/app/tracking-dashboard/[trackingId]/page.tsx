@@ -139,11 +139,7 @@ export default function ShipmentTrackingDashboard() {
     <div className="min-h-screen bg-[#FDFDFD] text-[#0B1D3A] selection:bg-[#C9A84C]/20 pt-10 pb-20">
       {/* Premium Hero Section */}
       <div className="relative bg-[#0B1D3A] pt-10 pb-32 px-6 overflow-hidden">
-        {/* Subtle Decorative Elements */}
-        <div className="absolute top-0 right-0 w-full h-full opacity-10 pointer-events-none">
-          <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-[#C9A84C] rounded-full blur-[120px]" />
-          <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-400 rounded-full blur-[100px]" />
-        </div>
+
 
         <div className="relative  max-w-4xl lg:max-w-5xl mx-auto text-center">
           <motion.div
