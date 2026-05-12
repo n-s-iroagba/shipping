@@ -126,7 +126,7 @@ export default function EditStageForm() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-100"
+        className=""
       >
         {/* Header */}
         <div className="bg-slate-900 p-4 md:p-8 text-white relative overflow-hidden">
@@ -179,9 +179,9 @@ export default function EditStageForm() {
           </AnimatePresence>
 
           <form onSubmit={handleSubmit} className="space-y-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 ">
               {/* Left Column: Basic Info */}
-              <div className="space-y-8">
+              <div className="space-y-8 ">
                 <section>
                   <h3 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-2">
                     <span className="w-8 h-8 bg-[#0B1D3A]/5 text-[#0B1D3A] rounded-lg flex items-center justify-center text-sm">01</span>
