@@ -48,7 +48,7 @@ const ShipmentDashboard: React.FC = () => {
           >
             <FiPlus className="text-lg" />
             <span className="hidden sm:inline text-slate-900">Create New Shipment</span>
-            <span className="sm:hidden">New</span>
+            <span className="sm:hidden text-slate-900">New</span>
           </motion.button>
         </motion.div>
 
