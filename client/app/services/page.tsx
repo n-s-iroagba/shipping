@@ -67,7 +67,7 @@ export default function ServicesPage() {
 
       {/* Hero Header */}
       <header className=" bg-[#0B1D3A] pt-48 pb-32 px-6 overflow-hidden">
-        <div className=" -mr-16 -mt-16 w-64 h-64 bg-[#C9A84C]/5 rounded-full blur-3xl" />
+        <div className=" mr-16 -mt-16 w-64 h-64 bg-[#C9A84C]/5 rounded-full blur-3xl" />
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
