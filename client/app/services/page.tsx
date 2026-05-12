@@ -66,7 +66,7 @@ export default function ServicesPage() {
       <Navbar />
       
       {/* Hero Header */}
-      <header className="relative bg-[#0B1D3A] pt-48 pb-32 px-6 overflow-hidden">
+      <header className="relative bg-[#0B1D3A] pt-56 md:pt-64 pb-32 md:pb-48 px-6 overflow-hidden">
         <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-[#C9A84C]/5 rounded-full blur-3xl" />
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <motion.div
@@ -128,30 +128,30 @@ export default function ServicesPage() {
         </div>
 
         {/* Call to Action */}
-        <section className="mt-32 md:mt-48 py-24 px-8 md:py-32 md:px-16 bg-[#0B1D3A] rounded-[3rem] text-white text-center relative overflow-hidden shadow-2xl">
-          <div className="absolute top-0 right-0 -mr-24 -mt-24 w-64 h-64 bg-[#C9A84C]/5 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 left-0 -ml-24 -mb-24 w-64 h-64 bg-[#C9A84C]/5 rounded-full blur-3xl" />
+        <section className="mt-32 md:mt-48 py-32 px-8 md:py-48 md:px-16 bg-[#0B1D3A] rounded-[4rem] text-white text-center relative overflow-hidden shadow-2xl">
+          <div className="absolute top-0 right-0 -mr-24 -mt-24 w-96 h-96 bg-[#C9A84C]/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 left-0 -ml-24 -mb-24 w-96 h-96 bg-[#C9A84C]/5 rounded-full blur-3xl" />
           <div className="relative z-10">
-            <FiLock className="w-10 h-10 text-[#C9A84C] mx-auto mb-6" />
+            <FiLock className="w-12 h-12 text-[#C9A84C] mx-auto mb-10" />
             <h2
-              className="text-3xl md:text-5xl font-bold mb-6"
+              className="text-4xl md:text-6xl font-bold mb-10"
               style={{ fontFamily: "var(--font-playfair), serif" }}
             >
               Ready to Begin?
             </h2>
-            <p className="text-white/50 mb-10 max-w-xl mx-auto text-lg">
+            <p className="text-white/50 mb-16 max-w-xl mx-auto text-xl leading-relaxed font-light">
               Contact our private logistics team for a confidential consultation tailored to your requirements.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
               <button 
                 onClick={handleContactClick}
-                className="px-10 py-4 bg-[#C9A84C] text-[#0B1D3A] rounded-xl font-bold hover:bg-[#d4b55c] transition-all"
+                className="px-12 py-5 md:py-6 md:px-14 text-lg bg-[#C9A84C] text-[#0B1D3A] rounded-xl font-bold hover:bg-[#d4b55c] transition-all"
               >
                 Private Consultation
               </button>
               <button 
                 onClick={handleContactClick}
-                className="px-10 py-4 bg-white/5 text-white rounded-xl font-bold border border-white/10 hover:bg-white/10 transition-all"
+                className="px-12 py-5 md:py-6 md:px-14 text-lg bg-white/5 text-white rounded-xl font-bold border border-white/10 hover:bg-white/10 transition-all"
               >
                 Contact Concierge
               </button>
