@@ -136,9 +136,9 @@ export default function ShipmentTrackingDashboard() {
   if (!shipmentData) return null;
 
   return (
-    <div className="min-h-screen bg-[#FDFDFD] text-[#0B1D3A] selection:bg-[#C9A84C]/20 pt-10 pb-20">
+    <div className="min-h-screen bg-[#FDFDFD] text-[#0B1D3A] selection:bg-[#C9A84C]/20 pt-5 pb-20">
       {/* Premium Hero Section */}
-      <div className="relative bg-[#0B1D3A] pt-24 pb-32 px-6 overflow-hidden">
+      <div className="relative bg-[#0B1D3A] pt-10 pb-32 px-6 overflow-hidden">
         {/* Subtle Decorative Elements */}
         <div className="absolute top-0 right-0 w-full h-full opacity-10 pointer-events-none">
           <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-[#C9A84C] rounded-full blur-[120px]" />
