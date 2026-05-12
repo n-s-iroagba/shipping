@@ -1,15 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  // faPhone,
   faEnvelope,
   faMapMarkerAlt,
-  faPhone,
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
   companyAddress,
   companyEmail,
-  telephoneNumber,
+
 } from "@/data/constants";
 const ContactInfo = () => {
   return (
@@ -24,17 +22,6 @@ const ContactInfo = () => {
           <span className="text-sm leading-relaxed mt-2 md:mt-1">{companyAddress}</span>
         </div>
 
-        <div className="flex flex-col md:flex-row items-center md:items-start gap-4">
-          <div className="w-10 h-10 shrink-0 bg-[#0B1D3A]/5 rounded-full flex items-center justify-center">
-            <FontAwesomeIcon icon={faPhone} className="text-[#C9A84C] w-4 h-4" />
-          </div>
-          <a 
-            href={`tel:${telephoneNumber}`}
-            className="text-sm font-medium text-gray-700 hover:text-[#C9A84C] transition-colors break-words mt-2 md:mt-1"
-          >
-            {telephoneNumber}
-          </a>
-        </div>
 
         <div className="flex flex-col md:flex-row items-center md:items-start gap-4">
           <div className="w-10 h-10 shrink-0 bg-[#0B1D3A]/5 rounded-full flex items-center justify-center">

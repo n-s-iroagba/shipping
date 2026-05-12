@@ -25,7 +25,7 @@ const Header: React.FC = () => {
 
   const handleFormSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!trackingId.trim()) {
       setError("Please enter a tracking ID");
       return;
@@ -55,7 +55,7 @@ const Header: React.FC = () => {
   return (
     <header className="py-6 relative bg-cover bg-center min-h-[120vh] md:min-h-[80vh] flex flex-col ">
       <Navbar />
-      
+
       {/* Background Carousel */}
       <div className="absolute inset-0 z-0">
         <Carousel
@@ -88,7 +88,7 @@ const Header: React.FC = () => {
 
       {/* Content */}
       <div className="relative z-10 flex flex-col justify-between flex-grow text-center text-white px-4">
-        
+
         {/* Hero Text */}
         <div className="flex-1 flex flex-col justify-center items-center mt-8 lg:mt-16">
           <div className="mb-8 space-y-4">
@@ -97,18 +97,18 @@ const Header: React.FC = () => {
                 <ShieldCheckIcon className="w-8 h-8 text-[#C9A84C]" />
               </div>
             </div>
-            
+
             <p className="text-[11px] font-semibold tracking-[0.4em] uppercase text-[#C9A84C] mb-4">
               Confidential &middot; Discreet &middot; Secure
             </p>
-            
+
             <h1
               className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-wide mb-2"
               style={{ fontFamily: "var(--font-playfair), serif" }}
             >
               Arbor Global
             </h1>
-            
+
             <p className="text-lg sm:text-xl text-white/70 mt-6 max-w-2xl mx-auto leading-relaxed">
               Bespoke logistics for individuals who demand absolute discretion and uncompromising security
             </p>
@@ -157,7 +157,7 @@ const Header: React.FC = () => {
                     type="text"
                     id="tracking-id"
                     className="w-full px-4 py-3.5 text-[#0B1D3A] bg-slate-50 border-2 border-slate-200 rounded-xl focus:ring-2 focus:ring-[#C9A84C]/30 focus:border-[#C9A84C] transition-colors placeholder-slate-400 font-medium"
-                    placeholder="Enter your tracking reference"
+                    placeholder="Enter tracking code"
                     value={trackingId}
                     onChange={handleInputChange}
                     disabled={loading}

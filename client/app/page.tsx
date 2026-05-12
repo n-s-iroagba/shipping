@@ -55,12 +55,12 @@ export default function Home() {
         images={images}
       />
       <Schedule />
-      <ContactInfo />
+
       <TestimonialCarousel />
 
       {/* Secondary Tracking Section */}
       <section id="tracking-section" className="py-24 bg-[#0B1D3A]/[0.03]">
-        <div className="max-w-4xl mx-auto px-6 text-center">
+        <div className="max-w-4xl mx-2 px-6 text-center">
           <div className="bg-white p-8 md:p-14 rounded-3xl shadow-2xl shadow-slate-200/50 border border-slate-100">
             <p className="text-[10px] font-semibold tracking-[0.4em] uppercase text-[#C9A84C] mb-4">
               Private Access
@@ -74,7 +74,7 @@ export default function Home() {
             <p className="text-slate-500 mb-10 max-w-md mx-auto text-sm md:text-base">
               Enter your private tracking reference below for encrypted, real-time status updates.
             </p>
-            
+
             <form onSubmit={handleTrackShipment} className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
               <input
                 type="text"
@@ -102,6 +102,7 @@ export default function Home() {
       </section>
 
       <ScheduleCard />
+      <ContactInfo />
       <Footer />
     </div>
   );
