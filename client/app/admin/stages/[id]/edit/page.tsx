@@ -179,7 +179,7 @@ export default function EditStageForm() {
           </AnimatePresence>
 
           <form onSubmit={handleSubmit} className="space-y-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 px-8">
               {/* Left Column: Basic Info */}
               <div className="space-y-8">
                 <section>
@@ -394,8 +394,8 @@ export default function EditStageForm() {
                       <label
                         htmlFor="stage-document"
                         className={`flex flex-col items-center justify-center p-8 border-2 border-dashed rounded-3xl transition-all cursor-pointer ${isUploading
-                            ? "bg-slate-50 border-slate-200 cursor-not-allowed"
-                            : "bg-slate-50 border-slate-200 hover:border-[#C9A84C] hover:bg-[#0B1D3A]/5/30"
+                          ? "bg-slate-50 border-slate-200 cursor-not-allowed"
+                          : "bg-slate-50 border-slate-200 hover:border-[#C9A84C] hover:bg-[#0B1D3A]/5/30"
                           }`}
                       >
                         {isUploading ? (
