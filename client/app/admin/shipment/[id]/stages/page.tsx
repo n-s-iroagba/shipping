@@ -4,7 +4,7 @@ import { routes } from "@/data/routes";
 import { useGetList } from "@/hooks/useGet";
 import { Stage } from "@/types/stage.types";
 import { motion } from "framer-motion";
-import { useParams,useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { FiPlus } from "react-icons/fi";
 
 const ShipmentStageList = () => {
@@ -32,7 +32,7 @@ const ShipmentStageList = () => {
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.98 }}
           onClick={() => router.push(`/admin/shipment/${id}/stages/new`)}
-          className="flex items-center gap-2 bg-gradient-to-r from-[#0B1D3A] to-slate-600 text-white px-6 py-3 rounded-xl hover:shadow-lg transition-all duration-300 font-medium shadow-md"
+          className="flex items-center gap-2 bg-gradient-to-r from-[#0B1D3A] to-slate-600 text-slate-900 px-6 py-3 rounded-xl hover:shadow-lg transition-all duration-300 font-medium shadow-md"
         >
           <FiPlus className="text-lg" />
           Create New Stages
