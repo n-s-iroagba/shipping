@@ -45,7 +45,7 @@ const TestimonialCarousel = () => {
       showIndicators={false}
       selectedItem={index}
       onChange={handleSelect}
-      className="w-full max-w-lg mx-auto"
+      className="w-full max-w-lg mx-2"
     >
       {testimonials.map((testimonial, idx) => (
         <div
