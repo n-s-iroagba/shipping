@@ -11,7 +11,7 @@ import {
 } from "@/data/constants";
 const ContactInfo = () => {
   return (
-    <div className="bg-white p-6 md:p-8 my-6 rounded-2xl shadow-xl w-full max-w-lg mx-auto text-center md:text-left overflow-hidden border border-gray-100">
+    <div className="bg-white p-2 my-6 rounded-2xl shadow-xl w-full max-w-lg mx-auto text-center md:text-left overflow-hidden border border-gray-100">
       <h2 className="text-2xl font-bold mb-2 text-[#0B1D3A]" style={{ fontFamily: "var(--font-playfair), serif" }}>Private Contact</h2>
       <h6 className="text-xs font-bold tracking-[0.2em] uppercase mb-8 text-[#C9A84C]">For Bespoke Logistics</h6>
       <div className="flex flex-col gap-6 text-gray-700">
