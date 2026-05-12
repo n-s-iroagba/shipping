@@ -142,7 +142,7 @@ export default function ServicesPage() {
             <p className="text-white/50 mb-10 max-w-xl mx-auto text-lg">
               Contact our private logistics team for a confidential consultation tailored to your requirements.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 px-4">
               <button
                 onClick={handleContactClick}
                 className=" w-full px-10 py-4 bg-[#C9A84C] text-[#0B1D3A] rounded-xl font-bold hover:bg-[#d4b55c] transition-all"
@@ -151,7 +151,7 @@ export default function ServicesPage() {
               </button>
               <button
                 onClick={handleContactClick}
-                className="w-fullpx-10 py-4 bg-white/5 text-white rounded-xl font-bold border border-white/10 hover:bg-white/10 transition-all"
+                className="w-full px-10 py-4 bg-white/5 text-white rounded-xl font-bold border border-white/10 hover:bg-white/10 transition-all"
               >
                 Contact Concierge
               </button>
