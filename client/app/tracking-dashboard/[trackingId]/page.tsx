@@ -169,9 +169,9 @@ export default function ShipmentTrackingDashboard() {
             transition={{ delay: 0.3 }}
             className="flex items-center justify-center gap-4 text-white/50 text-xs font-medium tracking-widest uppercase"
           >
-            <span className="w-12 h-px bg-white/10" />
+            <span className="w-12 h-px" />
             {shipmentData.status}
-            <span className="w-12 h-px bg-white/10" />
+            <span className="w-12 h-px " />
           </motion.div>
         </div>
       </div>
@@ -195,7 +195,7 @@ export default function ShipmentTrackingDashboard() {
           />
 
         </div>
-        <h3 className="text-lg sm:text-xl font-semibold text-gray-900">
+        <h3 className="mt-4 text-lg sm:text-xl font-semibold text-gray-900">
           Current Location: {displayStages[0].location}
         </h3>
       </div>
