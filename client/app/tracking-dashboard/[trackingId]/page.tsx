@@ -143,7 +143,7 @@ export default function ShipmentTrackingDashboard() {
       <div className="relative bg-[#0B1D3A] pt-10 pb-32 px-6 overflow-hidden">
 
 
-        <div className="relative  max-w-4xl lg:max-w-5xl mx-auto text-center">
+        <div className="relative my-8  max-w-4xl lg:max-w-5xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
