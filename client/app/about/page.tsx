@@ -81,12 +81,12 @@ export default function AboutPage() {
               Our Heritage
             </p>
             <h1
-              className="text-4xl md:text-6xl font-bold mb-6"
+              className="text-4xl md:text-6xl font-bold mb-6 text-black"
               style={{ fontFamily: "var(--font-playfair), serif" }}
             >
               About {brandName}
             </h1>
-            <p className="text-lg md:text-xl text-white/60 mb-8 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-black mb-8 max-w-2xl mx-auto">
               Discreet global logistics for individuals and institutions who demand absolute confidentiality
             </p>
             <div className="flex justify-center">
