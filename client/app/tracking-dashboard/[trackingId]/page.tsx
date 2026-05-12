@@ -389,11 +389,11 @@ export default function ShipmentTrackingDashboard() {
         {!isSensitive && (
           <section className="space-y-12 md:space-y-16 pt-8">
             <div className="flex items-center gap-4 text-[#0B1D3A] font-bold text-[10px] uppercase tracking-[0.4em] px-4">
-              <FiClock className="w-4 my-10 h-4 text-[#C9A84C]" />
+              <FiClock className="w-4 my-10 mr-3 h-4 text-[#C9A84C]" />
               <span>Routing Overview</span>
             </div>
             <div className="relative pl-10 space-y-12 before:absolute before:left-[19px] before:top-2 before:bottom-2 before:w-px before:bg-slate-100">
-              {shipmentData.shippingStages.slice(0, 3).map((stage, idx) => (
+              {shipmentData.shippingStages.map((stage, idx) => (
                 <div key={idx} className="relative">
                   <div className="absolute -left-[31px] top-1.5 w-5 h-5 rounded-full border-4 border-white bg-[#C9A84C] shadow-lg" />
                   <h4 className="text-lg font-light text-[#0B1D3A] mb-1" style={{ fontFamily: "var(--font-playfair), serif" }}>{stage.title}</h4>
