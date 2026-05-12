@@ -272,7 +272,7 @@ export default function ShipmentTrackingDashboard() {
                     <FiImage className="w-4 h-4 text-[#C9A84C]" />
                     <span>Visual Asset Manifest</span>
                   </div>
-                  <div className="rounded-[3rem] flex items-center  border border-slate-100 bg-white shadow-2xl p-4">
+                  <div className="rounded-[3rem] flex justify-center  border border-slate-100 bg-white shadow-2xl p-4">
                     <img
                       src={fullInfo.packagePhotos}
                       alt="Consignment"
