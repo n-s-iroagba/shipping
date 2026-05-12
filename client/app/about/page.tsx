@@ -197,10 +197,11 @@ export default function AboutPage() {
             </div>
           </div>
         </section>
+        <br />
 
         {/* Team Section */}
         <section className="bg-[#0B1D3A]/[0.02] py-32 md:py-48 my-12">
-          <div className="container mx-auto px-4">
+          <div className=" mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <p className="text-[10px] font-bold tracking-[0.5em] uppercase text-[#C9A84C] mb-6 text-center">
                 Leadership
@@ -237,7 +238,7 @@ export default function AboutPage() {
         </section>
         <br />
 
-        <ContactInfo />
+
       </main>
 
       <Footer />
