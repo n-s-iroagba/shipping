@@ -5,15 +5,14 @@ import {
   ShieldCheckIcon,
   ClockIcon,
   UsersIcon,
-  PhoneIcon,
-  EnvelopeIcon,
-  MapPinIcon,
+
   LockClosedIcon,
 } from "@heroicons/react/24/outline";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-import { brandName, companyEmail, telephoneNumber, companyAddress } from "@/data/constants";
+import { brandName } from "@/data/constants";
+import ContactInfo from "@/components/Contact";
 
 export default function AboutPage() {
   const stats = [
@@ -237,48 +236,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Contact Section */}
-        <section className="bg-[#0B1D3A] py-32 md:py-56 rounded-[4rem] mx-4 md:mx-8">
-          <div className=" mx-auto p-8">
-            <div className="max-w-4xl mx-auto text-center text-white">
-              <p className="text-[10px] font-bold tracking-[0.5em] uppercase text-[#C9A84C] mb-8">
-                Private Enquiries
-              </p>
-              <h2
-                className="text-4xl md:text-8xl font-bold mb-12"
-                style={{ fontFamily: "var(--font-playfair), serif" }}
-              >
-                Get in Touch
-              </h2>
-              <p className="text-xl md:text-2xl text-white/50 mb-20 font-light max-w-2xl mx-auto">
-                All enquiries are treated with the utmost confidentiality. Our concierge team is available around the clock.
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-                <div className="flex flex-col items-center">
-                  <div className="bg-white/5 backdrop-blur-md p-6 rounded-full mb-6 border border-white/10">
-                    <PhoneIcon className="w-10 h-10 text-[#C9A84C]" />
-                  </div>
-                  <h3 className="text-xl font-bold mb-2 uppercase tracking-widest text-[10px] text-[#C9A84C]">Call Us</h3>
-                  <p className="text-white text-lg font-light">{telephoneNumber || "+41 22 000 0000"}</p>
-                </div>
-                <a href={`mailto:${companyEmail}`} className="flex flex-col items-center group">
-                  <div className="bg-white/5 backdrop-blur-md p-6 rounded-full mb-6 border border-white/10 group-hover:bg-[#C9A84C]/20 transition-all">
-                    <EnvelopeIcon className="w-10 h-10 text-[#C9A84C]" />
-                  </div>
-                  <h3 className="text-xl font-bold mb-2 uppercase tracking-widest text-[10px] text-[#C9A84C]">Email Us</h3>
-                  <p className="text-white text-lg font-light group-hover:text-[#C9A84C] transition-colors">{companyEmail}</p>
-                </a>
-                <div className="flex flex-col items-center">
-                  <div className="bg-white/5 backdrop-blur-md p-6 rounded-full mb-6 border border-white/10">
-                    <MapPinIcon className="w-10 h-10 text-[#C9A84C]" />
-                  </div>
-                  <h3 className="text-xl font-bold mb-2 uppercase tracking-widest text-[10px] text-[#C9A84C]">Visit Us</h3>
-                  <p className="text-white text-lg font-light">{companyAddress}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <ContactInfo />
       </main>
 
       <Footer />
