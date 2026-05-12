@@ -127,9 +127,9 @@ export default function BulkCreateStagesForm() {
       >
         {/* Header Section */}
         <div className="bg-[#0B1D3A] rounded-[2rem] shadow-xl text-white  px-6 pb-8 md:px-10 md:pb-10">
-          <div className=" py-8 bg-[#C9A84C]/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="  bg-[#C9A84C]/10 rounded-full blur-3xl pointer-events-none" />
 
-          <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between">
+          <div className="py-8 relative z-10 flex flex-col md:flex-row md:items-center justify-between">
             <div className="flex items-center gap-6 mb-8 md:mb-0">
               <div className="w-16 h-16 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/20 shadow-xl shrink-0">
                 <FiPlus className="w-8 h-8 text-[#C9A84C]" />
