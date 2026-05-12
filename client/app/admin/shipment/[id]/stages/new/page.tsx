@@ -138,11 +138,11 @@ export default function BulkCreateStagesForm() {
             </div>
           </div>
           
-          <div className="relative z-10 flex items-center gap-4">
+          <div className="relative z-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full md:w-auto mt-6 md:mt-0">
             <button
               type="button"
               onClick={() => router.back()}
-              className="flex items-center gap-2 bg-white/5 hover:bg-white/10 px-5 py-2.5 rounded-xl transition-all font-medium border border-white/10"
+              className="flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 px-5 py-3 sm:py-2.5 rounded-xl transition-all font-medium border border-white/10 w-full sm:w-auto"
             >
               <FiArrowLeft />
               Cancel
@@ -150,7 +150,7 @@ export default function BulkCreateStagesForm() {
             <button
               type="button"
               onClick={addStage}
-              className="flex items-center gap-2 bg-[#0B1D3A] hover:bg-[#0B1D3A] px-6 py-2.5 rounded-xl transition-all font-bold shadow-lg shadow-[#0B1D3A]-900/20"
+              className="flex items-center justify-center gap-2 bg-slate-700 hover:bg-slate-600 text-white px-6 py-3 sm:py-2.5 rounded-xl transition-all font-bold shadow-lg w-full sm:w-auto"
             >
               <FiPlus />
               Add Another Stage
@@ -337,15 +337,15 @@ export default function BulkCreateStagesForm() {
             ))}
           </AnimatePresence>
 
-          <div className="flex items-center justify-end gap-6 pt-10 border-t border-slate-100">
-            <div className="text-right">
+          <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between sm:justify-end gap-6 pt-10 border-t border-slate-100">
+            <div className="text-center sm:text-right w-full sm:w-auto">
               <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Creation Batch</p>
               <p className="text-xl font-bold text-slate-900">{stages.length} Stages Ready</p>
             </div>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="flex items-center gap-3 px-12 py-4 bg-slate-900 text-white rounded-3xl font-bold shadow-2xl shadow-slate-300 hover:bg-slate-800 transition-all active:scale-[0.98] disabled:opacity-50"
+              className="flex items-center justify-center gap-3 px-8 sm:px-12 py-4 bg-slate-900 text-white rounded-2xl sm:rounded-3xl font-bold shadow-xl sm:shadow-2xl shadow-slate-300 hover:bg-slate-800 transition-all active:scale-[0.98] disabled:opacity-50 w-full sm:w-auto"
             >
               {isSubmitting ? (
                 <FiLoader className="w-6 h-6 animate-spin" />
