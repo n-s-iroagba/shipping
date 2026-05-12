@@ -235,7 +235,7 @@ export default function ShipmentTrackingDashboard() {
               </div>
 
               <div className="relative z-10 max-w-2xl mx-auto">
-                <div className="inline-flex items-center justify-center w-24 h-24 bg-white/5 rounded-full mb-10 border border-white/10 shadow-2xl backdrop-blur-md">
+                <div className="inline-flex items-center mt-5 justify-center w-24 h-24 bg-white/5 rounded-full mb-10 border border-white/10 shadow-2xl backdrop-blur-md">
                   <FiLock className="w-10 h-10 text-[#C9A84C]" />
                 </div>
                 <h2 className="text-3xl md:text-5xl font-light mb-6 leading-tight" style={{ fontFamily: "var(--font-playfair), serif" }}>
@@ -244,7 +244,7 @@ export default function ShipmentTrackingDashboard() {
                 <p className="text-white/40 text-base md:text-lg mb-12 font-light leading-relaxed tracking-wide">
                   This consignment contains high-value assets and sensitive documentation. Please complete identity verification to access visual manifests and routing history.
                 </p>
-                <div className="flex justify-center w-full">
+                <div className="flex justify-center w-full p-4 md:p-6">
                   <button
                     onClick={handleRequestSensitive}
                     disabled={isInitiating}
