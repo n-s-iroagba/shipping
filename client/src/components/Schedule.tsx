@@ -25,7 +25,7 @@ const Schedule: React.FC = () => {
   };
 
   return (
-    <div className=" bg-white shadow-xl border border-gray-100 rounded-2xl p-2">
+    <div className="w-full max-w-3xl mx-auto bg-white shadow-xl border border-gray-100 rounded-2xl p-2 md:p-8">
       <h2 className="text-2xl font-bold text-center mb-6 relative text-[#0B1D3A]" style={{ fontFamily: "var(--font-playfair), serif" }}>
         Consignment Routing
         <div className="absolute left-1/2 transform -translate-x-1/2 mt-2 h-1 w-16 bg-[#C9A84C] rounded-full"></div>
