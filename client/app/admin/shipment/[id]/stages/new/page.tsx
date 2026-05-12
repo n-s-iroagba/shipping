@@ -119,7 +119,7 @@ export default function BulkCreateStagesForm() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto p-4 md:p-8">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pt-24 md:pt-12">
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -138,11 +138,11 @@ export default function BulkCreateStagesForm() {
             </div>
           </div>
           
-          <div className="relative z-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full lg:w-auto mt-6 lg:mt-0">
+          <div className="relative z-10 flex flex-wrap items-center gap-4 w-full lg:w-auto mt-6 lg:mt-0">
             <button
               type="button"
               onClick={() => router.back()}
-              className="flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 px-6 py-3 sm:py-2.5 rounded-xl transition-all font-medium border border-white/10 w-full sm:w-auto whitespace-nowrap"
+              className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 px-6 py-3 rounded-xl transition-all font-medium border border-white/10 min-w-[140px]"
             >
               <FiArrowLeft />
               Cancel
@@ -150,7 +150,7 @@ export default function BulkCreateStagesForm() {
             <button
               type="button"
               onClick={addStage}
-              className="flex items-center justify-center gap-2 bg-slate-700 hover:bg-slate-600 text-white px-6 py-3 sm:py-2.5 rounded-xl transition-all font-bold shadow-lg w-full sm:w-auto whitespace-nowrap"
+              className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-[#C9A84C] hover:bg-[#b89945] text-[#0B1D3A] px-6 py-3 rounded-xl transition-all font-bold shadow-lg min-w-[200px]"
             >
               <FiPlus />
               Add Another Stage
@@ -208,8 +208,8 @@ export default function BulkCreateStagesForm() {
                   )}
                 </div>
 
-                <div className="p-8">
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="p-6 md:p-8">
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-10">
                     {/* Basic Info */}
                     <div className="space-y-4">
                       <label className="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">General Info</label>
@@ -336,15 +336,15 @@ export default function BulkCreateStagesForm() {
             ))}
           </AnimatePresence>
 
-          <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between sm:justify-end gap-6 pt-10 border-t border-slate-100">
-            <div className="text-center sm:text-right w-full sm:w-auto">
+          <div className="mt-8 bg-white p-6 md:p-8 rounded-3xl border border-slate-100 shadow-xl flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-6">
+            <div className="text-center sm:text-left w-full sm:w-auto">
               <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Creation Batch</p>
-              <p className="text-xl font-bold text-slate-900">{stages.length} Stages Ready</p>
+              <p className="text-xl font-bold text-[#0B1D3A]">{stages.length} Stages Ready</p>
             </div>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="flex items-center justify-center gap-3 px-8 sm:px-12 py-4 bg-slate-900 text-white rounded-2xl sm:rounded-3xl font-bold shadow-xl sm:shadow-2xl shadow-slate-300 hover:bg-slate-800 transition-all active:scale-[0.98] disabled:opacity-50 w-full sm:w-auto"
+              className="flex items-center justify-center gap-3 px-8 sm:px-12 py-4 bg-[#0B1D3A] text-[#C9A84C] rounded-2xl sm:rounded-3xl font-bold shadow-xl shadow-slate-300 hover:bg-slate-800 transition-all active:scale-[0.98] disabled:opacity-50 w-full sm:w-auto"
             >
               {isSubmitting ? (
                 <FiLoader className="w-6 h-6 animate-spin" />
