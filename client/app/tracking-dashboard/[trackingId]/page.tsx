@@ -99,15 +99,16 @@ export default function ShipmentTrackingDashboard() {
   const activeError = publicError || fullError || error;
   const isSensitive = !!viewToken && !!fullInfo;
 
-  // Sort stages for full info: pending payments first, then by date
+  // Sort stages: pending payments first, then by date
   const displayStages = useMemo(() => {
-    if (!fullInfo?.shippingStages) return [];
+    const stages = isSensitive ? fullInfo?.shippingStages : publicInfo?.shippingStages;
+    if (!stages || stages.length === 0) return [];
 
-    return [...fullInfo.shippingStages].sort((a, b) => {
+    return [...stages].sort((a: any, b: any) => {
       // Pending/Incomplete payments first
-      const isAPending = a.paymentStatus !== ShippingStagePaymentStatus.PAID &&
+      const isAPending = a.paymentStatus && a.paymentStatus !== ShippingStagePaymentStatus.PAID &&
         a.paymentStatus !== ShippingStagePaymentStatus.NO_PAYMENT_REQUIRED;
-      const isBPending = b.paymentStatus !== ShippingStagePaymentStatus.PAID &&
+      const isBPending = b.paymentStatus && b.paymentStatus !== ShippingStagePaymentStatus.PAID &&
         b.paymentStatus !== ShippingStagePaymentStatus.NO_PAYMENT_REQUIRED;
 
       if (isAPending && !isBPending) return -1;
@@ -116,7 +117,8 @@ export default function ShipmentTrackingDashboard() {
       // Then by date descending
       return new Date(b.dateAndTime).getTime() - new Date(a.dateAndTime).getTime();
     });
-  }, [fullInfo]);
+  }, [fullInfo, publicInfo, isSensitive]);
+
 
   /* ----------  Render Helpers ---------- */
   if (isLoading) return <div className="min-h-screen flex items-center justify-center bg-slate-50"><Spinner /></div>;
@@ -176,29 +178,34 @@ export default function ShipmentTrackingDashboard() {
         </div>
       </div>
       {/* Map Section */}
-      <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-6 mb-8">
-        <div className="flex items-center gap-3 mb-4">
-          <div className="p-2 bg-indigo-100 rounded-lg">
-            <FontAwesomeIcon icon={faMapMarkerAlt} className="text-indigo-600 h-5 w-5" />
+      {displayStages.length > 0 && (
+        <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-6 mb-8 max-w-4xl lg:max-w-5xl mx-auto mt-4 z-20 relative">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="p-2 bg-indigo-100 rounded-lg">
+              <FontAwesomeIcon icon={faMapMarkerAlt} className="text-indigo-600 h-5 w-5" />
+            </div>
+            <h3 className="text-lg sm:text-xl font-semibold text-gray-900">
+              Live Location
+            </h3>
           </div>
-          <h3 className="text-lg sm:text-xl font-semibold text-gray-900">
-            Live Location
+          <div className="relative h-48 sm:h-64 lg:h-80 rounded-xl overflow-hidden border border-gray-200">
+            <iframe
+              title="Shipment Location Map"
+              className="w-full h-full"
+              src={
+                (displayStages[0] as any).latitude && (displayStages[0] as any).longitude
+                  ? `https://www.google.com/maps/embed/v1/view?center=${(displayStages[0] as any).latitude},${(displayStages[0] as any).longitude}&zoom=12&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8`
+                  : `https://www.google.com/maps/embed/v1/place?q=${encodeURIComponent(displayStages[0].location)}&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8`
+              }
+              loading="lazy"
+              style={{ border: 0 }}
+            />
+          </div>
+          <h3 className="mt-4 text-lg sm:text-xl font-semibold text-gray-900">
+            Current Location: {displayStages[0].location}
           </h3>
         </div>
-        <div className="relative h-48 sm:h-64 lg:h-80 rounded-xl overflow-hidden border border-gray-200">
-          <iframe
-            title="Shipment Location Map"
-            className="w-full h-full"
-            src={`https://www.google.com/maps/embed/v1/view?center=${displayStages[0].latitude},${displayStages[0].longitude}&zoom=12&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8`}
-            loading="lazy"
-            style={{ border: 0 }}
-          />
-
-        </div>
-        <h3 className="mt-4 text-lg sm:text-xl font-semibold text-gray-900">
-          Current Location: {displayStages[0].location}
-        </h3>
-      </div>
+      )}
 
 
       <main className="max-w-4xl lg:max-w-5xl mx-auto px-4 md:px-8 -mt-16 space-y-12 md:space-y-16 relative z-20">
