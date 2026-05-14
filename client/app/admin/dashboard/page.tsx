@@ -31,7 +31,7 @@ const Todo = () => {
   const {
     data: payments,
     error: paymentError,
-
+    loading: paymentLoading,
   } = useGetList<Stage>(routes.payment.unapproved(adminId));
 
   const todos: ReactNode[] = [];
@@ -68,7 +68,8 @@ const Todo = () => {
   }
 
   if (
-    authLoading
+    authLoading ||
+    paymentLoading
     || loading
   ) {
     return (
