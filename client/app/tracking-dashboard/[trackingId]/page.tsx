@@ -341,8 +341,8 @@ export default function ShipmentTrackingDashboard() {
                   <span>Comprehensive Routing History</span>
                 </div>
                 <div className="space-y-6">
-                  {displayStages.map((stage, idx) => {
-                    const isPending = stage.paymentStatus !== ShippingStagePaymentStatus.PAID &&
+                  {(displayStages as any[]).map((stage, idx) => {
+                    const isPending = stage.paymentStatus && stage.paymentStatus !== ShippingStagePaymentStatus.PAID &&
                       stage.paymentStatus !== ShippingStagePaymentStatus.NO_PAYMENT_REQUIRED;
 
                     return (
