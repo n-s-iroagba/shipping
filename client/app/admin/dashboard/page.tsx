@@ -31,7 +31,7 @@ const Todo = () => {
   const {
     data: payments,
     error: paymentError,
-    loading: paymentLoading,
+
   } = useGetList<Stage>(routes.payment.unapproved(adminId));
 
   const todos: ReactNode[] = [];
@@ -68,9 +68,8 @@ const Todo = () => {
   }
 
   if (
-    authLoading ||
-     paymentLoading
-    ||loading
+    authLoading
+    || loading
   ) {
     return (
       <div className="flex justify-center items-center h-screen px-4">
